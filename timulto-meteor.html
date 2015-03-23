@@ -61,12 +61,11 @@
   <div class="container">
     <div class="section">
         <h4 class="header left blue-text">Le tue segnalazioni</h4>
-        <table class="bordered">
+        <table class="striped">
           <thead>
               <tr>
                   <th width="1%" data-field="Foto">Foto</th>
                   <th data-field="Descrizione">Descrizione</th>
-                  <th data-field="Posizione">Posizione</th>
                   <th width="1%" data-field="Azioni">Azioni</th>
               </tr>
           </thead>
@@ -116,8 +115,7 @@
 <template name="task">
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span class="text">{{text}}</span></td>
-      <td><span class="position">{{lat}}, {{lng}}</span></td>
+      <td><span class="text">{{text}} alla posizione {{lat}}, {{lng}}</span></td>
       <td><button class="delete">&times;</button></td>
   </tr>
 </template>

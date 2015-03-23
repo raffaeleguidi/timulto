@@ -1,0 +1,890 @@
+Started by user Andrea Colocci
+Building in workspace C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD
+Switching from http://10.232.132.31:8100/svn/BNL/tags/bancadigitale-v0.0.430/rilasci to http://10.232.132.31:8100/svn/BNL/tags/bancadigitale-v1.0.0/rilasci
+Switching to http://10.232.132.31:8100/svn/BNL/tags/bancadigitale-v1.0.0/rilasci at revision '2015-03-23T18:10:00.554 +0100'
+U         it.bnl.bd.il.bpmIL\it.bnl.bd.il.bpmIL.deployment-config-PROD.xml
+U         it.bnl.bd.il.bpmIL\it.bnl.bd.il.bpmIL.daa
+U         it.bnl.bd.il.bpmIL\it.bnl.bd.il.bpmIL.deployment-config-COLL.xml
+U         it.bnl.bd.il.utility\it.bnl.bd.il.utility.deployment-config-PROD.xml
+U         it.bnl.bd.il.utility\it.bnl.bd.il.utility.daa
+U         it.bnl.bd.il.utility\it.bnl.bd.il.utility.deployment-config-COLL.xml
+U         it.bnl.bd.il.serviziGiaCliente\it.bnl.bd.il.serviziGiaCliente.deployment-config-PROD.xml
+U         it.bnl.bd.il.serviziGiaCliente\it.bnl.bd.il.serviziGiaCliente.daa
+U         it.bnl.bd.il.serviziGiaCliente\it.bnl.bd.il.serviziGiaCliente.deployment-config-COLL.xml
+U         build.xml
+U         it.bnl.bd.il.wrapservicemanager\it.bnl.bd.il.wrapservicemanager.daa
+U         it.bnl.bd.bpm.backoffice\it.bnl.bd.bpm.backoffice.deployment-config-PROD.xml
+U         it.bnl.bd.bpm.backoffice\it.bnl.bd.bpm.backoffice.daa
+U         it.bnl.paperless.il.plugin_generazionedoc_bd\it.bnl.paperless.il.plugin_generazionedoc_bd.daa
+U         it.bnl.bd.il.serviziEIR\it.bnl.bd.il.serviziEIR.daa
+U         SMBANCADIGITALE\artifacts\SMBancaDigitale.ear
+At revision 62120
+no revision recorded for http://10.232.132.31:8100/svn/BNL/tags/bancadigitale-v1.0.0/rilasci in the previous build
+No emails were triggered.
+[BancaDigitale-deploy-PROD] $ cmd.exe /C '"E:\apache-ant-1.9.2\apache-ant-1.9.2\bin\ant.bat -file build.xml -Dticket=CRQ000000118282 -Dtask=deploy -Dversione=bancadigitale-v1.0.0 "-Dtipo=nuova funzionalità" -Dambiente=PROD -Denv=PROD -DTIBCO-HOME=E:/tibco_bpm_21 "-DTIBCO-ANTLIB=C:/Program Files (x86)/Jenkins/workspace/deployFramework/ant-lib_v1.1" deploy -lib "C:\Program Files (x86)\Jenkins\workspace\deployFramework\ant-lib_v1.1\lib" "-Dantlib.path=C:\Program Files (x86)\Jenkins\workspace\deployFramework\ant-lib_v1.1\lib" && exit %%ERRORLEVEL%%"'
+Buildfile: C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD\build.xml
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+init:
+     [echo] Banca Digitale
+     [echo] env=PROD
+     [echo] versione=bancadigitale-v1.0.0
+
+deploy:
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+sg.init:
+     [echo] Using User: prod_deployer
+
+sg.deploy-soa:
+     [echo] deploying SOA component:it.bnl.paperless.il.plugin_generazionedoc_bd version: 1.0.0.201502201703 in C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD for environment "PROD"
+     [echo] includo C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.paperless.il.plugin_generazionedoc_bd/it.bnl.paperless.il.plugin_generazionedoc_bd.deployment-config-PROD.xml
+     [echo] ----------------------------------------------------------------------------------
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+undeploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Initializing JSSE's crypto provider class com.sun.net.ssl.internal.ssl.Provider in default mode
+[AMXAdminTask]  INFO - Undeploying application...
+[AMXAdminTask]  INFO - Undeploying application 'it.bnl.paperless.il.plugin_generazionedoc_bd' in background 
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Undeploy finished successfully
+
+delete.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deleting Application...
+[AMXAdminTask]  INFO - Successfully deleted Application 'it.bnl.paperless.il.plugin_generazionedoc_bd'
+
+upload.daa:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Uploading DAA...
+[AMXAdminTask]  INFO - DAA location: C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.paperless.il.plugin_generazionedoc_bd/it.bnl.paperless.il.plugin_generazionedoc_bd.daa
+[AMXAdminTask]  INFO - Successfully added Application Template 'it.bnl.paperless.il.plugin_generazionedoc_bd' (version: '1.0.0.201502201703') to the Administrator Staging Area
+
+create.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Adding application...
+[AMXAdminTask]  INFO - Successfully added Application 'it.bnl.paperless.il.plugin_generazionedoc_bd'
+
+edit.properties:
+[AMXAdminTask]  INFO - Processing 4 objects
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'ServiceManager:Connessione:Host' : Successfully updated property 'ServiceManager:Connessione:Host' to '10.238.220.13'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnectorPaperless_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BEPaperless_HttpClient_RI'
+[AMXAdminTask]  INFO - Processing 0 objects
+
+wire.application:
+[AMXAdminTask]  INFO - Processing 0 objects
+
+distribute.app:
+[AMXAdminTask]  INFO - Processing 12 objects
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'it.bnl.paperless.il.plugin_generazionedoc_bd' to node 'SOANode-Paperless-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'it.bnl.paperless.il.plugin_generazionedoc_bd' to node 'SOANode-Paperless-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'it.bnl.paperless.il.plugin_generazionedoc_bd' to node 'SOANode-Paperless-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'it.bnl.paperless.il.plugin_generazionedoc_bd' to node 'SOANode-Paperless-BE-S' 
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPService_Binding1' to node 'SOANode-Paperless-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPService_Binding1' to node 'SOANode-Paperless-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPService_Binding1' to node 'SOANode-Paperless-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPService_Binding1' to node 'SOANode-Paperless-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnagraficaTemplate_Binding' to node 'SOANode-Paperless-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnagraficaTemplate_Binding' to node 'SOANode-Paperless-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnagraficaTemplate_Binding' to node 'SOANode-Paperless-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnagraficaTemplate_Binding' to node 'SOANode-Paperless-BE-S'                                    
+
+deploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deploying application...
+[AMXAdminTask]  INFO - Deploying application 'it.bnl.paperless.il.plugin_generazionedoc_bd' in background : Deployment succeeded for application 'it.bnl.paperless.il.plugin_generazionedoc_bd' at 3/23/15 6:18 PM on node(s): 'SOANode-Paperless-FE-N, SOANode-Paperless-FE-S, SOANode-Paperless-BE-N, SOANode-Paperless-BE-S'
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Deploy with Start finished successfully
+
+start.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Starting Applications...
+[AMXAdminTask]  INFO - Starting application 'it.bnl.paperless.il.plugin_generazionedoc_bd' in background 
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Start finished successfully
+
+set.log:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Set logging configuration of Application...
+[AMXAdminTask]  INFO - Successfully set log configuration to Application 'it.bnl.paperless.il.plugin_generazionedoc_bd'
+
+deploy.log:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deploy logging configuration of Application...
+[AMXAdminTask]  INFO - Successfully deployed log configuration to Application 'it.bnl.paperless.il.plugin_generazionedoc_bd'
+
+soa.deploy:
+     [echo] completato deploy SOA component:it.bnl.paperless.il.plugin_generazionedoc_bd version: 1.0.0.201502201703 in C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+sg.init:
+     [echo] Using User: prod_deployer
+
+sg.deploy-soa:
+     [echo] deploying SOA component:it.bnl.bd.il.utility version: 1.0.0.201503191254 in C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD for environment "PROD"
+     [echo] includo C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.bd.il.utility/it.bnl.bd.il.utility.deployment-config-PROD.xml
+     [echo] ----------------------------------------------------------------------------------
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+undeploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Initializing JSSE's crypto provider class com.sun.net.ssl.internal.ssl.Provider in default mode
+[AMXAdminTask]  INFO - Undeploying application...
+[AMXAdminTask]  INFO - Undeploying application 'it.bnl.bd.il.utility' in background 
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - 100 tasks are pending on node [SOANode-H24-BE-S] on host [SystemHost]
+[AMXAdminTask]  INFO - 102 tasks are pending on node [SOANode-H24-BE-N] on host [Host-BE-N]
+[AMXAdminTask]  INFO - 102 tasks are pending on node [SOANode-H24-FE-N] on host [Host-FE-N]
+[AMXAdminTask]  INFO - 101 tasks are pending on node [SOANode-H24-FE-S] on host [Host-FE-S]
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - 2 tasks are pending on node [SOANode-H24-BE-S] on host [SystemHost]
+[AMXAdminTask]  INFO - 102 tasks are pending on node [SOANode-H24-BE-N] on host [Host-BE-N]
+[AMXAdminTask]  INFO - 102 tasks are pending on node [SOANode-H24-FE-N] on host [Host-FE-N]
+[AMXAdminTask]  INFO - 42 tasks are pending on node [SOANode-H24-FE-S] on host [Host-FE-S]
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - 75 tasks are pending on node [SOANode-H24-BE-N] on host [Host-BE-N]
+[AMXAdminTask]  INFO - 7 tasks are pending on node [SOANode-H24-FE-N] on host [Host-FE-N]
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Undeploy finished successfully
+
+delete.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deleting Application...
+[AMXAdminTask]  INFO - Successfully deleted Application 'it.bnl.bd.il.utility'
+
+upload.daa:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Uploading DAA...
+[AMXAdminTask]  INFO - DAA location: C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.bd.il.utility/it.bnl.bd.il.utility.daa
+[AMXAdminTask]  INFO - Successfully added Application Template 'it.bnl.bd.il.utility' (version: '1.0.0.201503191254') to the Administrator Staging Area
+
+create.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Adding application...
+[AMXAdminTask]  INFO - Successfully added Application 'it.bnl.bd.il.utility'
+
+edit.properties:
+[AMXAdminTask]  INFO - Processing 47 objects
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:TimerNumSlot:MinSlot1' : Successfully updated property 'Processes:TimerNumSlot:MinSlot1' to '300'
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:TimerSlot:StartTime1' : Successfully updated property 'Processes:TimerSlot:StartTime1' to '2014 Nov 18 02:28:00 Europe/Rome'
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:TimerSlot:TimerInterval1' : Successfully updated property 'Processes:TimerSlot:TimerInterval1' to '14400000'
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:TimerSlot:email2' : Successfully updated property 'Processes:TimerSlot:email2' to 'are@alic.com'
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:TimerSlot:email1' : Successfully updated property 'Processes:TimerSlot:email1' to 'bre@alic.com'
+[AMXAdminTask]  INFO - Successfully edited property 'ServiceManager:Connessione:Port' : Successfully updated property 'ServiceManager:Connessione:Port' to '80'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:User' : Successfully updated property 'Resources:Connections:DB_APPL:User' to 'TIBCO_AS_APP'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:DatabaseURL' : Successfully updated property 'Resources:Connections:DB_APPL:DatabaseURL' to 'jdbc:oracle:thin:@10.238.146.123:1522:PRV1ITP0'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_RF:User' : Successfully updated property 'Resources:Connections:DB_RF:User' to 'RFPRVAPP'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:Password' : Successfully updated property 'Resources:Connections:DB_APPL:Password' to 'tibcoasapp003'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_RF:DatabaseURL' : Successfully updated property 'Resources:Connections:DB_RF:DatabaseURL' to 'jdbc:oracle:thin:@10.238.146.123:1522:PRV1ITP0'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_RF:Password' : Successfully updated property 'Resources:Connections:DB_RF:Password' to 'rfprv03app'
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:Log:severity' : Successfully updated property 'Processes:Log:severity' to 'INFO'
+[AMXAdminTask]  INFO - Successfully edited property 'ServiceManager:Connessione:Host' : Successfully updated property 'ServiceManager:Connessione:Host' to '10.238.220.13'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:JMS:ProviderUrl' : Successfully updated property 'Resources:Connections:JMS:ProviderUrl' to 'tcp://ems-app-m:7224,tcp://ems-app-s:7224'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:JMS:JNDI:ContextUrl' : Successfully updated property 'Resources:Connections:JMS:JNDI:ContextUrl' to 'tibjmsnaming://ems-app-m:7224,tibjmsnaming://ems-app-s:7224'
+[AMXAdminTask]  INFO - Successfully edited property 'Common:Unirel:userID_FirmaBanca' : Successfully updated property 'Common:Unirel:userID_FirmaBanca' to 'TRNMRC72D22G273B'
+[AMXAdminTask]  INFO - Successfully edited property 'VersioneBPM' : Successfully updated property 'VersioneBPM' to '20150107'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'InboundDestination' : Successfully updated property 'InboundDestination' to 'it.bnl.be.bancadigitale.avviopraticaevent_RI'
+[AMXAdminTask]  INFO - Successfully edited property 'ConnectionFactoryConfiguration' : Successfully updated property 'ConnectionFactoryConfiguration' to 'EMSApplQueueConnFactoryConf_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'InboundDestination' : Successfully updated property 'InboundDestination' to 'it.bnl.be.bancadigitale.ricaricadocsevent_RI'
+[AMXAdminTask]  INFO - Successfully edited property 'ConnectionFactoryConfiguration' : Successfully updated property 'ConnectionFactoryConfiguration' to 'EMSApplQueueConnFactoryConf_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'ConnectionFactoryConfiguration' : Successfully updated property 'ConnectionFactoryConfiguration' to 'EMSApplQueueConnFactoryConf_RI'
+[AMXAdminTask]  INFO - Successfully edited property 'InboundDestination' : Successfully updated property 'InboundDestination' to 'it.bnl.be.bancadigitale.ricrifattoevent_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'SOAInboundHttp_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'HttpClient_SMFlowPin_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BEPaperless_HttpClient_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Processing 0 objects
+
+wire.application:
+[AMXAdminTask]  INFO - Processing 6 objects
+[AMXAdminTask]  INFO - Wiring reference 'id = 3205769, name = EmailService' to binding 'Virtualization' on service 'EmailServicePortType' on Application 'it.bnl.common.il.emailservice'
+[AMXAdminTask]  INFO - Successfully wired reference 'EmailService' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3205770, name = Plugin_GenerazioneDoc_BancaDigitale1' to binding 'Virtualization' on service 'Plugin_GenerazioneDoc_BancaDigitale' on Application 'it.bnl.paperless.il.plugin_generazionedoc_bd'
+[AMXAdminTask]  INFO - Successfully wired reference 'Plugin_GenerazioneDoc_BancaDigitale1' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3205771, name = PaperlessManagement' to binding 'Virtualization' on service 'GestioneDocumenti' on Application 'it.bnl.paperless.il.PaperlessManagement'
+[AMXAdminTask]  INFO - Successfully wired reference 'PaperlessManagement' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3205814, name = FirmaPinOtp_Paperless' to binding 'Virtualization' on service 'FirmaPIN_OTP' on Application 'it.bnl.paperless.il.FirmeElettroniche'
+[AMXAdminTask]  INFO - Successfully wired reference 'FirmaPinOtp_Paperless' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3205777, name = CreaDocumento_Paperless' to binding 'Virtualization' on service 'CreaDocumento' on Application 'it.bnl.paperless.il.PaperlessManagement'
+[AMXAdminTask]  INFO - Successfully wired reference 'CreaDocumento_Paperless' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3205783, name = SchedulerNotifichePortType1' to binding 'Virtualization' on service 'SchedulerNotifiche' on Application 'it.bnl.common.il.schedulernotifiche'
+[AMXAdminTask]  INFO - Successfully wired reference 'SchedulerNotifichePortType1' to service binding 'Virtualization'
+
+distribute.app:
+[AMXAdminTask]  INFO - Processing 112 objects
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'utility' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'utility' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'utility' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'utility' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'EstrazionePIN' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'EstrazionePIN' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'EstrazionePIN' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'EstrazionePIN' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'ModuloCifratura' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'ModuloCifratura' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'ModuloCifratura' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'ModuloCifratura' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'ConvertURI' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'ConvertURI' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'ConvertURI' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'ConvertURI' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'NotifyBE2BPM' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'NotifyBE2BPM' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'NotifyBE2BPM' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'NotifyBE2BPM' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'BPMOneWay' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'BPMOneWay' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'BPMOneWay' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'BPMOneWay' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDUtility' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDUtility' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDUtility' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDUtility' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BDBackOfficeBPM_Main_HTTP' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BDBackOfficeBPM_Main_HTTP' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BDBackOfficeBPM_Main_HTTP' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BDBackOfficeBPM_Main_HTTP' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDFlowPIN' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDFlowPIN' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDFlowPIN' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Utility_BDFlowPIN' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_AvvioPraticae_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_AvvioPraticae_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_AvvioPraticae_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_AvvioPraticae_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_DocsUploaded_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_DocsUploaded_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_DocsUploaded_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_DocsUploaded_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_RicRifatto_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_RicRifatto_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_RicRifatto_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Main_RicRifatto_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMFlowPIN_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMFlowPIN_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMFlowPIN_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMFlowPIN_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_EIR_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_EIR_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_EIR_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BancaDigitaleBOBPM_EIR_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'NotificaCambioRic_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'NotificaCambioRic_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'NotificaCambioRic_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'NotificaCambioRic_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'RicaricaDocumentiGC_Binding' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'RicaricaDocumentiGC_Binding' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'RicaricaDocumentiGC_Binding' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'RicaricaDocumentiGC_Binding' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnnullaChiudiPratica_Binding1' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnnullaChiudiPratica_Binding1' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnnullaChiudiPratica_Binding1' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'AnnullaChiudiPratica_Binding1' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CaricamentoDocOneWay' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CaricamentoDocOneWay' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CaricamentoDocOneWay' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CaricamentoDocOneWay' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_RicaricaDocOneWay' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_RicaricaDocOneWay' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_RicaricaDocOneWay' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_RicaricaDocOneWay' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CambioRiconOneWay' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CambioRiconOneWay' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CambioRiconOneWay' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_CambioRiconOneWay' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_ProcessManagment' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_ProcessManagment' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_ProcessManagment' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_ProcessManagment' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_EventCollector' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_EventCollector' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_EventCollector' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SOAPReference_EventCollector' to node 'SOANode-H24-BE-S'                                    
+
+deploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deploying application...
+[AMXAdminTask]  WARN - Deployment succeeded for application 'it.bnl.bd.il.utility' at 3/23/15 6:38 PM on node(s): 'SOANode-H24-FE-S, SOANode-H24-FE-N, SOANode-H24-BE-N, SOANode-H24-BE-S'
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-S' on host 'Host-FE-S' for property 'Resources:Connections:JMS:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-S' on host 'Host-FE-S' for property 'Resources:Connections:JMS:JNDI:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-S' on host 'Host-FE-S' for property 'Resources:Connections:JMS:JNDI:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-S' on host 'Host-FE-S' for property 'Resources:Connections:JMS:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-S' on host 'Host-FE-S' for property 'ServiceManager:Connessione:Timeout_msec' on component 'utility'.
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-N' on host 'Host-FE-N' for property 'Resources:Connections:JMS:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-N' on host 'Host-FE-N' for property 'Resources:Connections:JMS:JNDI:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-N' on host 'Host-FE-N' for property 'Resources:Connections:JMS:JNDI:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-N' on host 'Host-FE-N' for property 'Resources:Connections:JMS:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-FE-N' on host 'Host-FE-N' for property 'ServiceManager:Connessione:Timeout_msec' on component 'utility'.
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-N' on host 'Host-BE-N' for property 'Resources:Connections:JMS:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-N' on host 'Host-BE-N' for property 'Resources:Connections:JMS:JNDI:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-N' on host 'Host-BE-N' for property 'Resources:Connections:JMS:JNDI:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-N' on host 'Host-BE-N' for property 'Resources:Connections:JMS:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-N' on host 'Host-BE-N' for property 'ServiceManager:Connessione:Timeout_msec' on component 'utility'.
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-S' on host 'SystemHost' for property 'Resources:Connections:JMS:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-S' on host 'SystemHost' for property 'Resources:Connections:JMS:JNDI:Password' on component 'NotifyBE2BPM' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-S' on host 'SystemHost' for property 'Resources:Connections:JMS:JNDI:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:JNDI:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-S' on host 'SystemHost' for property 'Resources:Connections:JMS:Password' on component 'utility' and has been sourced to property 'Resources:Connections:JMS:Password' on composite 'rootComposite'. 
+[AMXAdminTask]  WARN - 	Property value does not exist on node 'SOANode-H24-BE-S' on host 'SystemHost' for property 'ServiceManager:Connessione:Timeout_msec' on component 'utility'.
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - 1 task is pending on host [Host-BE-N]
+[AMXAdminTask]  INFO - 1 task is pending on host [Host-FE-S]
+[AMXAdminTask]  INFO - 1 task is pending on host [SystemHost]
+[AMXAdminTask]  INFO - Application Deploy with Start finished successfully
+
+start.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Starting Applications...
+[AMXAdminTask]  INFO - Starting application 'it.bnl.bd.il.utility' in background 
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Start finished successfully
+
+set.log:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Set logging configuration of Application...
+[AMXAdminTask]  INFO - Successfully set log configuration to Application 'it.bnl.bd.il.utility'
+
+deploy.log:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deploy logging configuration of Application...
+[AMXAdminTask]  INFO - Successfully deployed log configuration to Application 'it.bnl.bd.il.utility'
+
+soa.deploy:
+     [echo] completato deploy SOA component:it.bnl.bd.il.utility version: 1.0.0.201503191254 in C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+sg.init:
+     [echo] Using User: prod_deployer
+
+sg.deploy-soa:
+     [echo] deploying SOA component:it.bnl.bd.il.serviziEIR version: 1.0.0.201503091648 in C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD for environment "PROD"
+     [echo] includo C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.bd.il.serviziEIR/it.bnl.bd.il.serviziEIR.deployment-config-PROD.xml
+     [echo] ----------------------------------------------------------------------------------
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+undeploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Initializing JSSE's crypto provider class com.sun.net.ssl.internal.ssl.Provider in default mode
+[AMXAdminTask]  INFO - Undeploying application...
+[AMXAdminTask]  INFO - Undeploying application 'it.bnl.bd.il.serviziEIR' in background 
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - 68 tasks are pending on node [SOANode-H24-BE-S] on host [SystemHost]
+[AMXAdminTask]  INFO - 38 tasks are pending on node [SOANode-H24-FE-N] on host [Host-FE-N]
+[AMXAdminTask]  INFO - 66 tasks are pending on node [SOANode-H24-BE-N] on host [Host-BE-N]
+[AMXAdminTask]  INFO - 68 tasks are pending on node [SOANode-H24-FE-S] on host [Host-FE-S]
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - 64 tasks are pending on node [SOANode-H24-FE-S] on host [Host-FE-S]
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Undeploy finished successfully
+
+delete.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deleting Application...
+[AMXAdminTask]  INFO - Successfully deleted Application 'it.bnl.bd.il.serviziEIR'
+
+upload.daa:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Uploading DAA...
+[AMXAdminTask]  INFO - DAA location: C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.bd.il.serviziEIR/it.bnl.bd.il.serviziEIR.daa
+[AMXAdminTask]  INFO - Successfully added Application Template 'it.bnl.bd.il.serviziEIR' (version: '1.0.0.201503091648') to the Administrator Staging Area
+
+create.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Adding application...
+[AMXAdminTask]  INFO - Successfully added Application 'it.bnl.bd.il.serviziEIR'
+
+edit.properties:
+[AMXAdminTask]  INFO - Processing 14 objects
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'ServiceManager:Connessione:Port' : Successfully updated property 'ServiceManager:Connessione:Port' to '80'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:DatabaseURL' : Successfully updated property 'Resources:Connections:DB_APPL:DatabaseURL' to 'jdbc:oracle:thin:@10.238.146.123:1522:PRV1ITP0'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:User' : Successfully updated property 'Resources:Connections:DB_APPL:User' to 'TIBCO_AS_APP'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:Password' : Successfully updated property 'Resources:Connections:DB_APPL:Password' to 'tibcoasapp003'
+[AMXAdminTask]  INFO - Successfully edited property 'ServiceManager:Connessione:Host' : Successfully updated property 'ServiceManager:Connessione:Host' to '10.238.220.13'
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:Log:severity' : Successfully updated property 'Processes:Log:severity' to 'INFO'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'SOAInboundHttp_RI'
+[AMXAdminTask]  INFO - Processing 0 objects
+
+wire.application:
+[AMXAdminTask]  INFO - Processing 3 objects
+[AMXAdminTask]  INFO - Wiring reference 'id = 3211365, name = BDUtility' to binding 'Virtualization' on service 'BDUtility' on Application 'it.bnl.bd.il.utility'
+[AMXAdminTask]  INFO - Successfully wired reference 'BDUtility' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3211366, name = partnerServiceMail1' to binding 'Virtualization' on service 'EmailServicePortType' on Application 'it.bnl.common.il.emailservice'
+[AMXAdminTask]  INFO - Successfully wired reference 'partnerServiceMail1' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3211367, name = SchedulerNotifichePortType1' to binding 'Virtualization' on service 'SchedulerNotifiche' on Application 'it.bnl.common.il.schedulernotifiche'
+[AMXAdminTask]  INFO - Successfully wired reference 'SchedulerNotifichePortType1' to service binding 'Virtualization'
+
+distribute.app:
+[AMXAdminTask]  INFO - Processing 52 objects
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'InsDatiConfigurazione' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'InsDatiConfigurazione' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'InsDatiConfigurazione' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'InsDatiConfigurazione' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'RiconoscimentoEIR' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'RiconoscimentoEIR' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'RiconoscimentoEIR' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'RiconoscimentoEIR' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaEIR' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaEIR' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaEIR' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaEIR' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'HashServiceMgr' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoEIR' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoEIR' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoEIR' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoEIR' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_InsDatiConfigurazione' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_InsDatiConfigurazione' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_InsDatiConfigurazione' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_InsDatiConfigurazione' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GestionePratica' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GestionePratica' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GestionePratica' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GestionePratica' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GenerazioneEFirmaContratto' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GenerazioneEFirmaContratto' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GenerazioneEFirmaContratto' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_GenerazioneEFirmaContratto' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_Riconoscimento' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_Riconoscimento' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_Riconoscimento' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'EIR_Riconoscimento' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'BachecaDocumentaleService' to node 'SOANode-H24-FE-S'                                    
+
+deploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deploying application...
+[AMXAdminTask]  INFO - Deploying application 'it.bnl.bd.il.serviziEIR' in background : Deployment succeeded for application 'it.bnl.bd.il.serviziEIR' at 3/23/15 6:53 PM on node(s): 'SOANode-H24-BE-N, SOANode-H24-BE-S, SOANode-H24-FE-N, SOANode-H24-FE-S'
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Deploy with Start finished successfully
+
+start.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Starting Applications...
+[AMXAdminTask]  INFO - Starting application 'it.bnl.bd.il.serviziEIR' in background 
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Start finished successfully
+
+set.log:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Set logging configuration of Application...
+[AMXAdminTask]  INFO - Successfully set log configuration to Application 'it.bnl.bd.il.serviziEIR'
+
+deploy.log:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deploy logging configuration of Application...
+[AMXAdminTask]  INFO - Successfully deployed log configuration to Application 'it.bnl.bd.il.serviziEIR'
+
+soa.deploy:
+     [echo] completato deploy SOA component:it.bnl.bd.il.serviziEIR version: 1.0.0.201503091648 in C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+sg.init:
+     [echo] Using User: prod_deployer
+
+sg.deploy-soa:
+     [echo] deploying SOA component:it.bnl.bd.il.serviziGiaCliente version: 1.0.0.201503111558 in C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD for environment "PROD"
+     [echo] includo C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.bd.il.serviziGiaCliente/it.bnl.bd.il.serviziGiaCliente.deployment-config-PROD.xml
+     [echo] ----------------------------------------------------------------------------------
+Trying to override old definition of task for
+Trying to override old definition of task for
+
+undeploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Initializing JSSE's crypto provider class com.sun.net.ssl.internal.ssl.Provider in default mode
+[AMXAdminTask]  INFO - Undeploying application...
+[AMXAdminTask]  INFO - Undeploying application 'it.bnl.bd.il.serviziGiaCliente' in background 
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - 36 tasks are pending on node [SOANode-H24-BE-S] on host [SystemHost]
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - .
+[AMXAdminTask]  INFO - Application Undeploy finished successfully
+
+delete.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deleting Application...
+[AMXAdminTask]  INFO - Successfully deleted Application 'it.bnl.bd.il.serviziGiaCliente'
+
+upload.daa:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Uploading DAA...
+[AMXAdminTask]  INFO - DAA location: C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD/it.bnl.bd.il.serviziGiaCliente/it.bnl.bd.il.serviziGiaCliente.daa
+[AMXAdminTask]  INFO - Successfully added Application Template 'it.bnl.bd.il.serviziGiaCliente' (version: '1.0.0.201503111558') to the Administrator Staging Area
+
+create.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Adding application...
+[AMXAdminTask]  INFO - Successfully added Application 'it.bnl.bd.il.serviziGiaCliente'
+
+edit.properties:
+[AMXAdminTask]  INFO - Processing 16 objects
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'ServiceManager:Connessione:Host' : Successfully updated property 'ServiceManager:Connessione:Host' to '10.238.220.13'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:Password' : Successfully updated property 'Resources:Connections:DB_APPL:Password' to 'tibcoasapp003'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_RF:Password' : Successfully updated property 'Resources:Connections:DB_RF:Password' to 'rfprv03app'
+[AMXAdminTask]  INFO - Successfully edited property 'ServiceManager:Connessione:Port' : Successfully updated property 'ServiceManager:Connessione:Port' to '80'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_RF:DatabaseURL' : Successfully updated property 'Resources:Connections:DB_RF:DatabaseURL' to 'jdbc:oracle:thin:@10.238.146.123:1522:PRV1ITP0'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_RF:User' : Successfully updated property 'Resources:Connections:DB_RF:User' to 'RFPRVAPP'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:DatabaseURL' : Successfully updated property 'Resources:Connections:DB_APPL:DatabaseURL' to 'jdbc:oracle:thin:@10.238.146.123:1522:PRV1ITP0'
+[AMXAdminTask]  INFO - Successfully edited property 'Resources:Connections:DB_APPL:User' : Successfully updated property 'Resources:Connections:DB_APPL:User' to 'TIBCO_AS_APP'
+[AMXAdminTask]  INFO - Successfully edited property 'Processes:Log:severity' : Successfully updated property 'Processes:Log:severity' to 'INFO'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpInboundConnectionConfig' : Successfully updated property 'HttpInboundConnectionConfig' to 'SOAHttpConnector_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'HttpClient_SMBancaDigitale_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BEPaperless_HTTPClient_APF_RI'
+[AMXAdminTask]  INFO - Editing properties..
+[AMXAdminTask]  INFO - Successfully edited property 'HttpOutboundConnectionConfig' : Successfully updated property 'HttpOutboundConnectionConfig' to 'BPMInboundHttpInstance_RI'
+[AMXAdminTask]  INFO - Processing 0 objects
+
+wire.application:
+[AMXAdminTask]  INFO - Processing 3 objects
+[AMXAdminTask]  INFO - Wiring reference 'id = 3214998, name = BD_Utility' to binding 'Virtualization' on service 'BDUtility' on Application 'it.bnl.bd.il.utility'
+[AMXAdminTask]  INFO - Successfully wired reference 'BD_Utility' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3215004, name = partnerEmailService' to binding 'Virtualization' on service 'EmailServicePortType' on Application 'it.bnl.common.il.emailservice'
+[AMXAdminTask]  INFO - Successfully wired reference 'partnerEmailService' to service binding 'Virtualization'
+[AMXAdminTask]  INFO - Wiring reference 'id = 3215005, name = SchedulerNotifichePortType1' to binding 'Virtualization' on service 'SchedulerNotifiche' on Application 'it.bnl.common.il.schedulernotifiche'
+[AMXAdminTask]  INFO - Successfully wired reference 'SchedulerNotifichePortType1' to service binding 'Virtualization'
+
+distribute.app:
+[AMXAdminTask]  INFO - Processing 40 objects
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaCLI' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaCLI' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaCLI' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GestionePraticaCLI' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoCLI' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoCLI' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoCLI' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GeneraEFirmaContrattoCLI' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Mapping component to nodes...                                      
+[AMXAdminTask]  INFO - Successfully mapped component 'GatewayServiceManagerMediation' to node 'SOANode-H24-BE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GatewayServiceManagerMediation' to node 'SOANode-H24-BE-S' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GatewayServiceManagerMediation' to node 'SOANode-H24-FE-N' 
+[AMXAdminTask]  INFO - Successfully mapped component 'GatewayServiceManagerMediation' to node 'SOANode-H24-FE-S' 
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GeneraEFirmaContratto' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GeneraEFirmaContratto' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GeneraEFirmaContratto' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GeneraEFirmaContratto' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GestionePratica' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GestionePratica' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GestionePratica' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GiaCli_GestionePratica' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'gatewaysm.soap' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'gatewaysm.soap' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'gatewaysm.soap' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'gatewaysm.soap' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'StateMachine_Events' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'GeneraIDPratica_v1' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Paperless_AvvioProcessoDiFirma' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Paperless_AvvioProcessoDiFirma' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Paperless_AvvioProcessoDiFirma' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'Paperless_AvvioProcessoDiFirma' to node 'SOANode-H24-FE-S'                                    
+[AMXAdminTask]  INFO - Setting mapping of bindings to nodes...   
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-BE-S'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-N'                                    
+[AMXAdminTask]  INFO - Successfully set mapping of binding 'SMSPT_InvioSMS' to node 'SOANode-H24-FE-S'                                    
+
+deploy.app:
+[AMXAdminTask]  INFO - Processing 1 objects
+[AMXAdminTask]  INFO - Deploying application...
+[AMXAdminTask] ERROR - Failed to deploy Application 'it.bnl.bd.il.serviziGiaCliente': Deployment failed for application 'it.bnl.bd.il.serviziGiaCliente' at 3/23/15 7:04 PM 
+[AMXAdminTask] ERROR - 	Resource instance 'BEPaperless_HTTPClient_APF_RI' could not be found for node 'SOANode-H24-BE-N' on host 'Host-BE-N'. It is required by property 'HttpOutboundConnectionConfig' on binding 'Paperless_AvvioProcessoDiFirma' on reference 'AvvioProcessodiFirmaPortType1' for component 'rootComposite'.
+[AMXAdminTask] ERROR - 	Resource instance 'BEPaperless_HTTPClient_APF_RI' could not be found for node 'SOANode-H24-BE-S' on host 'SystemHost'. It is required by property 'HttpOutboundConnectionConfig' on binding 'Paperless_AvvioProcessoDiFirma' on reference 'AvvioProcessodiFirmaPortType1' for component 'rootComposite'.
+[AMXAdminTask] ERROR - 	Resource instance 'BEPaperless_HTTPClient_APF_RI' could not be found for node 'SOANode-H24-FE-N' on host 'Host-FE-N'. It is required by property 'HttpOutboundConnectionConfig' on binding 'Paperless_AvvioProcessoDiFirma' on reference 'AvvioProcessodiFirmaPortType1' for component 'rootComposite'.
+[AMXAdminTask] ERROR - 	Resource instance 'BEPaperless_HTTPClient_APF_RI' could not be found for node 'SOANode-H24-FE-S' on host 'Host-FE-S'. It is required by property 'HttpOutboundConnectionConfig' on binding 'Paperless_AvvioProcessoDiFirma' on reference 'AvvioProcessodiFirmaPortType1' for component 'rootComposite'.
+
+BUILD FAILED
+C:\Program Files (x86)\Jenkins\workspace\BancaDigitale-deploy-PROD\build.xml:28: The following error occurred while executing this line:
+C:\Program Files (x86)\Jenkins\workspace\deployFramework\ant-lib_v1.1\deploy-servicegrid.xml:16: The following error occurred while executing this line:
+C:\Program Files (x86)\Jenkins\workspace\deployFramework\ant-lib_v1.1\deployment-all-build.xml:148: Failed on error
+
+Total time: 48 minutes 52 seconds
+Build step 'Invoke Ant' marked build as failure
+Email was triggered for: Always
+Sending email for trigger: Always
+Sending email to: tibco-ingegneria@bnlmail.com andrea.ferracci+buildjenkins@bnlmail.com marcobartolini74@gmail.com morinimanuel+buildjenkins@gmail.com raffaele.p.guidi+buildjenkins@gmail.com cc_open_network@bnlmail.com pat064-indra@bnlmail.com laliberti@indracompany.com marco.bartolin74@gmail.com raffaele.p.pguidi@gmail.com
