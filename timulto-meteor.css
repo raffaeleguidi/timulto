@@ -1,3 +1,7 @@
+/*
+Probably it's better to switch to:
+https://github.com/FezVrasta/bootstrap-material-design/tree/master/meteor
+*/
 .shot {
     width: 300px;
     --height: 500px;
