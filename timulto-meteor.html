@@ -1,4 +1,5 @@
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TiMulto</title>
     <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/css/materialize.min.css">
@@ -10,9 +11,9 @@
 
 <body>
   <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">TiMulto</a>
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>
       <ul class="right">
-        <li><a href="#">Dimmi di più</a></li>
+        <li><a href="#">[ ? ]</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -24,28 +25,32 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h1 class="header center orange-text">TiMulto</h1>
+      <h1 class="header center"><span class="orange white-text">Ti</span><span class="blue-text">Multo</span></h1>
       <div class="row center">
-        <h5 class="header col s12 light">Delazione moderna e con senso civico</h5>
+        <h5 class="header col s12 light">Delazione e senso civico</h5>
       </div>
+      <!-- <div class="row center">
+        <a id="shoot" class="btn-large waves-effect waves-light orange">Scatta</a>
+      </div> -->
+
+      <div class="center">
+          <button id="shoot" class="btn waves-light orange" type="submit" name="action">Scatta
+            <i class="mdi-image-camera-alt"></i>
+          </button>
+      </div>
+
       <div class="row center">
-        <a id="shoot" href="#" class="btn-large waves-effect waves-light orange">Scatta</a>
+        <header>
+          <form id="new-task" class="new-task">
+            <img class="shot" id="shot" name="shot" src="{{photo}}" />
+            <input type="text" id="description" name="text" placeholder="Cosa vuoi segnalare?" />
+            <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
+            <button id="send" class="btn waves-light" type="submit" name="action">Invia
+              <i class="mdi-content-send right"></i>
+            </button>
+          </form>
+        </header>
       </div>
-
-          <div class="row center">
-            <header>
-              <form id="new-task" class="new-task">
-                <img class="shot" id="shot" name="shot" src="{{photo}}" />
-                <input type="text" id="description" name="text" placeholder="Cosa vuoi segnalare?" />
-                <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
-
-              <div class="row center">
-                <a id="send" class="btn-large waves-effect waves-light orange">Segnala</a>
-              </div>
-              </form>
-            </header>
-          </div>
-
 
     </div>
   </div>
@@ -53,16 +58,15 @@
 
   <div class="container">
     <div class="section">
-        <h3 class="header center orange-text">Le tue segnalazioni</h3>
-      <table class="bordered">
+        <h4 class="header left blue-text">Le tue segnalazioni</h4>
+        <table class="bordered">
           <thead>
               <tr>
-                  <th data-field="name">Descrizione</th>
-                  <th data-field="name">Foto</th>
-                  <th data-field="price">Azioni</th>
+                  <th data-field="Descrizione">Descrizione</th>
+                  <th data-field="Foto">Foto</th>
+                  <th data-field="Azioni">Azioni</th>
               </tr>
-         </thead>
-
+          </thead>
           <tbody>
               {{#each tasks}}
                 {{> task}}
@@ -71,18 +75,6 @@
         </table>
     </div>
 </div>
-<!--
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="mdi-social-group"></i></h2>
-            <h2 class="center light-blue-text"><i class="mdi-image-flash-on"></i></h2>
-            <h2 class="center light-blue-text"><i class="mdi-action-settings"></i></h2>
-            <h5 class="center">Easy to work with</h5>
-
-            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-          </div>
-        </div>
--->
 
   <footer class="page-footer orange">
     <div class="container">
@@ -98,8 +90,6 @@
           <ul>
             <li><a class="white-text" href="#!">Link 1</a></li>
             <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
@@ -107,8 +97,6 @@
           <ul>
             <li><a class="white-text" href="#!">Link 1</a></li>
             <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
           </ul>
         </div>
       </div>
@@ -123,12 +111,10 @@
 </body>
 
 <template name="task">
-
-              <tr>
-                  <td><span class="text">{{text}}</span></td>
-                  <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-                  <td><button class="delete">&times;</button></td>
-              </tr>
-
+  <tr>
+      <td><span class="text">{{text}}</span></td>
+      <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+      <td><button class="delete">&times;</button></td>
+  </tr>
 </template>
 

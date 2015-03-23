@@ -15,19 +15,15 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click #shoot": function(event) {
-        // https://atmospherejs.com/mdg/camera
+        event.preventDefault();
         MeteorCamera.getPicture(function(error, data) {
            Session.set("photo", data);
-            //console.log('ciao');
         })
     },
     "click #send": function (event) {
-        // This function is called when the new task form is submitted
-
-        console.log("ciao");
+        event.preventDefault();
         var text = $("#description").val();
         var imageData = $("#imgdata").val();
-        console.log(text);
 
         Tasks.insert({
           text: text,
@@ -36,7 +32,7 @@ if (Meteor.isClient) {
         });
 
         // Clear form
-        event.target.text.value = "";
+        $("#description").val("");
         Session.set("photo", 'icon-camera-128.png');
 
         // Prevent default form submit
