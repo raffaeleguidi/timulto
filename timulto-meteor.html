@@ -1,39 +1,134 @@
 <head>
-  <title>Todo List</title>
+  <title>TiMulto</title>
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/css/materialize.min.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/js/materialize.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1>TiMulto</h1>
-      <!-- add a form below the h1 -->
-      <form class="new-task">
-        <input type="text" name="text" placeholder="Descrivi l'infrazione" />
-        <input type="hidden" name="imgdata" value="{{photo}}" />
-        <img style="width: 32px" id="dajece" src="icon-camera-128.png">
-        <img class="shot" name="shot" src="{{photo}}" />
-        <br />
-        <button>invia</button>
-      </form>
-    </header>
-    <ul>
-      {{#each tasks}}
-        {{> task}}
-      {{/each}}
-    </ul>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">TiMulto</a>
+      <ul class="right">
+        <li><a href="#">Dimmi di più</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Scopri di più</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h1 class="header center orange-text">TiMulto</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">Delazione moderna e con senso civico</h5>
+      </div>
+      <div class="row center">
+        <a id="shoot" href="#" class="btn-large waves-effect waves-light orange">Scatta</a>
+      </div>
+
+          <div class="row center">
+            <header>
+              <form id="new-task" class="new-task">
+                <img class="shot" id="shot" name="shot" src="{{photo}}" />
+                <input type="text" id="description" name="text" placeholder="Cosa vuoi segnalare?" />
+                <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
+
+              <div class="row center">
+                <a id="send" class="btn-large waves-effect waves-light orange">Segnala</a>
+              </div>
+              </form>
+            </header>
+          </div>
+
+
+    </div>
   </div>
+
+
+  <div class="container">
+    <div class="section">
+        <h3 class="header center orange-text">Le tue segnalazioni</h3>
+      <table class="bordered">
+          <thead>
+              <tr>
+                  <th data-field="name">Descrizione</th>
+                  <th data-field="name">Foto</th>
+                  <th data-field="price">Azioni</th>
+              </tr>
+         </thead>
+
+          <tbody>
+              {{#each tasks}}
+                {{> task}}
+              {{/each}}
+          </tbody>
+        </table>
+    </div>
+</div>
+<!--
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="mdi-social-group"></i></h2>
+            <h2 class="center light-blue-text"><i class="mdi-image-flash-on"></i></h2>
+            <h2 class="center light-blue-text"><i class="mdi-action-settings"></i></h2>
+            <h5 class="center">Easy to work with</h5>
+
+            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+          </div>
+        </div>
+-->
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Chi è TiMulto?</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 
 <template name="task">
-  <li class="{{#if checked}}checked{{/if}}">
 
-    <button class="delete">&times;</button>
+              <tr>
+                  <td><span class="text">{{text}}</span></td>
+                  <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+                  <td><button class="delete">&times;</button></td>
+              </tr>
 
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-
-    <span class="text">{{text}}</span>
-
-    <img class="shot" name="imageData" src="{{imageData}}" />
-  </li>
 </template>
 

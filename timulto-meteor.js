@@ -1,6 +1,8 @@
 Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isClient) {
+  Session.set("photo", 'icon-camera-128.png');
+
   // This code only runs on the client
   Template.body.helpers({
     tasks: function () {
@@ -12,18 +14,20 @@ if (Meteor.isClient) {
   });
 
   Template.body.events({
-    "click #dajece": function(event) {
+    "click #shoot": function(event) {
         // https://atmospherejs.com/mdg/camera
         MeteorCamera.getPicture(function(error, data) {
            Session.set("photo", data);
             //console.log('ciao');
         })
     },
-    "submit .new-task": function (event) {
+    "click #send": function (event) {
         // This function is called when the new task form is submitted
 
-        var text = event.target.text.value;
-        var imageData = event.target.imgdata.value;
+        console.log("ciao");
+        var text = $("#description").val();
+        var imageData = $("#imgdata").val();
+        console.log(text);
 
         Tasks.insert({
           text: text,
@@ -33,7 +37,7 @@ if (Meteor.isClient) {
 
         // Clear form
         event.target.text.value = "";
-        Session.set("photo", '');
+        Session.set("photo", 'icon-camera-128.png');
 
         // Prevent default form submit
         return false;

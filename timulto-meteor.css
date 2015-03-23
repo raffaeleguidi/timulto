@@ -1,4 +1,22 @@
-/* CSS declarations go here */
+.shot {
+    width: 300px;
+    --height: 500px;
+    border: 1px solid gray;
+    vertical-align: middle;
+}
+
+.mini-shot {
+    max-width: 128px;
+    max-height: 128px;
+    border: 1px solid gray;
+    vertical-align: middle;
+}
+
+.flash{
+    width: 64px;
+}
+
+/* CSS declarations go here
 body {
   font-family: sans-serif;
   background-color: #315481;
@@ -130,3 +148,4 @@ header .hide-completed {
     max-height: 128px;
     vertical-align: middle;
 }
+*/
