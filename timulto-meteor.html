@@ -45,6 +45,8 @@
             <img class="shot" id="shot" name="shot" src="{{photo}}" />
             <input type="text" id="description" name="text" placeholder="Cosa vuoi segnalare?" />
             <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
+            <input type="hidden" id="lat" name="lat" value="{{loc.lat}}" />
+            <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
             <button id="send" class="btn waves-light" type="submit" name="action">Invia
               <i class="mdi-content-send right"></i>
             </button>
@@ -62,9 +64,10 @@
         <table class="bordered">
           <thead>
               <tr>
+                  <th width="1%" data-field="Foto">Foto</th>
                   <th data-field="Descrizione">Descrizione</th>
-                  <th data-field="Foto">Foto</th>
-                  <th data-field="Azioni">Azioni</th>
+                  <th data-field="Posizione">Posizione</th>
+                  <th width="1%" data-field="Azioni">Azioni</th>
               </tr>
           </thead>
           <tbody>
@@ -112,8 +115,9 @@
 
 <template name="task">
   <tr>
-      <td><span class="text">{{text}}</span></td>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+      <td><span class="text">{{text}}</span></td>
+      <td><span class="position">{{lat}}, {{lng}}</span></td>
       <td><button class="delete">&times;</button></td>
   </tr>
 </template>
