@@ -1,7 +1,8 @@
 Tasks = new Mongo.Collection("tasks");
+var blank = "scatta.png";
 
 if (Meteor.isClient) {
-  Session.set("photo", 'scatta.png');
+  Session.set("photo", blank);
 
   // This code only runs on the client
   Template.body.helpers({
@@ -19,10 +20,16 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click #shot": function(event) {
-        event.preventDefault();
+        //event.preventDefault();
         MeteorCamera.getPicture({ width: 300, height: 300 }, function(error, data) {
-           Session.set("photo", data);
-           $("#description").focus();
+            if (data) {
+                Session.set("photo", data);
+                $("#description").focus();
+                // it would be nice to show keyboard
+                // but this requires a cordova plugin
+            } else {
+                Session.set("photo", blank);
+            }
         })
     },
     "click #send": function (event) {
@@ -42,9 +49,9 @@ if (Meteor.isClient) {
 
         // Clear form
         $("#description").val("");
-        Session.set("photo", 'scatta.png');
+        Session.set("photo", blank);
 
-        // Prevent default form submit
+        // Prevent default form submit (just in case)
         return false;
     }
   });
