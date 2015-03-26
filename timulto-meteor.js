@@ -1,5 +1,5 @@
 Tasks = new Mongo.Collection("tasks");
-var blank = "scatta.png";
+var blank = "shoot-orange.png";
 
 if (Meteor.isClient) {
   Session.set("photo", blank);
@@ -46,6 +46,9 @@ if (Meteor.isClient) {
           lng: lng,
           createdAt: new Date() // current time
         });
+
+        // add reverse geocoding: see
+        //http://nominatim.openstreetmap.org/reverse?lat=41.8981543&lon=12.534745599999999&lang=it
 
         // Clear form
         $("#description").val("");
