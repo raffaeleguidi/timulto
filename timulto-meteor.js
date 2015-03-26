@@ -1,7 +1,7 @@
 Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isClient) {
-  Session.set("photo", 'icon-camera-128.png');
+  Session.set("photo", 'scatta.png');
 
   // This code only runs on the client
   Template.body.helpers({
@@ -18,10 +18,11 @@ if (Meteor.isClient) {
   });
 
   Template.body.events({
-    "click #shoot": function(event) {
+    "click #shot": function(event) {
         event.preventDefault();
         MeteorCamera.getPicture({ width: 300, height: 300 }, function(error, data) {
            Session.set("photo", data);
+           $("#description").focus();
         })
     },
     "click #send": function (event) {
@@ -41,7 +42,7 @@ if (Meteor.isClient) {
 
         // Clear form
         $("#description").val("");
-        Session.set("photo", 'icon-camera-128.png');
+        Session.set("photo", 'scatta.png');
 
         // Prevent default form submit
         return false;

@@ -1,5 +1,7 @@
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no;user-scalable=0" />
+    <!--<meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;" />-->
   <title>TiMulto</title>
     <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/css/materialize.min.css">
@@ -17,37 +19,35 @@
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Scopri di più</a></li>
+        <li><a href="#">[ ? ]</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
   </nav>
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
+      <!--
       <br><br>
       <h1 class="header center"><span class="orange white-text">Ti</span><span class="blue-text">Multo</span></h1>
       <div class="row center">
         <h5 class="header col s12 light">Delazione e senso civico</h5>
       </div>
-      <!-- <div class="row center">
-        <a id="shoot" class="btn-large waves-effect waves-light orange">Scatta</a>
-      </div> -->
 
-      <div class="center">
+      <div class="row center">
           <button id="shoot" class="btn waves-light orange" type="submit" name="action">Scatta
             <i class="mdi-image-camera-alt"></i>
           </button>
       </div>
-
+      -->
       <div class="row center">
         <header>
           <form id="new-task" class="new-task">
             <img class="shot" id="shot" name="shot" src="{{photo}}" />
-            <input type="text" id="description" name="text" placeholder="Cosa vuoi segnalare?" />
+            <input type="text" id="description" name="text" placeholder="Descrivi l'infrazione" />
             <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
             <input type="hidden" id="lat" name="lat" value="{{loc.lat}}" />
             <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
-            <button id="send" class="btn waves-light" type="submit" name="action">Invia
+            <button id="send" class="btn waves-light" type="submit" name="action">Multa
               <i class="mdi-content-send right"></i>
             </button>
           </form>
