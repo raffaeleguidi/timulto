@@ -33,7 +33,7 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click #shot": function(event) {
-        //event.preventDefault();
+        //added correctOrientation=true for samsung phones
         MeteorCamera.getPicture({ width: 800, height: 600, correctOrientation: true }, function(error, data) {
             geocode();
             if (data) {
