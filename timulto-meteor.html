@@ -6,7 +6,11 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/js/materialize.min.js"></script>
   <!-- Compiled and minified JavaScript -->
-
+  <script type="text/javascript" charset="utf-8">
+    document.addEventListener("backbutton", function () {
+        navigator.app.exitApp();
+    }, false);
+  </script>
 </head>
 
 <body>
@@ -26,8 +30,10 @@
       <div class="row center">
         <header>
           <form id="new-task" class="new-task">
+              <br />
             <img class="shot" id="shot" name="shot" src="{{photo}}" />
-            <input type="text" id="description" name="text" placeholder="Descrivi l'infrazione" />
+            <input type="text" id="address" name="address" placeholder="Indirizzo" value="{{address}}"/>
+            <input type="text" id="description" name="text" placeholder="Descrivi l'infrazione" value="{{description}}"/>
             <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
             <input type="hidden" id="lat" name="lat" value="{{loc.lat}}" />
             <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
@@ -66,22 +72,22 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Chi è TiMulto?</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+          <p class="grey-text text-lighten-4">Siamo una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Ogni contributo, morale e materiale, è largamente apprezzato.</p>
 
 
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
+          <h5 class="white-text">Partner</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Il mago di oz</a></li>
+            <li><a class="white-text" href="#!">Harry Poter</a></li>
           </ul>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
+          <h5 class="white-text">Contattaci</h5>
           <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Facebook</a></li>
+            <li><a class="white-text" href="#!">Twitter</a></li>
           </ul>
         </div>
       </div>
@@ -98,7 +104,7 @@
 <template name="task">
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span class="text">{{text}} alla posizione {{lat}}, {{lng}}</span></td>
+      <td><span class="text">{{text}}, in {{address}} ({{lat}}, {{lng}})</span></td>
       <td><button class="delete">&times;</button></td>
   </tr>
 </template>

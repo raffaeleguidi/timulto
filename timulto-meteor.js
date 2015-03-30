@@ -1,14 +1,27 @@
 Tasks = new Mongo.Collection("tasks");
 var blank = "shoot-orange.png";
 
+function geocode() {
+    var coords = Geolocation.latLng();
+    if (coords.lat && coords.lng) {
+        Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
+            Session.set("address", results);
+        });
+    }
+}
+
 if (Meteor.isClient) {
+  // This code only runs on the client
   Session.set("photo", blank);
 
-  // This code only runs on the client
   Template.body.helpers({
     tasks: function () {
     // Show newest tasks first
        return Tasks.find({}, {sort: {createdAt: -1}});
+    }, address: function () {
+      return Session.get("address");
+    }, description: function () {
+      return Session.get("description");
     }, photo: function () {
       return Session.get("photo");
     }, loc: function () {
@@ -21,7 +34,8 @@ if (Meteor.isClient) {
   Template.body.events({
     "click #shot": function(event) {
         //event.preventDefault();
-        MeteorCamera.getPicture({ width: 300, height: 300 }, function(error, data) {
+        MeteorCamera.getPicture({ width: 800, height: 600, correctOrientation: true }, function(error, data) {
+            geocode();
             if (data) {
                 Session.set("photo", data);
                 $("#description").focus();
@@ -35,24 +49,25 @@ if (Meteor.isClient) {
     "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
+        var address = $("#address").val();
         var imageData = $("#imgdata").val();
         var lat = $("#lat").val();
         var lng = $("#lng").val();
 
         Tasks.insert({
           text: text,
+          address: address,
           imageData: imageData,
           lat: lat,
           lng: lng,
           createdAt: new Date() // current time
         });
 
-        // add reverse geocoding: see
-        //http://nominatim.openstreetmap.org/reverse?lat=41.8981543&lon=12.534745599999999&lang=it
-
         // Clear form
         $("#description").val("");
+        Session.set("description", "");
         Session.set("photo", blank);
+        Session.set("address", "");
 
         // Prevent default form submit (just in case)
         return false;
@@ -69,5 +84,35 @@ if (Meteor.isClient) {
   });
 }
 
+if(Meteor.isCordova){
+    //console.log("eccomi");
+    Meteor.startup(function(){
+        window.onpopstate = function () {
+            //console.log(JSON.stringify(history));
+            if (false && !history.state){
+                //console.log("eccomi 4");
+                navigator.app.exitApp();
+            }
+        };
+    });
+}
+
+if (Meteor.isServer) {
+    Meteor.startup(function () {
+        Meteor.methods({
+            reverseGeocode: function (lat, lon) {
+                this.unblock();
+                var obj = HTTP.get("http://nominatim.openstreetmap.org/reverse",
+                                   { params: {
+                                         format: "json",
+                                         lat: lat,
+                                         lon: lon
+                                     }});
+                var ret = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
+                return ret;
+            }
+        });
+    });
+}
 
 
