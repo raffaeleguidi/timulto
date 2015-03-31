@@ -2,11 +2,15 @@ Tasks = new Mongo.Collection("tasks");
 var blank = "shoot-orange.png";
 
 function geocode() {
-    var coords = Geolocation.latLng();
-    if (coords.lat && coords.lng) {
-        Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
-            Session.set("address", results);
-        });
+    try {
+        var coords = Geolocation.latLng();
+        if (coords.lat && coords.lng) {
+            Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
+                Session.set("address", results);
+            });
+        }
+    } catch(err) {
+        console.log("error geocoding " + err.message);
     }
 }
 
