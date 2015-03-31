@@ -87,13 +87,16 @@ if (Meteor.isClient) {
 if(Meteor.isCordova){
     //console.log("eccomi");
     Meteor.startup(function(){
-        window.onpopstate = function () {
+        document.addEventListener("backbutton", function() {
             //console.log(JSON.stringify(history));
-            if (false && !history.state){
+            //alert(document.location.pathname);
+            if (document.location.pathname == "/"){
                 //console.log("eccomi 4");
                 navigator.app.exitApp();
+            } else {
+                history.go(-1)
             }
-        };
+        })
     });
 }
 
@@ -102,14 +105,18 @@ if (Meteor.isServer) {
         Meteor.methods({
             reverseGeocode: function (lat, lon) {
                 this.unblock();
-                var obj = HTTP.get("http://nominatim.openstreetmap.org/reverse",
-                                   { params: {
-                                         format: "json",
-                                         lat: lat,
-                                         lon: lon
-                                     }});
-                var ret = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
-                return ret;
+                try {
+                    var obj = HTTP.get("http://nominatim.openstreetmap.org/reverse",
+                                       { params: {
+                                             format: "json",
+                                             lat: lat,
+                                             lon: lon
+                                         }});
+                    var ret = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
+                    return ret;
+                } catch (ex) {
+                    return "Lat: " + lat + ", Lon: " + lon;
+                }
             }
         });
     });
