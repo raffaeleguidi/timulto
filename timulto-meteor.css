@@ -7,6 +7,10 @@ https://github.com/FezVrasta/bootstrap-material-design/tree/master/meteor
     vertical-align: middle;
 }
 
+#canvas {
+    background-color: lightseagreen;
+}
+
 .mini-shot {
     max-width: 100px;
     max-height: 128px;

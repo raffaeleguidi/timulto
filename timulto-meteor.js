@@ -46,6 +46,18 @@ if (Meteor.isClient) {
             }
         })
     },
+    "click #canvas": function (event) {
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var imageObj = new Image();
+
+        console.log(event.offsetX + " " + event.offsetY);
+
+        imageObj.onload = function() {
+            context.drawImage(imageObj, event.offsetX - imageObj.width /2, event.offsetY - imageObj.height /2);
+        };
+        imageObj.src =  "icon.png";
+    },
     "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
