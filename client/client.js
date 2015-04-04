@@ -57,11 +57,8 @@ function takePhoto() {
         if (data) {
             photoTaken = true;
             fitImageInCanvas(data, canvas)
-            Materialize.toast("Fai tap sulla foto per mascherare targhe e visi",
-                              3000 , 'rounded', function() {
-                                  //  alert("ciao");
-                                  Materialize.toast("Completa la scheda e premi \"Multa\"", 3000 , 'rounded');
-                              });
+            Materialize.toast("Fai tap sulla foto per mascherare targhe e visi", 2000 , 'rounded');
+            Materialize.toast("Completa la scheda e premi \"Multa\"", 3000 , 'rounded');
             Session.set("photo", data);
         } else {
             resetPicture();
@@ -160,6 +157,7 @@ if (Meteor.isClient) {
         Session.set("address", "");
         $("#category").val("");
         $('select').material_select();
+        $('body').scrollTop(0);
         Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
         resetPicture();
 
