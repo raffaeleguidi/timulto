@@ -26,14 +26,22 @@ function fitImageInCanvas(data, canvas) {
     var context = canvas.getContext('2d');
     var photo = new Image();
     photo.onload = function() {
-        var scaled = (canvas.width * photo.height) / photo.width;
         // canvas.width : x = photo.width : photo.height
         if (photo.width > photo.height) {
+            var scaled = (canvas.width * photo.height) / photo.width;
             context.drawImage(photo,
                 0,
                 (canvas.height - scaled) / 2,
                 canvas.width,
                 scaled
+            );
+        } else {
+            var scaled = (canvas.height * photo.width) / photo.height;
+            context.drawImage(photo,
+                (canvas.width - scaled) / 2,
+                0,
+                scaled,
+                canvas.height
             );
         }
     };
@@ -110,12 +118,25 @@ if (Meteor.isClient) {
             });
         } else {
             var imageObj = new Image();
+            //console.log(event.offsetX + " " + event.offsetY);
+
+            context.beginPath();
+            context.moveTo(event.offsetX, event.offsetY);
+            context.lineTo(event.offsetX+1, event.offsetY+1);
+            context.stroke();
+
             imageObj.onload = function() {
+                var w = imageObj.width / 4;
+                var h = imageObj.height / 4;
                 context.drawImage(imageObj,
-                    event.offsetX - imageObj.width / 4,
-                    event.offsetY - imageObj.height / 4,
-                    imageObj.width / 2,
-                    imageObj.height / 2
+/*
+                    event.offsetX*75/100 - (w/2),
+                    event.offsetY*75/100 - (h/2),
+*/
+                    event.offsetX - (w/2),
+                    event.offsetY - (h/2),
+                    w,
+                    h
                 );
             };
             imageObj.src =  "icon.png";
