@@ -2,13 +2,14 @@
 Probably it's better to switch to:
 https://github.com/FezVrasta/bootstrap-material-design/tree/master/meteor
 */
+
 .shot {
     width: 250px;
     vertical-align: middle;
 }
 
 #canvas {
-    background-color: lightseagreen;
+    background-color: lightgray;
 }
 
 .mini-shot {

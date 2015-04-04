@@ -1,5 +1,44 @@
 Tasks = new Mongo.Collection("tasks");
 var blank = "shoot-orange.png";
+var photoTaken = false;
+
+function drawButton() {
+    photoTaken = false;
+    Session.set("photo", blank);
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var imageObj = new Image();
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = 'white';
+    context.fill();
+    var photo = new Image();
+    photo.onload = function() {
+        context.drawImage(photo,
+            (canvas.width - photo.width) / 2,
+            (canvas.height - photo.height) / 2
+        );
+    };
+    photo.src =  Session.get("photo");
+}
+
+function fitImageInCanvas(data, canvas) {
+    var context = canvas.getContext('2d');
+    var photo = new Image();
+    photo.onload = function() {
+        var scaled = (canvas.width * photo.height) / photo.width;
+        // canvas.width : x = photo.width : photo.height
+        if (photo.width > photo.height) {
+            context.drawImage(photo,
+                0,
+                (canvas.height - scaled) / 2,
+                canvas.width,
+                scaled
+            );
+        }
+    };
+    photo.src =  data;
+}
 
 function geocode() {
     try {
@@ -15,8 +54,11 @@ function geocode() {
 }
 
 if (Meteor.isClient) {
-  // This code only runs on the client
-  Session.set("photo", blank);
+  Meteor.startup(function(){
+      // This code only runs on the client
+      Session.set("photo", blank);
+      drawButton();
+  });
 
   Template.body.helpers({
     tasks: function () {
@@ -43,8 +85,6 @@ if (Meteor.isClient) {
             if (data) {
                 Session.set("photo", data);
                 $("#description").focus();
-                // it would be nice to show keyboard
-                // but this requires a cordova plugin
             } else {
                 Session.set("photo", blank);
             }
@@ -53,23 +93,43 @@ if (Meteor.isClient) {
     "click #canvas": function (event) {
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
-        var imageObj = new Image();
 
-        console.log(event.offsetX + " " + event.offsetY);
-
-        imageObj.onload = function() {
-            context.drawImage(imageObj, event.offsetX - imageObj.width /2, event.offsetY - imageObj.height /2);
-        };
-        imageObj.src =  "icon.png";
+        if (!photoTaken) {
+            MeteorCamera.getPicture({ width: 800, height: 600, correctOrientation: true }, function(error, data) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                geocode();
+                if (data) {
+                    photoTaken = true;
+                    fitImageInCanvas(data, canvas)
+                    Session.set("photo", data);
+                    $("#description").focus();
+                } else {
+                    photoTaken = false;
+                    Session.set("photo", blank);
+                }
+            });
+        } else {
+            var imageObj = new Image();
+            imageObj.onload = function() {
+                context.drawImage(imageObj,
+                    event.offsetX - imageObj.width / 4,
+                    event.offsetY - imageObj.height / 4,
+                    imageObj.width / 2,
+                    imageObj.height / 2
+                );
+            };
+            imageObj.src =  "icon.png";
+        }
     },
     "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
         var address = $("#address").val();
-        var imageData = $("#imgdata").val();
+        //var imageData = $("#imgdata").val();
         var lat = $("#lat").val();
         var lng = $("#lng").val();
-
+        var canvas = document.getElementById('canvas');
+        var imageData = canvas.toDataURL();
         Tasks.insert({
           text: text,
           address: address,
@@ -84,6 +144,7 @@ if (Meteor.isClient) {
         Session.set("description", "");
         Session.set("photo", blank);
         Session.set("address", "");
+        drawButton();
 
         // Prevent default form submit (just in case)
         return false;
