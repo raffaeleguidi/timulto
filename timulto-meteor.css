@@ -9,12 +9,8 @@ https://github.com/FezVrasta/bootstrap-material-design/tree/master/meteor
 }
 
 #canvas {
-    background-color: lightgray;
-    --width: 240px;
-    --height: 240px;
-    --width: 100%;
-    --max-width: 300px;
-    --min-height: 200px;
+    background-color: white;
+     box-shadow: 5px 5px 5px #dedede;
 }
 
 .mini-shot {
