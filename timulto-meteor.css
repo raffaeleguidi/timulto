@@ -9,8 +9,10 @@ https://github.com/FezVrasta/bootstrap-material-design/tree/master/meteor
 }
 
 #canvas {
+    margin-top: 10px;
+    margin-bottom: 10px;
     background-color: white;
-     box-shadow: 5px 5px 5px #dedede;
+    box-shadow: 5px 5px 5px #dedede;
 }
 
 .mini-shot {

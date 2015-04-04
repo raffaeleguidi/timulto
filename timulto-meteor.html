@@ -1,17 +1,6 @@
 <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
   <title>TiMulto</title>
-    <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/css/materialize.min.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.95.3/js/materialize.min.js"></script>
-  <!-- Compiled and minified JavaScript -->
-  <script type="text/javascript" charset="utf-8">
-    // added simple back button management
-    document.addEventListener("backbutton", function () {
-        navigator.app.exitApp();
-    }, false);
-  </script>
 </head>
 
 <body>
@@ -29,10 +18,8 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <div class="row center">
-        <header>
-          <form id="new-task" class="new-task">
-            <canvas id="canvas" width="240" height="240"></canvas><br />
-            <!--<img class="shot" id="shot" name="shot" src="{{photo}}" />-->
+        <!--<header>-->
+            <canvas id="canvas" width="240" height="240"></canvas>
             <input type="text" id="address" name="address" placeholder="Indirizzo" value="{{address}}"/>
             <input type="text" id="description" name="text" placeholder="Descrivi l'infrazione" value="{{description}}"/>
             <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
@@ -41,8 +28,10 @@
             <button id="send" class="btn waves-light" type="submit" name="action">Multa
               <i class="mdi-content-send right"></i>
             </button>
-          </form>
-        </header>
+        <!--</header>-->
+      </div>
+      <div class="row right">
+            <a id="shoot" class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-image-camera-alt"></i></a>
       </div>
     </div>
   </div>
