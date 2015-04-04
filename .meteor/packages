@@ -8,6 +8,6 @@ meteor-platform
 autopublish
 insecure
 mdg:camera
-d0minikk:materialize-meteor
+materialize:materialize
 mdg:geolocation
 http

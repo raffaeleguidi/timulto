@@ -15,23 +15,29 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
   </nav>
-  <div class="section no-pad-bot" id="index-banner">
+
+  <div class="section no-pad-bot" id="anonymous-banner">
     <div class="container">
       <div class="row center">
-        <!--<header>-->
             <canvas id="canvas" width="240" height="240"></canvas>
             <input type="text" id="address" name="address" placeholder="Indirizzo" value="{{address}}"/>
-            <input type="text" id="description" name="text" placeholder="Descrivi l'infrazione" value="{{description}}"/>
+            <select id="category" aclass="browser-default">
+                <option value="" disabled selected>Tipo di segnalazione</option>
+                <option value="1">Parcheggio incivile</option>
+                <option value="2">Cassonetti sporchi</option>
+                <option value="3">Affissioni abusive</option>
+                <option value="4">Altro</option>
+            </select>
+            <input type="text" id="description" name="text" placeholder="Note" value="{{description}}"/>
             <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
             <input type="hidden" id="lat" name="lat" value="{{loc.lat}}" />
             <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
             <button id="send" class="btn waves-light" type="submit" name="action">Multa
               <i class="mdi-content-send right"></i>
             </button>
-        <!--</header>-->
       </div>
       <div class="row right">
-            <a id="shoot" class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-image-camera-alt"></i></a>
+            <a id="shoot" class="btn-floating btn-large waves-light red"><i class="mdi-image-camera-alt"></i></a>
       </div>
     </div>
   </div>
@@ -44,7 +50,7 @@
           <thead>
               <tr>
                   <th width="1%" data-field="Foto">Foto</th>
-                  <th data-field="Descrizione">Descrizione</th>
+                  <th data-field="Segnalazione">Note</th>
                   <th width="1%" data-field="Azioni">Azioni</th>
               </tr>
           </thead>
@@ -63,8 +69,6 @@
         <div class="col l6 s12">
           <h5 class="white-text">Chi è TiMulto?</h5>
           <p class="grey-text text-lighten-4">Siamo una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Ogni contributo, morale e materiale, è largamente apprezzato.</p>
-
-
         </div>
         <div class="col l3 s12">
           <h5 class="white-text">Partner</h5>
@@ -94,7 +98,7 @@
 <template name="task">
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span class="text">{{text}}, in {{address}} ({{lat}}, {{lng}})</span></td>
+      <td><span class="text">{{category}} - {{text}}, in {{address}}</span></td>
       <td><button class="delete">&times;</button></td>
   </tr>
 </template>

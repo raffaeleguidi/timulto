@@ -57,6 +57,11 @@ function takePhoto() {
         if (data) {
             photoTaken = true;
             fitImageInCanvas(data, canvas)
+            Materialize.toast("Fai tap sulla foto per mascherare targhe e visi",
+                              3000 , 'rounded', function() {
+                                  //  alert("ciao");
+                                  Materialize.toast("Completa la scheda e premi \"Multa\"", 3000 , 'rounded');
+                              });
             Session.set("photo", data);
         } else {
             resetPicture();
@@ -97,6 +102,7 @@ function geocode() {
 if (Meteor.isClient) {
   Meteor.startup(function(){
       resetPicture();
+      $('select').material_select();
   });
 
   Template.body.helpers({
@@ -121,7 +127,6 @@ if (Meteor.isClient) {
     "click #canvas": function (event) {
         if (!photoTaken) {
             takePhoto();
-            //Materialize.toast("hello", 5000);
         } else {
             drawLogo(event.offsetX, event.offsetY);
         }
@@ -133,22 +138,29 @@ if (Meteor.isClient) {
         //var imageData = $("#imgdata").val();
         var lat = $("#lat").val();
         var lng = $("#lng").val();
+        var category = $("#category").val();
         var canvas = document.getElementById('canvas');
         var imageData = canvas.toDataURL();
         Tasks.insert({
           text: text,
           address: address,
           imageData: imageData,
+          category: category,
           lat: lat,
           lng: lng,
           createdAt: new Date() // current time
         });
+
+        console.log("category: " + category);
 
         // Clear form
         $("#description").val("");
         Session.set("description", "");
         Session.set("photo", blank);
         Session.set("address", "");
+        $("#category").val("");
+        $('select').material_select();
+        Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
         resetPicture();
 
         // Prevent default form submit (just in case)
