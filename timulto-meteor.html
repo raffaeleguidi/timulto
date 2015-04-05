@@ -58,15 +58,15 @@
 
   <div class="container">
     <div class="section">
-        <h4 class="header left blue-text">Le tue segnalazioni</h4>
+        <h5 class="header center blue-text">Le tue segnalazioni</h5>
         <table class="striped">
-          <thead>
+          <!--<thead>
               <tr>
                   <th width="1%" data-field="Foto">Foto</th>
                   <th data-field="Segnalazione">Note</th>
                   <th width="1%" data-field="Azioni">Azioni</th>
               </tr>
-          </thead>
+          </thead>-->
           <tbody>
               {{#each tasks}}
                 {{> task}}
@@ -112,7 +112,7 @@
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
       <td><span class="text">{{category}} - {{text}}, in {{address}}</span></td>
-      <td><button class="delete">&times;</button></td>
+      <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>--></td>
   </tr>
 </template>
 

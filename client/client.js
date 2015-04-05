@@ -1,4 +1,5 @@
-var blank = "shoot-orange.png";
+//var blank = "shoot-orange.png";
+var blank = "splash.png";
 var photoTaken = false;
 
 function resetPicture() {
@@ -13,10 +14,18 @@ function resetPicture() {
     context.fill();
     var photo = new Image();
     photo.onload = function() {
-        context.drawImage(photo,
-            (canvas.width - photo.width) / 2,
-            (canvas.height - photo.height) / 2
-        );
+        if (photo.width < canvas.width) {
+            context.drawImage(photo,
+                (canvas.width - photo.width) / 2,
+                (canvas.height - photo.height) / 2
+            );
+        } else {
+            context.drawImage(photo,
+                0,0,
+                canvas.width,
+                canvas.height
+            );
+        }
     };
     photo.src =  Session.get("photo");
 }
@@ -60,6 +69,7 @@ function takePhoto() {
             Materialize.toast("Fai tap sulla foto per mascherare targhe e visi", 2000 , 'rounded');
             Materialize.toast("Completa la scheda e premi \"Multa\"", 3000 , 'rounded');
             Session.set("photo", data);
+            $('body').scrollTop(0);
         } else {
             resetPicture();
         }
