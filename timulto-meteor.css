@@ -2,7 +2,9 @@
 Probably it's better to switch to:
 https://github.com/FezVrasta/bootstrap-material-design/tree/master/meteor
 */
-
+li {
+    text-align: left;
+}
 div.select-wrapper {
     margin-top: 0px;
 }

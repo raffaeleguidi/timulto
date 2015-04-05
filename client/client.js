@@ -110,6 +110,7 @@ if (Meteor.isClient) {
   Meteor.startup(function(){
       resetPicture();
       $('select').material_select();
+      $(".button-collapse").sideNav();
   });
 
   Template.body.helpers({

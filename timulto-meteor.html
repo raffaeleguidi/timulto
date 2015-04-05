@@ -4,16 +4,34 @@
 </head>
 
 <body>
-  <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>
-      <ul class="right">
-        <li><a href="#">[ ? ]</a></li>
-      </ul>
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">[ ? ]</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-    </div>
+
+   <!--<nav class="light-blue lighten-1" role="navigation">-->
+      <!--<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>-->
+          <!--<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="components.html">Components</a></li>
+            <li><a href="javascript.html">JavaScript</a></li>
+          </ul>-->
+      <!--</div>-->
+  <!--</nav>-->
+
+
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+          <a href="#!" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#info">Chi siamo</a></li>
+            <li><a href="#contactus">Contattaci</a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo" style="width: 240px">
+            <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
+            <li class="divider"></li>
+            <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
+            <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
+          </ul>
+        </div>
   </nav>
 
   <div class="section no-pad-bot" id="anonymous-banner">
@@ -79,29 +97,24 @@
   <footer class="page-footer orange">
     <div class="container">
       <div class="row">
-        <div class="col l6 s12">
+        <div class="col l8 s12">
           <h5 class="white-text">Chi è TiMulto?</h5>
-          <p class="grey-text text-lighten-4">Siamo una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Ogni contributo, morale e materiale, è largamente apprezzato.</p>
+          <a name="info"><p class="grey-text text-lighten-4">Siamo una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Ogni contributo, morale e materiale, è largamente apprezzato.</p></a>
         </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Partner</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Il mago di oz</a></li>
-            <li><a class="white-text" href="#!">Harry Poter</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
+        <div class="col l4 s12">
           <h5 class="white-text">Contattaci</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Facebook</a></li>
-            <li><a class="white-text" href="#!">Twitter</a></li>
-          </ul>
+          <a name="contactus">
+              <ul>
+                <li><a class="white-text" href="https://www.facebook.com/raffaele.guidi">Facebook</a></li>
+                <li><a class="white-text" href="https://twitter.com/raffaeleguidi">Twitter</a></li>
+              </ul>
+          </a>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      Made by <a class="orange-text text-lighten-3" href="https://twitter.com/raffaeleguidi">@raffaeleguidi</a>
       </div>
     </div>
   </footer>
