@@ -4,19 +4,6 @@
 </head>
 
 <body>
-
-   <!--<nav class="light-blue lighten-1" role="navigation">-->
-      <!--<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>-->
-          <!--<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="components.html">Components</a></li>
-            <li><a href="javascript.html">JavaScript</a></li>
-          </ul>-->
-      <!--</div>-->
-  <!--</nav>-->
-
-
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
           <a href="#!" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>
@@ -30,29 +17,48 @@
             <li class="divider"></li>
             <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
             <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
+            <li>{{> loginButtons}}</li>
           </ul>
         </div>
   </nav>
 
   <div class="section no-pad-bot" id="anonymous-banner">
+    {{#if currentUser}}
+    <div class="container">
+      Ciao, {{userName}}
+    </div>
+    {{/if}}
     <div class="container">
       <div class="row center">
-            <canvas id="canvas" width="240" height="240"></canvas>
-            <input type="text" id="address" name="address" placeholder="Indirizzo" value="{{address}}"/>
-            <select id="category" aclass="browser-default">
-                <option value="" disabled selected>Tipo di segnalazione</option>
-                <option value="1">Parcheggio incivile</option>
-                <option value="2">Cassonetti sporchi</option>
-                <option value="3">Affissioni abusive</option>
-                <option value="4">Altro</option>
-            </select>
-            <input type="text" id="description" name="text" placeholder="Note" value="{{description}}"/>
-            <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
-            <input type="hidden" id="lat" name="lat" value="{{loc.lat}}" />
-            <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
-            <button id="send" class="btn waves-light" type="submit" name="action">Multa
-              <i class="mdi-content-send right"></i>
-            </button>
+            <div class="row">
+                <canvas id="canvas" width="240" height="240"></canvas>
+                <input type="text" id="address" name="address" placeholder="Indirizzo" value="{{address}}"/>
+                <select id="category" aclass="browser-default">
+                    <option value="" disabled selected>Tipo di segnalazione</option>
+                    <option value="1">Parcheggio incivile</option>
+                    <option value="2">Cassonetti sporchi</option>
+                    <option value="3">Affissioni abusive</option>
+                    <option value="4">Altro</option>
+                </select>
+                <input type="text" id="description" name="text" placeholder="Note" value="{{description}}"/>
+                <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
+                <input type="hidden" id="lat" name="lat" value="{{loc.lat}}" />
+                <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
+                {{#if currentUser}}
+                <button id="send" class="btn waves-light" type="submit" name="action">Multa
+                  <i class="mdi-content-send right"></i>
+                </button>
+                {{else}}
+                <div class="container">
+                    <label>fai login o crea un utente per continuare</label>
+                    <p>
+                        <button id="login" class="btn waves-light" type="submit" name="action">Login
+                          <i class="mdi-login right"></i>
+                        </button>
+                    </p>
+                </div>
+                {{/if}}
+            </div>
       </div>
 
       <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
@@ -86,8 +92,8 @@
               </tr>
           </thead>-->
           <tbody>
-              {{#each tasks}}
-                {{> task}}
+              {{#each fines}}
+                {{> fine}}
               {{/each}}
           </tbody>
         </table>
@@ -121,7 +127,7 @@
 
 </body>
 
-<template name="task">
+<template name="fine">
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
       <td><span class="text">{{category}} - {{text}}, in {{address}}</span></td>

@@ -1,7 +1,10 @@
-Tasks = new Mongo.Collection("tasks");
-
 if (Meteor.isServer) {
     Meteor.startup(function () {
+
+        Meteor.publish("fines", function () {
+            return Fines.find({}, {sort: {createdAt: -1}});
+        });
+
         Meteor.methods({
             reverseGeocode: function (lat, lon) {
                 this.unblock();
@@ -17,34 +20,9 @@ if (Meteor.isServer) {
                 } catch (ex) {
                     return "Lat: " + lat + ", Lon: " + lon;
                 }
-            },
-            getFines: function() {
-                return Tasks.find({}, {sort: {createdAt: -1}});
-            },
-            saveFine: function (text, address, lat, lng, category, canvas, imageData) {
-                // Make sure the user is logged in before inserting a task
-                /*if (! Meteor.userId()) {
-                  throw new Meteor.Error("not-authorized");
-                }*/
-
-                Tasks.insert({
-                  text: text,
-                  address: address,
-                  imageData: imageData,
-                  category: category,
-                  lat: lat,
-                  lng: lng,
-                  createdAt: new Date() // current time
-                });
-
-            },
-            deleteFine: function (fineId) {
-                //Tasks.remove(taskId);
-            },
-            setChecked: function (fineId, setChecked) {
-                //Tasks.update(taskId, { $set: { checked: setChecked} });
             }
-        })
+        });
+
     });
 }
 

@@ -106,15 +106,20 @@ function geocode() {
 }
 
 if (Meteor.isClient) {
+  Meteor.subscribe("fines");
+
   Meteor.startup(function(){
       resetPicture();
       $('select').material_select();
       $(".button-collapse").sideNav();
   });
 
-  Template.body.helpers({
-    tasks: function () {
-       return getFines();
+ Template.body.helpers({
+    userName: function() {
+        //console.log(Meteor.user());
+        return Meteor.user().username;
+    }, fines: function() {
+       return Fines.find({}, {sort: {createdAt: -1}});
     }, address: function () {
       return Session.get("address");
     }, description: function () {
@@ -128,6 +133,11 @@ if (Meteor.isClient) {
   });
 
   Template.body.events({
+    "click #login": function() {
+        $('.button-collapse').sideNav('show');
+        $('#login-sign-in-link').click();
+        $('#login-username').focus();
+    },
     "click #shoot": function(event) {
         takePhoto();
     },
@@ -142,20 +152,23 @@ if (Meteor.isClient) {
         event.preventDefault();
         var text = $("#description").val();
         var address = $("#address").val();
-        //var imageData = $("#imgdata").val();
         var lat = $("#lat").val();
         var lng = $("#lng").val();
         var category = $("#category").val();
         var canvas = document.getElementById('canvas');
+        //var imageData = $("#imgdata").val();
         var imageData = canvas.toDataURL();
 
-        saveFine(text, address, lat, lng, category, canvas, imageData);
+        Meteor.call("saveFine", text, address, lat, lng, category, imageData);
 
         // Clear form
-        $("#description").val("");
+/*
         Session.set("description", "");
         Session.set("photo", blank);
         Session.set("address", "");
+*/
+        $("#address").val("");
+        $("#description").val("");
         $("#category").val("");
         $('select').material_select();
         $('body').scrollTop(0);
@@ -166,13 +179,19 @@ if (Meteor.isClient) {
         return false;
     }
   });
-  Template.task.events({
+  Template.fine.events({
      "click .toggle-checked": function () {
         // Set the checked property to the opposite of its current value
         Tasks.update(this._id, {$set: {checked: ! this.checked}});
       },
       "click .delete": function () {
-        Tasks.remove(this._id);
+        Meteor.call("deleteFine", this._id);
       }
   });
+
+  // At the bottom of the client code
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 }
+
