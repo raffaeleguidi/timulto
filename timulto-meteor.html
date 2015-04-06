@@ -82,7 +82,7 @@
 
   <div class="container">
     <div class="section">
-        <h5 class="header center blue-text">Le tue segnalazioni</h5>
+        <h5 class="header center blue-text">Ultime segnalazioni</h5>
         <table class="striped">
           <!--<thead>
               <tr>
@@ -130,7 +130,7 @@
 <template name="fine">
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span class="text">{{category}} - {{text}}, in {{address}}</span></td>
+      <td><span class="text">{{username}}: {{category}} - {{text}}, in {{address}}</span></td>
       <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>--></td>
   </tr>
 </template>

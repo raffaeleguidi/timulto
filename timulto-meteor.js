@@ -3,9 +3,9 @@ Fines = new Mongo.Collection("fines");
 Meteor.methods({
     "saveFine": function (text, address, lat, lng, category, imageData) {
         // Make sure the user is logged in before inserting a task
-        /*if (! Meteor.userId()) {
+        if (! Meteor.userId()) {
           throw new Meteor.Error("not-authorized");
-        }*/
+        }
 
         Fines.insert({
           text: text,
@@ -14,6 +14,8 @@ Meteor.methods({
           lng: lng,
           category: category,
           imageData: imageData,
+          owner: Meteor.userId(),
+          username: Meteor.user().username,
           createdAt: new Date() // current time
         });
 
