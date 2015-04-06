@@ -1,4 +1,3 @@
-//var blank = "shoot-orange.png";
 var blank = "splash.png";
 var photoTaken = false;
 
@@ -115,7 +114,7 @@ if (Meteor.isClient) {
 
   Template.body.helpers({
     tasks: function () {
-       return Tasks.find({}, {sort: {createdAt: -1}});
+       return getFines();
     }, address: function () {
       return Session.get("address");
     }, description: function () {
@@ -149,17 +148,8 @@ if (Meteor.isClient) {
         var category = $("#category").val();
         var canvas = document.getElementById('canvas');
         var imageData = canvas.toDataURL();
-        Tasks.insert({
-          text: text,
-          address: address,
-          imageData: imageData,
-          category: category,
-          lat: lat,
-          lng: lng,
-          createdAt: new Date() // current time
-        });
 
-        console.log("category: " + category);
+        saveFine(text, address, lat, lng, category, canvas, imageData);
 
         // Clear form
         $("#description").val("");
