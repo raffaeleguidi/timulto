@@ -5,9 +5,8 @@
 # but you can also edit it by hand.
 
 meteor-platform
-insecure
-mdg:camera
 materialize:materialize
+mdg:camera
 mdg:geolocation
 http
 accounts-ui
