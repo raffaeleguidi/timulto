@@ -1,3 +1,3 @@
 # timulto
 
-This is the main repo for TiMulto
+A crowd approach to social delation
