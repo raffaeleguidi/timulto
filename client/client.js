@@ -138,6 +138,9 @@ if (Meteor.isClient) {
         $('#login-sign-in-link').click();
         $('#login-username').focus();
     },
+    "click #logout": function(event) {
+        $('.button-collapse').sideNav('show');
+    },
     "click #shoot": function(event) {
         takePhoto();
     },
