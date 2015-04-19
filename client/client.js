@@ -112,6 +112,7 @@ if (Meteor.isClient) {
       resetPicture();
       $('select').material_select();
       $(".button-collapse").sideNav();
+      $('.modal-trigger').leanModal()
   });
 
  Template.body.helpers({
@@ -134,7 +135,7 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click #login": function() {
-        $('.button-collapse').sideNav('show');
+        //$('.button-collapse').sideNav('show');
         $('#login-sign-in-link').click();
         $('#login-username').focus();
     },

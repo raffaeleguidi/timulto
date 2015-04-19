@@ -4,6 +4,19 @@
 </head>
 
 <body>
+  <!-- Modal Trigger -->
+  <!--<a class="waves-effect waves-light btn modal-trigger" href="#loginbox">Modal</a>-->
+
+  <!-- Modal Structure -->
+  <div id="helpbox" style="width: 400px" class="modal">
+    <div class="modal-content" style="min-height: 500px">
+      <h4>Aiuto!</h4>
+      <p>Come fare per...</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+  </div>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
           <a href="#!" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>
@@ -11,24 +24,23 @@
           <ul class="right hide-on-med-and-down">
             <li><a href="#info">Chi siamo</a></li>
             <li><a href="#contactus">Contattaci</a></li>
+            <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
           </ul>
           <ul class="side-nav" id="mobile-demo" style="width: 240px">
             <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
             <li class="divider"></li>
             <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
             <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
-            <li>{{> loginButtons}}</li>
+            <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
           </ul>
         </div>
   </nav>
 
   <div class="section no-pad-bot" id="anonymous-banner">
 
-    {{#if currentUser}}
     <div class="container">
-      <div class="row">Ciao, {{currentUser.profile.name}}</div>
+      <div class="row">{{#if currentUser}}Ciao, {{/if}}{{> loginButtons}}</div>
     </div>
-    {{/if}}
     <div class="container">
       <div class="row center">
         <div class="row">
@@ -50,12 +62,14 @@
                 <button id="send" class="btn waves-light" type="submit" name="action">Multa
                    <i class="mdi-content-send right"></i>
                 </button>
+                <!--
                 <button id="help" class="btn waves-light" type="submit" name="action">Aiuto
                    <i class="mdi-action-help right"></i>
                 </button>
                 <button id="logout" class="btn waves-light" type="submit" name="action">Logout
                     <i class="mdi-action-exit-to-app right"></i>
                 </button>
+                -->
             </div>
             {{else}}
             <div class="container">
