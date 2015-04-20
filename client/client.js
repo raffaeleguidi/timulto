@@ -1,6 +1,7 @@
 var blank = "splash.png";
 var photoTaken = false;
 
+
 function resetPicture() {
     photoTaken = false;
     Session.set("photo", blank);
@@ -112,7 +113,20 @@ if (Meteor.isClient) {
       resetPicture();
       $('select').material_select();
       $(".button-collapse").sideNav();
-      $('.modal-trigger').leanModal()
+      $('.modal-trigger').leanModal();
+      
+      var help = new Array();
+
+      help.push("Segnalare un'infrazione?");
+      help.push("Attiva il GPS per abilitare la geolocalizzazione..");
+      help.push("..Fai una foto alla presunta infrazione..");
+      help.push("..Fai \"tap\" sulla foto per mascherare targhe e visi..");
+      help.push("..Completa la scheda inserendo il tipo di segnalazione ed eventuali note..");
+      help.push("..premi \"Multa\" ed è fatta!");
+      
+
+      Session.set("help",help);
+      Session.set("currentHelp",0);
   });
 
  Template.body.helpers({
@@ -181,8 +195,33 @@ if (Meteor.isClient) {
 
         // Prevent default form submit (just in case)
         return false;
-    }
+    },
+    "click #showHelp": function (event) {
+         event.preventDefault();
+       
+        var currentHelp = Session.get("currentHelp");
+
+        if(currentHelp < Session.get("help").length-1) {
+            currentHelp++;
+        }  else {
+            currentHelp = 0;
+        }
+        
+        Session.set("currentHelp", currentHelp);
+
+        return false;
+      },
+    "click #closeHelp": function (event) {
+        event.preventDefault();
+    
+        currentHelp=0;
+
+        Session.set("currentHelp", currentHelp);
+
+        return false;
+      }
   });
+
   Template.fine.events({
      "click .toggle-checked": function () {
         // Set the checked property to the opposite of its current value
@@ -192,6 +231,14 @@ if (Meteor.isClient) {
         Meteor.call("deleteFine", this._id);
       }
   });
+
+  Template.helpBox.helpers({
+    helpMsg: function () {
+       
+        return Session.get("help")[Session.get("currentHelp")];
+    }
+  });
+
 
   // At the bottom of the client code
   Accounts.ui.config({

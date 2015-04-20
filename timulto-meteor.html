@@ -8,14 +8,20 @@
   <!--<a class="waves-effect waves-light btn modal-trigger" href="#loginbox">Modal</a>-->
 
   <!-- Modal Structure -->
+  
   <div id="helpbox" class="modal">
+    
     <div class="modal-content">
+      
       <h4>Aiuto!</h4>
       <p>Come fare per...</p>
+      {{> helpBox}}
     </div>
     <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+      <a href="#!" id="closeHelp" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+      <a href="#!"  id="showHelp" class="btn-flat">Avanti</a>
     </div>
+
   </div>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
@@ -158,3 +164,6 @@
   </tr>
 </template>
 
+<template name="helpBox">
+   <p>{{helpMsg}}</p>
+</template>
