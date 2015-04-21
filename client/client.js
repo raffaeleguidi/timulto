@@ -1,6 +1,6 @@
 var blank = "splash.png";
 var photoTaken = false;
-
+ var help = new Array();
 
 function resetPicture() {
     photoTaken = false;
@@ -106,17 +106,7 @@ function geocode() {
     }
 }
 
-if (Meteor.isClient) {
-  Meteor.subscribe("fines");
-
-  Meteor.startup(function(){
-      resetPicture();
-      $('select').material_select();
-      $(".button-collapse").sideNav();
-      $('.modal-trigger').leanModal();
-      
-      var help = new Array();
-
+function initHelp() {
       help.push("Segnalare un'infrazione?");
       help.push("Attiva il GPS per abilitare la geolocalizzazione..");
       help.push("..Fai una foto alla presunta infrazione..");
@@ -127,12 +117,34 @@ if (Meteor.isClient) {
 
       Session.set("help",help);
       Session.set("currentHelp",0);
+
+}
+if (Meteor.isClient) {
+  Meteor.subscribe("fines");
+
+  Meteor.startup(function(){
+      T9n.setLanguage('it');//Set language
+      resetPicture();
+      $('select').material_select();
+      $(".button-collapse").sideNav();
+      $('.modal-trigger').leanModal();
+       $('#collapsibleLogin').collapsible();
+      initHelp();
   });
 
  Template.body.helpers({
+     user: function() {
+        return Meteor.user().name;
+     },
     userName: function() {
         //console.log(Meteor.user());
-        return Meteor.user().username;
+        var user = Meteor.user().username;
+        
+        if(!user){
+            user = Meteor.user().name;
+        }
+        
+        return user;
     }, fines: function() {
        return Fines.find({}, {sort: {createdAt: -1}});
     }, address: function () {
@@ -143,6 +155,13 @@ if (Meteor.isClient) {
       return Session.get("photo");
     }, loc: function () {
       return Geolocation.latLng() || { lat: 0, lng: 0 };
+    },
+     helpMessage: function() {
+         var help = "";
+         if(Session.get("help") && Session.get("help").length> Session.get("currentHelp")){
+            help = Session.get("help")[Session.get("currentHelp")];
+         }
+        return help; 
     },
     error: Geolocation.error
   });
@@ -208,17 +227,12 @@ if (Meteor.isClient) {
         }
         
         Session.set("currentHelp", currentHelp);
-
-        return false;
       },
     "click #closeHelp": function (event) {
         event.preventDefault();
     
         currentHelp=0;
-
         Session.set("currentHelp", currentHelp);
-
-        return false;
       }
   });
 
@@ -232,17 +246,44 @@ if (Meteor.isClient) {
       }
   });
 
-  Template.helpBox.helpers({
-    helpMsg: function () {
-       
-        return Session.get("help")[Session.get("currentHelp")];
-    }
-  });
-
 
   // At the bottom of the client code
-  Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
-  });
+//  Accounts.ui.config({
+//    passwordSignupFields: "USERNAME_ONLY"
+//  });
+
+    AccountsTemplates.configure({
+        forbidClientAccountCreation: true,
+
+            // Appearance
+        showAddRemoveServices: true,
+        showForgotPasswordLink: false,
+        showLabels: true,
+        showPlaceholders: true,
+        showResendVerificationEmailLink: false,
+        
+        texts: {
+            button: {
+                signIn:"Sign In",
+                signUp: "Register Now!"
+            },
+            socialSignIn:"Sign In",
+            socialSignUp: "Register",
+            socialIcons: {
+                "meteor-developer": "fa fa-rocket"
+            },
+            title: {
+                signIn: ""
+            }
+        }
+   });
+   
+    AccountsTemplates.configureRoute('signIn', {
+        name: 'signin',
+        path: '/',
+        template: 'atForm',
+        layoutTemplate: 'atForm',
+        redirect: '/',
+    });
 }
 

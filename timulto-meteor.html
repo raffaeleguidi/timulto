@@ -15,7 +15,7 @@
       
       <h4>Aiuto!</h4>
       <p>Come fare per...</p>
-      {{> helpBox}}
+      {{helpMessage}}
     </div>
     <div class="modal-footer">
       <a href="#!" id="closeHelp" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
@@ -35,17 +35,24 @@
           <ul class="side-nav" id="mobile-demo" style="width: 240px">
             <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
             <li class="divider"></li>
+              <li><a href="#!">{{> atNavButton}}</a></li>
             <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
             <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
             <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
           </ul>
         </div>
   </nav>
-
+   
   <div class="section no-pad-bot" id="anonymous-banner">
 
     <div class="container">
-      <div class="row">{{#if currentUser}}Ciao, {{/if}}{{> loginButtons}}</div>
+      <div class="row">{{#if currentUser}}Ciao, {{user}}{{else}} 
+         <div class="col s12 m4 l4"><ul id="collapsibleLogin" class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="mdi-navigation-expand-more"></i>First</div>
+              <div class="collapsible-body"><p>{{> atForm}}</p></div>
+            </li>
+             </ul></div>{{/if}}<!--{{> loginButtons}}--></div>
     </div>
     <div class="container">
       <div class="row center">
@@ -160,10 +167,7 @@
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
       <td><span class="text">{{username}}: {{category}} - {{text}}, in {{address}}</span></td>
-      <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>--></td>
+      <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>-->
+    </td>
   </tr>
-</template>
-
-<template name="helpBox">
-   <p>{{helpMsg}}</p>
 </template>
