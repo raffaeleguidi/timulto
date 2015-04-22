@@ -128,20 +128,20 @@ if (Meteor.isClient) {
       $('select').material_select();
       $(".button-collapse").sideNav();
       $('.modal-trigger').leanModal();
-       $('#collapsibleLogin').collapsible();
+       $('.collapsible').collapsible();
       initHelp();
   });
 
  Template.body.helpers({
      user: function() {
-        return Meteor.user().name;
+        return Meteor.user().profile.name;
      },
     userName: function() {
         //console.log(Meteor.user());
         var user = Meteor.user().username;
         
         if(!user){
-            user = Meteor.user().name;
+            user = Meteor.user().profile.name;
         }
         
         return user;
@@ -171,6 +171,12 @@ if (Meteor.isClient) {
         //$('.button-collapse').sideNav('show');
         $('#login-sign-in-link').click();
         $('#login-username').focus();
+    },
+    "click #loginNav": function() {
+        event.preventDefault();
+        $('.button-collapse').sideNav('hide');
+        $('#collapsibleLogin').trigger('collapse');
+//        $('#collapsibleLogin').collapsible('open');
     },
     "click #logout": function(event) {
         $('.button-collapse').sideNav('show');
@@ -254,24 +260,15 @@ if (Meteor.isClient) {
 
     AccountsTemplates.configure({
         forbidClientAccountCreation: true,
-
-            // Appearance
+        // Appearance
         showAddRemoveServices: true,
-        showForgotPasswordLink: false,
         showLabels: true,
-        showPlaceholders: true,
-        showResendVerificationEmailLink: false,
-        
+        showPlaceholders: false,
         texts: {
             button: {
-                signIn:"Sign In",
-                signUp: "Register Now!"
+                signIn:"Sign In"
             },
             socialSignIn:"Sign In",
-            socialSignUp: "Register",
-            socialIcons: {
-                "meteor-developer": "fa fa-rocket"
-            },
             title: {
                 signIn: ""
             }

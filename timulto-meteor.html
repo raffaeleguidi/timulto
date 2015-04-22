@@ -35,24 +35,26 @@
           <ul class="side-nav" id="mobile-demo" style="width: 240px">
             <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
             <li class="divider"></li>
-              <li><a href="#!">{{> atNavButton}}</a></li>
             <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
             <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
             <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
+            <li class="bold"><a href="#"  id="loginNav">Accedi</a></li>
           </ul>
         </div>
   </nav>
-   
   <div class="section no-pad-bot" id="anonymous-banner">
 
     <div class="container">
-      <div class="row">{{#if currentUser}}Ciao, {{user}}{{else}} 
-         <div class="col s12 m4 l4"><ul id="collapsibleLogin" class="collapsible" data-collapsible="accordion">
+      <div class="row"><div class="col s12 m8 l6">
+          {{#if currentUser}}Ciao, {{user}}
+          {{else}} 
+          <ul id="collapsibleLogin" class="collapsible" data-collapsible="accordion">
             <li>
-              <div class="collapsible-header"><i class="mdi-navigation-expand-more"></i>First</div>
+              <div class="collapsible-header"><i class="mdi-navigation-expand-more"></i>Accedi</div>
               <div class="collapsible-body"><p>{{> atForm}}</p></div>
             </li>
-             </ul></div>{{/if}}<!--{{> loginButtons}}--></div>
+              </ul>{{/if}}</div><!--{{> loginButtons}}-->
+        </div>
     </div>
     <div class="container">
       <div class="row center">
