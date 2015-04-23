@@ -1,6 +1,6 @@
 var blank = "splash.png";
 var photoTaken = false;
- var help = new Array();
+var help = new Array();
 
 function resetPicture() {
     photoTaken = false;
@@ -123,13 +123,13 @@ if (Meteor.isClient) {
   Meteor.subscribe("fines");
 
   Meteor.startup(function(){
-      T9n.setLanguage('it');//Set language
       resetPicture();
       $('select').material_select();
       $(".button-collapse").sideNav();
       $('.modal-trigger').leanModal();
-       $('.collapsible').collapsible();
+      $('.collapsible').collapsible();
       initHelp();
+      T9n.setLanguage('it');//Set language
   });
 
  Template.body.helpers({

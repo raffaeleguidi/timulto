@@ -4,11 +4,7 @@
 </head>
 
 <body>
-  <!-- Modal Trigger -->
-  <!--<a class="waves-effect waves-light btn modal-trigger" href="#loginbox">Modal</a>-->
 
-  <!-- Modal Structure -->
-  
   <div id="helpbox" class="modal">
     
     <div class="modal-content">
@@ -44,10 +40,11 @@
   <div class="section no-pad-bot" id="anonymous-banner">
 
     <div class="container">
-      <div class="row center">
+        <div class="row left">
           {{#if currentUser}}Ciao, {{/if}}{{> loginButtons}}
         </div>
     </div>
+    <br clear="left"/>
     <div class="container">
       <div class="row center">
         <div class="row">
