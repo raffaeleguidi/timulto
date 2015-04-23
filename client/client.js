@@ -129,7 +129,7 @@ if (Meteor.isClient) {
       $('.modal-trigger').leanModal();
       $('.collapsible').collapsible();
       initHelp();
-      T9n.setLanguage('it');//Set language
+      //T9n.setLanguage('it');//Set language
   });
 
  Template.body.helpers({
@@ -167,9 +167,9 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click #login": function() {
-        $('.button-collapse').sideNav('show');
+        /*$('.button-collapse').sideNav('show');*/
         $('#login-sign-in-link').click();
-        $('#login-username').focus();
+        /*$('#login-username').focus();*/
     },
     "click #loginNav": function() {
         event.preventDefault();
