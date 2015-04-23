@@ -13,6 +13,6 @@ accounts-facebook
 accounts-twitter
 accounts-google
 service-configuration
-useraccounts:materialize
 jquery
 aldeed:template-extension
+accounts-ui

@@ -33,30 +33,19 @@
             <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
           </ul>
           <ul class="side-nav" id="mobile-demo" style="width: 240px">
-            <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
-            <li class="divider"></li>
-            <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
-            <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
-            <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
-            <li><a href="#" >{{> atNavButton}}</a></li>
-             
-          </ul>
+                <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
+                <li class="divider"></li>
+                <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
+                <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
+                <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
+            </ul>
         </div>
   </nav>
   <div class="section no-pad-bot" id="anonymous-banner">
 
     <div class="container">
       <div class="row center">
-          <div class="col s12 m8 l6">
-          {{#if currentUser}}Ciao,  <a href="#" class="logoutLink">{{user}}</a>
-          {{else}} 
-          <ul id="collapsibleLogin" class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header"><i class="mdi-navigation-expand-more"></i>Accedi</div>
-              <div class="collapsible-body"><p>{{> atForm state='signIn'}}</p></div>
-            </li>
-              </ul>{{/if}}
-          </div><!--{{> loginButtons}}-->
+          {{#if currentUser}}Ciao, {{/if}}{{> loginButtons}}
         </div>
     </div>
     <div class="container">

@@ -167,23 +167,17 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click #login": function() {
-        //$('.button-collapse').sideNav('show');
+        $('.button-collapse').sideNav('show');
         $('#login-sign-in-link').click();
         $('#login-username').focus();
     },
     "click #loginNav": function() {
         event.preventDefault();
         $('.button-collapse').sideNav('hide');
-        $('#collapsibleLogin').trigger('collapse');
-//        $('#collapsibleLogin').collapsible('open');
     },
     "click #logout": function(event) {
         $('.button-collapse').sideNav('show');
     },   
-    "click .logoutLink": function(event) {
-        AccountsTemplates.logout();
-//        $('.button-collapse').sideNav('show');
-    },
     "click #shoot": function(event) {
         takePhoto();
     },
@@ -257,36 +251,9 @@ if (Meteor.isClient) {
 
 
   // At the bottom of the client code
-//  Accounts.ui.config({
-//    passwordSignupFields: "USERNAME_ONLY"
-//  });
-
-    AccountsTemplates.configure({
-        forbidClientAccountCreation: true,
-        // Appearance
-        showAddRemoveServices: true,
-        showLabels: true,
-        showPlaceholders: false,
-        texts: {
-            button: {
-                signIn:"Sign In"
-            },
-            socialSignIn:"Sign In",
-            title: {
-                signIn: ""
-            }
-        }
-   });
-   
-    AccountsTemplates.configureRoute('signIn', {
-        name: 'signin',
-        path: '/',
-        template: 'atForm',
-        layoutTemplate: 'atForm',
-        redirect: '/',
-    });
-    
-
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 
 }
 
