@@ -38,7 +38,8 @@
             <li class="bold"><a href="#info" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
             <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">Contattaci</a></li>
             <li><a href="#helpbox" class="modal-trigger">Aiuto!</a></li>
-            <li class="bold"><a href="#"  id="loginNav">{{> atNavButton}}</a></li>
+            <li><a href="#" >{{> atNavButton}}</a></li>
+             
           </ul>
         </div>
   </nav>
@@ -47,12 +48,12 @@
     <div class="container">
       <div class="row center">
           <div class="col s12 m8 l6">
-          {{#if currentUser}}Ciao, {{user}}
+          {{#if currentUser}}Ciao,  <a href="#" class="logoutLink">{{user}}</a>
           {{else}} 
           <ul id="collapsibleLogin" class="collapsible" data-collapsible="accordion">
             <li>
               <div class="collapsible-header"><i class="mdi-navigation-expand-more"></i>Accedi</div>
-              <div class="collapsible-body"><p>{{> atForm}}</p></div>
+              <div class="collapsible-body"><p>{{> atForm state='signIn'}}</p></div>
             </li>
               </ul>{{/if}}
           </div><!--{{> loginButtons}}-->

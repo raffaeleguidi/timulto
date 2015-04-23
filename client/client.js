@@ -179,6 +179,10 @@ if (Meteor.isClient) {
     },
     "click #logout": function(event) {
         $('.button-collapse').sideNav('show');
+    },   
+    "click .logoutLink": function(event) {
+        AccountsTemplates.logout();
+//        $('.button-collapse').sideNav('show');
     },
     "click #shoot": function(event) {
         takePhoto();
@@ -281,5 +285,8 @@ if (Meteor.isClient) {
         layoutTemplate: 'atForm',
         redirect: '/',
     });
+    
+
+
 }
 
