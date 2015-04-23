@@ -137,7 +137,6 @@ if (Meteor.isClient) {
         return Meteor.user().profile.name;
      },
     userName: function() {
-        //console.log(Meteor.user());
         var user = Meteor.user().username;
         
         if(!user){
