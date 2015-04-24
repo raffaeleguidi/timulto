@@ -1,0 +1,10 @@
+{
+    "greetings":"Ciao",
+    "tiposegnalazione": "Tipo di segnalazione",
+    "segnalazione1":"Parcheggio incivile",
+    "segnalazione2":"Cassonetti sporchi",
+    "segnalazione3":"Affissioni abusive",
+    "segnalazionegenerica":"Altro",
+    "aiuto":"Aiuto",
+    "contattaci":"Contattaci"
+}

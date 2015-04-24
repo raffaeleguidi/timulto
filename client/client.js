@@ -2,6 +2,13 @@ var blank = "splash.png";
 var photoTaken = false;
 var help = new Array();
 
+
+getUserLanguage = function () {
+  // Put here the logic for determining the user language
+
+  return "it";
+};
+
 function resetPicture() {
     photoTaken = false;
     Session.set("photo", blank);
@@ -123,6 +130,16 @@ if (Meteor.isClient) {
   Meteor.subscribe("fines");
 
   Meteor.startup(function(){
+//      console.log(TAPi18n.getLanguage());
+      TAPi18n.setLanguage(getUserLanguage())
+      .done(function () {
+        Session.set("showLoadingIndicator", false);
+      })
+      .fail(function (error_message) {
+        // Handle the situation
+        console.log(error_message);
+      });
+      
       resetPicture();
       $('select').material_select();
       $(".button-collapse").sideNav();
