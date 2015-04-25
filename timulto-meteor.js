@@ -10,21 +10,66 @@ Meteor.methods({
         Fines.insert({
           text: text,
           address: address,
-          lat: lat,
-          lng: lng,
+//          lat: lat,
+//          lng: lng,
+          loc:{type:"Point",coordinates:[parseFloat(lng),parseFloat(lat)]},
           category: category,
+          approved:0,
           imageData: imageData,
           owner: Meteor.userId(),
-          username: Meteor.user().username,
+          username: Meteor.user().profile.name,
           createdAt: new Date() // current time
         });
 
+    },
+    approveFine: function(fineId) {
+        Fines.update({id:fineId},{$set:{approved:1}});
     },
     deleteFine: function (fineId) {
         Fines.remove(fineId);
     },
     setChecked: function (fineId, setChecked) {
         //Fines.update(taskId, { $set: { checked: setChecked} });
+    },
+    findNearUserFine: function(latitude, longitude, minDistance, maxDistance) {
+        //Con la seguente query vengono restituite tutte le segnalazioni in prossimità delle coordinate specificate e che siano approved=1 se di altri utenti, o anche approved=0 se sono dell'utente corrente. La discriminante più forte è la vicinanza che potrebbe non includere le segnalazioni dell'utente corrente
+        console.log("Calling findNearUserFine. Lat:" + latitude + " parsed " +parseFloat(latitude)+
+                    ",lon:"+longitude+" parsed " +parseFloat(longitude)+
+                    ", maxD:"+maxDistance+" minD:"+minDistance);
+        
+        var cursor = Fines.find({
+            loc:{
+                $near:{
+                    $geometry:{
+                        type:"Point",
+                        coordinates:[parseFloat(longitude),parseFloat(latitude) ]
+                    },
+                    $minDistance:parseFloat(minDistance),
+                    $maxDistance:parseFloat(maxDistance),
+                    }
+                }
+        },
+            {_id:1});
+        
+        var finalResult = new Array();
+        var curEl = null;
+        var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
+
+        if(cursor){
+            cursor.forEach(function (doc) {
+//                console.log(doc._id + ":" + doc.createdAt);
+
+                curEl = Fines.findOne({_id:doc._id});
+                console.log(curEl._id+":"+curEl.createdAt+", user:"+curEl.username+",approved:"+curEl.approved);
+                if(curEl && ((curEl.approved == 1 ) || curEl.username ==  currentUsername)){
+                    finalResult.push(curEl);
+                }
+            });
+        }
+//        for(i in finalResult)
+//            console.log("Found: "+ JSON.stringify(finalResult[i]));
+        
+        return finalResult;
     }
 });
 

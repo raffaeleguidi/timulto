@@ -145,6 +145,8 @@ if (Meteor.isClient) {
       $(".button-collapse").sideNav();
       $('.modal-trigger').leanModal();
       $('.collapsible').collapsible();
+      
+      Session.set("foundfines",[]);
       initHelp();
       //T9n.setLanguage('it');//Set language
   });
@@ -163,6 +165,7 @@ if (Meteor.isClient) {
         return user;
     }, fines: function() {
        return Fines.find({}, {sort: {createdAt: -1}});
+        
     }, address: function () {
       return Session.get("address");
     }, description: function () {
@@ -171,6 +174,8 @@ if (Meteor.isClient) {
       return Session.get("photo");
     }, loc: function () {
       return Geolocation.latLng() || { lat: 0, lng: 0 };
+    },foundfines: function() {
+        return Session.get("foundfines");
     },
      helpMessage: function() {
          var help = "";
@@ -204,6 +209,42 @@ if (Meteor.isClient) {
         } else {
             drawLogo(event.offsetX, event.offsetY);
         }
+    },
+    "click #resetFines": function(event){
+        event.preventDefault();
+        
+        Session.set("foundfines",[]);
+    },
+    "click #getFines":function(event) {
+        event.preventDefault();
+        
+        var lat = $("#lat").val();
+        var lon = $("#lng").val();
+        var maxD = $("#maxD")?$("#maxD").val():1000;
+        var minD = $("#minD")?$("#minD").val():0;
+        
+        Meteor.call("findNearUserFine", lat, lon, minD,maxD, function(error,result) {
+            if(error || !result) {
+                console.log("Error in searching fines");
+                Session.set("foundfines",[]);
+            }
+            
+            if(result.length>1){
+                result.sort(function(a, b){
+                    var keyA = new Date(a.createdAt),
+                    keyB = new Date(b.createdAt);
+                    // Compare the 2 dates
+                    if(keyA < keyB) return 1;
+                    if(keyA > keyB) return -1;
+                    return 0;
+                });
+            }
+
+            Session.set("foundfines",result);
+
+            
+        });
+        
     },
     "click #send": function (event) {
         event.preventDefault();
