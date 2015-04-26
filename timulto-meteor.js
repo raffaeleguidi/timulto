@@ -31,7 +31,7 @@ Meteor.methods({
     setChecked: function (fineId, setChecked) {
         //Fines.update(taskId, { $set: { checked: setChecked} });
     },
-    findNearUserFine: function(latitude, longitude, minDistance, maxDistance) {
+    findNearUserFine: function(orderbydate, latitude, longitude, minDistance, maxDistance) {
         //Con la seguente query vengono restituite tutte le segnalazioni in prossimità delle coordinate specificate e che siano approved=1 se di altri utenti, o anche approved=0 se sono dell'utente corrente. La discriminante più forte è la vicinanza che potrebbe non includere le segnalazioni dell'utente corrente
         console.log("Calling findNearUserFine. Lat:" + latitude + " parsed " +parseFloat(latitude)+
                     ",lon:"+longitude+" parsed " +parseFloat(longitude)+
@@ -66,8 +66,38 @@ Meteor.methods({
                 }
             });
         }
-//        for(i in finalResult)
-//            console.log("Found: "+ JSON.stringify(finalResult[i]));
+        
+        if(finalResult.length>1 && orderbydate==true){
+                finalResult.sort(function(a, b){
+                    var keyA = new Date(a.createdAt),
+                    keyB = new Date(b.createdAt);
+                    // Compare the 2 dates
+                    if(keyA < keyB) return 1;
+                    if(keyA > keyB) return -1;
+                    return 0;
+                });
+            }
+        
+        return finalResult;
+    },
+    findLatestFines: function() {
+        var cursor = Fines.find({},{ sort:{createdAt:-1}});
+        
+        var finalResult = new Array();
+        var curEl = null;
+        var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
+
+        if(cursor){
+            cursor.forEach(function (doc) {
+//                console.log(doc._id + ":" + doc.createdAt);
+
+                curEl = Fines.findOne({_id:doc._id});
+                console.log(curEl._id+":"+curEl.createdAt+", user:"+curEl.username+",approved:"+curEl.approved);
+                if(curEl && ((curEl.approved == 1 ) || curEl.username ==  currentUsername)){
+                    finalResult.push(curEl);
+                }
+            });
+        }
         
         return finalResult;
     }

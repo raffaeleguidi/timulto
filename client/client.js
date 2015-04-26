@@ -217,33 +217,43 @@ if (Meteor.isClient) {
     },
     "click #getFines":function(event) {
         event.preventDefault();
+        var filter = $("input[type='radio'][name='group1']:checked").val();
         
         var lat = $("#lat").val();
         var lon = $("#lng").val();
         var maxD = $("#maxD")?$("#maxD").val():1000;
         var minD = $("#minD")?$("#minD").val():0;
         
-        Meteor.call("findNearUserFine", lat, lon, minD,maxD, function(error,result) {
-            if(error || !result) {
-                console.log("Error in searching fines");
-                Session.set("foundfines",[]);
-            }
-            
-            if(result.length>1){
-                result.sort(function(a, b){
-                    var keyA = new Date(a.createdAt),
-                    keyB = new Date(b.createdAt);
-                    // Compare the 2 dates
-                    if(keyA < keyB) return 1;
-                    if(keyA > keyB) return -1;
-                    return 0;
-                });
-            }
-
-            Session.set("foundfines",result);
-
-            
-        });
+        if(filter == "0"){ //all
+            /* Fines più vicini ed ordinati per data */
+            Meteor.call("findNearUserFine", true, lat, lon, minD,maxD, function(error,result) {
+                if(error || !result) {
+                    console.log("Error in searching fines." + error);
+                    Session.set("foundfines",[]);
+                }else {
+                    Session.set("foundfines",result);
+                }
+            });
+         } else if (filter == "1") {//nearest. do not order by date
+            Meteor.call("findNearUserFine", false, lat, lon, minD, maxD, function (error, result) {
+                if (error || !result) {
+                    console.log("Error in searching fines." + error);
+                    Session.set("foundfines", []);
+                }else {
+                    Session.set("foundfines", result);
+                }
+            });    
+         } else if (filter == "2") {//latest
+            /* Fines più recenti */
+            Meteor.call("findLatestFines", function(error,result) {
+                if(error || !result) {
+                    console.log("Error in searching fines." + error);
+                    Session.set("foundfines",[]);
+                } else {
+                    Session.set("foundfines",result);
+                }
+            });
+         }
         
     },
     "click #send": function (event) {

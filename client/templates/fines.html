@@ -1,0 +1,15 @@
+
+<template name="fine">
+  <tr>
+      <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+      <td><span class="text">{{username}}: {{category}} - {{text}}, in {{address}}</span></td>
+      <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>-->
+    </td>
+  </tr>
+</template>
+<template name="foundfine">
+  <tr>
+      <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+      <td><span class="text">{{createdAt}} - Da {{username}}: {{category}} - {{text}}, in {{address}}</span></td>
+  </tr>
+</template>
