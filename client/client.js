@@ -203,10 +203,59 @@ Template.navbar.events({
 /////////////////////////////////////
 ////////////// Main /////////////////
     
-Template.main.rendered = function(){
-    resetPicture();
+    Template.main.rendered = function(){
+        resetPicture();
 
-};
+    };
+    
+    Template.main.helpers({
+        address: function () {
+            return Session.get("address");
+        }, description: function () {
+            return Session.get("description");
+        }, photo: function () {
+            return Session.get("photo");
+        }, loc: function () {
+            return Geolocation.latLng() || {
+                lat: 0,
+                lng: 0
+            };
+        }
+    });
+    
+    Template.main.events({
+        "click #send": function (event) {
+        event.preventDefault();
+        var text = $("#description").val();
+        var address = $("#address").val();
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+        var category = $("#category").val();
+        var canvas = document.getElementById('canvas');
+        //var imageData = $("#imgdata").val();
+        var imageData = canvas.toDataURL();
+
+        Meteor.call("saveFine", text, address, lat, lng, category, imageData);
+
+        // Clear form
+/*
+        Session.set("description", "");
+        Session.set("photo", blank);
+        Session.set("address", "");
+*/
+        $("#address").val("");
+        $("#description").val("");
+        $("#category").val("");
+        $('select').material_select();
+        $('body').scrollTop(0);
+        Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
+        resetPicture();
+
+        // Prevent default form submit (just in case)
+        return false;
+    }
+    
+    });
     
 /////////////////////////////////////
 ///////////// Body //////////////////
@@ -226,14 +275,6 @@ Template.main.rendered = function(){
     }, fines: function() {
        return Fines.find({}, {sort: {createdAt: -1}});
         
-    }, address: function () {
-      return Session.get("address");
-    }, description: function () {
-      return Session.get("description");
-    }, photo: function () {
-      return Session.get("photo");
-    }, loc: function () {
-      return Geolocation.latLng() || { lat: 0, lng: 0 };
     },
      helpMessage: function() {
          var help = "";
@@ -268,36 +309,7 @@ Template.main.rendered = function(){
             drawLogo(event.offsetX, event.offsetY);
         }
     },
-    "click #send": function (event) {
-        event.preventDefault();
-        var text = $("#description").val();
-        var address = $("#address").val();
-        var lat = $("#lat").val();
-        var lng = $("#lng").val();
-        var category = $("#category").val();
-        var canvas = document.getElementById('canvas');
-        //var imageData = $("#imgdata").val();
-        var imageData = canvas.toDataURL();
 
-        Meteor.call("saveFine", text, address, lat, lng, category, imageData);
-
-        // Clear form
-/*
-        Session.set("description", "");
-        Session.set("photo", blank);
-        Session.set("address", "");
-*/
-        $("#address").val("");
-        $("#description").val("");
-        $("#category").val("");
-        $('select').material_select();
-        $('body').scrollTop(0);
-        Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
-        resetPicture();
-
-        // Prevent default form submit (just in case)
-        return false;
-    },
     "click #showHelp": function (event) {
         event.preventDefault();
        
