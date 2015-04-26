@@ -16,3 +16,4 @@ jquery
 aldeed:template-extension
 accounts-ui
 tap:i18n
+iron:router

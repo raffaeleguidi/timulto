@@ -22,11 +22,13 @@ Meteor.methods({
         });
 
     },
-    approveFine: function(fineId) {
-        Fines.update({id:fineId},{$set:{approved:1}});
+    approveFine: function(fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin
+        Fines.update({"_id":fineId},{$set:{"approved":1}});
     },
-    deleteFine: function (fineId) {
+    deleteFine: function (fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin o l'utente corrente "possiede" il fine
+//        console.log("Removing fine:"+fineId);
         Fines.remove(fineId);
+        
     },
     setChecked: function (fineId, setChecked) {
         //Fines.update(taskId, { $set: { checked: setChecked} });
@@ -100,7 +102,28 @@ Meteor.methods({
         }
         
         return finalResult;
-    }
+    },
+    findFinesByApproval: function(approved) {//TODO da aggiungere la logica che controlla se l'utente è admin
+        var filter = 1;
+        
+        if(approved == false || approved == 0) {
+            filter = 0;
+        }
+        var cursor = Fines.find({approved:filter},{ sort:{createdAt:1}});
+        
+        var finalResult = new Array();
+//        var curEl = null;
+//        var currentUsername = Meteor.user()?  Meteor.user().profile.name:"";
+
+        if(cursor){
+            cursor.forEach(function (doc) {
+//                console.log("Not approved--> "+ doc._id + ":" + doc.createdAt+"."+doc.approved);
+                finalResult.push(doc);
+            });
+        }
+        
+        return finalResult;
+    },
 });
 
 if(Meteor.isCordova){

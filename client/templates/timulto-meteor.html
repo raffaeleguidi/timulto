@@ -1,0 +1,68 @@
+<template name="main">
+ 
+    
+    {{> navbar}}
+    
+  <div class="section no-pad-bot" id="anonymous-banner">
+
+    <div class="container">
+        <div class="row left">
+          {{#if currentUser}}{{_ "greetings"}}, {{/if}}{{> loginButtons}}
+        </div>
+    </div>
+    <br clear="left"/>
+    <div class="container">
+      <div class="row center">
+        <div class="row">
+            <canvas id="canvas" width="240" height="240"></canvas>
+            <input type="text" id="address" name="address" placeholder="Indirizzo" value="{{address}}"/>
+            <select id="category" class="browser-default">
+                <option value="" disabled selected>{{_ "tiposegnalazione"}}</option>
+                <option value="1">{{_ "segnalazione1"}}</option>
+                <option value="2">{{_ "segnalazione2"}}</option>
+                <option value="3">{{_ "segnalazione3"}}</option>
+                <option value="4">{{_ "segnalazionegenerica"}}</option>
+            </select>
+            <input type="text" id="description" name="text" placeholder="Note" value="{{description}}"/>
+            <input type="hidden" id="imgdata" name="imgdata" value="{{photo}}" />
+            <input type="hidden" id="lat" name="lat" value="{{loc.lat}}" />
+            <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
+            {{#if currentUser}}
+            <div class="row">
+                <button id="send" class="btn waves-light" type="submit" name="action">Multa
+                   <i class="mdi-content-send right"></i>
+                </button>
+                <!--
+                <button id="help" class="btn waves-light" type="submit" name="action">Aiuto
+                   <i class="mdi-action-help right"></i>
+                </button>
+                <button id="logout" class="btn waves-light" type="submit" name="action">Logout
+                    <i class="mdi-action-exit-to-app right"></i>
+                </button>
+                -->
+            </div>
+            {{else}}
+            <div class="container">
+                <label>fai login o crea un utente per continuare</label>
+                <p>
+                    <button id="login" class="btn waves-light" type="submit" name="action">Login
+                      <i class="mdi-login right"></i>
+                    </button>
+                </p>
+            </div>
+            {{/if}}             
+        </div>
+      </div>
+
+      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a id="shoot" class="btn-floating btn-large red">
+          <i class="large mdi-image-camera-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+    {{> homepage}}
+
+    </template>

@@ -140,18 +140,78 @@ if (Meteor.isClient) {
         console.log(error_message);
       });
       
-      resetPicture();
-      $('select').material_select();
-      $(".button-collapse").sideNav();
-      $('.modal-trigger').leanModal();
-      $('.collapsible').collapsible();
       
+      $('select').material_select();
+//      $(".button-collapse").sideNav();
+//      $('.modal-trigger').leanModal();
+
       Session.set("foundfines",[]);
-      initHelp();
+      Session.set("finesToApprove",[]);
+      
       //T9n.setLanguage('it');//Set language
   });
+ 
+    
+/////////////////////////////////////
+////////////// Navbar ///////////////
+Template.navbar.rendered = function(){
+    $('.modal-trigger').leanModal();
+    $('.button-collapse').sideNav(); 
+    $('collapsible').collapsible();
+    initHelp();
+};
+    
+Template.navbar.helpers({
+    helpMessage: function() {
+         var help = "";
+         if(Session.get("help") && Session.get("help").length> Session.get("currentHelp")){
+            help = Session.get("help")[Session.get("currentHelp")];
+         }
+        return help; 
+    }
+});
 
- Template.body.helpers({
+Template.navbar.events({
+    "click #showHelp": function (event) {
+        event.preventDefault();
+
+        var currentHelp = Session.get("currentHelp");
+
+        if (currentHelp < Session.get("help").length - 1) {
+            currentHelp++;
+        } else {
+            currentHelp = 0;
+        }
+
+        Session.set("currentHelp", currentHelp);
+    },
+    "click #closeHelp": function (event) {
+        event.preventDefault();
+
+        currentHelp=0;
+        Session.set("currentHelp", currentHelp);
+    },
+   "click #loginNav": function() {
+        event.preventDefault();
+        $('.button-collapse').sideNav('hide');
+    },
+    "click #logout": function(event) {
+        $('.button-collapse').sideNav('show');
+    }
+});
+    
+/////////////////////////////////////
+////////////// Main /////////////////
+    
+Template.main.rendered = function(){
+    resetPicture();
+
+};
+    
+/////////////////////////////////////
+///////////// Body //////////////////
+    
+    Template.body.helpers({
      user: function() {
         return Meteor.user().profile.name;
      },
@@ -174,8 +234,6 @@ if (Meteor.isClient) {
       return Session.get("photo");
     }, loc: function () {
       return Geolocation.latLng() || { lat: 0, lng: 0 };
-    },foundfines: function() {
-        return Session.get("foundfines");
     },
      helpMessage: function() {
          var help = "";
@@ -210,7 +268,141 @@ if (Meteor.isClient) {
             drawLogo(event.offsetX, event.offsetY);
         }
     },
-    "click #resetFines": function(event){
+    "click #send": function (event) {
+        event.preventDefault();
+        var text = $("#description").val();
+        var address = $("#address").val();
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+        var category = $("#category").val();
+        var canvas = document.getElementById('canvas');
+        //var imageData = $("#imgdata").val();
+        var imageData = canvas.toDataURL();
+
+        Meteor.call("saveFine", text, address, lat, lng, category, imageData);
+
+        // Clear form
+/*
+        Session.set("description", "");
+        Session.set("photo", blank);
+        Session.set("address", "");
+*/
+        $("#address").val("");
+        $("#description").val("");
+        $("#category").val("");
+        $('select').material_select();
+        $('body').scrollTop(0);
+        Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
+        resetPicture();
+
+        // Prevent default form submit (just in case)
+        return false;
+    },
+    "click #showHelp": function (event) {
+        event.preventDefault();
+       
+        var currentHelp = Session.get("currentHelp");
+
+        if(currentHelp < Session.get("help").length-1) {
+            currentHelp++;
+        }  else {
+            currentHelp = 0;
+        }
+        
+        Session.set("currentHelp", currentHelp);
+      },
+    "click #closeHelp": function (event) {
+        event.preventDefault();
+    
+        currentHelp=0;
+        Session.set("currentHelp", currentHelp);
+      }
+  });
+    
+/////////////////////////////////////
+
+
+  Template.fine.events({
+     "click .toggle-checked": function () {
+        // Set the checked property to the opposite of its current value
+        Tasks.update(this._id, {$set: {checked: ! this.checked}});
+      },
+      "click .delete": function () {
+//    console.log("click .delete deleting:"+this._id);
+        Meteor.call("deleteFine", this._id);
+      }
+  });
+    
+
+ //////////////////////////////////////////
+ ///////////////// admin //////////////////
+    
+function startupAdmin() {//TODO forse è il caso di usare Tracker
+     Meteor.call("findFinesByApproval", false, function (error, result) {
+        if (error || !result) {
+            console.log("Error in searching not approved fines." + error);
+            Session.set("finesToApprove", []);
+        } else {
+            console.log("not approved list:" + result.toString());
+            Session.set("finesToApprove", result);
+        }
+    });
+};
+    
+Template.admin.rendered = function() {
+   startupAdmin();
+};
+    
+Template.admin.helpers({
+    finesToApprove: function() {
+        return Session.get("finesToApprove");             
+    }
+});
+
+Template.admin.events({
+      "click .delete": function () {
+//    console.log("click .delete deleting:"+this._id);
+        Meteor.call("deleteFine", this._id, function(err){
+            startupAdmin();
+        });
+      },
+        "click .thumb-up": function () {
+//    console.log("click .delete deleting:"+this._id);
+        Meteor.call("approveFine",this._id, function(err){
+            startupAdmin();
+        });
+      }
+});
+    
+    
+    
+ //////////////////////////////////////////
+ 
+ //////////////////////////////////////////
+ ////////// Ultime Segnalazioni ///////////
+ 
+    Template.ultimeSegnalazioni.helpers({
+        fines: function () {
+            return Fines.find({}, {
+                sort: {
+                    createdAt: -1
+                }
+            });
+        }
+    }); 
+    
+ //////////////////////////////////////////
+    
+ //////////////////////////////////////////
+ ///////// cercaSegnalazioni //////////////
+Template.cercaSegnalazioni.helpers({
+    foundfines: function () {
+        return Session.get("foundfines");
+    }
+});
+    
+Template.cercaSegnalazioni.events({
+"click #resetFines": function(event){
         event.preventDefault();
         
         Session.set("foundfines",[]);
@@ -254,71 +446,10 @@ if (Meteor.isClient) {
                 }
             });
          }
-        
-    },
-    "click #send": function (event) {
-        event.preventDefault();
-        var text = $("#description").val();
-        var address = $("#address").val();
-        var lat = $("#lat").val();
-        var lng = $("#lng").val();
-        var category = $("#category").val();
-        var canvas = document.getElementById('canvas');
-        //var imageData = $("#imgdata").val();
-        var imageData = canvas.toDataURL();
-
-        Meteor.call("saveFine", text, address, lat, lng, category, imageData);
-
-        // Clear form
-/*
-        Session.set("description", "");
-        Session.set("photo", blank);
-        Session.set("address", "");
-*/
-        $("#address").val("");
-        $("#description").val("");
-        $("#category").val("");
-        $('select').material_select();
-        $('body').scrollTop(0);
-        Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
-        resetPicture();
-
-        // Prevent default form submit (just in case)
-        return false;
-    },
-    "click #showHelp": function (event) {
-         event.preventDefault();
-       
-        var currentHelp = Session.get("currentHelp");
-
-        if(currentHelp < Session.get("help").length-1) {
-            currentHelp++;
-        }  else {
-            currentHelp = 0;
-        }
-        
-        Session.set("currentHelp", currentHelp);
-      },
-    "click #closeHelp": function (event) {
-        event.preventDefault();
-    
-        currentHelp=0;
-        Session.set("currentHelp", currentHelp);
-      }
-  });
-
-  Template.fine.events({
-     "click .toggle-checked": function () {
-        // Set the checked property to the opposite of its current value
-        Tasks.update(this._id, {$set: {checked: ! this.checked}});
-      },
-      "click .delete": function () {
-        Meteor.call("deleteFine", this._id);
-      }
-  });
-
-
-  // At the bottom of the client code
+    }
+});
+    //////////////////////////////////////////
+    // At the bottom of the client code
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
   });
