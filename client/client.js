@@ -128,6 +128,7 @@ function initHelp() {
 }
 if (Meteor.isClient) {
   Meteor.subscribe("fines");
+  Meteor.subscribe("userData");
 
   Meteor.startup(function(){
 //      console.log(TAPi18n.getLanguage());
@@ -149,6 +150,16 @@ if (Meteor.isClient) {
       Session.set("finesToApprove",[]);
       
       //T9n.setLanguage('it');//Set language
+      
+       Meteor.call("isAdministrator", function (error, result) {
+
+        if (error) {
+            console.log("Error occurred: " + error);
+            return false;
+        }
+        //            console.log("check is administrator:"+result);
+        Session.set("isAdministrator",result);
+    });
   });
  
     
@@ -220,10 +231,25 @@ Template.navbar.events({
                 lat: 0,
                 lng: 0
             };
+        },
+        screen_name: function() {
+            if( Meteor.user().services.facebook ) {
+                return Meteor.user().services.facebook.name;
+            }
+            else if( Meteor.user().services.twitter ) {
+                return Meteor.user().services.twitter.screenName;
+            }
         }
     });
     
     Template.main.events({
+      "click #getScreenName":function(){
+//        Meteor.call("getUserScreenName",function(err,res){
+//            console.log("In client:" + JSON.stringify(res));
+//        });
+          console.log(Meteor.user().services.twitter.screenName);
+          console.log(Meteor.user().services.twitter.profile_image_url);
+      },
         "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
@@ -266,7 +292,7 @@ Template.navbar.events({
      },
     userName: function() {
         var user = Meteor.user().username;
-        
+        console.log(user);
         if(!user){
             user = Meteor.user().profile.name;
         }
@@ -332,7 +358,29 @@ Template.navbar.events({
   });
     
 /////////////////////////////////////
+Template.fineToApprove.created = function() {
+    console.log(this.data._id);
+          Meteor.call("isOwner", this.data._id, function (err, isOwner) {
+            if (err) {
+                Session.set("isOwner", false);
+            } else {
+//                console.log(isOwner);
+                Session.set("isOwner", isOwner);
+            }
+        });
+}
+Template.fineToApprove.helpers({
 
+    isAdministrator:function() {
+        return Session.get("isAdministrator");
+    },
+    isOwner:function() {
+//        console.log("Helper : " + this._id);
+
+        return Session.get("isOwner");
+        
+    }
+});
 
   Template.fine.events({
      "click .toggle-checked": function () {
@@ -467,4 +515,3 @@ Template.cercaSegnalazioni.events({
   });
 
 }
-

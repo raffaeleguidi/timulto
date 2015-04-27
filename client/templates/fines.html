@@ -11,8 +11,8 @@
     <tr>
         <td><span class="text">{{username}}: {{category}} - {{text}}, in {{address}}. Approved:{{approved}}</span></td>
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-        <td><a class="btn-floating orange"><i class="large mdi-action-thumb-up thumb-up"></i></a></td>
-        <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a></td>
+        {{#if isAdministrator}}<td><a class="btn-floating orange"><i class="large mdi-action-thumb-up thumb-up"></i></a></td>{{/if}}
+        {{#if isOwner}}<td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a></td>{{/if}}
     </tr>
 </template>
 

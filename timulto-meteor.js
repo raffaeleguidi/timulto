@@ -1,6 +1,47 @@
 Fines = new Mongo.Collection("fines");
+Administrators = new Mongo.Collection("administrators");
+
+function isAdministrator() {
+    var username = "";
+        
+    if(Meteor.user()) {
+        if( Meteor.user().services.facebook ) {
+            username = Meteor.user().services.facebook.name;
+        }
+        else if( Meteor.user().services.twitter ) {
+            username = Meteor.user().services.twitter.screenName;
+        }
+        //console.log(username);
+    }
+
+    var userAdm = Administrators.findOne({username:username});
+
+    if(!userAdm) {
+       return false;
+    } else {
+        return true;
+    }
+};
 
 Meteor.methods({
+    isOwner:function(fineId){
+        if(Meteor.userId()) {
+            var userId = Meteor.userId();
+
+            var owner = Fines.findOne(fineId,{fields:{"owner":1}})
+            if(owner) {
+                owner = owner.owner;
+                console.log("owner: "+ owner + " compared to current "+userId);
+                
+                return (owner == userId);
+            }
+        }
+        
+        return false;
+    },
+    isAdministrator:function(){
+        return isAdministrator();
+    },
     "saveFine": function (text, address, lat, lng, category, imageData) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
@@ -22,13 +63,27 @@ Meteor.methods({
         });
 
     },
-    approveFine: function(fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin
-        Fines.update({"_id":fineId},{$set:{"approved":1}});
+    approveFine: function(fineId) {
+        
+        if(isAdministrator()) {
+            Fines.update({"_id":fineId},{$set:{"approved":1}});
+        } else {
+             console.log("User is not an administrator: "+ JSON.stringify(Meteor.user().profile.name));
+        }
     },
     deleteFine: function (fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin o l'utente corrente "possiede" il fine
-//        console.log("Removing fine:"+fineId);
-        Fines.remove(fineId);
-        
+
+        if(isAdministrator()) { //Se amministratore, è possibile rimuovere la segnalazione
+            Fines.remove(fineId);
+        } else{
+            var res = Fines.findOne(fineId);
+            
+            if(res && res.owner == Meteor.userId()) {//se l'utente corrente ha creato la segnalazione può anche rimuoverla
+                Fines.remove(fineId);
+            } else {
+                console.log("User is not an administrator and does not own the fine: "+ JSON.stringify(Meteor.user().profile.name));
+            }
+        }
     },
     setChecked: function (fineId, setChecked) {
         //Fines.update(taskId, { $set: { checked: setChecked} });
