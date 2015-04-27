@@ -152,14 +152,13 @@ if (Meteor.isClient) {
       //T9n.setLanguage('it');//Set language
       
        Meteor.call("isAdministrator", function (error, result) {
-
-        if (error) {
-            console.log("Error occurred: " + error);
-            return false;
-        }
-        //            console.log("check is administrator:"+result);
-        Session.set("isAdministrator",result);
-    });
+            if (error) {
+                console.log("Error occurred: " + error);
+                Session.set("isadmin",false);
+            }
+            // console.log("check is administrator:"+result);
+            Session.set("isadmin",result);
+      });
   });
  
     
@@ -358,27 +357,39 @@ Template.navbar.events({
   });
     
 /////////////////////////////////////
-Template.fineToApprove.created = function() {
-    console.log(this.data._id);
-          Meteor.call("isOwner", this.data._id, function (err, isOwner) {
-            if (err) {
-                Session.set("isOwner", false);
-            } else {
-//                console.log(isOwner);
-                Session.set("isOwner", isOwner);
+
+Template.fineToApprove.rendered = function() {
+    if(Session.get("isadmin")) {
+         $(".adminThumb").show();
+    } else {
+         $(".adminThumb").hide();
+    }
+    
+    Meteor.call("isOwner", this.data._id, function (err, isOwner) {
+        var isAdmin = Session.get("isadmin");
+        if (err) {
+            if(isAdmin) {
+                $("#"+isOwner._id).show();
+            }else{
+                $("#"+isOwner._id).hide();
             }
-        });
+        } else {
+//                console.log(isOwner);
+            if(isOwner.result || isAdmin) {
+//                    console.log("Showing " + isOwner._id);
+                $("#"+isOwner._id).show();
+            } else {
+//                    console.log("Hiding " + isOwner._id);
+                $("#"+isOwner._id).hide();
+            }
+        }
+    });
 }
+
 Template.fineToApprove.helpers({
 
-    isAdministrator:function() {
-        return Session.get("isAdministrator");
-    },
-    isOwner:function() {
-//        console.log("Helper : " + this._id);
-
-        return Session.get("isOwner");
-        
+    isadmin:function() {
+        return Session.get("isadmin");
     }
 });
 

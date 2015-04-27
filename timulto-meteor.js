@@ -3,10 +3,11 @@ Administrators = new Mongo.Collection("administrators");
 
 function isAdministrator() {
     var username = "";
-        
+//    console.log("#isAdministrator: " + JSON.stringify(Meteor.user()));
+    
     if(Meteor.user()) {
         if( Meteor.user().services.facebook ) {
-            username = Meteor.user().services.facebook.name;
+            username = Meteor.user().services.facebook.email;
         }
         else if( Meteor.user().services.twitter ) {
             username = Meteor.user().services.twitter.screenName;
@@ -17,8 +18,10 @@ function isAdministrator() {
     var userAdm = Administrators.findOne({username:username});
 
     if(!userAdm) {
+        console.log(username + " is not admin");
        return false;
     } else {
+        console.log(username + " is  admin!!!!");
         return true;
     }
 };
@@ -31,15 +34,21 @@ Meteor.methods({
             var owner = Fines.findOne(fineId,{fields:{"owner":1}})
             if(owner) {
                 owner = owner.owner;
-                console.log("owner: "+ owner + " compared to current "+userId);
+//                console.log("owner: "+ owner + " compared to current "+userId);
+//                console.log("@MeteorMethod#isOwner: fine " + fineId + ", found owner: " + owner + " , user "+Meteor.userId());
+            
+                var obj=  {result:(owner == userId), _id:fineId};
                 
-                return (owner == userId);
+//                console.log(JSON.stringify(obj));
+                
+                return obj;
             }
         }
         
-        return false;
+        return {result:false, _id:fineId};
     },
     isAdministrator:function(){
+//        console.log("@MeteorMethod#isAdministrator: ");
         return isAdministrator();
     },
     "saveFine": function (text, address, lat, lng, category, imageData) {

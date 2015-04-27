@@ -12,7 +12,8 @@ if (Meteor.isServer) {
                 fields: {
                     'services.twitter.screenName': 1,
                     'services.twitter.profile_image_url': 1,
-                    'services.facebook.name':1,
+//                    'services.facebook':1,
+                    'services.facebook.email':1,
                     'services.facebook.picture':1,
                     'services.google.given_name':1
                 }
