@@ -466,13 +466,13 @@ Template.admin.events({
     
  //////////////////////////////////////////
  ///////// cercaSegnalazioni //////////////
-Template.cercaSegnalazioni.helpers({
+Template.listaSegnalazioni.helpers({
     foundfines: function () {
         return Session.get("foundfines");
     }
 });
     
-Template.cercaSegnalazioni.events({
+Template.listaSegnalazioni.events({
 "click #resetFines": function(event){
         event.preventDefault();
         
@@ -482,10 +482,16 @@ Template.cercaSegnalazioni.events({
         event.preventDefault();
         var filter = $("input[type='radio'][name='group1']:checked").val();
         
-        var lat = $("#lat").val();
-        var lon = $("#lng").val();
-        var maxD = $("#maxD")?$("#maxD").val():1000;
-        var minD = $("#minD")?$("#minD").val():0;
+        var coords = Geolocation.latLng();
+//        var lat = $("#lat").val();
+//        var lon = $("#lng").val();
+        
+        
+        console.log("coords:" + JSON.stringify(coords));
+        var maxD = $("#maxD").val()?$("#maxD").val():1000;
+        var minD = $("#minD").val()?$("#minD").val():0;
+        var lat = coords.lat;
+        var lon = coords.lng;
         
         if(filter == "0"){ //all
             /* Fines più vicini ed ordinati per data */
@@ -494,6 +500,7 @@ Template.cercaSegnalazioni.events({
                     console.log("Error in searching fines." + error);
                     Session.set("foundfines",[]);
                 }else {
+                    console.log("found something.. " + result);
                     Session.set("foundfines",result);
                 }
             });

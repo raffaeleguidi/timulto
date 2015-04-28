@@ -102,15 +102,29 @@ Meteor.methods({
         console.log("Calling findNearUserFine. Lat:" + latitude + " parsed " +parseFloat(latitude)+
                     ",lon:"+longitude+" parsed " +parseFloat(longitude)+
                     ", maxD:"+maxDistance+" minD:"+minDistance);
-        
+        var lat = 0.0;
+        if(latitude){
+           console.log("lat is not nan");
+            lat = parseFloat(latitude);
+           }
+        var lon = 0.0;
+        if(longitude){
+           console.log("lon is not nan");
+            lon = parseFloat(longitude);
+           }
+        var minD = 0.0;
+        if(minDistance && minDistance > 0){
+           console.log("minD is not nan");
+            minD = parseFloat(minDistance);
+           }
         var cursor = Fines.find({
             loc:{
                 $near:{
                     $geometry:{
                         type:"Point",
-                        coordinates:[parseFloat(longitude),parseFloat(latitude) ]
+                        coordinates:[lon, lat ]
                     },
-                    $minDistance:parseFloat(minDistance),
+                    $minDistance:minD,
                     $maxDistance:parseFloat(maxDistance),
                     }
                 }
