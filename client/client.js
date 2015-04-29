@@ -87,7 +87,7 @@ function drawLogo(offsetX, offsetY) {
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
     var imageObj = new Image();
-
+console.log("context:" + context);
     imageObj.onload = function() {
         var w = imageObj.width / 4;
         var h = imageObj.height / 4;
@@ -238,7 +238,30 @@ Template.navbar.events({
             else if( Meteor.user().services.twitter ) {
                 return Meteor.user().services.twitter.screenName;
             }
-        }
+        },
+        user: function() {
+        return Meteor.user().profile.name;
+        },
+        userName: function() {
+            var user = Meteor.user().username;
+            console.log(user);
+            if(!user){
+                user = Meteor.user().profile.name;
+            }
+
+            return user;
+        }, fines: function() {
+           return Fines.find({}, {sort: {createdAt: -1}});
+
+        },
+         helpMessage: function() {
+             var help = "";
+             if(Session.get("help") && Session.get("help").length> Session.get("currentHelp")){
+                help = Session.get("help")[Session.get("currentHelp")];
+             }
+            return help; 
+        },
+        error: Geolocation.error
     });
     
     Template.main.events({
@@ -278,9 +301,31 @@ Template.navbar.events({
 
         // Prevent default form submit (just in case)
         return false;
+    },
+    "click #login": function() {
+        /*$('.button-collapse').sideNav('show');*/
+        $('#login-sign-in-link').click();
+        /*$('#login-username').focus();*/
+    },
+    "click #loginNav": function() {
+            event.preventDefault();
+            $('.button-collapse').sideNav('hide');
+    },
+    "click #logout": function(event) {
+            $('.button-collapse').sideNav('show');
+    },   
+    "click #shoot": function(event) {
+            takePhoto();
+    },
+    "click #canvas": function (event) {
+            if (!photoTaken) {
+                takePhoto();
+            } else {
+                drawLogo(event.offsetX, event.offsetY);
+            }
     }
     
-    });
+});
     
 /////////////////////////////////////
 ///////////// Body //////////////////
