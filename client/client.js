@@ -87,7 +87,8 @@ function drawLogo(offsetX, offsetY) {
     var canvas = document.getElementById('canvas');
     var context = canvas.getContext('2d');
     var imageObj = new Image();
-console.log("context:" + context);
+
+    console.log("context:" + context);
     imageObj.onload = function() {
         var w = imageObj.width / 4;
         var h = imageObj.height / 4;
@@ -152,7 +153,7 @@ if (Meteor.isClient) {
       
       //T9n.setLanguage('it');//Set language
       
-       Meteor.call("isAdministrator", function (error, result) {
+      Meteor.call("isAdministrator", function (error, result) {
             if (error) {
                 console.log("Error occurred: " + error);
                 Session.set("isadmin",false);
