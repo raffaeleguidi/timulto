@@ -1,6 +1,14 @@
 if (Meteor.isServer) {
     Meteor.startup(function () {
 
+        Restivus.configure({
+          useAuth: false,
+          prettyJson: true
+        });
+
+        // Generates: GET, POST on /api/users and GET, DELETE /api/users/:id for
+        Restivus.addCollection(Fines, {excludedEndpoints: ['post', 'put','deleteAll', 'delete']});
+
         Meteor.publish("fines", function () {
             return Fines.find({}, {sort: {createdAt: -1}});
         });
