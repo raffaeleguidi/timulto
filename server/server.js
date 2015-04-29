@@ -29,8 +29,14 @@ if (Meteor.isServer) {
                                              lat: lat,
                                              lon: lon
                                          }});
-                    var ret = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
-                    return ret;
+                    var address = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
+                    var city = obj.data.address.city;
+                    
+                    var response = {
+                        address:address,
+                        city:city
+                    }
+                    return response;
                 } catch (ex) {
                     return "Lat: " + lat + ", Lon: " + lon;
                 }

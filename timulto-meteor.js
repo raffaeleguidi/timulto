@@ -51,7 +51,7 @@ Meteor.methods({
 //        console.log("@MeteorMethod#isAdministrator: ");
         return isAdministrator();
     },
-    "saveFine": function (text, address, lat, lng, category, imageData) {
+    "saveFine": function (text, address, city, lat, lng, category, imageData) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
           throw new Meteor.Error("not-authorized");
@@ -60,8 +60,7 @@ Meteor.methods({
         Fines.insert({
           text: text,
           address: address,
-//          lat: lat,
-//          lng: lng,
+          city:city,
           loc:{type:"Point",coordinates:[parseFloat(lng),parseFloat(lat)]},
           category: category,
           approved:0,
@@ -99,22 +98,22 @@ Meteor.methods({
     },
     findNearUserFine: function(orderbydate, latitude, longitude, minDistance, maxDistance) {
         //Con la seguente query vengono restituite tutte le segnalazioni in prossimità delle coordinate specificate e che siano approved=1 se di altri utenti, o anche approved=0 se sono dell'utente corrente. La discriminante più forte è la vicinanza che potrebbe non includere le segnalazioni dell'utente corrente
-        console.log("Calling findNearUserFine. Lat:" + latitude + " parsed " +parseFloat(latitude)+
-                    ",lon:"+longitude+" parsed " +parseFloat(longitude)+
-                    ", maxD:"+maxDistance+" minD:"+minDistance);
+//        console.log("Calling findNearUserFine. Lat:" + latitude + " parsed " +parseFloat(latitude)+
+//                    ",lon:"+longitude+" parsed " +parseFloat(longitude)+
+//                    ", maxD:"+maxDistance+" minD:"+minDistance);
         var lat = 0.0;
         if(latitude){
-           console.log("lat is not nan");
+//           console.log("lat is not nan");
             lat = parseFloat(latitude);
            }
         var lon = 0.0;
         if(longitude){
-           console.log("lon is not nan");
+//           console.log("lon is not nan");
             lon = parseFloat(longitude);
            }
         var minD = 0.0;
         if(minDistance && minDistance > 0){
-           console.log("minD is not nan");
+//           console.log("minD is not nan");
             minD = parseFloat(minDistance);
            }
         var cursor = Fines.find({
@@ -187,8 +186,14 @@ Meteor.methods({
         if(approved == false || approved == 0) {
             filter = 0;
         }
-        var cursor = Fines.find({approved:filter},{ sort:{createdAt:1}});
-        
+        var cursor; 
+
+
+        if(isAdministrator()) {
+            cursor = Fines.find({approved:filter},{ sort:{createdAt:1}});
+        } else {
+            cursor = Fines.find({$and:[{approved:filter},{owner:Meteor.userId()}]},{ sort:{createdAt:1}});
+        }
         var finalResult = new Array();
 //        var curEl = null;
 //        var currentUsername = Meteor.user()?  Meteor.user().profile.name:"";

@@ -105,7 +105,8 @@ function geocode() {
         var coords = Geolocation.latLng();
         if (coords.lat && coords.lng) {
             Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
-                Session.set("address", results);
+                Session.set("address", results.address);
+                Session.set("city", results.city);
             });
         }
     } catch(err) {
@@ -219,6 +220,9 @@ Template.navbar.events({
     };
     
     Template.main.helpers({
+        city:function() {
+            return Session.get("city");
+        },
         address: function () {
             return Session.get("address");
         }, description: function () {
@@ -276,14 +280,18 @@ Template.navbar.events({
         event.preventDefault();
         var text = $("#description").val();
         var address = $("#address").val();
+        var city = Session.get("city");
         var lat = $("#lat").val();
         var lng = $("#lng").val();
         var category = $("#category").val();
+            if(!category){
+                category = "4";
+            }
         var canvas = document.getElementById('canvas');
         //var imageData = $("#imgdata").val();
         var imageData = canvas.toDataURL();
 
-        Meteor.call("saveFine", text, address, lat, lng, category, imageData);
+        Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
 
         // Clear form
 /*
@@ -454,12 +462,14 @@ Template.fineToApprove.helpers({
  ///////////////// admin //////////////////
     
 function startupAdmin() {//TODO forse è il caso di usare Tracker
+    //Se admin restituisci tutti  i fine non approvati
+    //Se utente normale restituisci tutti i fine dell'utente non ancora approvati
      Meteor.call("findFinesByApproval", false, function (error, result) {
         if (error || !result) {
             console.log("Error in searching not approved fines." + error);
-            Session.set("finesToApprove", []);
+//            Session.set("finesToApprove", []);
         } else {
-            console.log("not approved list:" + result.toString());
+//            console.log("not approved list:" + result.toString());
             Session.set("finesToApprove", result);
         }
     });
@@ -479,7 +489,8 @@ Template.admin.events({
       "click .delete": function () {
 //    console.log("click .delete deleting:"+this._id);
         Meteor.call("deleteFine", this._id, function(err){
-            startupAdmin();
+            if(!err)
+                startupAdmin();
         });
       },
         "click .thumb-up": function () {
