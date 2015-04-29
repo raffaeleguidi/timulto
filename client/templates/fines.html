@@ -7,8 +7,23 @@
     </td>
   </tr>
 </template>
+
+<template name="fineDetails">
+    {{> navbar}}
+   
+    <div class="container">
+      <div class="section">
+        <h5 class="header center blue-text">Dettaglio segnalazione</h5>
+              <img class="mini-shot" name="imageData" src="{{imageData}}" /><br />
+    <p>{{username}} hai segnalato "{{text}}" in {{address}}.<br />Tipologia: {{category}}</p>            
+        </div>
+    </div>
+    {{> footer}}
+</template>
+
 <template name="fineToApprove">
-    <tr>
+    
+    <tr class="afine">
         <td><span class="text">{{username}}: {{category}} - {{text}}, in {{address}}. Approved:{{approved}}</span></td>
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
         <td>

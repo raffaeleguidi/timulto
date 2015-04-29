@@ -410,7 +410,24 @@ Template.navbar.events({
   });
     
 /////////////////////////////////////
-
+Template.fineDetails.helpers({
+    username: function(){
+        return Session.get("detailUsername");
+    },
+    text: function(){
+        return Session.get("detailText");
+    },
+    address: function(){
+        return Session.get("detailAddress");
+    },
+    category: function(){
+        return Session.get("detailCategory");
+    },
+    imageData: function(){
+        return Session.get("detailImageData");
+    }
+});
+    
 Template.fineToApprove.rendered = function() {
     if(Session.get("isadmin")) {
          $(".adminThumb").show();
@@ -443,6 +460,19 @@ Template.fineToApprove.helpers({
 
     isadmin:function() {
         return Session.get("isadmin");
+    }
+});
+
+Template.fineToApprove.events({
+    "click .afine":function(){
+        console.log("clicked " + this._id);
+        Session.get("detailUsername");
+        Session.get("detailText");
+        Session.get("detailAddress");
+        Session.get("detailCategory");
+        Session.get("detailImageData");
+        
+        Router.go('/dettaglioSegnalazione');
     }
 });
 
