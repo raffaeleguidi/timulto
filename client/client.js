@@ -410,6 +410,18 @@ Template.navbar.events({
   });
     
 /////////////////////////////////////
+Template.fineDetails.rendered = function(){
+
+ var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var imageObj = new Image();
+
+      imageObj.onload = function() {
+        context.drawImage(imageObj, 0, 0,500,500);//,600,600);
+      };
+      imageObj.src = Session.get("detailImageData");
+};
+
 Template.fineDetails.helpers({
     username: function(){
         return Session.get("detailUsername");
@@ -424,6 +436,7 @@ Template.fineDetails.helpers({
         return Session.get("detailCategory");
     },
     imageData: function(){
+
         return Session.get("detailImageData");
     }
 });
@@ -464,13 +477,13 @@ Template.fineToApprove.helpers({
 });
 
 Template.fineToApprove.events({
-    "click .afine":function(){
+    "click .mini-shot":function(){
         console.log("clicked " + this._id);
-        Session.get("detailUsername");
-        Session.get("detailText");
-        Session.get("detailAddress");
-        Session.get("detailCategory");
-        Session.get("detailImageData");
+        Session.set("detailUsername", this.username);
+        Session.set("detailText",this.text);
+        Session.set("detailAddress",this.address);
+        Session.set("detailCategory",this.category);
+        Session.set("detailImageData",this.imageData);
         
         Router.go('/dettaglioSegnalazione');
     }
