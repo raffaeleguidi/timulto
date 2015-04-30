@@ -31,7 +31,7 @@ if (Meteor.isServer) {
               filter[this.urlParams.service] = null;
               var fines = findFinesFor(filter);
               if (fines) {
-                return {status: 'success', data: fines};
+                return fines;
               }
               return {
                 statusCode: 404,
