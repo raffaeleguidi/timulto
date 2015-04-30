@@ -27,15 +27,15 @@ function findFinesFor(service) {
 
 var key = 'this is the key';
 
-Restivus.addRoute('test', {authRequired: false}, {
+Restivus.addRoute('token/:message', {authRequired: false}, {
     get: function () {
       console.log(this);
       return {
         body: {
-            timestamp: this.request.headers.timestamp,
-            app: this.request.headers.app,
             token: CryptoJS.HmacMD5(
-                this.request.headers.timestamp + '#' + this.request.headers.app,
+                this.request.headers.timestamp + '#' +
+                this.request.headers.app + '#' +
+                this.urlParams.message,
             key).toString()
         }
       };
