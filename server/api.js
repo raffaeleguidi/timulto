@@ -81,6 +81,21 @@ Restivus.addRoute('fines/:service', {authRequired: false}, {
 
 Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
     post: function () {
+
+        var check = CryptoJS.HmacMD5(
+                    this.request.headers.timestamp + '#' +
+                    this.request.headers.app + '#' +
+                    this.urlParams.service + '#' +
+                    this.urlParams.id,
+                key).toString();
+
+        console.log(check);
+
+        if (this.request.headers.token != check) return {
+            statusCode: 401,
+            body: {status: 'unauthorized', message: 'Token is not correct'}
+        };
+
         var filter = {}; filter[this.urlParams.service] = this.bodyParams.postId;
         var updatedCount = Fines.update({_id: this.urlParams.id, approved: 1}, {$set: filter});
         if (updatedCount == 1) {
