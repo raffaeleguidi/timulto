@@ -1,43 +1,9 @@
-if (Meteor.isServer) {
+//if (Meteor.isServer) {
     Meteor.startup(function () {
 
         Restivus.configure({
           useAuth: false,
           prettyJson: true
-        });
-
-        // Generates: GET, POST on /api/users and GET, DELETE /api/users/:id for
-        //Restivus.addCollection(Fines, {excludedEndpoints: ['post', 'put','deleteAll', 'delete']});
-
-        function findFinesFor(service) {
-            var cursor = Fines.find({
-                $and:[{approved: 1}, service]
-            }, {
-                sort:{createdAt:1}
-            });
-            var res = new Array();
-
-            if(cursor){
-                cursor.forEach(function (doc) {
-                    res.push(doc);
-                });
-            }
-            return res;
-        }
-
-        Restivus.addRoute('fines/:service', {authRequired: false}, {
-            get: function () {
-              var filter = {};
-              filter[this.urlParams.service] = null;
-              var fines = findFinesFor(filter);
-              if (fines) {
-                return fines;
-              }
-              return {
-                statusCode: 404,
-                body: {status: 'fail', message: 'Fines not found'}
-              };
-            }
         });
 
         Meteor.publish("fines", function () {
@@ -83,5 +49,5 @@ if (Meteor.isServer) {
         });
 
     });
-}
+//}
 
