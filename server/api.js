@@ -25,8 +25,48 @@ function findFinesFor(service) {
     return res;
 }
 
+var key = 'this is the key';
+
+Restivus.addRoute('test', {authRequired: false}, {
+    get: function () {
+      console.log(this);
+      return {
+        body: {
+            timestamp: this.request.headers.timestamp,
+            app: this.request.headers.app,
+            token: CryptoJS.HmacMD5(
+                this.request.headers.timestamp + '#' + this.request.headers.app,
+            key).toString()
+        }
+      };
+      var filter = {}; filter[this.urlParams.service] = null;
+      var fines = findFinesFor(filter);
+      if (fines) {
+        return fines;
+      }
+      return {
+        statusCode: 404,
+        body: {status: 'fail', message: 'Fines not found'}
+      };
+    }
+});
+
 Restivus.addRoute('fines/:service', {authRequired: false}, {
     get: function () {
+
+      var check = CryptoJS.HmacMD5(
+                this.request.headers.timestamp + '#' +
+                this.request.headers.app + '#' +
+                this.urlParams.service,
+            key).toString();
+
+      console.log(check);
+
+      if (this.request.headers.token != check) return {
+        statusCode: 401,
+        body: {status: 'unauthorized', message: 'Token is not correct'}
+      };
+
       var filter = {}; filter[this.urlParams.service] = null;
       var fines = findFinesFor(filter);
       if (fines) {

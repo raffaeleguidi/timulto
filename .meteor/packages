@@ -18,3 +18,5 @@ accounts-ui
 tap:i18n
 iron:router
 nimble:restivus
+jparker:crypto-md5
+jparker:crypto-hmac
