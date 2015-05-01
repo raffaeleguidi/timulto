@@ -106,8 +106,7 @@ function geocode() {
         var coords = Geolocation.latLng();
         if (coords.lat && coords.lng) {
             Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
-                Session.set("address", results.address);
-                Session.set("city", results.city);
+                Session.set("address", results.address + ' - ' + results.postcode + ' ' + results.city);
             });
         }
     } catch(err) {

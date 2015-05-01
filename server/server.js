@@ -36,10 +36,12 @@
                                          }});
                     var address = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
                     var city = obj.data.address.city;
+                    var postcode = obj.data.address.postcode;
                     
                     var response = {
-                        address:address,
-                        city:city
+                        address: address,
+                        postcode: postcode,
+                        city: city
                     }
                     return response;
                 } catch (ex) {
