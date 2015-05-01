@@ -11,6 +11,7 @@ mdg:geolocation
 http
 accounts-facebook
 accounts-twitter
+accounts-google
 service-configuration
 jquery
 aldeed:template-extension
