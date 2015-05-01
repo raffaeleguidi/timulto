@@ -1,8 +1,8 @@
 App.info({
   id: 'it.timulto.app',
-  name: 'Timulto',
+  name: 'TiMulto',
   description: 'Delazione e senso civico',
-  author: 'Timulto',
+  author: 'TiMulto',
   email: 'info@timulto.org',
   website: 'http://www.timulto.org',
   version: '0.0.3'
