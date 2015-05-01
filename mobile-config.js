@@ -5,7 +5,7 @@ App.info({
   author: 'TiMulto.it',
   email: 'info@timulto.org',
   website: 'http://www.timulto.org',
-  version: '0.0.2'
+  version: '0.0.3'
 });
 
 App.launchScreens({
