@@ -1,0 +1,22 @@
+<template name="finesmap">
+    <head>
+        <style>
+            .map-container {
+              width: 800px;
+              max-width: 100%;
+              height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        {{> navbar}}
+        <div class="container">
+        <div class="section">
+  <div class="map-container z-depth-2">
+    {{> googleMap name="finesMap" options=finesMapOptions}}
+  </div>
+        </div>
+        </div>
+{{> footer}}
+    </body>
+</template>

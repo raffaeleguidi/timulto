@@ -684,6 +684,58 @@ Template.listaSegnalazioni.events({
          }
     }
 });
+    
+    
+    
+    Template.finesmap.helpers({
+        finesMapOptions: function () {
+            // Make sure the maps API has loaded
+            if (GoogleMaps.loaded()) {
+                // Map initialization options
+                console.log("map init");
+                return {
+                    center: new google.maps.LatLng(41.901556, 12.502005),
+                    zoom: 11
+                };
+            }
+        }
+    });
+    
+    Template.finesmap.onCreated(function() {
+        
+  // We can use the `ready` callback to interact with the map API once the map is ready.
+  GoogleMaps.ready('finesMap', function(map) {
+      var theFinesCursor = Fines.find({approved:1});
+      
+      theFinesCursor.forEach(function(fine){
+          console.log(JSON.stringify( fine.loc));
+          if(fine.loc.coordinates[0] != 0.0 && fine.loc.coordinates[1] != 0.0) {
+              var myCenter = new google.maps.LatLng(fine.loc.coordinates[1], fine.loc.coordinates[0]);
+              var marker = new google.maps.Marker({
+                  position: myCenter,
+                  icon:'icon_20X20.png'
+              });
+              
+              var infowindow = new google.maps.InfoWindow({
+                    content:fine.city + ".<br/>Segnalato da "+fine.username+" in "+fine.address
+              });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map.instance,marker);
+              });
+              
+              marker.setMap(map.instance);
+          }
+            
+      });
+      
+    // Add a marker to the map once it's ready
+    var marker = new google.maps.Marker({
+      position: map.options.center,
+      map: map.instance
+    });
+  });
+});
     //////////////////////////////////////////
     // At the bottom of the client code
   Accounts.ui.config({
