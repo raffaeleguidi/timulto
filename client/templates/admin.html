@@ -12,7 +12,6 @@
         <h5 class="header center blue-text">{{_ "gestioneSegnalazioni"}}</h5>
         <table class="striped">
             <tbody>
-                {{#if finesToApprove.length = 0 }}{{_ "Nessuna segnalazione da approvare"}}{{/if}}
                 {{#each finesToApprove}}
                    {{> fineToApprove}}
                 {{/each}}
