@@ -2,9 +2,10 @@ Fines = new Mongo.Collection("fines");
 Administrators = new Mongo.Collection("administrators");
 
 function isAdministrator() {
-    var username = "";
+    var username;
 //    console.log("#isAdministrator: " + JSON.stringify(Meteor.user()));
-    
+    console.log("Meteor.user() "+ JSON.stringify(Meteor.user()));
+    console.log("Meteor.userId() "+ Meteor.userId());
     if(Meteor.user()) {
         if( Meteor.user().services.facebook ) {
             username = Meteor.user().services.facebook.email;
@@ -15,8 +16,11 @@ function isAdministrator() {
         //console.log(username);
     }
 
-    var userAdm = Administrators.findOne({username:username});
-
+//    var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
+     var userAdm = Administrators.findOne({username:username});
+   
+//    console.log("userAdm " + JSON.stringify(userAdm)+" looking for "+username);
+   
     if(!userAdm) {
         console.log(username + " is not admin");
        return false;
@@ -85,8 +89,8 @@ Meteor.methods({
             Fines.remove(fineId);
         } else{
             var res = Fines.findOne(fineId);
-            
-            if(res && res.owner == Meteor.userId()) {//se l'utente corrente ha creato la segnalazione può anche rimuoverla
+            console.log("Res.owner:"+res.owner + " - Userid:"+Meteor.userId());
+            if(res && res.owner === Meteor.userId()) {//se l'utente corrente ha creato la segnalazione può anche rimuoverla
                 Fines.remove(fineId);
             } else {
                 console.log("User is not an administrator and does not own the fine: "+ JSON.stringify(Meteor.user().profile.name));

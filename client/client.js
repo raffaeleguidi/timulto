@@ -459,6 +459,25 @@ Template.fineDetails.rendered = function(){
     }
 };
 
+Template.fineDetails.events({
+      "click .delete": function () {
+        Meteor.call("deleteFine", this._id, function(err){
+            if(err)
+                console.log(err);
+            
+            Router.go('/gestioneSegnalazioni');
+        });
+      },
+        "click .thumb-up": function () {
+        Meteor.call("approveFine",this._id, function(err){
+            if(err)
+                console.log(err);
+            
+            Router.go('/gestioneSegnalazioni');
+        });
+      }
+});
+    
 Template.fineDetails.helpers({
     username: function(){
         return Session.get("detailUsername");
@@ -564,15 +583,6 @@ function startupAdmin() {//TODO forse è il caso di usare Tracker
         }
     });
 };
-//    
-//Template.admin.rendered = function() {
-//    if(Session.get("isadmin")) {
-//         $("#adminApproval").show();
-//         startupAdmin();
-//    } else {
-//         $("#adminApproval").hide();
-//    }
-//};
     
 Template.admin.helpers({
     finesToApprove: function() {
@@ -586,25 +596,6 @@ Template.admin.helpers({
         return !Session.get("isadmin");
     }
 });
-
-Template.admin.events({
-      "click .delete": function () {
-//    console.log("click .delete deleting:"+this._id);
-        Meteor.call("deleteFine", this._id, function(err){
-            if(!err)
-                startupAdmin();
-        });
-      },
-        "click .thumb-up": function () {
-//    console.log("click .delete deleting:"+this._id);
-        Meteor.call("approveFine",this._id, function(err){
-            startupAdmin();
-        });
-      }
-});
-    
-    
-    
  //////////////////////////////////////////
  
  //////////////////////////////////////////
