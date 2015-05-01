@@ -1,16 +1,11 @@
 <template name="main">
- 
-    
+
     {{> navbar}}
     
   <div class="section no-pad-bot" id="anonymous-banner">
 
-    <div class="container">
-        <div class="row left">
-          {{#if currentUser}}{{_ "greetings"}},{{/if}}{{> loginButtons}}
-        </div>
-    </div>
-    <br clear="left"/>
+    {{> loginbox}}
+
     <div class="container">
       <div class="row center">
         <div class="row">

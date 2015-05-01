@@ -133,6 +133,11 @@ if (Meteor.isClient) {
   Meteor.subscribe("userData");
 
   Meteor.startup(function(){
+
+      /*$('.navbutton').on("click", function(evt){
+          console.log(evt);
+          $('.button-collapse').sideNav('hide');
+      });*/
 //      console.log(TAPi18n.getLanguage());
       TAPi18n.setLanguage(getUserLanguage())
       .done(function () {

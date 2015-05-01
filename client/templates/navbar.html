@@ -19,12 +19,11 @@
             <ul class="side-nav" id="mobile-demo" style="width: 240px">
                 <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
                 <li class="divider"></li>
-                <li class="bold"><a href="/home">Home</a></li>
-                <li class="bold"><a href="/gestioneSegnalazioni">Gestione segnalazioni</a></li>
-                <li class="bold"><a href="/listaSegnalazioni">Lista segnalazioni</a></li>
+                <li class="bold"><a class="navbutton" onclick="$('.button-collapse').sideNav('hide');" href="/home">Home</a></li>
+                <li class="bold"><a class="navbutton" onclick="$('.button-collapse').sideNav('hide');" href="/gestioneSegnalazioni">{{_ "gestioneSegnalazioni"}}</a></li>
+                <li class="bold"><a class="navbutton"  onclick="$('.button-collapse').sideNav('hide');" href="/listaSegnalazioni">{{_ "listaSegnalazioni"}}</a></li>
                 <!--<li class="bold"><a href="#">Mappa segnalazioni</a></li>-->
-                <li class="bold"><a href="/chisiamo" onclick="$('.button-collapse').sideNav('hide');">Chi siamo</a></li>
-                <li class="bold"><a href="#contactus" onclick="$('.button-collapse').sideNav('hide');">{{_ "contattaci"}}</a></li>
+                <li class="bold"><a class="navbutton" href="/chisiamo" onclick="$('.button-collapse').sideNav('hide');">{{_ "chisiamo"}}</a></li>
                 <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
             </ul>
             
@@ -32,10 +31,9 @@
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
           <ul class="right hide-on-med-and-down">
             <li class="bold"><a href="/home">Home</a></li>
-            <li class="bold"><a href="/gestioneSegnalazioni">Gestione segnalazioni</a></li>
-            <li class="bold"><a href="/listaSegnalazioni">Lista segnalazioni</a></li>
-            <li><a href="/chisiamo">Chi siamo</a></li>
-            <li><a href="#contactus">{{_ "contattaci"}}</a></li>
+            <li class="bold"><a href="/gestioneSegnalazioni">{{_ "gestioneSegnalazioni"}}</a></li>
+            <li class="bold"><a href="/listaSegnalazioni">{{_ "listaSegnalazioni"}}</a></li>
+            <li><a href="/chisiamo">{{_ "chisiamo"}}</a></li>
             <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
           </ul>
           

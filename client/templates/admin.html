@@ -4,14 +4,18 @@
    
     <div class="container" >
       <div class="section">
-        <h5 class="header center blue-text"> Gestisci le segnalazioni!</h5>
-                <table class="striped">
-                    <tbody>
-                        {{#each finesToApprove}} 
-                           {{> fineToApprove}}
-                        {{/each}}
-                    </tbody>
-                </table>
+
+          {{> loginbox}}
+
+        <h5 class="header center blue-text">{{_ "gestioneSegnalazioni"}}</h5>
+        <table class="striped">
+            <tbody>
+                {{#if finesToApprove.length = 0 }}{{_ "Nessuna segnalazione da approvare"}}{{/if}}
+                {{#each finesToApprove}}
+                   {{> fineToApprove}}
+                {{/each}}
+            </tbody>
+        </table>
         </div>
     </div>
     {{> footer}}

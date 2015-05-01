@@ -4,14 +4,38 @@
     
     <div class="container">
         <div class="section">
+
+            {{> loginbox}}
+
             <div class="row">
-                <div class="col l8 s12">
-                    <h5 class="header center blue-text">Chi è TiMulto?</h5>
+                <div>
+                    <h5 class="blue-text">Chi è TiMulto?</h5>
                     <a name="info">
                         <p class="black-text text-lighten-4">Siamo una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Ogni contributo, morale e materiale, è largamente apprezzato.</p>
                     </a>
                 </div>
+                <div>
+                  <h5 class="blue-text">{{_ "contattaci"}}</h5>
+                  <p>Siamo in costante ascolto su tutti i social network. Ci trovi su:</p>
+                  <a name="contactus">
+                      <ul>
+                        <li><a onclick="window.open('https://www.facebook.com/raffaele.guidi', '_system');" href="https://www.facebook.com/raffaele.guidi">Facebook</a></li>
+                        <li><a onclick="window.open('https://twitter.com/raffaeleguidi', '_system');" href="https://twitter.com/raffaeleguidi">Twitter</a></li>
+                        <li><a onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a></li>
+                      </ul>
+                  </a>
+                </div>
             </div>
+            <div class="row">
+        <!--
+                <div class="col l8 s12">
+                  <h5 class="white-text">Chi è TiMulto?</h5>
+                  <a name="info"><p class="grey-text text-lighten-4">Siamo una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Ogni contributo, morale e materiale, è largamente apprezzato.</p></a>
+                </div>
+        -->
+                <div class="col l4 s12">
+                </div>
+              </div>
         </div>
         
        
