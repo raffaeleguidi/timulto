@@ -22,15 +22,29 @@
 <!--              <img class="mini-shot" name="imageData" style="width: 100%; float: center;" width="500" height="500" src="{{imageData}}" /><br />-->
               
               <div class="col s12 m10 l10">
-                 <p class="card-panel orange lighten-4"> {{username}} hai segnalato "{{text}}" in {{address}}.</p>
+                 <p class="card-panel orange lighten-4"> {{username}} ha segnalato "{{text}}" in {{address}}.</p>
               </div>
          <br />
               <div class="col s12 m10 l10">
                   <p class="card-panel orange lighten-4">Tipologia segnalazione: {{category}}</p>
               </div>
+              
+          </div>
+          <div class="row">
+              <div class="col s1 m1 l1">
+                <p class="adminThumb">
+                    <a class="btn-floating orange"><i class="large mdi-action-thumb-up thumb-up"></i></a>
+                </p>
+              </div>
+              <div class="col s1 m1 l1">
+                <p id="{{_id}}">
+                    <a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a>
+                </p>
+              </div>
           </div>
         </div>
     </div>
+    
     {{> footer}}
 </template>
 
@@ -39,6 +53,7 @@
     <tr>
         <td><span class="text">{{username}}: {{category}} - {{text}}, in {{address}}. Approved:{{approved}}</span></td>
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+<!--
         <td>
             <p class="adminThumb">
                 <a class="btn-floating orange"><i class="large mdi-action-thumb-up thumb-up"></i></a>
@@ -49,6 +64,7 @@
                 <a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a>
             </p>
         </td>
+-->
     </tr>
 </template>
 

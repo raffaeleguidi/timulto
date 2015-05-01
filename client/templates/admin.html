@@ -6,17 +6,25 @@
         {{> loginbox}}
     </div>
 
-    <div class="container" >
-      <div class="section">
+    <div class="container">
+        <div class="section">
+            <div class="row" id="adminApproval" hidden="{{hide}}">
+                <h5 class="header center blue-text">{{_ "gestioneSegnalazioni"}}</h5>
+                <table class="striped">
+                    <tbody>
+                        {{#each finesToApprove}} {{> fineToApprove}} {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <h5 class="header center blue-text">{{_ "ultimeSegnalazioni"}}</h5>
+            <table class="striped">
+                <tbody>
+                    {{#each latestFines}} {{> foundfine}} {{/each}}
+                </tbody>
+            </table>
 
-        <h5 class="header center blue-text">{{_ "gestioneSegnalazioni"}}</h5>
-        <table class="striped">
-            <tbody>
-                {{#each finesToApprove}}
-                   {{> fineToApprove}}
-                {{/each}}
-            </tbody>
-        </table>
         </div>
     </div>
     {{> footer}}

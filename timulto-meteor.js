@@ -131,17 +131,17 @@ Meteor.methods({
             {_id:1});
         
         var finalResult = new Array();
-        var curEl = null;
+//        var curEl = null;
         var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
 
         if(cursor){
             cursor.forEach(function (doc) {
 //                console.log(doc._id + ":" + doc.createdAt);
 
-                curEl = Fines.findOne({_id:doc._id});
-                console.log(curEl._id+":"+curEl.createdAt+", user:"+curEl.username+",approved:"+curEl.approved);
-                if(curEl && ((curEl.approved == 1 ) || curEl.username ==  currentUsername)){
-                    finalResult.push(curEl);
+//                curEl = Fines.findOne({_id:doc._id});
+                if(doc && ((doc.approved == 1 ) || doc.username ==  currentUsername)){
+                    console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
+                    finalResult.push(doc);
                 }
             });
         }
@@ -163,17 +163,17 @@ Meteor.methods({
         var cursor = Fines.find({},{ sort:{createdAt:-1}});
         
         var finalResult = new Array();
-        var curEl = null;
+//        var curEl = null;
         var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
 
         if(cursor){
             cursor.forEach(function (doc) {
 //                console.log(doc._id + ":" + doc.createdAt);
 
-                curEl = Fines.findOne({_id:doc._id});
-                console.log(curEl._id+":"+curEl.createdAt+", user:"+curEl.username+",approved:"+curEl.approved);
-                if(curEl && ((curEl.approved == 1 ) || curEl.username ==  currentUsername)){
-                    finalResult.push(curEl);
+//                curEl = Fines.findOne({_id:doc._id});
+                if(doc && (doc.approved == 1 )){// || doc.username ===  currentUsername)){
+                    console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
+                    finalResult.push(doc);
                 }
             });
         }

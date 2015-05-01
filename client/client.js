@@ -132,6 +132,31 @@ if (Meteor.isClient) {
   Meteor.subscribe("fines");
   Meteor.subscribe("userData");
 
+    
+    var userWasLoggedIn = false;
+    Deps.autorun(function (c) {
+        if(!Meteor.userId())
+        {
+            if(userWasLoggedIn)
+            {
+                console.log('Clean up');
+                Session.set('isadmin', false);
+            }
+        }
+        else
+        {
+            Meteor.call("isAdministrator", function (error, result) {
+            if (error) {
+                console.log("Error occurred: " + error);
+                Session.set("isadmin",false);
+            }
+            // console.log("check is administrator:"+result);
+            Session.set("isadmin",result);
+            });
+            userWasLoggedIn = true;
+        }
+    });
+    
   Meteor.startup(function(){
 
       /*$('.navbutton').on("click", function(evt){
@@ -158,14 +183,14 @@ if (Meteor.isClient) {
       
       //T9n.setLanguage('it');//Set language
       
-      Meteor.call("isAdministrator", function (error, result) {
-            if (error) {
-                console.log("Error occurred: " + error);
-                Session.set("isadmin",false);
-            }
-            // console.log("check is administrator:"+result);
-            Session.set("isadmin",result);
-      });
+//      Meteor.call("isAdministrator", function (error, result) {
+//            if (error) {
+//                console.log("Error occurred: " + error);
+//                Session.set("isadmin",false);
+//            }
+//            // console.log("check is administrator:"+result);
+//            Session.set("isadmin",result);
+//      });
   });
  
     
@@ -426,6 +451,12 @@ Template.fineDetails.rendered = function(){
         context.drawImage(imageObj, 0, 0,500,500);//,600,600);
       };
       imageObj.src = Session.get("detailImageData");
+    
+     if(Session.get("isadmin")) {
+         $(".adminThumb").show();
+    } else {
+         $(".adminThumb").hide();
+    }
 };
 
 Template.fineDetails.helpers({
@@ -513,6 +544,16 @@ Template.fineToApprove.events({
 function startupAdmin() {//TODO forse è il caso di usare Tracker
     //Se admin restituisci tutti  i fine non approvati
     //Se utente normale restituisci tutti i fine dell'utente non ancora approvati
+    if(!Session.get("isadmin")){
+     Meteor.call("isAdministrator", function (error, result) {
+            if (error) {
+                console.log("Error occurred: " + error);
+                Session.set("isadmin",false);
+            }
+            // console.log("check is administrator:"+result);
+            Session.set("isadmin",result);
+      });
+    }
      Meteor.call("findFinesByApproval", false, function (error, result) {
         if (error || !result) {
             console.log("Error in searching not approved fines." + error);
@@ -523,14 +564,26 @@ function startupAdmin() {//TODO forse è il caso di usare Tracker
         }
     });
 };
-    
-Template.admin.rendered = function() {
-   startupAdmin();
-};
+//    
+//Template.admin.rendered = function() {
+//    if(Session.get("isadmin")) {
+//         $("#adminApproval").show();
+//         startupAdmin();
+//    } else {
+//         $("#adminApproval").hide();
+//    }
+//};
     
 Template.admin.helpers({
     finesToApprove: function() {
-        return Session.get("finesToApprove");             
+        return Fines.find({approved:0}, {sort: {createdAt: -1}});            
+    },
+    latestFines: function() {
+        return Fines.find({approved:1}, {sort: {createdAt: -1}});
+//        return Session.get("latestFines");
+    },
+    hide:function(){
+        return !Session.get("isadmin");
     }
 });
 
