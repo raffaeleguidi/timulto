@@ -24,7 +24,70 @@
                 }
             });
         });
+        
+        function isAdministrator() {
+            var username;
+            //    console.log("#isAdministrator: " + JSON.stringify(Meteor.user()));
+            //    console.log("Meteor.user() "+ JSON.stringify(Meteor.user()));
+            //    console.log("Meteor.userId() "+ Meteor.userId());
+            if (Meteor.user()) {
+                if (Meteor.user().services.facebook) {
+                    username = Meteor.user().services.facebook.email;
+                } else if (Meteor.user().services.twitter) {
+                    username = Meteor.user().services.twitter.screenName;
+                }
+                //console.log(username);
+            }
+
+            //    var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
+            var userAdm = Administrators.findOne({
+                username: username
+            });
+
+            //    console.log("userAdm " + JSON.stringify(userAdm)+" looking for "+username);
+
+            if (!userAdm) {
+                console.log(username + " is not admin");
+                return false;
+            } else {
+                console.log(username + " is  admin!!!!");
+                return true;
+            }
+        };
+        
         Meteor.methods({
+//            isAdministrator: function () {
+//                return isAdministrator();
+//            },
+            approveFine: function (fineId) {
+
+                if (isAdministrator()) {
+                    Fines.update({
+                        "_id": fineId
+                    }, {
+                        $set: {
+                            "approved": 1
+                        }
+                    });
+                } else {
+                    console.log("User is not an administrator: " + JSON.stringify(Meteor.user().profile.name));
+                }
+            },
+            deleteFine: function (fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin o l'utente corrente "possiede" il fine
+
+                if(isAdministrator()) { //Se amministratore, è possibile rimuovere la segnalazione
+                    console.log("removing fine " + fineId);
+                    Fines.remove(fineId);
+                } else{
+                    var res = Fines.findOne(fineId);
+                    console.log("Res.owner:"+res.owner + " - Userid:"+Meteor.userId());
+                    if(res && res.owner === Meteor.userId()) {//se l'utente corrente ha creato la segnalazione può anche rimuoverla
+                        Fines.remove(fineId);
+                    } else {
+                        console.log("User is not an administrator and does not own the fine: "+ JSON.stringify(Meteor.user().profile.name));
+                    }
+                }
+            },
             reverseGeocode: function (lat, lon) {
                 this.unblock();
                 try {

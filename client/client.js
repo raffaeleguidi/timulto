@@ -460,7 +460,8 @@ Template.fineDetails.rendered = function(){
 
 Template.fineDetails.events({
       "click .delete": function () {
-        Meteor.call("deleteFine", this._id, function(err){
+//          console.log("id da cancellare " + Session.get("_id"));
+        Meteor.call("deleteFine", Session.get("_id"), function(err){
             if(err)
                 console.log(err);
             
@@ -468,7 +469,7 @@ Template.fineDetails.events({
         });
       },
         "click .thumb-up": function () {
-        Meteor.call("approveFine",this._id, function(err){
+        Meteor.call("approveFine",Session.get("_id"), function(err){
             if(err)
                 console.log(err);
             
@@ -480,6 +481,10 @@ Template.fineDetails.events({
 Template.fineDetails.helpers({
     username: function(){
         return Session.get("detailUsername");
+    },
+    _id:function(){
+//        console.log("retrieving id from session:"+Session.get("_id"));
+        return Session.get("_id");
     },
     text: function(){
         return Session.get("detailText");
@@ -534,6 +539,7 @@ Template.fineToApprove.helpers({
 Template.fineToApprove.events({
     "click .mini-shot":function(){
         console.log("clicked " + this._id);
+        Session.set("_id", this._id);
         Session.set("detailUsername", this.username);
         Session.set("detailText",this.text);
         Session.set("detailAddress",this.address);
