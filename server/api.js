@@ -54,7 +54,7 @@ Restivus.addRoute('token/:message', {authRequired: false}, {
 Restivus.addRoute('fines/:service', {authRequired: false}, {
     get: function () {
 
-      var check = CryptoJS.HmacMD5(
+      /*var check = CryptoJS.HmacMD5(
                 this.request.headers.timestamp + '#' +
                 this.request.headers.app + '#' +
                 this.urlParams.service,
@@ -65,7 +65,7 @@ Restivus.addRoute('fines/:service', {authRequired: false}, {
       if (this.request.headers.token != check) return {
         statusCode: 401,
         body: {status: 'unauthorized', message: 'Token is not correct'}
-      };
+      };*/
 
       var filter = {}; filter[this.urlParams.service] = null;
       var fines = findFinesFor(filter);
@@ -82,7 +82,7 @@ Restivus.addRoute('fines/:service', {authRequired: false}, {
 Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
     post: function () {
 
-        var check = CryptoJS.HmacMD5(
+        /*var check = CryptoJS.HmacMD5(
                     this.request.headers.timestamp + '#' +
                     this.request.headers.app + '#' +
                     this.urlParams.service + '#' +
@@ -94,7 +94,7 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
         if (this.request.headers.token != check) return {
             statusCode: 401,
             body: {status: 'unauthorized', message: 'Token is not correct'}
-        };
+        };*/
 
         var filter = {}; filter[this.urlParams.service] = this.bodyParams.postId;
         var updatedCount = Fines.update({_id: this.urlParams.id, approved: 1}, {$set: filter});
