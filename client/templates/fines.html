@@ -15,29 +15,22 @@
       <div class="section">
         <h5 class="header center blue-text">Dettaglio segnalazione</h5>
           <div class="row">
-              <div class="col s12 m10 l10">
+              <div>
                   <canvas id="myCanvas" style="width: 100%; float: center" width="500" height="500"></canvas>
               </div>
    
 <!--              <img class="mini-shot" name="imageData" style="width: 100%; float: center;" width="500" height="500" src="{{imageData}}" /><br />-->
               
-              <div class="col s12 m10 l10">
-                 <p class="card-panel orange lighten-4"> {{username}} ha segnalato "{{text}}" in {{address}}.</p>
-              </div>
-         <br />
-              <div class="col s12 m10 l10">
-                  <p class="card-panel orange lighten-4">Tipologia segnalazione: {{category}}</p>
+              <div>
+                 <p class="card-panel orange lighten-4"> {{username}} ha segnalato "{{text}}" in {{address}}. Tipologia segnalazione: {{category}}</p>
               </div>
               
           </div>
           <div class="row center">
-              <div class="col s2 offset-s4 m1 offset-m4 l1 offset-l4">
+              <div>
                 <p class="adminThumb">
                     <a class="btn-floating orange"><i class="large mdi-action-thumb-up thumb-up"></i></a>
-                </p>
-              </div>
-              <div class="col s2 m1 l1 ">
-                <p id="{{_id}}">
+                &nbsp;
                     <a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a>
                 </p>
               </div>
