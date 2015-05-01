@@ -299,13 +299,13 @@ Template.navbar.events({
     });
     
     Template.main.events({
-      "click #getScreenName":function(){
-//        Meteor.call("getUserScreenName",function(err,res){
-//            console.log("In client:" + JSON.stringify(res));
-//        });
-          console.log(Meteor.user().services.twitter.screenName);
-          console.log(Meteor.user().services.twitter.profile_image_url);
-      },
+//      "click #getScreenName":function(){
+////        Meteor.call("getUserScreenName",function(err,res){
+////            console.log("In client:" + JSON.stringify(res));
+////        });
+//          console.log(Meteor.user().services.twitter.screenName);
+//          console.log(Meteor.user().services.twitter.profile_image_url);
+//      },
         "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
@@ -620,6 +620,7 @@ Template.admin.helpers({
     
  //////////////////////////////////////////
  ///////// cercaSegnalazioni //////////////
+
 Template.listaSegnalazioni.helpers({
     foundfines: function () {
         return Session.get("foundfines");

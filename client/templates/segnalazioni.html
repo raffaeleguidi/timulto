@@ -2,9 +2,11 @@
 
     {{> navbar}}
 
+<!--
     <div class="section no-pad-bot">
         {{> loginbox}}
     </div>
+-->
 
     <div class="container">
         <div class="section">
@@ -21,7 +23,8 @@
             <h5 class="header center blue-text">{{_ "Segnalazioni recenti"}}</h5>
             <table class="striped">
                 <tbody>
-                    {{#each latestFines}} {{> foundfine}} {{/each}}
+                    {{#each latestFines}} {{> fineToApprove}} {{/each}}
+<!--                    {{#each latestFines}} {{> foundfine}} {{/each}}-->
                 </tbody>
             </table>
 
