@@ -3,8 +3,9 @@ App.info({
   name: 'timulto',
   description: 'Delazione e senso civico',
   author: 'TiMulto.it',
-  email: 'raffaele.p.guidi@gmail.com',
-  website: 'http://timulto.meteor.com'
+  email: 'info@timulto.org',
+  website: 'http://www.timulto.org',
+  version: '0.0.2'
 });
 
 App.launchScreens({
