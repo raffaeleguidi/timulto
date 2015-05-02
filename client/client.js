@@ -445,19 +445,19 @@ Template.fineDetails.rendered = function(){
         context.drawImage(imageObj, 0, 0,350,350);//,600,600);
       };
       imageObj.src = Session.get("detailImageData");
-    
-     if(Session.get("isadmin") && !Session.get("isapproved")) {
+      console.log('isadmin' + Session.get("isadmin"));
+     /* if(Session.get("isadmin") && !Session.get("isapproved")) {
          $(".adminThumb").show();
-    } else {
+      } else {
          $(".adminThumb").hide();
-    }
+      }*/
 };
 
 Template.fineDetails.events({
     
     "click #myCanvas": function (event) {
-        if(Session.get("isadmin") && !Session.get("isapproved")){
-           drawLogo('myCanvas', event.offsetX, event.offsetY);
+        if(Session.get("isadmin")/* && !Session.get("isapproved")*/){
+           //drawLogo('myCanvas', event.offsetX, event.offsetY);
         }
      },
       "click .delete": function () {
@@ -601,6 +601,10 @@ function startupAdmin() {//TODO forse è il caso di usare Tracker
     
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('MM/DD/YYYY hh:mm');
+});
+
+Template.registerHelper('isadmin', function() {
+    return Session.get("isadmin");
 });
 
 Template.admin.helpers({

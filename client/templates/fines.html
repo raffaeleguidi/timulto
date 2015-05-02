@@ -2,7 +2,7 @@
 <template name="fine">
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span class="text">Tipologia: {{category}} - {{text}}, in {{address}}</span></td>
+      <td><span class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
       <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>-->
     </td>
   </tr>
@@ -27,6 +27,8 @@
               </div>
               
           </div>
+
+         {{#if isadmin}}
           <div class="row center">
               <div>
                 <p class="adminThumb">
@@ -36,6 +38,7 @@
                 </p>
               </div>
           </div>
+          {{/if}}
         </div>
     </div>
     
@@ -47,6 +50,8 @@
     <tr>
         <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td><!--            Approved:{{approved}}</span></td>-->
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+
+
 <!--
         <td>
             <p class="adminThumb">
