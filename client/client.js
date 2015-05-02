@@ -84,8 +84,8 @@ function takePhoto() {
         
 }
 
-function drawLogo(offsetX, offsetY) {
-    var canvas = document.getElementById('canvas');
+function drawLogo(canvasId,offsetX, offsetY) {
+    var canvas = document.getElementById(canvasId);
     var context = canvas.getContext('2d');
     var imageObj = new Image();
 
@@ -354,7 +354,7 @@ Template.navbar.events({
             if (!photoTaken) {
                 takePhoto();
             } else {
-                drawLogo(event.offsetX, event.offsetY);
+                drawLogo('canvas',event.offsetX, event.offsetY);
             }
     }
     
@@ -409,7 +409,7 @@ Template.navbar.events({
         if (!photoTaken) {
             takePhoto();
         } else {
-            drawLogo(event.offsetX, event.offsetY);
+            drawLogo('canvas', event.offsetX, event.offsetY);
         }
     },
 
@@ -442,11 +442,11 @@ Template.fineDetails.rendered = function(){
       var imageObj = new Image();
 
       imageObj.onload = function() {
-        context.drawImage(imageObj, 0, 0,500,500);//,600,600);
+        context.drawImage(imageObj, 0, 0,350,350);//,600,600);
       };
       imageObj.src = Session.get("detailImageData");
     
-     if(Session.get("isadmin")) {
+     if(Session.get("isadmin") && !Session.get("isapproved")) {
          $(".adminThumb").show();
     } else {
          $(".adminThumb").hide();
@@ -454,6 +454,12 @@ Template.fineDetails.rendered = function(){
 };
 
 Template.fineDetails.events({
+    
+    "click #myCanvas": function (event) {
+        if(Session.get("isadmin") && !Session.get("isapproved")){
+           drawLogo('myCanvas', event.offsetX, event.offsetY);
+        }
+     },
       "click .delete": function () {
 //          console.log("id da cancellare " + Session.get("_id"));
         Meteor.call("deleteFine", Session.get("_id"), function(err){
@@ -480,6 +486,9 @@ Template.fineDetails.helpers({
     _id:function(){
 //        console.log("retrieving id from session:"+Session.get("_id"));
         return Session.get("_id");
+    },
+    isapproved:function() {
+        return Session.get("isapproved");
     },
     text: function(){
         return Session.get("detailText");
@@ -525,7 +534,6 @@ Template.fineToApprove.rendered = function() {
 }
 
 Template.fineToApprove.helpers({
-
     isadmin:function() {
         return Session.get("isadmin");
     }
@@ -540,6 +548,7 @@ Template.fineToApprove.events({
         Session.set("detailAddress",this.address);
         Session.set("detailCategory",this.category);
         Session.set("detailImageData",this.imageData);
+        Session.set("isapproved", (this.approved==1?true:false));
         
         Router.go('/dettaglioSegnalazione');
     }

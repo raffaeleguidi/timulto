@@ -65,14 +65,18 @@ Meteor.methods({
 //          throw new Meteor.Error("cannot insert empty fine.");
 //        
 //        }
-
+        var approved = 0;
+        
+        if(isAdministrator()){
+            approved = 1; 
+        }
         Fines.insert({
           text: text,
           address: address,
           city:city,
           loc:{type:"Point",coordinates:[parseFloat(lng),parseFloat(lat)]},
           category: category,
-          approved:0,
+          approved:approved,
           imageData: imageData,
           owner: Meteor.userId(),
           username: Meteor.user().profile.name,
