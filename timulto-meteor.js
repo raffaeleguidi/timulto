@@ -61,10 +61,10 @@ Meteor.methods({
           throw new Meteor.Error("not-authorized");
         }
         
-        if(!text || text === "" || !address || address === "" || !category || category === "" || !imageData || imageData === "") {
-          throw new Meteor.Error("cannot insert empty fine.");
-        
-        }
+//        if( !address || address === "" || !category || category === "" || !imageData || imageData === "") {
+//          throw new Meteor.Error("cannot insert empty fine.");
+//        
+//        }
 
         Fines.insert({
           text: text,
