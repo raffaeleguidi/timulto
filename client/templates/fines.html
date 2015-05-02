@@ -22,7 +22,8 @@
 <!--              <img class="mini-shot" name="imageData" style="width: 100%; float: center;" width="500" height="500" src="{{imageData}}" /><br />-->
               
               <div>
-                 <p class="card-panel orange lighten-4"> {{username}} ha segnalato "{{text}}" in {{address}}. Tipologia segnalazione: {{category}}</p>
+                 <p class="card-panel orange lighten-4"> {{username}} ha segnalato "{{text}}" in {{address}}. </p>
+<!--                  Tipologia segnalazione: {{category}}-->
               </div>
               
           </div>
@@ -44,7 +45,7 @@
 <template name="fineToApprove">
     
     <tr>
-        <td><span id="{{_id}}" class="text">{{username}}: {{category}} - {{text}}, in {{address}}. Approved:{{approved}}</span></td>
+        <td><span id="{{_id}}" class="text">{{username}}: {{category}} - {{text}}, in {{address}}.</span></td><!--            Approved:{{approved}}</span></td>-->
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
 <!--
         <td>

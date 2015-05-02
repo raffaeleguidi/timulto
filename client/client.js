@@ -69,7 +69,6 @@ function takePhoto() {
 
     MeteorCamera.getPicture({ width: 800, height: 600, correctOrientation: true }, function(error, data) {
         context.clearRect(0, 0, canvas.width, canvas.height);
-        geocode();
         if (data) {
             photoTaken = true;
             fitImageInCanvas(data, canvas)
@@ -81,6 +80,8 @@ function takePhoto() {
             resetPicture();
         }
     });
+    geocode();
+        
 }
 
 function drawLogo(offsetX, offsetY) {
@@ -107,6 +108,7 @@ function geocode() {
         if (coords.lat && coords.lng) {
             Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
                 Session.set("address", results.address + ' - ' + results.postcode + ' ' + results.city);
+                Session.set("city",results.city);
             });
         }
     } catch(err) {
@@ -153,6 +155,7 @@ if (Meteor.isClient) {
             Session.set("isadmin",result);
             });
             userWasLoggedIn = true;
+            geocode();
         }
     });
     
@@ -246,7 +249,7 @@ Template.navbar.events({
     
     Template.main.rendered = function(){
         resetPicture();
-
+        geocode();
     };
     
     Template.main.helpers({
@@ -299,13 +302,6 @@ Template.navbar.events({
     });
     
     Template.main.events({
-//      "click #getScreenName":function(){
-////        Meteor.call("getUserScreenName",function(err,res){
-////            console.log("In client:" + JSON.stringify(res));
-////        });
-//          console.log(Meteor.user().services.twitter.screenName);
-//          console.log(Meteor.user().services.twitter.profile_image_url);
-//      },
         "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
@@ -320,7 +316,7 @@ Template.navbar.events({
         var canvas = document.getElementById('canvas');
         //var imageData = $("#imgdata").val();
         var imageData = canvas.toDataURL();
-
+//console.log("save fine. t:" + text + ", a:"+address+", city:"+city+",lat:"+lat+",lon:"+lng+",cat:"+category);
         Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
 
         // Clear form
@@ -336,7 +332,6 @@ Template.navbar.events({
         $('body').scrollTop(0);
         Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
         resetPicture();
-
         // Prevent default form submit (just in case)
         return false;
     },
@@ -638,11 +633,7 @@ Template.listaSegnalazioni.events({
         var filter = $("input[type='radio'][name='group1']:checked").val();
         
         var coords = Geolocation.latLng();
-//        var lat = $("#lat").val();
-//        var lon = $("#lng").val();
-        
-        
-        console.log("coords:" + JSON.stringify(coords));
+//        console.log("coords:" + JSON.stringify(coords));
         var maxD = $("#maxD").val()?$("#maxD").val():1000;
         var minD = $("#minD").val()?$("#minD").val():0;
         var lat = coords.lat;
@@ -686,12 +677,17 @@ Template.listaSegnalazioni.events({
     
     Template.finesmap.helpers({
         finesMapOptions: function () {
+            
+            var coords = Geolocation.latLng();
+            var lat = coords.lat;
+            var lon = coords.lng;
+            
             // Make sure the maps API has loaded
             if (GoogleMaps.loaded()) {
                 // Map initialization options
-                console.log("map init");
+//                console.log("map init");
                 return {
-                    center: new google.maps.LatLng(41.901556, 12.502005),
+                    center: new google.maps.LatLng(lat, lon),
                     zoom: 11
                 };
             }
@@ -700,38 +696,39 @@ Template.listaSegnalazioni.events({
     
     Template.finesmap.onCreated(function() {
         
-  // We can use the `ready` callback to interact with the map API once the map is ready.
-  GoogleMaps.ready('finesMap', function(map) {
-      var theFinesCursor = Fines.find({approved:1});
-      
-      theFinesCursor.forEach(function(fine){
-          console.log(JSON.stringify( fine.loc));
-          if(fine.loc.coordinates[0] != 0.0 && fine.loc.coordinates[1] != 0.0) {
-              var myCenter = new google.maps.LatLng(fine.loc.coordinates[1], fine.loc.coordinates[0]);
-              var marker = new google.maps.Marker({
-                  position: myCenter,
-                  icon:'icon_20X20.png'
-              });
-              
-              var infowindow = new google.maps.InfoWindow({
-                    content:fine.city + ".<br/>Segnalato da "+fine.username+" in "+fine.address
-              });
+      // We can use the `ready` callback to interact with the map API once the map is ready.
+      GoogleMaps.ready('finesMap', function(map) {
+          
+        var theFinesCursor = Fines.find({approved:1});
 
-                google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.open(map.instance,marker);
-              });
-              
-              marker.setMap(map.instance);
-          }
-            
+        theFinesCursor.forEach(function (fine) {
+            console.log(JSON.stringify(fine.loc));
+            if (fine.loc.coordinates[0] != 0.0 && fine.loc.coordinates[1] != 0.0) {
+                var myCenter = new google.maps.LatLng(fine.loc.coordinates[1], fine.loc.coordinates[0]);
+                var marker = new google.maps.Marker({
+                    position: myCenter,
+                    icon: 'icon_20X20.png'
+                });
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: fine.city + ".<br/>Segnalato da " + fine.username + " in " + fine.address
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map.instance, marker);
+                });
+
+                marker.setMap(map.instance);
+            }
+
+        });
+
+        // Add a marker to the map once it's ready
+        var marker = new google.maps.Marker({
+          position: map.options.center,
+          map: map.instance
+        });
       });
-      
-    // Add a marker to the map once it's ready
-    var marker = new google.maps.Marker({
-      position: map.options.center,
-      map: map.instance
-    });
-  });
 });
     //////////////////////////////////////////
     // At the bottom of the client code
