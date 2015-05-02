@@ -480,6 +480,9 @@ Template.fineDetails.events({
 });
     
 Template.fineDetails.helpers({
+    createdAt: function(){
+        return Session.get("createdAt");
+    },
     username: function(){
         return Session.get("detailUsername");
     },
@@ -545,6 +548,7 @@ Template.fineToApprove.events({
     "click .mini-shot":function(){
         console.log("clicked " + this._id);
         Session.set("_id", this._id);
+        Session.set("createdAt", this.createdAt);
         Session.set("detailUsername", this.username);
         Session.set("detailText",this.text);
         Session.set("detailAddress",this.address);
@@ -595,6 +599,10 @@ function startupAdmin() {//TODO forse è il caso di usare Tracker
     });
 };
     
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('MM/DD/YYYY hh:mm');
+});
+
 Template.admin.helpers({
     finesToApprove: function() {
         return Fines.find({approved:0}, {sort: {createdAt: -1}});            

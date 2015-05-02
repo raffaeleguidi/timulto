@@ -22,7 +22,7 @@
 <!--              <img class="mini-shot" name="imageData" style="width: 100%; float: center;" width="500" height="500" src="{{imageData}}" /><br />-->
               
               <div>
-                 <p class="card-panel orange lighten-4">{{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
+                 <p class="card-panel orange lighten-4">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
 <!--                  Tipologia segnalazione: {{category}}-->
               </div>
               
@@ -45,7 +45,7 @@
 <template name="fineToApprove">
     
     <tr>
-        <td><span id="{{_id}}" class="text">{{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td><!--            Approved:{{approved}}</span></td>-->
+        <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td><!--            Approved:{{approved}}</span></td>-->
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
 <!--
         <td>
@@ -65,6 +65,6 @@
 <template name="foundfine">
   <tr>
       <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span id="{{_id}}" class="text">{{createdAt}} - Da {{username}}: {{category}} - {{text}}, in {{address}}</span></td>
+      <td><span id="{{_id}}" class="text">{{formatDate createdAt}} - Da {{username}}: {{category}} - {{text}}, in {{address}}</span></td>
   </tr>
 </template>
