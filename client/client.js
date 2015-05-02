@@ -500,8 +500,10 @@ Template.fineDetails.helpers({
         return Session.get("detailCategory");
     },
     imageData: function(){
-
         return Session.get("detailImageData");
+    },
+    isadmin: function() {
+        return Session.get("isadmin");
     }
 });
     

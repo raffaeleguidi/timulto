@@ -14,7 +14,7 @@
     <div class="container">
       <div class="section">
         <h5 class="header center blue-text">Dettaglio segnalazione</h5>
-          <div class="row">
+          <div class="row center">
               <div>
                   <canvas id="myCanvas" style="width: 100%; float: center" width="400" height="400"></canvas>
               </div>
@@ -22,7 +22,7 @@
 <!--              <img class="mini-shot" name="imageData" style="width: 100%; float: center;" width="500" height="500" src="{{imageData}}" /><br />-->
               
               <div>
-                 <p class="card-panel orange lighten-4"> {{username}} ha segnalato "{{text}}" in {{address}}. </p>
+                 <p class="card-panel orange lighten-4">{{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
 <!--                  Tipologia segnalazione: {{category}}-->
               </div>
               
@@ -45,7 +45,7 @@
 <template name="fineToApprove">
     
     <tr>
-        <td><span id="{{_id}}" class="text">{{username}}: {{category}} - {{text}}, in {{address}}.</span></td><!--            Approved:{{approved}}</span></td>-->
+        <td><span id="{{_id}}" class="text">{{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td><!--            Approved:{{approved}}</span></td>-->
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
 <!--
         <td>
