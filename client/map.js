@@ -47,7 +47,7 @@ Template.finesmap.onCreated(function () {
         });
 
         theFinesCursor.forEach(function (fine) {
-            console.log(JSON.stringify(fine.loc));
+//            console.log(JSON.stringify(fine.loc));
             if (fine.loc.coordinates[0] != 0.0 && fine.loc.coordinates[1] != 0.0) {
                 var myCenter = new google.maps.LatLng(fine.loc.coordinates[1], fine.loc.coordinates[0]);
                 var marker = new google.maps.Marker({
