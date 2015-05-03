@@ -75,7 +75,7 @@ if (Meteor.isClient) {
 
       Session.set("foundfines",[]);
       Session.set("finesToApprove",[]);
-      
+      Meteor.photoHandling.resetPicture();
       //T9n.setLanguage('it');//Set language
       
 //      Meteor.call("isAdministrator", function (error, result) {
@@ -244,7 +244,8 @@ Template.navbar.events({
             Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
-            if (!Meteor.photoHandling.photoTaken) {
+        console.log("photo has been taken? "+Meteor.photoHandling.photoTaken());
+            if (!Meteor.photoHandling.photoTaken()) {
                 Meteor.photoHandling.takePhoto();
             } else {
                 Meteor.photoHandling.drawLogo('canvas',event.offsetX, event.offsetY);
@@ -299,7 +300,8 @@ Template.navbar.events({
         Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
-        if (!Meteor.photoHandling.photoTaken) {
+        console.log("photo has been taken? "+Meteor.photoHandling.photoTaken());
+        if (!Meteor.photoHandling.photoTaken()) {
             Meteor.photoHandling.takePhoto();
         } else {
             Meteor.photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
