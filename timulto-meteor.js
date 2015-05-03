@@ -186,7 +186,7 @@ Meteor.methods({
 if(Meteor.isCordova){
     Meteor.startup(function(){
         document.addEventListener("backbutton", function() {
-            if (
+            /*if (
                 document.location.pathname == "/chisiamo" ||
                 document.location.pathname == "/mappaSegnalazioni" ||
                 document.location.pathname == "/gestioneSegnalazioni"
@@ -196,25 +196,21 @@ if(Meteor.isCordova){
                     document.location.pathname = "/gestioneSegnalazioni";
             } else if ( document.location.pathname == "/" || document.location.pathname == "/home") {
                    navigator.app.exitApp();
-            };
-            /*if (document.location.pathname == "/" || document.location.pathname == "/home"){
+            };*/
+            if (document.location.pathname == "/" || document.location.pathname == "/home"){
                 navigator.app.exitApp();
             } else {
-                if (document.location.pathname == "/mappaSegnalazioni") {
-                    document.location.pathname ="/";
-                } else {
-                    history.go(-1);
-                }
-            }*/
+                history.go(-1);
+            };
         });
 
-        window.onpopstate = function () {
+        /*window.onpopstate = function () {
             if (history.state && history.state.initial === true){
                 navigator.app.exitApp();
 
                 //or to suspend meteor add cordova:org.android.tools.suspend@0.1.2
                 //window.plugins.Suspend.suspendApp();
             }
-        };
+        };*/
     });
 }
