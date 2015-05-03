@@ -1,5 +1,4 @@
-//var blank = "splash.png";
-//var photoTaken = false;
+
 var help = new Array();
 
 
@@ -245,7 +244,7 @@ Template.navbar.events({
             Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
-            if (!photoTaken) {
+            if (!Meteor.photoHandling.photoTaken) {
                 Meteor.photoHandling.takePhoto();
             } else {
                 Meteor.photoHandling.drawLogo('canvas',event.offsetX, event.offsetY);
@@ -300,7 +299,7 @@ Template.navbar.events({
         Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
-        if (!photoTaken) {
+        if (!Meteor.photoHandling.photoTaken) {
             Meteor.photoHandling.takePhoto();
         } else {
             Meteor.photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
