@@ -45,13 +45,10 @@
     {{> footer}}
 </template>
 
-<template name="fineToApprove">
-    
+<template name="fineToApprove">    
     <tr>
-        <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td><!--            Approved:{{approved}}</span></td>-->
+        <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-
-
 <!--
         <td>
             <p class="adminThumb">

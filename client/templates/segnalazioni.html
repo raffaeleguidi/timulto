@@ -21,15 +21,17 @@
             </div>
         </div>
         {{/if}}
-        <div class="row">
-            <h5 class="header center blue-text">{{_ "Segnalazioni recenti"}}</h5>
-            <table class="striped">
-                <tbody>
+        <div class="section">
+            <div class="row">
+                <h5 class="header center blue-text">{{_ "Segnalazioni recenti"}}</h5>
+                <table class="striped">
+                    <tbody>
 
-                    {{#each latestFines}} {{> fineToApprove}} {{/each}}
-<!--                    {{#each latestFines}} {{> foundfine}} {{/each}}-->
-                </tbody>
-            </table>
+                        {{#each latestFines}} {{> fineToApprove}} {{/each}}
+    <!--                    {{#each latestFines}} {{> foundfine}} {{/each}}-->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     {{> footer}}

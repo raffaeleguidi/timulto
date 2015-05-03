@@ -511,31 +511,28 @@ Template.fineDetails.helpers({
 });
     
 Template.fineToApprove.rendered = function() {
-    if(Session.get("isadmin")) {
-         $(".adminThumb").show();
-    } else {
-         $(".adminThumb").hide();
-    }
+//    if(Session.get("isadmin")) {
+//         $(".adminThumb").show();
+//    } else {
+//         $(".adminThumb").hide();
+//    }
     
-    Meteor.call("isOwner", this.data._id, function (err, isOwner) {
-        var isAdmin = Session.get("isadmin");
-        if (err) {
-            if(isAdmin) {
-                $("#"+isOwner._id).show();
-            }else{
-                $("#"+isOwner._id).hide();
-            }
-        } else {
-//                console.log(isOwner);
-            if(isOwner.result || isAdmin) {
-//                    console.log("Showing " + isOwner._id);
-                $("#"+isOwner._id).show();
-            } else {
-//                    console.log("Hiding " + isOwner._id);
-                $("#"+isOwner._id).hide();
-            }
-        }
-    });
+//    Meteor.call("isOwner", this.data._id, function (err, isOwner) {
+//        var isAdmin = Session.get("isadmin");
+//        if (err) {
+//            if(isAdmin) {
+//                $("#"+isOwner._id).show();
+//            }else{
+//                $("#"+isOwner._id).hide();
+//            }
+//        } else {
+//            if(isOwner.result || isAdmin) {
+//                $("#"+isOwner._id).show();
+//            } else {
+//                $("#"+isOwner._id).hide();
+//            }
+//        }
+//    });
 }
 
 Template.fineToApprove.helpers({
@@ -566,7 +563,6 @@ Template.fineToApprove.events({
         Tasks.update(this._id, {$set: {checked: ! this.checked}});
       },
       "click .delete": function () {
-//    console.log("click .delete deleting:"+this._id);
         Meteor.call("deleteFine", this._id);
       }
   });
