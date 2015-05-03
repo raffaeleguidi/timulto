@@ -109,14 +109,25 @@
                     var city = obj.data.address.city;
                     var postcode = obj.data.address.postcode;
                     
-                    var response = {
-                        address: address,
-                        postcode: postcode,
-                        city: city
+                    if(obj.statusCode==200) {
+                        return {
+                            address: address,
+                            postcode: postcode,
+                            city: city
+                        }
+                    } else {
+                        return {
+                            address: "Lat: " + lat + ", Lon: " + lon,
+                            postcode: 'geocoding error',
+                            city: obj.statusCode
+                        }
                     }
-                    return response;
                 } catch (ex) {
-                    return "Lat: " + lat + ", Lon: " + lon;
+                    return {
+                        address: "Lat: " + lat + ", Lon: " + lon,
+                        postcode: 'geocoding error',
+                        city: ex.message
+                    }
                 }
             }
         });

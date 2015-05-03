@@ -492,3 +492,4 @@ Template.listaSegnalazioni.events({
     passwordSignupFields: "USERNAME_ONLY"
   });
 
+
