@@ -1,26 +1,26 @@
 Meteor.subscribe("fines");
-  Meteor.subscribe("userData");
-
+Meteor.subscribe("userData");
     
-    var userWasLoggedIn = false;
-    Deps.autorun(function (c) {
-        if(!Meteor.userId()){
-            if(userWasLoggedIn){
-                Session.set('isadmin', false);
-            }
+var userWasLoggedIn = false;
+
+Deps.autorun(function (c) {
+    if(!Meteor.userId()){
+        if(userWasLoggedIn){
+            Session.set('isadmin', false);
         }
-        else {
-            Meteor.call("isAdministrator", function (error, result) {
-            if (error) {
-                console.log("Error occurred: " + error);
-                Session.set("isadmin",false);
-            }
-            // console.log("check is administrator:"+result);
-            Session.set("isadmin",result);
-            });
-            userWasLoggedIn = true;
-            Meteor.geolocalization.geocode();
+    }
+    else {
+        Meteor.call("isAdministrator", function (error, result) {
+        if (error) {
+            console.log("Error occurred: " + error);
+            Session.set("isadmin",false);
         }
+        // console.log("check is administrator:"+result);
+        Session.set("isadmin",result);
+        });
+        userWasLoggedIn = true;
+        Meteor.geolocalization.geocode();
+    }
     });
     
   Meteor.startup(function(){

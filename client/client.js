@@ -142,7 +142,12 @@ Template.main.events({
             category = "4";
         }
 
-        var canvas = document.getElementById('canvas');
+        var canvas = null;
+        try {
+            canvas = document.getElementById('canvas');
+        } catch(ex) {
+            //noop
+        }
         var imageData = canvas.toDataURL();
 
         Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
@@ -263,7 +268,11 @@ Template.body.events({
 /////////////////////////////////////
 Template.fineDetails.rendered = function(){
 
- var canvas = document.getElementById('myCanvas');
+      var canvas = document.getElementById('myCanvas');
+      if (!canvas) {
+          console.log('myCanvas is null');
+          return;
+      }
       var context = canvas.getContext('2d');
       var imageObj = new Image();
 
