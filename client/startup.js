@@ -42,6 +42,8 @@ Meteor.subscribe("fines");
       Session.set("foundfines",[]);
       Session.set("finesToApprove",[]);
       Meteor.photoHandling.resetPicture();
+      
+      GoogleMaps.load();
       //T9n.setLanguage('it');//Set language
       
 //      Meteor.call("isAdministrator", function (error, result) {

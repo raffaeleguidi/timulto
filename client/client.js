@@ -282,6 +282,7 @@ Template.fineDetails.events({
     
     "click #myCanvas": function (event) {
         if(Session.get("isadmin")/* && !Session.get("isapproved")*/){
+            console.log(event);
            //drawLogo('myCanvas', event.offsetX, event.offsetY);
         }
      },

@@ -33,6 +33,12 @@ App.accessRule(
         launchExternal: false
     }
 );
+
+App.accessRule('*.google.com/*');
+App.accessRule('*.googleapis.com/*');
+App.accessRule('*.gstatic.com/*');
+
+
 /*App.accessRule(
     "http://timulto.meteor.com/*",
     {

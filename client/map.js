@@ -19,7 +19,6 @@ Template.finesmap.helpers({
     }
 });
 
-
 Template.finesmap.events({
     "click #clickableMapElement":function(event) {
         var selectedId = Session.get("_id");
@@ -40,7 +39,6 @@ Template.finesmap.events({
     }
 });
 Template.finesmap.onCreated(function () {
-    
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('finesMap', function (map) {
 
@@ -67,16 +65,8 @@ Template.finesmap.onCreated(function () {
                 });
                 
                 google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map.instance, marker);
-                    
+                    infowindow.open(map.instance, marker);                    
                     Session.set("_id", fine._id);
-//                    Session.set("createdAt", fine.createdAt);
-//                    Session.set("detailUsername", fine.username);
-//                    Session.set("detailText",fine.text);
-//                    Session.set("detailAddress",fine.address);
-//                    Session.set("detailCategory",fine.category);
-//                    Session.set("detailImageData",fine.imageData);
-//                    Session.set("isapproved", (fine.approved==1?true:false));
                 });
                 
                 google.maps.event.addListener(map.instance, 'click', function() {
