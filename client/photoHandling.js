@@ -8,7 +8,7 @@ Meteor.photoHandling = {
     },
     resetPicture: function () {
         Meteor.photoHandling.isPhotoTaken = false;
-        
+
         Session.set("photo", blank);
         var canvas = document.getElementById('canvas');
         if (!canvas) return;
@@ -37,7 +37,7 @@ Meteor.photoHandling = {
         };
         photo.src =  Session.get("photo");
     },
-    
+
     takePhoto: function() {
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
@@ -48,7 +48,7 @@ Meteor.photoHandling = {
             context.clearRect(0, 0, canvas.width, canvas.height);
             if (data) {
                 Meteor.photoHandling.isPhotoTaken = true;
-                
+
                 Meteor.photoHandling.fitImageInCanvas(data, canvas);
                 Materialize.toast("Fai tap sulla foto per mascherare targhe e visi", 2000 , 'rounded');
                 Materialize.toast("Completa la scheda e premi \"Multa\"", 3000 , 'rounded');
@@ -62,7 +62,7 @@ Meteor.photoHandling = {
     fitImageInCanvas: function (data, canvas) {
         var context = canvas.getContext('2d');
         var photo = new Image();
-        
+
         photo.onload = function () {
             // canvas.width : x = photo.width : photo.height
             if (photo.width > photo.height) {
