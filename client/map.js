@@ -57,7 +57,7 @@ Template.finesmap.onCreated(function () {
 
                 var content = '<div class="row" id="clickableMapElement"><input type="hidden" id="'+fine._id+'"' +
                     '<div class="col s6"><img class="mini-shot" name="imageData" src="'+fine.imageData+'" /></div>'+
-      '<div id="iw_content" class="col s6">'+"Segnalato da " + fine.username + " in " + fine.address+'</div>' +
+      '<div id="iw_content" class="col s6">'+"Segnalato in " + fine.address+'</div>' +
    '</div>';
                 var infowindow = new google.maps.InfoWindow({
 //                    content: "Segnalato da " + fine.username + " in " + fine.address

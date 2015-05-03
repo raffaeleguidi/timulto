@@ -1,15 +1,19 @@
 <template name="finesmap">
-    <head>
+    <!--<head>
         <link href="finesmap.css" rel="stylesheet" type="text/css">
-    </head>
+    </head>-->
     <body>
         {{> navbar}}
-        <div class="container">
+        <div class="map-container">
+<!--
             <div class="section">
-              <div class="map-container z-depth-2">
+              <div class="map-container">
+-->
                 {{> googleMap name="finesMap" options=finesMapOptions}}
+<!--
               </div>
             </div>
+-->
         </div>
         {{> footer}}
     </body>
