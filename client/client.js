@@ -1,5 +1,5 @@
-var blank = "splash.png";
-var photoTaken = false;
+//var blank = "splash.png";
+//var photoTaken = false;
 var help = new Array();
 
 
@@ -9,112 +9,6 @@ getUserLanguage = function () {
   return "it";
 };
 
-function resetPicture() {
-    photoTaken = false;
-    Session.set("photo", blank);
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    var imageObj = new Image();
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = 'white';
-    context.fill();
-    var photo = new Image();
-    photo.onload = function() {
-        if (photo.width < canvas.width) {
-            context.drawImage(photo,
-                (canvas.width - photo.width) / 2,
-                (canvas.height - photo.height) / 2
-            );
-        } else {
-            context.drawImage(photo,
-                0,0,
-                canvas.width,
-                canvas.height
-            );
-        }
-    };
-    photo.src =  Session.get("photo");
-}
-
-function fitImageInCanvas(data, canvas) {
-    var context = canvas.getContext('2d');
-    var photo = new Image();
-    photo.onload = function() {
-        // canvas.width : x = photo.width : photo.height
-        if (photo.width > photo.height) {
-            var scaled = (canvas.width * photo.height) / photo.width;
-            context.drawImage(photo,
-                0,
-                (canvas.height - scaled) / 2,
-                canvas.width,
-                scaled
-            );
-        } else {
-            var scaled = (canvas.height * photo.width) / photo.height;
-            context.drawImage(photo,
-                (canvas.width - scaled) / 2,
-                0,
-                scaled,
-                canvas.height
-            );
-        }
-    };
-    photo.src =  data;
-}
-
-function takePhoto() {
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-
-    MeteorCamera.getPicture({ width: 800, height: 600, correctOrientation: true }, function(error, data) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        if (data) {
-            photoTaken = true;
-            fitImageInCanvas(data, canvas)
-            Materialize.toast("Fai tap sulla foto per mascherare targhe e visi", 2000 , 'rounded');
-            Materialize.toast("Completa la scheda e premi \"Multa\"", 3000 , 'rounded');
-            Session.set("photo", data);
-            $('body').scrollTop(0);
-        } else {
-            resetPicture();
-        }
-    });
-    geocode();
-        
-}
-
-function drawLogo(canvasId,offsetX, offsetY) {
-    var canvas = document.getElementById(canvasId);
-    var context = canvas.getContext('2d');
-    var imageObj = new Image();
-
-    console.log("context:" + context);
-    imageObj.onload = function() {
-        var w = imageObj.width / 4;
-        var h = imageObj.height / 4;
-        context.drawImage(imageObj,
-            offsetX - (w/2),
-            offsetY - (h/2),
-            w, h
-        );
-    };
-    imageObj.src =  "icon.png";
-}
-
-function geocode() {
-    try {
-        var coords = Geolocation.latLng();
-        if (coords && coords.lat && coords.lng) {
-            Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
-                Session.set("address", results.address + ' - ' + results.postcode + ' ' + results.city);
-                Session.set("city",results.city);
-            });
-        }
-    } catch(err) {
-        console.log("error geocoding " + err.message);
-    }
-}
 
 function initHelp() {
       help.push("Segnalare un'infrazione?");
@@ -155,7 +49,7 @@ if (Meteor.isClient) {
             Session.set("isadmin",result);
             });
             userWasLoggedIn = true;
-            geocode();
+            Meteor.geolocalization.geocode();
         }
     });
     
@@ -248,8 +142,8 @@ Template.navbar.events({
 ////////////// Main /////////////////
     
     Template.main.rendered = function(){
-        resetPicture();
-        geocode();
+        Meteor.photoHandling.resetPicture();
+        Meteor.geolocalization.geocode();
     };
     
     Template.main.helpers({
@@ -331,7 +225,7 @@ Template.navbar.events({
         $('select').material_select();
         $('body').scrollTop(0);
         Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
-        resetPicture();
+        Meteor.photoHandling.resetPicture();
         // Prevent default form submit (just in case)
         return false;
     },
@@ -348,13 +242,13 @@ Template.navbar.events({
             $('.button-collapse').sideNav('show');
     },   
     "click #shoot": function(event) {
-            takePhoto();
+            Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
             if (!photoTaken) {
-                takePhoto();
+                Meteor.photoHandling.takePhoto();
             } else {
-                drawLogo('canvas',event.offsetX, event.offsetY);
+                Meteor.photoHandling.drawLogo('canvas',event.offsetX, event.offsetY);
             }
     }
     
@@ -403,13 +297,13 @@ Template.navbar.events({
         $('.button-collapse').sideNav('show');
     },   
     "click #shoot": function(event) {
-        takePhoto();
+        Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
         if (!photoTaken) {
-            takePhoto();
+            Meteor.photoHandling.takePhoto();
         } else {
-            drawLogo('canvas', event.offsetX, event.offsetY);
+            Meteor.photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
         }
     },
 
