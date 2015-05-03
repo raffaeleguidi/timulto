@@ -23,71 +23,7 @@ function initHelp() {
 
 }
 if (Meteor.isClient) {
-  Meteor.subscribe("fines");
-  Meteor.subscribe("userData");
-
-    
-    var userWasLoggedIn = false;
-    Deps.autorun(function (c) {
-        if(!Meteor.userId())
-        {
-            if(userWasLoggedIn)
-            {
-                console.log('Clean up');
-                Session.set('isadmin', false);
-            }
-        }
-        else
-        {
-            Meteor.call("isAdministrator", function (error, result) {
-            if (error) {
-                console.log("Error occurred: " + error);
-                Session.set("isadmin",false);
-            }
-            // console.log("check is administrator:"+result);
-            Session.set("isadmin",result);
-            });
-            userWasLoggedIn = true;
-            Meteor.geolocalization.geocode();
-        }
-    });
-    
-  Meteor.startup(function(){
-
-      /*$('.navbutton').on("click", function(evt){
-          console.log(evt);
-          $('.button-collapse').sideNav('hide');
-      });*/
-//      console.log(TAPi18n.getLanguage());
-      TAPi18n.setLanguage(getUserLanguage())
-      .done(function () {
-        Session.set("showLoadingIndicator", false);
-      })
-      .fail(function (error_message) {
-        // Handle the situation
-        console.log(error_message);
-      });
-      
-      
-      $('select').material_select();
-//      $(".button-collapse").sideNav();
-//      $('.modal-trigger').leanModal();
-
-      Session.set("foundfines",[]);
-      Session.set("finesToApprove",[]);
-      Meteor.photoHandling.resetPicture();
-      //T9n.setLanguage('it');//Set language
-      
-//      Meteor.call("isAdministrator", function (error, result) {
-//            if (error) {
-//                console.log("Error occurred: " + error);
-//                Session.set("isadmin",false);
-//            }
-//            // console.log("check is administrator:"+result);
-//            Session.set("isadmin",result);
-//      });
-  });
- 
+  
     
 /////////////////////////////////////
 ////////////// Navbar ///////////////
@@ -149,13 +85,13 @@ Template.navbar.events({
         city:function() {
             return Session.get("city");
         },
-        address: function () {
+        address: function() {
             return Session.get("address");
         }, description: function () {
             return Session.get("description");
-        }, photo: function () {
+        }, photo: function() {
             return Session.get("photo");
-        }, loc: function () {
+        }, loc: function() {
             return Geolocation.latLng() || {
                 lat: 0,
                 lng: 0
@@ -196,37 +132,33 @@ Template.navbar.events({
     
     Template.main.events({
         "click #send": function (event) {
-        event.preventDefault();
-        var text = $("#description").val();
-        var address = $("#address").val();
-        var city = Session.get("city");
-        var lat = $("#lat").val();
-        var lng = $("#lng").val();
-        var category = $("#category").val();
+            event.preventDefault();
+            var text = $("#description").val();
+            var address = $("#address").val();
+            var city = Session.get("city");
+            var lat = $("#lat").val();
+            var lng = $("#lng").val();
+            var category = $("#category").val();
             if(!category){
                 category = "4";
             }
-        var canvas = document.getElementById('canvas');
-        //var imageData = $("#imgdata").val();
-        var imageData = canvas.toDataURL();
-//console.log("save fine. t:" + text + ", a:"+address+", city:"+city+",lat:"+lat+",lon:"+lng+",cat:"+category);
-        Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
+            
+            var canvas = document.getElementById('canvas');
+            var imageData = canvas.toDataURL();
+    
+            Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
 
-        // Clear form
-/*
-        Session.set("description", "");
-        Session.set("photo", blank);
-        Session.set("address", "");
-*/
-        $("#address").val("");
-        $("#description").val("");
-        $("#category").val("");
-        $('select').material_select();
-        $('body').scrollTop(0);
-        Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
-        Meteor.photoHandling.resetPicture();
-        // Prevent default form submit (just in case)
-        return false;
+            Meteor.photoHandling.resetPicture();
+            Meteor.geolocalization.geocode();
+           
+             $("#address").val(Session.get("address"));
+            $("#description").val("");
+            $("#category").val("");
+            $('select').material_select();
+            $('body').scrollTop(0);
+            Materialize.toast("Grazie per la segnalazione!", 3000 , 'rounded');
+            
+            return false;
     },
     "click #login": function() {
         /*$('.button-collapse').sideNav('show');*/
@@ -244,12 +176,11 @@ Template.navbar.events({
             Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
-        console.log("photo has been taken? "+Meteor.photoHandling.photoTaken());
-            if (!Meteor.photoHandling.photoTaken()) {
-                Meteor.photoHandling.takePhoto();
-            } else {
-                Meteor.photoHandling.drawLogo('canvas',event.offsetX, event.offsetY);
-            }
+        if (!Meteor.photoHandling.photoTaken()) {
+            Meteor.photoHandling.takePhoto();
+        } else {
+            Meteor.photoHandling.drawLogo('canvas',event.offsetX, event.offsetY);
+        }
     }
     
 });
@@ -300,7 +231,6 @@ Template.navbar.events({
         Meteor.photoHandling.takePhoto();
     },
     "click #canvas": function (event) {
-        console.log("photo has been taken? "+Meteor.photoHandling.photoTaken());
         if (!Meteor.photoHandling.photoTaken()) {
             Meteor.photoHandling.takePhoto();
         } else {
@@ -382,7 +312,6 @@ Template.fineDetails.helpers({
         return Session.get("detailUsername");
     },
     _id:function(){
-//        console.log("retrieving id from session:"+Session.get("_id"));
         return Session.get("_id");
     },
     isapproved:function() {
