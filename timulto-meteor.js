@@ -2,10 +2,8 @@ Fines = new Mongo.Collection("fines");
 Administrators = new Mongo.Collection("administrators");
 
 function isAdministrator() {
-    var username;
-//    console.log("#isAdministrator: " + JSON.stringify(Meteor.user()));
-//    console.log("Meteor.user() "+ JSON.stringify(Meteor.user()));
-//    console.log("Meteor.userId() "+ Meteor.userId());
+    var username = "";
+
     if(Meteor.user()) {
         if( Meteor.user().services.facebook ) {
             username = Meteor.user().services.facebook.email;
@@ -13,19 +11,15 @@ function isAdministrator() {
         else if( Meteor.user().services.twitter ) {
             username = Meteor.user().services.twitter.screenName;
         }
-        //console.log(username);
     }
 
-//    var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
-     var userAdm = Administrators.findOne({username:username});
-   
-//    console.log("userAdm " + JSON.stringify(userAdm)+" looking for "+username);
+    var userAdm = Administrators.findOne({username:username});
    
     if(!userAdm) {
-        console.log(username + " is not admin");
+//        console.log(username + " is not admin");
        return false;
     } else {
-        console.log(username + " is  admin!!!!");
+//        console.log(username + " is  admin!!!!");
         return true;
     }
 };
@@ -37,19 +31,19 @@ Meteor.methods({
 
             var owner = Fines.findOne(fineId,{fields:{"owner":1}})
             if(owner) {
-                owner = owner.owner;
-//                console.log("owner: "+ owner + " compared to current "+userId);
-//                console.log("@MeteorMethod#isOwner: fine " + fineId + ", found owner: " + owner + " , user "+Meteor.userId());
-            
-                var obj=  {result:(owner == userId), _id:fineId};
-                
-//                console.log(JSON.stringify(obj));
+                var obj =  {
+                    result:(owner.owner == userId),
+                    _id:fineId
+                };
                 
                 return obj;
             }
         }
         
-        return {result:false, _id:fineId};
+        return {
+            result:false,
+            _id:fineId
+        };
     },
     isAdministrator:function(){
 //        console.log("@MeteorMethod#isAdministrator: ");
@@ -94,19 +88,19 @@ Meteor.methods({
 //                    ", maxD:"+maxDistance+" minD:"+minDistance);
         var lat = 0.0;
         if(latitude){
-//           console.log("lat is not nan");
             lat = parseFloat(latitude);
-           }
+        }
+        
         var lon = 0.0;
         if(longitude){
-//           console.log("lon is not nan");
             lon = parseFloat(longitude);
-           }
+        }
+        
         var minD = 0.0;
         if(minDistance && minDistance > 0){
-//           console.log("minD is not nan");
             minD = parseFloat(minDistance);
-           }
+        }
+        
         var cursor = Fines.find({
             loc:{
                 $near:{
@@ -122,14 +116,10 @@ Meteor.methods({
             {_id:1});
         
         var finalResult = new Array();
-//        var curEl = null;
         var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
 
         if(cursor){
             cursor.forEach(function (doc) {
-//                console.log(doc._id + ":" + doc.createdAt);
-
-//                curEl = Fines.findOne({_id:doc._id});
                 if(doc && ((doc.approved == 1 ) || doc.username ==  currentUsername)){
                     console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
                     finalResult.push(doc);
@@ -154,14 +144,10 @@ Meteor.methods({
         var cursor = Fines.find({},{ sort:{createdAt:-1}});
         
         var finalResult = new Array();
-//        var curEl = null;
         var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
 
         if(cursor){
             cursor.forEach(function (doc) {
-//                console.log(doc._id + ":" + doc.createdAt);
-
-//                curEl = Fines.findOne({_id:doc._id});
                 if(doc && (doc.approved == 1 )){// || doc.username ===  currentUsername)){
                     console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
                     finalResult.push(doc);
@@ -186,12 +172,9 @@ Meteor.methods({
             cursor = Fines.find({$and:[{approved:filter},{owner:Meteor.userId()}]},{ sort:{createdAt:1}});
         }
         var finalResult = new Array();
-//        var curEl = null;
-//        var currentUsername = Meteor.user()?  Meteor.user().profile.name:"";
 
         if(cursor){
             cursor.forEach(function (doc) {
-//                console.log("Not approved--> "+ doc._id + ":" + doc.createdAt+"."+doc.approved);
                 finalResult.push(doc);
             });
         }

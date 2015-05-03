@@ -105,7 +105,7 @@ function drawLogo(canvasId,offsetX, offsetY) {
 function geocode() {
     try {
         var coords = Geolocation.latLng();
-        if (coords.lat && coords.lng) {
+        if (coords && coords.lat && coords.lng) {
             Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {
                 Session.set("address", results.address + ' - ' + results.postcode + ' ' + results.city);
                 Session.set("city",results.city);
@@ -692,63 +692,6 @@ Template.listaSegnalazioni.events({
     }
 });
     
-    
-    
-    Template.finesmap.helpers({
-        finesMapOptions: function () {
-            
-            var coords = Geolocation.latLng();
-            var lat = coords.lat;
-            var lon = coords.lng;
-            
-            // Make sure the maps API has loaded
-            if (GoogleMaps.loaded()) {
-                // Map initialization options
-//                console.log("map init");
-                return {
-                    center: new google.maps.LatLng(lat, lon),
-                    zoom: 11
-                };
-            }
-        }
-    });
-    
-    Template.finesmap.onCreated(function() {
-        
-      // We can use the `ready` callback to interact with the map API once the map is ready.
-      GoogleMaps.ready('finesMap', function(map) {
-          
-        var theFinesCursor = Fines.find({approved:1});
-
-        theFinesCursor.forEach(function (fine) {
-            console.log(JSON.stringify(fine.loc));
-            if (fine.loc.coordinates[0] != 0.0 && fine.loc.coordinates[1] != 0.0) {
-                var myCenter = new google.maps.LatLng(fine.loc.coordinates[1], fine.loc.coordinates[0]);
-                var marker = new google.maps.Marker({
-                    position: myCenter,
-                    icon: 'icon_20X20.png'
-                });
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: fine.city + ".<br/>Segnalato da " + fine.username + " in " + fine.address
-                });
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map.instance, marker);
-                });
-
-                marker.setMap(map.instance);
-            }
-
-        });
-
-        // Add a marker to the map once it's ready
-        var marker = new google.maps.Marker({
-          position: map.options.center,
-          map: map.instance
-        });
-      });
-});
     //////////////////////////////////////////
     // At the bottom of the client code
   Accounts.ui.config({

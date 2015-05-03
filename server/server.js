@@ -61,7 +61,7 @@
 //            },
             approveFine: function (fineId) {
 
-                if (isAdministrator()) {
+                if (fineId && isAdministrator()) {
                     Fines.update({
                         "_id": fineId
                     }, {
@@ -69,15 +69,23 @@
                             "approved": 1
                         }
                     });
+//                    var fine = Fines.find({_id:fineId});
+                    //Send notification
+                    //serverNotification(fine);
                 } else {
-                    console.log("User is not an administrator: " + JSON.stringify(Meteor.user().profile.name));
+                    console.log("Trying to approve fine "+ fineId +".User is not an administrator: " + JSON.stringify(Meteor.user().profile.name));
                 }
             },
             deleteFine: function (fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin o l'utente corrente "possiede" il fine
 
-                if(isAdministrator()) { //Se amministratore, è possibile rimuovere la segnalazione
-                    console.log("removing fine " + fineId);
+                if(fineId && isAdministrator()) { //Se amministratore, è possibile rimuovere la segnalazione
+//                    console.log("removing fine " + fineId);
                     Fines.remove(fineId);
+                    
+                    //Send notification
+                    //var fine = Fines.find({_id:fineId});
+                    //Send notification
+                    //serverNotification(fine);
                 } else{
                     var res = Fines.findOne(fineId);
                     console.log("Res.owner:"+res.owner + " - Userid:"+Meteor.userId());
