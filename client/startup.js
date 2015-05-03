@@ -19,7 +19,7 @@ Deps.autorun(function (c) {
         Session.set("isadmin",result);
         });
         userWasLoggedIn = true;
-        Meteor.geolocalization.geocode();
+        //Meteor.geolocalization.geocode();
     }
     });
     

@@ -77,13 +77,9 @@ Template.navbar.events({
     
 Template.main.rendered = function () {
     Meteor.photoHandling.resetPicture();
-    Meteor.geolocalization.geocode();
 };
 
 Template.main.helpers({
-    city:function() {
-        return Session.get("city");
-    },
     address: function() {
         return Session.get("address");
     }, 
@@ -153,7 +149,7 @@ Template.main.events({
         Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
 
         Meteor.photoHandling.resetPicture();
-        Meteor.geolocalization.geocode();
+        //Meteor.geolocalization.geocode();
 
         $("#address").val(Session.get("address"));
         $("#description").val("");
@@ -440,7 +436,7 @@ Template.listaSegnalazioni.helpers({
 });
     
 Template.listaSegnalazioni.events({
-"click #resetFines": function(event){
+    "click #resetFines": function(event){
         event.preventDefault();
         
         Session.set("foundfines",[]);
