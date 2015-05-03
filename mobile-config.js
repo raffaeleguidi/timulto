@@ -5,7 +5,7 @@ App.info({
   author: 'TiMulto',
   email: 'info@timulto.org',
   website: 'http://www.timulto.org',
-  version: '0.0.4'
+  version: '0.0.5'
 });
 
 App.launchScreens({
@@ -37,6 +37,7 @@ App.accessRule(
 App.accessRule('*.google.com/*');
 App.accessRule('*.googleapis.com/*');
 App.accessRule('*.gstatic.com/*');
+App.accessRule('*.mapquestapi.com/*');
 
 
 /*App.accessRule(
