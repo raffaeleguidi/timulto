@@ -1,5 +1,6 @@
 Fines = new Mongo.Collection("fines");
 Administrators = new Mongo.Collection("administrators");
+Categories = new Mongo.Collection("categories");
 
 function isAdministrator() {
     var username = "";
