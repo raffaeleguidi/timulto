@@ -21,14 +21,20 @@ function clientGeocode (lat, lon, cb) {
                             city: city
                         })
                     } else {
-                        cb( null, {
+                        cb({
+                                code: 'HTTP-' + res.statusCode,
+                                message: 'reverse geocoding error'
+                        }, {
                             address: "Lat: " + lat + ", Lon: " + lon,
                             postcode: 'geocoding error',
                             city: res.statusCode
                         })
                     }
                 } catch (ex) {
-                    cb( null, {
+                    cb({
+                                code: 'exception',
+                                message: 'reverse geocoding error'
+                        }, {
                         address: "Lat: " + lat + ", Lon: " + lon,
                         postcode: 'geocoding error',
                         city: ex.message
@@ -46,6 +52,10 @@ Meteor.geolocalization = {
             if (coords && coords.lat && coords.lng) {
                 /*Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {*/
                 clientGeocode( coords.lat, coords.lng, function(error, results) {
+                    if (error) {
+                        console.log('skipping reverse geocode becaus of error: ' + error.message + ' (' + error.code + ')');
+                        return;
+                    }
                     Session.set("address", results.address + ' - ' + results.postcode + ' ' + results.city);
                     console.log("address taken in geoLocalization");
                     $('#address').val(Session.get("address"));
