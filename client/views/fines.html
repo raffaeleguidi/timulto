@@ -10,7 +10,7 @@
 
 <template name="fineDetails">
     {{> navbar}}
-   
+
     <div class="container">
       <div class="section">
         <h5 class="header center blue-text">Dettaglio segnalazione</h5>
@@ -18,14 +18,14 @@
               <div>
                   <canvas id="myCanvas" style="width: 100%; float: center" width="400" height="400"></canvas>
               </div>
-   
+
 <!--              <img class="mini-shot" name="imageData" style="width: 100%; float: center;" width="500" height="500" src="{{imageData}}" /><br />-->
-              
+
               <div>
                  <p class="card-panel orange lighten-4">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
 <!--                  Tipologia segnalazione: {{category}}-->
               </div>
-              
+
           </div>
 
          {{#if isadmin}}
@@ -41,11 +41,11 @@
           {{/if}}
         </div>
     </div>
-    
+
     {{> footer}}
 </template>
 
-<template name="fineToApprove">    
+<template name="fineToApprove">
     <tr>
         <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>

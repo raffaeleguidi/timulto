@@ -1,18 +1,13 @@
-<template name="listaSegnalazioni">
-    
-    {{> navbar}}
-
-<!--
+<template name="cercaSegnalazioni">
     <div class="section no-pad-bot">
         {{> loginbox}}
     </div>
--->
 
     <div class="container">
-          <div class="section center">
+          <div class="section">
 
-               <h5 class="header center blue-text">{{_ "listaSegnalazioni"}}</h5><br />
-              
+               <h5 class="header blue-text">Cerca segnalazioni</h5><br />
+
                 <form action="#">
                     <div class="row" id="filter">
                      <p>
@@ -28,8 +23,16 @@
                       <label for="all">Tutte</label>
                     </p>
                     </div>
+                    <div class="row">
+                    <!-- test Longitude: <input type="text" id="longitude" name="longitude" placeholder="0.0" value="12.5348843"/> -->
+                   <!-- test Latitude:<input type="text" id="latitude" name="latitude" placeholder="0.0" value="41.8982409"/> -->
+                    <div class="col l6 m6 s8">
+                        Distanza minima (metri):
+                        <input type="text" id="minD" name="minD" placeholder="0" value="0" maxlength="10" size="10"/>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="">
+                    <div class="col l6 m6 s8">
                         Distanza massima (metri):
                         <input type="text" id="maxD" name="maxD" placeholder="1000" value="1000" maxlength="10" size="10"/>
                     </div>
@@ -38,12 +41,12 @@
                     <button id="getFines" class="btn waves-light" type="submit" name="action">Cerca
                       <i class="mdi-login right"></i>
                     </button>
-                    <!--<button id="resetFines" class="btn waves-light" type="submit" name="action">Azzera
+                    <button id="resetFines" class="btn waves-light" type="submit" name="action">Azzera
                       <i class="mdi-login right"></i>
-                    </button>-->
+                    </button>
                </div>
               </form>
-              
+
                 <table class="striped">
                   <tbody>
                     {{#each foundfines}} {{> foundfine}} {{/each}}
@@ -51,7 +54,5 @@
                 </table>
           </div>
      </div>
-    
-    {{> footer}}
 
 </template>
