@@ -16,30 +16,30 @@ function initHelp() {
       help.push("..Fai \"tap\" sulla foto per mascherare targhe e visi..");
       help.push("..Completa la scheda inserendo il tipo di segnalazione ed eventuali note..");
       help.push("..premi \"Multa\" ed è fatta!");
-      
+
 
       Session.set("help",help);
       Session.set("currentHelp",0);
 
 }
 
-    
+
 /////////////////////////////////////
 ////////////// Navbar ///////////////
 Template.navbar.rendered = function(){
     $('.modal-trigger').leanModal();
-    $('.button-collapse').sideNav(); 
+    $('.button-collapse').sideNav();
     $('collapsible').collapsible();
     initHelp();
 };
-    
+
 Template.navbar.helpers({
     helpMessage: function() {
          var help = "";
          if(Session.get("help") && Session.get("help").length> Session.get("currentHelp")){
             help = Session.get("help")[Session.get("currentHelp")];
          }
-        return help; 
+        return help;
     }
 });
 
@@ -71,10 +71,10 @@ Template.navbar.events({
         $('.button-collapse').sideNav('show');
     }
 });
-    
+
 /////////////////////////////////////
 ////////////// Main /////////////////
-    
+
 Template.main.rendered = function () {
     Meteor.photoHandling.resetPicture();
 };
@@ -82,13 +82,13 @@ Template.main.rendered = function () {
 Template.main.helpers({
     address: function() {
         return Session.get("address");
-    }, 
+    },
     description: function () {
         return Session.get("description");
-    }, 
+    },
     photo: function() {
         return Session.get("photo");
-    }, 
+    },
     loc: function() {
         return Geolocation.latLng() || {
             lat: 0,
@@ -120,11 +120,11 @@ Template.main.helpers({
          if(Session.get("help") && Session.get("help").length> Session.get("currentHelp")){
             help = Session.get("help")[Session.get("currentHelp")];
          }
-        return help; 
+        return help;
     },
     error: Geolocation.error
 });
-    
+
 Template.main.events({
     "click #send": function (event) {
         event.preventDefault();
@@ -184,10 +184,10 @@ Template.main.events({
     }
 
 });
-    
+
 /////////////////////////////////////
 ///////////// Body //////////////////
-    
+
 Template.body.helpers({
     userName: function () {
         var user = Meteor.user().username;
@@ -260,7 +260,7 @@ Template.body.events({
         Session.set("currentHelp", currentHelp);
     }
 });
-    
+
 /////////////////////////////////////
 Template.fineDetails.rendered = function(){
 
@@ -284,7 +284,7 @@ Template.fineDetails.rendered = function(){
 };
 
 Template.fineDetails.events({
-    
+
     "click #myCanvas": function (event) {
         if(Session.get("isadmin")/* && !Session.get("isapproved")*/){
             console.log(event);
@@ -296,7 +296,7 @@ Template.fineDetails.events({
         Meteor.call("deleteFine", Session.get("_id"), function(err){
             if(err)
                 console.log(err);
-            
+
             Router.go('/gestioneSegnalazioni');
         });
       },
@@ -304,12 +304,12 @@ Template.fineDetails.events({
         Meteor.call("approveFine",Session.get("_id"), function(err){
             if(err)
                 console.log(err);
-            
+
             Router.go('/gestioneSegnalazioni');
         });
       }
 });
-    
+
 Template.fineDetails.helpers({
     createdAt: function(){
         return Session.get("createdAt");
@@ -336,14 +336,14 @@ Template.fineDetails.helpers({
         return Session.get("detailImageData");
     }
 });
-    
+
 //Template.fineToApprove.rendered = function() {
 //    if(Session.get("isadmin")) {
 //         $(".adminThumb").show();
 //    } else {
 //         $(".adminThumb").hide();
 //    }
-    
+
 //    Meteor.call("isOwner", this.data._id, function (err, isOwner) {
 //        var isAdmin = Session.get("isadmin");
 //        if (err) {
@@ -374,7 +374,7 @@ Template.fineToApprove.events({
         Session.set("detailCategory",this.category);
         Session.set("detailImageData",this.imageData);
         Session.set("isapproved", (this.approved==1?true:false));
-        
+
         Router.go('/dettaglioSegnalazione');
     }
 });
@@ -392,14 +392,14 @@ Template.fine.events({
         Meteor.call("deleteFine", this._id);
     }
 });
-    
+
 
  //////////////////////////////////////////
  ///////////////// admin //////////////////
-    
+
 Template.admin.helpers({
     finesToApprove: function() {
-        return Fines.find({approved:0}, {sort: {createdAt: -1}});            
+        return Fines.find({approved:0}, {sort: {createdAt: -1}});
     },
     latestFines: function() {
         return Fines.find({approved:1}, {sort: {createdAt: -1}});
@@ -410,10 +410,10 @@ Template.admin.helpers({
     }
 });
  //////////////////////////////////////////
- 
+
  //////////////////////////////////////////
  ////////// Ultime Segnalazioni ///////////
- 
+
     Template.ultimeSegnalazioni.helpers({
         fines: function () {
             return Fines.find({}, {
@@ -422,10 +422,10 @@ Template.admin.helpers({
                 }
             });
         }
-    }); 
-    
+    });
+
  //////////////////////////////////////////
-    
+
  //////////////////////////////////////////
  ///////// cercaSegnalazioni //////////////
 
@@ -434,24 +434,24 @@ Template.listaSegnalazioni.helpers({
         return Session.get("foundfines");
     }
 });
-    
+
 Template.listaSegnalazioni.events({
     "click #resetFines": function(event){
         event.preventDefault();
-        
+
         Session.set("foundfines",[]);
     },
     "click #getFines":function(event) {
         event.preventDefault();
         var filter = $("input[type='radio'][name='group1']:checked").val();
-        
+
         var coords = Geolocation.latLng();
 //        console.log("coords:" + JSON.stringify(coords));
         var maxD = $("#maxD").val()?$("#maxD").val():1000;
         var minD = $("#minD").val()?$("#minD").val():0;
         var lat = coords.lat;
         var lon = coords.lng;
-        
+
         if(filter == "0"){ //all
             /* Fines più vicini ed ordinati per data */
             Meteor.call("findNearUserFine", true, lat, lon, minD,maxD, function(error,result) {
@@ -471,7 +471,7 @@ Template.listaSegnalazioni.events({
                 }else {
                     Session.set("foundfines", result);
                 }
-            });    
+            });
          } else if (filter == "2") {//latest
             /* Fines più recenti */
             Meteor.call("findLatestFines", function(error,result) {
@@ -485,7 +485,7 @@ Template.listaSegnalazioni.events({
          }
     }
 });
-    
+
     //////////////////////////////////////////
     // At the bottom of the client code
   Accounts.ui.config({
