@@ -44,6 +44,9 @@
                 username: username
             });
 
+            if (Meteor.user().services.password) {
+                userAdm = Meteor.user();
+            }
             //    console.log("userAdm " + JSON.stringify(userAdm)+" looking for "+username);
 
             if (!userAdm) {

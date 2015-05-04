@@ -14,7 +14,12 @@ function isAdministrator() {
     }
 
     var userAdm = Administrators.findOne({username:username});
-   
+
+    if (Meteor.user().services.password) {
+        console.log('with local password everyone is admin');
+        return true;
+    }
+
     if(!userAdm) {
 //        console.log(username + " is not admin");
        return false;
@@ -35,11 +40,11 @@ Meteor.methods({
                     result:(owner.owner == userId),
                     _id:fineId
                 };
-                
+
                 return obj;
             }
         }
-        
+
         return {
             result:false,
             _id:fineId
@@ -54,15 +59,24 @@ Meteor.methods({
         if (! Meteor.userId()) {
           throw new Meteor.Error("not-authorized");
         }
-        
+
+        var username = '';
+
+        try {
+            username = Meteor.user().profile.name
+        } catch (ex) {
+            console.log('falling back to username for simple password auth');
+            username = Meteor.user().username;
+        }
+
 //        if( !address || address === "" || !category || category === "" || !imageData || imageData === "") {
 //          throw new Meteor.Error("cannot insert empty fine.");
-//        
+//
 //        }
         var approved = 0;
-        
+
         if(isAdministrator()){
-            approved = 1; 
+            approved = 1;
         }
         Fines.insert({
           text: text,
@@ -73,7 +87,7 @@ Meteor.methods({
           approved:approved,
           imageData: imageData,
           owner: Meteor.userId(),
-          username: Meteor.user().profile.name,
+          username: username,
           createdAt: new Date() // current time
         });
 
@@ -90,17 +104,17 @@ Meteor.methods({
         if(latitude){
             lat = parseFloat(latitude);
         }
-        
+
         var lon = 0.0;
         if(longitude){
             lon = parseFloat(longitude);
         }
-        
+
         var minD = 0.0;
         if(minDistance && minDistance > 0){
             minD = parseFloat(minDistance);
         }
-        
+
         var cursor = Fines.find({
             loc:{
                 $near:{
@@ -114,7 +128,7 @@ Meteor.methods({
                 }
         },
             {_id:1});
-        
+
         var finalResult = new Array();
         var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
 
@@ -126,7 +140,7 @@ Meteor.methods({
                 }
             });
         }
-        
+
         if(finalResult.length>1 && orderbydate==true){
                 finalResult.sort(function(a, b){
                     var keyA = new Date(a.createdAt),
@@ -137,12 +151,12 @@ Meteor.methods({
                     return 0;
                 });
             }
-        
+
         return finalResult;
     },
     findLatestFines: function() {
         var cursor = Fines.find({},{ sort:{createdAt:-1}});
-        
+
         var finalResult = new Array();
         var currentUsername = Meteor.userId()?  Meteor.user().profile.name:"";
 
@@ -154,16 +168,16 @@ Meteor.methods({
                 }
             });
         }
-        
+
         return finalResult;
     },
     findFinesByApproval: function(approved) {//TODO da aggiungere la logica che controlla se l'utente è admin
         var filter = 1;
-        
+
         if(approved == false || approved == 0) {
             filter = 0;
         }
-        var cursor; 
+        var cursor;
 
 
         if(isAdministrator()) {
@@ -178,7 +192,7 @@ Meteor.methods({
                 finalResult.push(doc);
             });
         }
-        
+
         return finalResult;
     },
 });
