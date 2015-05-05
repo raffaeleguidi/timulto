@@ -1,8 +1,8 @@
 
-Template.finesmap.helpers({
+Template.mappa.helpers({
     finesMapOptions: function() {
         var coords = Geolocation.latLng();
-    
+
         if(coords) {
             var lat = coords.lat;
             var lon = coords.lng;
@@ -19,11 +19,11 @@ Template.finesmap.helpers({
     }
 });
 
-Template.finesmap.events({
+Template.mappa.events({
     "click #clickableMapElement":function(event) {
         var selectedId = Session.get("_id");
         var fine = Fines.findOne({_id:selectedId});
-        
+
         if(fine) {
             console.log(JSON.stringify(fine));
             Session.set("createdAt", fine.createdAt);
@@ -38,7 +38,7 @@ Template.finesmap.events({
         }
     }
 });
-Template.finesmap.onCreated(function () {
+Template.mappa.onCreated(function () {
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('finesMap', function (map) {
 
@@ -63,12 +63,12 @@ Template.finesmap.onCreated(function () {
 //                    content: "Segnalato da " + fine.username + " in " + fine.address
                     content:content
                 });
-                
+
                 google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map.instance, marker);                    
+                    infowindow.open(map.instance, marker);
                     Session.set("_id", fine._id);
                 });
-                
+
                 google.maps.event.addListener(map.instance, 'click', function() {
                     infowindow.close();
                 });
@@ -83,6 +83,6 @@ Template.finesmap.onCreated(function () {
 //            position: map.options.center,
 //            map: map.instance
 //        });
-        
+
     });
 });

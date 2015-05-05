@@ -1,18 +1,19 @@
 
 Router.route('/', function () {
-  this.render('main');
+  this.render('crea');
+});
+
+Router.route('/crea', function () {
+  this.render('crea');
 });
 
 Router.onBeforeAction(function() {
   GoogleMaps.load();
   this.next();
-}, { only: ['finesmap'] });
+}, { only: ['mappa'] });
 
 Router.map(function(){
-  this.route('finesmap', {path: '/mappaSegnalazioni'});
-});
-Router.map(function(){
-  this.route('listaSegnalazioni', {path: '/listaSegnalazioni'});
+  this.route('mappa', {path: '/mappa'});
 });
 
 Router.map(function(){
@@ -20,26 +21,10 @@ Router.map(function(){
 });
 
 Router.map(function(){
-  this.route('fineDetails', {path: '/dettaglioSegnalazione'});
+  this.route('fineDetails', {path: '/dettaglio'});
 });
 
 Router.map(function(){
-  this.route('main', {path: '/home'});
+  this.route('segnalazioni', {path: '/segnalazioni'});
 });
 
-Router.map(function(){
-  this.route('admin', {path: '/gestioneSegnalazioni'});
-});
-
-//Router.map(function(){
-//  this.route('list', {path: '/notifications'});
-//});
-
-//
-//Router.map(function(){
-//  this.route('about', {path: '/about'});
-//});
-
-//Router.map(function(){
-//  this.route('home', {path: '/'});
-//});

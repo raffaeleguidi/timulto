@@ -9,7 +9,7 @@ function clientGeocode (lat, lon, cb) {
                              }}, function(err, res){
             try {
                     if(res.statusCode==200) {
-                        console.log(res);
+                        //console.log(res);
                         var data = JSON.parse(res.content);
                         var address = data.address.road + (data.address.house_number ? ", " + data.address.house_number : "");
                         var city = data.address.city;
