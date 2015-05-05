@@ -16,8 +16,9 @@ function isAdministrator() {
             service  = "twitter";
         }
     }
+//    console.log("username : " + username + ", service " + service);
 
-    var userAdm = Administrators.findOne({$and:{username:username,service:service}});
+    var userAdm = Administrators.findOne({$and:[{username:username},{service:service}]});
 
     if (Meteor.user().services.password) {
         console.log('with local password everyone is admin');
@@ -67,7 +68,7 @@ Meteor.methods({
         var username = '';
 
         try {
-            username = Meteor.user().profile.name
+            username = Meteor.user().profile.name;
         } catch (ex) {
             console.log('falling back to username for simple password auth');
             username = Meteor.user().username;
@@ -217,6 +218,9 @@ if(Meteor.isCordova){
             };*/
             if (document.location.pathname == "/" || document.location.pathname == "/home"){
                 navigator.app.exitApp();
+            } else if( document.activeElement.className === "button-collapse" && document.activeElement.tagName.toUpperCase() === "A" ) {//close navbar on mobile
+                document.activeElement.click();
+                
             } else {
                 history.go(-1);
             };

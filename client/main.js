@@ -78,7 +78,11 @@ Template.main.rendered = function () {
     Meteor.photoHandling.resetPicture();
 };
 
+
 Template.main.helpers({
+    disabled: function() {
+       return !(Session.get("address")!="" && Session.get("isphototaken") && Session.get("categoryselected"));
+    },
     address: function() {
         return Session.get("address");
     },
@@ -125,6 +129,17 @@ Template.main.helpers({
 });
 
 Template.main.events({
+    "change #category":function(event) {
+        console.log("set category");
+        Session.set("categoryselected", true);       
+    },
+    "input #address": function(event){
+        if(!$("#address").val()) {
+            Session.set("address","");
+        } else {
+            Session.set("address","a");
+        }
+    },
     "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
@@ -147,9 +162,9 @@ Template.main.events({
 
         Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
 
-        Meteor.photoHandling.resetPicture();
-        //Meteor.geolocalization.geocode();
-
+        Meteor.photoHandling.resetPicture();       
+        
+        Session.set("categoryselected",false);
         $("#address").val(Session.get("address"));
         $("#description").val("");
         $("#category").val("");
@@ -172,11 +187,11 @@ Template.main.events({
         $('.button-collapse').sideNav('show');
     },
     "click #shoot": function (event) {
-        Meteor.photoHandling.takePhoto();
+        Meteor.photoHandling.takePhoto();       
     },
     "click #canvas": function (event) {
         if (!Meteor.photoHandling.photoTaken()) {
-            Meteor.photoHandling.takePhoto();
+            Meteor.photoHandling.takePhoto();        
         } else {
             Meteor.photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
         }

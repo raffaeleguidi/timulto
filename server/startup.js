@@ -31,7 +31,7 @@ function setupInitialData() {
     console.log("found %d categories in db", Categories.find().count());
 
     function addAdministrator(username,service) {
-        if (Administrators.find({$and:{username: username,service:service}}).count() == 0) {
+        if (Administrators.find({$and:[{username: username},{service:service}]}).count() == 0) {
             Administrators.insert({
               username: username,
               service:service
@@ -96,7 +96,7 @@ Meteor.startup(function () {
         }
 
         //    var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
-        var userAdm = Administrators.findOne({$and:{username: username,service:service}});
+        var userAdm = Administrators.findOne({$and:[{username: username},{service:service}]});
 
         if (Meteor.user().services.password) {
             userAdm = Meteor.user();

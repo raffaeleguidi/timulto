@@ -1,6 +1,7 @@
 var blank = "splash.png";
 var isPhotoTaken = false;
 
+
 Meteor.photoHandling = {
 
     photoTaken: function(){
@@ -8,7 +9,8 @@ Meteor.photoHandling = {
     },
     resetPicture: function () {
         Meteor.photoHandling.isPhotoTaken = false;
-
+        Session.set("isphototaken",Meteor.photoHandling.isPhotoTaken);
+        
         Session.set("photo", blank);
         var canvas = document.getElementById('canvas');
         if (!canvas) return;
@@ -54,6 +56,9 @@ Meteor.photoHandling = {
                 Materialize.toast("Completa la scheda e premi \"Multa\"", 3000 , 'rounded');
                 Session.set("photo", data);
                 $('body').scrollTop(0);
+                
+                Session.set("isphototaken",Meteor.photoHandling.isPhotoTaken);
+        
             } else {
                 Meteor.photoHandling.resetPicture();
             }
