@@ -44,8 +44,6 @@ Meteor.photoHandling = {
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
 
-        Meteor.geolocalization.geocode();
-
         MeteorCamera.getPicture({ width: 800, height: 600, correctOrientation: true }, function(error, data) {
             context.clearRect(0, 0, canvas.width, canvas.height);
             if (data) {

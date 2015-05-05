@@ -10,12 +10,14 @@ getUserLanguage = function () {
 ////////////// Crea /////////////////
 
 Template.crea.rendered = function () {
-    Meteor.photoHandling.resetPicture();
+    Meteor.photoHandling.takePhoto();
+    Meteor.geolocalization.geocode();
+    //Meteor.photoHandling.resetPicture();
 };
 
 Template.crea.helpers({
      disabled: function() {
-       return !(Session.get("address")!="" && Session.get("isphototaken") && Session.get("categoryselected"));
+       return !(Session.get("address")!="" && Session.get("isphototaken")); // && Session.get("categoryselected"));
     },
     address: function() {
         return Session.get("address");
@@ -125,6 +127,7 @@ Template.crea.events({
     },
     "click #shoot": function (event) {
         Meteor.photoHandling.takePhoto();
+        Meteor.geolocalization.geocode();
     },
     "click #canvas": function (event) {
         if (!Meteor.photoHandling.photoTaken()) {

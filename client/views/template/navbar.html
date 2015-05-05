@@ -16,6 +16,7 @@
   </div>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
+            <!-- mobile -->
             <ul class="side-nav" id="mobile-demo" style="width: 240px">
                 <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
                 <li class="divider"></li>
@@ -24,7 +25,10 @@
                 <li class="bold"><a class="navbutton" href="/crea" onclick="$('.button-collapse').sideNav('hide');">{{_ "Segnala"}}</a></li>
                 <li class="bold"><a class="navbutton" href="/mappa" onclick="$('.button-collapse').sideNav('hide');">Mappa</a></li>
                 <li class="bold"><a class="navbutton" href="/chisiamo" onclick="$('.button-collapse').sideNav('hide');">{{_ "chisiamo"}}</a></li>
+                <li class="divider"></li>
                 <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
+                <li class="divider"></li>
+                <li class="bold"><a class="navbutton" onclick="navigator.app.exitApp();" href="#">{{_ "Esci"}}</a></li>
             </ul>
 
           <a href="/" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>

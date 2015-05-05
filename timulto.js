@@ -220,7 +220,6 @@ if(Meteor.isCordova){
                 navigator.app.exitApp();
             } else if( document.activeElement.className === "button-collapse" && document.activeElement.tagName.toUpperCase() === "A" ) {//close navbar on mobile
                 document.activeElement.click();
-                
             } else {
                 history.go(-1);
             };
