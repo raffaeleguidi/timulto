@@ -17,7 +17,6 @@ function initHelp() {
       help.push("..Completa la scheda inserendo il tipo di segnalazione ed eventuali note..");
       help.push("..premi \"Multa\" ed è fatta!");
 
-
       Session.set("help",help);
       Session.set("currentHelp",0);
 

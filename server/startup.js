@@ -10,24 +10,39 @@ function setupInitialData() {
         }
     }
 
-    addCategory('parcheggio', 'Parcheggio incivile');
-    addCategory('rifiuti', 'Rifiuti abbandonati');
-    addCategory('vandalismo', 'Atti vandalici');
-    addCategory('affissioniabusive', 'Affissioni abusive');
+    Categories.remove({});
+
+    addCategory('PRC', 'Parcheggio incivile');
+    addCategory('RFT', 'Rifiuti o cassonetti sporchi');
+    addCategory('ACC', 'Accessibilità scarsa o mancante');
+    addCategory('ABS', 'Abusivismo');
+    //addCategory('AFF', 'Affissioni abusive');
+    //addCategory('BLL', 'Bullismo');
+    //addCategory('CSS', 'Cassonetti sporchi');
+    addCategory('DST', 'Disturbo della quiete pubblica');
+    addCategory('ILL', 'Illuminazione');
+    addCategory('MNT', 'Manto stradale');
+    addCategory('VND', 'Atti vandalici');
+    //addCategory('MRC', 'Marciapiede sporco');
+    addCategory('SGN', 'Segnaletica mancante');
+    //addCategory('VLZ', 'Atti di violenza');
+    addCategory('MLT', 'Maltrattamento animali');
+
     console.log("found %d categories in db", Categories.find().count());
 
-    function addAdministrator(username) {
-        if (Administrators.find({username: username}).count() == 0) {
+    function addAdministrator(username,service) {
+        if (Administrators.find({$and:{username: username,service:service}}).count() == 0) {
             Administrators.insert({
-              username: username
+              username: username,
+              service:service
             });
-            console.log('added %s', username);
+            console.log('added %s for %s social.', username, service);
         }
     }
 
-    addAdministrator('manuel_morini');
-    addAdministrator('raffaeleguidi');
-    addAdministrator('andrea.ferracci@gmail.com');
+    addAdministrator('manuel_morini', 'twitter');
+    addAdministrator('raffaeleguidi', 'twitter');
+    addAdministrator('aferracci', 'twitter');
     console.log("found %d administrators in db", Administrators.find().count());
 }
 
@@ -42,6 +57,10 @@ Meteor.startup(function () {
 
     Meteor.publish("fines", function () {
         return Fines.find({}, {sort: {createdAt: -1}});
+    });
+
+    Meteor.publish("categories", function () {
+        return Categories.find({});
     });
 
     Meteor.publish("userData", function () {
@@ -61,22 +80,23 @@ Meteor.startup(function () {
 
     function isAdministrator() {
         var username;
+        var service;
         //    console.log("#isAdministrator: " + JSON.stringify(Meteor.user()));
         //    console.log("Meteor.user() "+ JSON.stringify(Meteor.user()));
         //    console.log("Meteor.userId() "+ Meteor.userId());
         if (Meteor.user()) {
             if (Meteor.user().services.facebook) {
                 username = Meteor.user().services.facebook.email;
+                service  = "facebook";
             } else if (Meteor.user().services.twitter) {
                 username = Meteor.user().services.twitter.screenName;
+                service  = "twitter";
             }
             //console.log(username);
         }
 
         //    var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
-        var userAdm = Administrators.findOne({
-            username: username
-        });
+        var userAdm = Administrators.findOne({$and:{username: username,service:service}});
 
         if (Meteor.user().services.password) {
             userAdm = Meteor.user();

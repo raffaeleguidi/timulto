@@ -13,6 +13,11 @@
             <input type="text" id="address" name="address" placeholder="{{_ "indirizzo"}}" value="{{address}}"/>
             <select id="category" class="browser-default">
                 <option value="" disabled selected>{{_ "tiposegnalazione"}}</option>
+
+                {{#each categories}}
+                    <option value="{{key}}">{{value}}</option>
+                {{/each}}
+<!--
                 <option value="1">{{_ "segnalazione1"}}</option>
                 <option value="2">{{_ "segnalazione2"}}</option>
                 <option value="3">{{_ "segnalazione3"}}</option>
@@ -26,6 +31,7 @@
                 <option value="11">{{_ "segnalazione11"}}</option>
                 <option value="12">{{_ "segnalazione12"}}</option>
                 <option value="0">{{_ "segnalazionegenerica"}}</option>
+-->
             </select>
 
             <input type="text" id="description" name="text" placeholder="{{_ "note"}}" value="{{description}}"/>

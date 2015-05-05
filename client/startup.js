@@ -1,4 +1,5 @@
 Meteor.subscribe("fines");
+Meteor.subscribe("categories");
 Meteor.subscribe("userData");
     
 var userWasLoggedIn = false;

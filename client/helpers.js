@@ -1,3 +1,7 @@
+Template.registerHelper("categories",  function() {
+    return Categories.find({});
+});
+
 Template.registerHelper("isadmin", function() { 
     return Session.get("isadmin");
 });

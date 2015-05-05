@@ -4,17 +4,20 @@ Categories = new Mongo.Collection("categories");
 
 function isAdministrator() {
     var username = "";
+    var service = "";
 
     if(Meteor.user()) {
         if( Meteor.user().services.facebook ) {
             username = Meteor.user().services.facebook.email;
+            service  = "facebook";
         }
         else if( Meteor.user().services.twitter ) {
             username = Meteor.user().services.twitter.screenName;
+            service  = "twitter";
         }
     }
 
-    var userAdm = Administrators.findOne({username:username});
+    var userAdm = Administrators.findOne({$and:{username:username,service:service}});
 
     if (Meteor.user().services.password) {
         console.log('with local password everyone is admin');
