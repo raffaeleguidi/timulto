@@ -13,7 +13,6 @@ function initHelp() {
 
       Session.set("help",help);
       Session.set("currentHelp",0);
-
 }
 
 Template.navbar.rendered = function(){

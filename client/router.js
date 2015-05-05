@@ -1,6 +1,6 @@
 
 Router.route('/', function () {
-  this.render('crea');
+  this.render('segnalazioni');
 });
 
 Router.route('/crea', function () {

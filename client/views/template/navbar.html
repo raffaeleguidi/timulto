@@ -19,9 +19,10 @@
             <ul class="side-nav" id="mobile-demo" style="width: 240px">
                 <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
                 <li class="divider"></li>
-                <li class="bold"><a class="navbutton" onclick="$('.button-collapse').sideNav('hide');" href="/">Home</a></li>
-                <li class="bold"><a class="navbutton" onclick="$('.button-collapse').sideNav('hide');" href="/segnalazioni">{{_ "Segnalazioni"}}</a></li>
-                <li class="bold"><a class="navbutton" onclick="$('.button-collapse').sideNav('hide');" href="/mappa">Mappa</a></li>
+                <li class="bold"><a class="navbutton" href="/" onclick="$('.button-collapse').sideNav('hide');">Home</a></li>
+                <!--<li class="bold"><a class="navbutton" onclick="$('.button-collapse').sideNav('hide');" href="/segnalazioni">{{_ "Segnalazioni"}}</a></li>-->
+                <li class="bold"><a class="navbutton" href="/crea" onclick="$('.button-collapse').sideNav('hide');">{{_ "Segnala"}}</a></li>
+                <li class="bold"><a class="navbutton" href="/mappa" onclick="$('.button-collapse').sideNav('hide');">Mappa</a></li>
                 <li class="bold"><a class="navbutton" href="/chisiamo" onclick="$('.button-collapse').sideNav('hide');">{{_ "chisiamo"}}</a></li>
                 <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
             </ul>
@@ -30,8 +31,9 @@
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
           <ul class="right hide-on-med-and-down">
             <li class="bold"><a href="/">Home</a></li>
-            <li class="bold"><a href="/segnalazioni">{{_ "Segnalazioni"}}</a></li>
-            <li class="bold"><a class="navbutton" onclick="$('.button-collapse').sideNav('hide');" href="/mappa">Mappa</a></li>
+            <!--<li class="bold"><a href="/segnalazioni">{{_ "Segnalazioni"}}</a></li>-->
+            <li class="bold"><a class="navbutton" href="/crea">{{_ "Segnala"}}</a></li>
+            <li class="bold"><a class="navbutton" href="/mappa">Mappa</a></li>
             <li><a href="/chisiamo">{{_ "chisiamo"}}</a></li>
             <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
           </ul>

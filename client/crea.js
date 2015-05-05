@@ -1,7 +1,6 @@
 
 getUserLanguage = function () {
   // Put here the logic for determining the user language
-
   return "it";
 };
 
@@ -105,7 +104,10 @@ Template.crea.events({
         $("#category").val("");
         $('select').material_select();
         $('body').scrollTop(0);
-        Materialize.toast("Grazie per la segnalazione!", 3000, 'rounded');
+
+        Router.go("/");
+
+        Materialize.toast("Grazie! La segnalazione verrà pubblicata una volta vagliata dai nostri amministratori", 5000, 'rounded');
 
         return false;
     },
@@ -139,7 +141,7 @@ Template.crea.events({
 //////////////////////////////////////////
 // At the bottom of the client code
 Accounts.ui.config({
-passwordSignupFields: "USERNAME_ONLY"
+    passwordSignupFields: "USERNAME_ONLY"
 });
 
 

@@ -13,25 +13,9 @@
             <input type="text" id="address" name="address" placeholder="{{_ "indirizzo"}}" value="{{address}}"/>
             <select id="category" class="browser-default">
                 <option value="" disabled selected>{{_ "tiposegnalazione"}}</option>
-
                 {{#each categories}}
                     <option value="{{key}}">{{value}}</option>
                 {{/each}}
-<!--
-                <option value="1">{{_ "segnalazione1"}}</option>
-                <option value="2">{{_ "segnalazione2"}}</option>
-                <option value="3">{{_ "segnalazione3"}}</option>
-                <option value="4">{{_ "segnalazione4"}}</option>
-                <option value="5">{{_ "segnalazione5"}}</option>
-                <option value="6">{{_ "segnalazione6"}}</option>
-                <option value="7">{{_ "segnalazione7"}}</option>
-                <option value="8">{{_ "segnalazione8"}}</option>
-                <option value="9">{{_ "segnalazione9"}}</option>
-                <option value="10">{{_ "segnalazione10"}}</option>
-                <option value="11">{{_ "segnalazione11"}}</option>
-                <option value="12">{{_ "segnalazione12"}}</option>
-                <option value="0">{{_ "segnalazionegenerica"}}</option>
--->
             </select>
 
             <input type="text" id="description" name="text" placeholder="{{_ "note"}}" value="{{description}}"/>
@@ -57,11 +41,12 @@
         </div>
       </div>
 
-      <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+      <!--<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
         <a id="shoot" class="btn-floating btn-large red">
           <i class="large mdi-image-camera-alt"></i>
         </a>
-      </div>
+      </div>-->
+        {{> pulsantone }}
     </div>
   </div>
 
@@ -70,4 +55,4 @@
 
     {{> footer}}
 
-    </template>
+</template>

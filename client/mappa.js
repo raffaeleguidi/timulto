@@ -36,8 +36,12 @@ Template.mappa.events({
 
             Router.go('/dettaglioSegnalazione');
         }
+    },
+    "click #shoot": function (event) {
+        Router.go('/crea');
     }
 });
+
 Template.mappa.onCreated(function () {
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('finesMap', function (map) {

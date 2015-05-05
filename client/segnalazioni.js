@@ -13,6 +13,14 @@ Template.segnalazioni.helpers({
     }
 });
 
+
+Template.segnalazioni.events({
+    "click #shoot": function (event) {
+        Router.go('/crea');
+    }
+});
+
+
 //////////////////////////////////////////
 
  //////////////////////////////////////////
