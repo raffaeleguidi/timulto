@@ -27,8 +27,10 @@
                 <li class="bold"><a class="navbutton" href="/chisiamo" onclick="$('.button-collapse').sideNav('hide');">{{_ "chisiamo"}}</a></li>
                 <li class="divider"></li>
                 <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
+                {{#if isCordova}}
                 <li class="divider"></li>
                 <li class="bold"><a class="navbutton" onclick="navigator.app.exitApp();" href="#">{{_ "Esci"}}</a></li>
+                {{/if}}
             </ul>
 
           <a href="/" class="brand-logo"><span class="orange white-text">Ti</span>Multo</a>
