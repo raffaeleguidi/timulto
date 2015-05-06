@@ -130,6 +130,9 @@ Template.crea.events({
         Meteor.photoHandling.takePhoto();
         Meteor.geolocalization.geocode();
     },
+     "click #manualgeocode": function (event) {
+        Meteor.geolocalization.geocode();
+    },
     "click #canvas": function (event) {
         if (!Meteor.photoHandling.photoTaken()) {
             Meteor.photoHandling.takePhoto();

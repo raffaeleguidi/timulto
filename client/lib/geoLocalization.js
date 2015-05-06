@@ -57,6 +57,7 @@ Meteor.geolocalization = {
                         return;
                     }
                     Session.set("address", results.address + ' - ' + results.postcode + ' ' + results.city);
+                    Session.set("city", results.city);
                     console.log("address taken in geoLocalization");
                     $('#address').val(Session.get("address"));
                 });

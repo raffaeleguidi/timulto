@@ -45,6 +45,9 @@ Template.body.events({
     "click #shoot": function (event) {
         Meteor.photoHandling.takePhoto();
     },
+    "click #manualgeocode": function (event) {
+        Meteor.geolocalization.geocode();
+    },
     "click #canvas": function (event) {
         if (!Meteor.photoHandling.photoTaken()) {
             Meteor.photoHandling.takePhoto();
