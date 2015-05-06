@@ -109,7 +109,8 @@ Template.crea.events({
 
         Router.go("/");
 
-        Materialize.toast("Grazie! La segnalazione verrà pubblicata una volta vagliata dai nostri amministratori", 5000, 'rounded');
+        Materialize.toast("Grazie! La segnalazione verrà pubblicata", 5000, 'rounded');
+        Materialize.toast("non appena vagliata dai nostri amministratori", 5000, 'rounded');
 
         return false;
     },
