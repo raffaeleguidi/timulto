@@ -7,7 +7,7 @@ Template.registerHelper("isadmin", function() {
 });
 
 Template.registerHelper('formatDate', function(date) {
-  return moment(date).format('MM/DD/YYYY HH:mm');
+  return moment(date).format('DD/MM/YYYY HH:mm');
 });
 
 Template.registerHelper("user", function() { 

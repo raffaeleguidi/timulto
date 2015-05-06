@@ -50,8 +50,8 @@ Meteor.photoHandling = {
                 Meteor.photoHandling.isPhotoTaken = true;
 
                 Meteor.photoHandling.fitImageInCanvas(data, canvas);
-                Materialize.toast("Fai tap sulla foto per mascherare targhe e visi", 5000 , 'rounded');
-                Materialize.toast("Completa la scheda e premi \"Multa\"", 5000 , 'rounded');
+                Materialize.toast("Fai tap sulla foto per mascherare targhe e visi", 4000 , 'rounded');
+                //Materialize.toast("Completa la scheda e premi \"Multa\"", 4000 , 'rounded');
                 Session.set("photo", data);
                 $('body').scrollTop(0);
                 
