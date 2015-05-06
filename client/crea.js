@@ -11,7 +11,7 @@ getUserLanguage = function () {
 
 Template.crea.rendered = function () {
     Meteor.photoHandling.takePhoto();
-    Meteor.geolocalization.geocode();
+    //Meteor.geolocalization.geocode();
     //Meteor.photoHandling.resetPicture();
 };
 
@@ -128,7 +128,7 @@ Template.crea.events({
     },
     "click #shoot": function (event) {
         Meteor.photoHandling.takePhoto();
-        Meteor.geolocalization.geocode();
+        //Meteor.geolocalization.geocode();
     },
      "click #manualgeocode": function (event) {
         Meteor.geolocalization.geocode();

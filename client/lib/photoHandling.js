@@ -56,6 +56,7 @@ Meteor.photoHandling = {
                 $('body').scrollTop(0);
                 
                 Session.set("isphototaken",Meteor.photoHandling.isPhotoTaken);
+                Meteor.geolocalization.geocode();
         
             } else {
                 Meteor.photoHandling.resetPicture();
