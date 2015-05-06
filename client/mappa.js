@@ -34,7 +34,7 @@ Template.mappa.events({
             Session.set("detailImageData",fine.imageData);
             Session.set("isapproved", (fine.approved==1?true:false));
 
-            Router.go('/dettaglioSegnalazione');
+            Router.go('/dettaglio');
         }
     },
     "click #shoot": function (event) {
