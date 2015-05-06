@@ -11,7 +11,7 @@
         {{#if finesToApprove.count}}
         <div class="section">
             <div class="row" id="adminApproval" hidden="{{hide}}">
-                <h5 class="header center blue-text">{{_ "Segnalazioni da verificare"}}</h5>
+                <h5 class="header center blue-text">{{_ "Segnalazioni da verificare"}} ({{finesToApprove.count}})</h5>
                 <table class="striped">
                     <tbody>
                         {{#each finesToApprove}} {{> fineToApprove}} {{/each}}
