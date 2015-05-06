@@ -67,6 +67,14 @@ Template.fineDetails.helpers({
 });
 
 Template.fineToApprove.events({
+     "click .naviga":function(event) {
+         
+        Session.set("selectedLat",this.loc.coordinates[1]);
+        Session.set("selectedLon",this.loc.coordinates[0]);
+        Session.set("selectedId", this._id);
+         
+        Router.go('/naviga');
+    },
     "click .mini-shot":function(){
         Session.set("_id", this._id);
         Session.set("createdAt", this.createdAt);

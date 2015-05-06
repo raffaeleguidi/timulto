@@ -46,20 +46,16 @@
 
 <template name="fineToApprove">
     <tr>
-        <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
+        <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span><br /></td>
         <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-<!--
+    </tr>
+    <tr>
+        <td></td>
         <td>
-            <p class="adminThumb">
-                <a class="btn-floating orange"><i class="large mdi-action-thumb-up thumb-up"></i></a>
-            </p>
+            <button class="naviga btn waves-light" type="submit" name="action">Naviga
+                      <i class="mdi-login right"></i>
+            </button>
         </td>
-        <td>
-            <p id="{{_id}}">
-                <a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a>
-            </p>
-        </td>
--->
     </tr>
 </template>
 

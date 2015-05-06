@@ -10,10 +10,13 @@ Router.route('/crea', function () {
 Router.onBeforeAction(function() {
   GoogleMaps.load();
   this.next();
-}, { only: ['mappa'] });
+}, { only: ['mappa','navigatore'] });
 
 Router.map(function(){
   this.route('mappa', {path: '/mappa'});
+});
+Router.map(function(){
+  this.route('navigatore', {path: '/naviga'});
 });
 
 Router.map(function(){

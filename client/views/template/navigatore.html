@@ -1,0 +1,16 @@
+<template name="navigatore">
+    <body>
+        {{> navbar}}
+        <div class="map-container">
+            {{> googleMap name="navigatorMap" options=navigatorMapOptions}}
+            
+        </div>
+        <div>
+            <button id="naviga" class="btn waves-effect waves-light" type="submit" name="action">Calcola percorso
+                  <i class="mdi-login right"></i>
+            </button>
+        </div>
+        {{> geopulsantone }}
+        {{> footer}}
+    </body>
+</template>
