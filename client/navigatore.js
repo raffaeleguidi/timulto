@@ -2,6 +2,8 @@ var directionsDisplay;
 var directionsService;
 var currentLocation;
 var selectedLocation;
+var curmap;
+
 
 function calcRoute() {
 //{
@@ -27,6 +29,7 @@ function calcRoute() {
     console.log("starting navigation");
     directionsService.route(request, function (response, status) {
         console.log("some response frome google. Status " + status);
+        
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
         }
@@ -49,6 +52,17 @@ Template.navigatore.helpers({
 });
 
 Template.navigatore.events({
+    "click #manualgeocode": function (event) {
+        var coords = Geolocation.latLng();
+        
+        console.log("new position " + JSON.stringify(coords));
+        currentLocation = new google.maps.LatLng(coords.lat, coords.lng);
+            
+        var markerCurrentPos = new google.maps.Marker({
+            position: currentLocation,
+            map:curmap.instance
+        });
+    },
     "click #naviga":function(event) {
         calcRoute();
     }
@@ -86,6 +100,6 @@ Template.navigatore.onCreated(function () {
         directionsDisplay = new google.maps.DirectionsRenderer();
         directionsDisplay.setMap(map.instance);
 
-
+        curmap = map;
     });
 });

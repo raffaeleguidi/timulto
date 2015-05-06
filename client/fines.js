@@ -15,6 +15,14 @@ Template.fineDetails.rendered = function(){
 };
 
 Template.fineDetails.events({
+     "click .naviga":function(event) {
+         
+        Session.set("selectedLat",Session.get("lat"));
+        Session.set("selectedLon",Session.get("lon"));
+        Session.set("selectedId", this._id);
+         
+        Router.go('/naviga');
+    },
     "click #myCanvas": function (event) {
         if(Session.get("isadmin")/* && !Session.get("isapproved")*/){
             console.log(event);
@@ -67,15 +75,9 @@ Template.fineDetails.helpers({
 });
 
 Template.fineToApprove.events({
-     "click .naviga":function(event) {
-         
-        Session.set("selectedLat",this.loc.coordinates[1]);
-        Session.set("selectedLon",this.loc.coordinates[0]);
-        Session.set("selectedId", this._id);
-         
-        Router.go('/naviga');
-    },
     "click .mini-shot":function(){
+        Session.set("lat",this.loc.coordinates[1]);
+        Session.set("lon",this.loc.coordinates[0]);
         Session.set("_id", this._id);
         Session.set("createdAt", this.createdAt);
         Session.set("detailUsername", this.username);
