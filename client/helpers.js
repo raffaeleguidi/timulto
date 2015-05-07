@@ -1,6 +1,6 @@
 Template.registerHelper("categories",  function() {
-    
-    console.log(  Meteor.call("getCategoriesValues"));
+    //Meteor.call("getCategoriesValues");
+    return Session.get("categories");
 });
 
 Template.registerHelper("isadmin", function() { 
@@ -20,3 +20,6 @@ UI.registerHelper('isCordova', function(){
     return true;
   }
 });
+
+
+

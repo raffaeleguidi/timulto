@@ -23,7 +23,15 @@ Deps.autorun(function (c) {
     }
     });
     
+  function loadCategories () {
+    $.get("/api/categories", function(data){
+        Session.set("categories", data);
+    });
+  }
+
   Meteor.startup(function(){
+
+      loadCategories();
 
       TAPi18n.setLanguage(getUserLanguage())
           .done(function () {

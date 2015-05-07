@@ -10,7 +10,7 @@ function setupInitialData() {
         }
     }
 
-    Categories.remove({});
+    //Categories.remove({});
 
     addCategory('PRC', 'Parcheggio incivile');
     addCategory('RFT', 'Rifiuti o cassonetti sporchi');
@@ -55,13 +55,14 @@ Meteor.startup(function () {
       prettyJson: true
     });
 
+
     Meteor.publish("fines", function () {
         return Fines.find({}, {sort: {createdAt: -1}});
     });
 
-//    Meteor.publish("categories", function () {
-//        return Categories.find({});
-//    });
+    Meteor.publish("categories", function () {
+        return Categories.find({});
+    });
 
     Meteor.publish("userData", function () {
         return Meteor.users.find({

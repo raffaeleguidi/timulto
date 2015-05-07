@@ -35,9 +35,7 @@ function isAdministrator() {
 };
 
 Meteor.methods({
-    
     getCategoriesValues: function() {
-        
         return Meteor.wrapAsync(Categories.find({}).fetch());
     },
     isOwner:function(fineId){
@@ -60,11 +58,10 @@ Meteor.methods({
             _id:fineId
         };
     },
-    isAdministrator:function(){
-//        console.log("@MeteorMethod#isAdministrator: ");
+    isAdministrator: function(){
         return isAdministrator();
     },
-    "saveFine": function (text, address, city, lat, lng, category, imageData) {
+    saveFine: function (text, address, city, lat, lng, category, imageData) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
           throw new Meteor.Error("not-authorized");
@@ -81,14 +78,13 @@ Meteor.methods({
 
 //        if( !address || address === "" || !category || category === "" || !imageData || imageData === "") {
 //          throw new Meteor.Error("cannot insert empty fine.");
-//
 //        }
         var approved = 0;
 
         if(isAdministrator()){
             approved = 1;
         }
-        Fines.insert({
+        console.log("inserted element " + Fines.insert({
           text: text,
           address: address,
           city:city,
@@ -99,7 +95,7 @@ Meteor.methods({
           owner: Meteor.userId(),
           username: username,
           createdAt: new Date() // current time
-        });
+        }));
 
     },
     setChecked: function (fineId, setChecked) {
@@ -210,17 +206,6 @@ Meteor.methods({
 if(Meteor.isCordova){
     Meteor.startup(function(){
         document.addEventListener("backbutton", function() {
-            /*if (
-                document.location.pathname == "/chisiamo" ||
-                document.location.pathname == "/mappaSegnalazioni" ||
-                document.location.pathname == "/gestioneSegnalazioni"
-               ) {
-                    document.location.pathname ="/";
-            } else if (document.location.pathname == "/dettaglioSegnalazione") {
-                    document.location.pathname = "/gestioneSegnalazioni";
-            } else if ( document.location.pathname == "/" || document.location.pathname == "/home") {
-                   navigator.app.exitApp();
-            };*/
             if (document.location.pathname == "/" || document.location.pathname == "/home"){
                 navigator.app.exitApp();
             } else if( document.activeElement.className === "button-collapse" && document.activeElement.tagName.toUpperCase() === "A" ) {//close navbar on mobile

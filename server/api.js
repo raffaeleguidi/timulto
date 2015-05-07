@@ -13,7 +13,7 @@ function sanitize(fine) {
 function findFinesFor(service) {
     var cursor = Fines.find(
         {$and:[{approved: 1}, service]},
-        {sort:{createdAt:1}}
+        {sort:{createdAt: 1}}
     );
     var res = new Array();
 
@@ -25,6 +25,20 @@ function findFinesFor(service) {
     return res;
 }
 
+function allFines() {
+    var cursor = Fines.find(
+        {},
+        {sort:{createdAt: -1}}
+    );
+    var res = new Array();
+
+    if(cursor){
+        cursor.forEach(function (doc) {
+            res.push(sanitize(doc));
+        });
+    }
+    return res;
+}
 var key = 'this is the key';
 
 Restivus.addRoute('token/:message', {authRequired: false}, {
@@ -79,6 +93,20 @@ Restivus.addRoute('fines/:service', {authRequired: false}, {
     }
 });
 
+
+Restivus.addRoute('segnalazioni', {authRequired: false}, {
+    get: function () {
+      var fines = allFines();
+      if (fines) {
+        return fines;
+      }
+      return {
+        statusCode: 404,
+        body: {status: 'fail', message: 'Fines not found'}
+      };
+    }
+});
+
 Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
     post: function () {
 
@@ -105,5 +133,36 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
           statusCode: 400,
           body: {status: "fail", message: "Unable to find fine"}
         };
+    }
+});
+
+
+Restivus.addRoute('categories', {authRequired: false}, {
+    get: function () {
+        var categories = new Array();
+
+        function addCategory(key, value) {
+            categories.push({
+              key: key,
+              value: value
+            });
+        }
+
+        addCategory('PRC', 'Parcheggio incivile');
+        addCategory('RFT', 'Rifiuti o cassonetti sporchi');
+        addCategory('ACC', 'Accessibilità scarsa o mancante');
+        addCategory('ABS', 'Abusivismo');
+        //addCategory('AFF', 'Affissioni abusive');
+        //addCategory('BLL', 'Bullismo');
+        //addCategory('CSS', 'Cassonetti sporchi');
+        addCategory('DST', 'Disturbo della quiete pubblica');
+        addCategory('ILL', 'Illuminazione');
+        addCategory('MNT', 'Manto stradale');
+        addCategory('VND', 'Atti vandalici');
+        //addCategory('MRC', 'Marciapiede sporco');
+        addCategory('SGN', 'Segnaletica mancante');
+        //addCategory('VLZ', 'Atti di violenza');
+        addCategory('MLT', 'Maltrattamento animali');
+        return categories;
     }
 });
