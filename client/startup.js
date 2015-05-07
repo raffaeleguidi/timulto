@@ -4,6 +4,7 @@ Meteor.subscribe("userData");
     
 var userWasLoggedIn = false;
 
+/* maybe it should become main.js? */
 Deps.autorun(function (c) {
     if(!Meteor.userId()){
         if(userWasLoggedIn){
