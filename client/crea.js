@@ -10,9 +10,11 @@ getUserLanguage = function () {
 ////////////// Crea /////////////////
 
 Template.crea.rendered = function () {
-    Meteor.photoHandling.takePhoto();
+    Meteor.photoHandling.resetPicture();
+    if (Meteor.isCordova) {
+        Meteor.photoHandling.takePhoto();
+    }
     //Meteor.geolocalization.geocode();
-    //Meteor.photoHandling.resetPicture();
 };
 
 Template.crea.helpers({
