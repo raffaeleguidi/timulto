@@ -1,8 +1,8 @@
 
 
-Template.mappa.helpers({
+Template.mappagoogle.helpers({
     finesMapOptions: function() {
-        
+
 //         Make sure the maps API has loaded
         if (GoogleMaps.loaded()) {
 //            console.log("map google maps loaded");
@@ -25,10 +25,10 @@ Template.mappa.helpers({
     }
 });
 
-Template.mappa.events({
+Template.mappagoogle.events({
     "click #clickableMapElement":function(event) {
         event.preventDefault();
-        
+
         var selectedId = Session.get("_id");
         var fine = Fines.findOne({_id:selectedId});
 
@@ -44,7 +44,7 @@ Template.mappa.events({
 
             Router.go('/dettaglio');
         }
-        
+
     },
     "click #shoot": function (event) {
         Router.go('/crea');
@@ -52,10 +52,10 @@ Template.mappa.events({
 });
 
 
-Template.mappa.onCreated(function () {
+Template.mappagoogle.onCreated(function () {
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('finesMap', function (map) {
-        
+
         var theFinesCursor = Fines.find({
             approved: 1
         });
