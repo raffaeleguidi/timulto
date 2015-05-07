@@ -35,6 +35,11 @@ function isAdministrator() {
 };
 
 Meteor.methods({
+    
+    getCategoriesValues: function() {
+        
+        return Meteor.wrapAsync(Categories.find({}).fetch());
+    },
     isOwner:function(fineId){
         if(Meteor.userId()) {
             var userId = Meteor.userId();

@@ -1,8 +1,13 @@
 <template name="mappa">
     <body>
         {{> navbar}}
-        <div class="map-container">
-            {{> googleMap name="finesMap" options=finesMapOptions}}
+        <div class="leafletcontainer">
+
+          <h1 class="title">Meteor Leaflet Demo</h1>
+          <div id="finesMap" class="map"></div>
+         
+<!--            {{> googleMap name="finesMap" options=finesMapOptions}}-->
+            
             {{> pulsantone }}
         </div>
         {{> footer}}

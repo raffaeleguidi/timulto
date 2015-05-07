@@ -59,9 +59,9 @@ Meteor.startup(function () {
         return Fines.find({}, {sort: {createdAt: -1}});
     });
 
-    Meteor.publish("categories", function () {
-        return Categories.find({});
-    });
+//    Meteor.publish("categories", function () {
+//        return Categories.find({});
+//    });
 
     Meteor.publish("userData", function () {
         return Meteor.users.find({

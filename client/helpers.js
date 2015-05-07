@@ -1,5 +1,6 @@
 Template.registerHelper("categories",  function() {
-    return Categories.find({});
+    
+    console.log(  Meteor.call("getCategoriesValues"));
 });
 
 Template.registerHelper("isadmin", function() { 

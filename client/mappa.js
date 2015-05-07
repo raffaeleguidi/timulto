@@ -1,29 +1,5 @@
 
-
-Template.mappa.helpers({
-    finesMapOptions: function() {
-        
-//         Make sure the maps API has loaded
-        if (GoogleMaps.loaded()) {
-//            console.log("map google maps loaded");
-            var coords = Geolocation.latLng();
-
-            if (coords) {
-                var lat = coords.lat;
-                var lon = coords.lng;
-
-
-                // Map initialization options
-                return {
-                    center: new google.maps.LatLng(lat, lon),
-                    zoom: 16
-                };
-            }
-        }else {
-            console.log("map google maps not yet loaded");
-        }
-    }
-});
+var Markers = new Mongo.Collection(null);
 
 Template.mappa.events({
     "click #clickableMapElement":function(event) {
@@ -52,51 +28,67 @@ Template.mappa.events({
 });
 
 
-Template.mappa.onCreated(function () {
-    // We can use the `ready` callback to interact with the map API once the map is ready.
-    GoogleMaps.ready('finesMap', function (map) {
-        
-        var theFinesCursor = Fines.find({
+Template.mappa.created = function () {
+   var coords = Geolocation.latLng();
+//    console.log(JSON.stringify(coords));
+    if(coords) {
+        Session.set("lat",coords.lat);
+        Session.set("lng",coords.lng);
+    }
+};
+
+Template.mappa.rendered = function () {
+    
+            $(function() {
+  $(window).resize(function() {
+    $('.map').css('height', window.innerHeight - 82 - 45);
+  });
+  $(window).resize(); // trigger resize event
+ });
+    L.Icon.Default.imagePath = '/images';
+
+    var lat =  Session.get("lat");
+    var lon = Session.get("lng");
+    //  console.log(lat);
+    //  console.log(lon);
+
+    var map = L.map('finesMap', {
+        doubleClickZoom: true,
+        touchZoom: true
+    }).setView([lat, lon], 13);
+
+    L.tileLayer.provider('OpenStreetMap').addTo(map);
+
+    var theFinesCursor = Fines.find({
             approved: 1
-        });
-
-        theFinesCursor.forEach(function (fine) {
-//            console.log(JSON.stringify(fine.loc));
-            if (fine.loc.coordinates[0] != 0.0 && fine.loc.coordinates[1] != 0.0) {
-                var myCenter = new google.maps.LatLng(fine.loc.coordinates[1], fine.loc.coordinates[0]);
-                var marker = new google.maps.Marker({
-                    position: myCenter,
-                    icon: 'icon_20X20.png'
-                });
-
-                var content = '<div class="row" id="clickableMapElement"><input type="hidden" id="'+fine._id+'"' +
-                    '<div class="col s6"><img class="mini-shot" name="imageData" src="'+fine.imageData+'" /></div>'+
-      '<div id="iw_content" class="col s6">'+"Segnalato in " + fine.address+'</div>' +
-   '</div>';
-                var infowindow = new google.maps.InfoWindow({
-//                    content: "Segnalato da " + fine.username + " in " + fine.address
-                    content:content
-                });
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map.instance, marker);
-                    Session.set("_id", fine._id);
-                });
-
-                google.maps.event.addListener(map.instance, 'click', function() {
-                    infowindow.close();
-                });
-
-                marker.setMap(map.instance);
-            }
-
-        });
-
-        // Add a marker to the map once it's ready
-//        var marker = new google.maps.Marker({
-//            position: map.options.center,
-//            map: map.instance
-//        });
-
     });
-});
+
+    var myIcon = L.icon({
+        iconUrl: 'icon_20X20.png',
+        iconSize: [20, 20]
+    });
+
+    theFinesCursor.forEach(function (fine) {
+        var lat = fine.loc.coordinates[1];
+        var lng = fine.loc.coordinates[0];
+
+        if (lat && lng) {
+           var popupContent =
+                '<div class="row" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
+                '<div class="col s6"><img class="mini-shot" name="imageData" src="' + fine.imageData + '" />' +
+                '</div>' +
+                '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
+                '</div>';
+            var marker = L.marker([lat, lng], {
+                _id: fine._id,
+                icon: myIcon,
+                clickable: true
+            });
+            //            marker.addTo(map);
+            marker.bindPopup(popupContent).openPopup();
+            map.addLayer(marker);
+        }
+    });
+
+ 
+};
