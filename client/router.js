@@ -7,10 +7,10 @@ Router.route('/crea', function () {
   this.render('crea');
 });
 
-Router.onBeforeAction(function() {
-  GoogleMaps.load();
-  this.next();
-}, { only: ['mappa','navigatore'] });
+//Router.onBeforeAction(function() {
+//  GoogleMaps.load();
+//  this.next();
+//} , { only: ['mappa','navigatore'] });
 
 Router.map(function(){
   this.route('mappa', {path: '/mappa'});

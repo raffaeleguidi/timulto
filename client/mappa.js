@@ -1,26 +1,34 @@
 
+
 Template.mappa.helpers({
     finesMapOptions: function() {
-        var coords = Geolocation.latLng();
+        
+//         Make sure the maps API has loaded
+        if (GoogleMaps.loaded()) {
+//            console.log("map google maps loaded");
+            var coords = Geolocation.latLng();
 
-        if(coords) {
-            var lat = coords.lat;
-            var lon = coords.lng;
+            if (coords) {
+                var lat = coords.lat;
+                var lon = coords.lng;
 
-            // Make sure the maps API has loaded
-            if (GoogleMaps.loaded()) {
+
                 // Map initialization options
-               return {
+                return {
                     center: new google.maps.LatLng(lat, lon),
                     zoom: 16
                 };
             }
+        }else {
+            console.log("map google maps not yet loaded");
         }
     }
 });
 
 Template.mappa.events({
     "click #clickableMapElement":function(event) {
+        event.preventDefault();
+        
         var selectedId = Session.get("_id");
         var fine = Fines.findOne({_id:selectedId});
 
@@ -36,16 +44,18 @@ Template.mappa.events({
 
             Router.go('/dettaglio');
         }
+        
     },
     "click #shoot": function (event) {
         Router.go('/crea');
     }
 });
 
+
 Template.mappa.onCreated(function () {
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('finesMap', function (map) {
-
+        
         var theFinesCursor = Fines.find({
             approved: 1
         });
