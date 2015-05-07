@@ -1,6 +1,7 @@
 Template.registerHelper("categories",  function() {
     //Meteor.call("getCategoriesValues");
-    return Session.get("categories");
+    return Categories.find({}).fetch()
+    //return Session.get("categories");
 });
 
 Template.registerHelper("isadmin", function() { 

@@ -21,21 +21,13 @@
         </div>
         {{/if}}
         <div class="row">
-            <h5 class="header center blue-text">Da API</h5>
-            <table class="striped">
-                <tbody>
-                    {{#each segnalazioni}} {{> fineToApprove}} {{/each}}
-                </tbody>
-            </table>
-        </div>
-        <!--<div class="row">
             <h5 class="header center blue-text">{{_ "Ultime segnalazioni"}} ({{latestFines.count}})</h5>
             <table class="striped">
                 <tbody>
                     {{#each latestFines}} {{> fineToApprove}} {{/each}}
                 </tbody>
             </table>
-        </div>-->
+        </div>
         {{> pulsantone }}
     </div>
     {{> footer}}
