@@ -2,10 +2,6 @@ Fines = new Mongo.Collection("fines");
 Administrators = new Mongo.Collection("administrators");
 Categories = new Mongo.Collection("categories");
 
-Ground.Collection(Fines);
-//Ground.Collection(Administrators);
-//Ground.Collection(Categories);
-
 function isAdministrator() {
     var username = "";
     var service = "";
