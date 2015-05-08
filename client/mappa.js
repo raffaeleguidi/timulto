@@ -43,7 +43,11 @@ Template.mappa.events({
     },
     "click #shoot": function (event) {
         Router.go('/crea');
-    }
+    },
+    'click a[target=_blank]': function (event) {
+    event.preventDefault();
+    window.open(event.target.href, '_blank');
+  }
 });
 
 Template.mappa.created = function () {
@@ -59,12 +63,13 @@ Template.mappa.created = function () {
         added: function(fine) {/* see previous post */
             var lat = fine.loc.coordinates[1];
             var lng = fine.loc.coordinates[0];
+            var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
             var popupContent =
                 '<div class="row" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
                 '<div class="col s6"><img class="mini-shot" name="imageData" src="' + fine.imageData + '" />' +
                 '</div>' +
                 '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
-                '</div>';
+                '</div><div>'+'<a href="'+mapQuestUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
             var marker = L.marker([lat, lng], {
                 _id: fine._id,
                 icon: myIcon,
