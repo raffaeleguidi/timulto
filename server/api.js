@@ -156,6 +156,7 @@ Router.map(function() {
 
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
+        console.log("here to decode you");
 
         /*var check = CryptoJS.HmacMD5(
                     this.request.headers.timestamp + '#' +
@@ -186,44 +187,15 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
         }
 
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
-//        var bitmap = new Buffer(fine.imageData, 'base64');
-        var bitmap = decodeBase64Image(fine.imageData);
-//        var fs = Meteor.npmRequire('fs');
-        var fs = Npm.require('fs');
 
-        fs.writeFile("/Users/rough/test2.jpg", fine.imageData, function(err) {
-            if(err) {
-                return console.log(err);
-            } else {
-                console.log("The file was saved!");
-            }
-        });
-        fs.writeFile("/Users/rough/test.png", bitmap, function(err) {
-            if(err) {
-                return console.log(err);
-            } else {
-                console.log("The file was saved!");
-            }
-        });
-        fs.writeFile("/Users/rough/test.jpg", bitmap, function(err) {
-            if(err) {
-                return console.log(err);
-            } else {
-                console.log("The file was saved!");
-            }
-        });
+        return {
 
-//        this.response.write(fine.imageData);
-        this.response.write("ciao");
-        this.done();
-//
-//        return {
-//          statusCode: 200,
-////          body: fine.imageData,
-//          headers: {
-//            'Content-Type': 'image/jpeg'
-//          },
-//        };
+          body: fine.imageData,
+          headers: {
+            'Content-Type': 'text/plain'
+          }
+
+        };
     }
 });
 

@@ -58,7 +58,7 @@ Meteor.startup(function () {
 
     Meteor.publish("fines", function () {
 //        return Fines.find({},{fields:{imageData:0}}, {sort: {createdAt: -1}});
-        return Fines.find({},{ sort: {createdAt: -1} });
+        return Fines.find({},{fields:{imageData:0}},{ sort: {createdAt: -1} });
     });
 
     Meteor.publish("categories", function () {
@@ -154,6 +154,9 @@ Meteor.startup(function () {
                     console.log("User is not an administrator and does not own the fine: "+ JSON.stringify(Meteor.user().profile.name));
                 }
             }
+        },
+        fineImage: function(fineId){
+            return Fines.findOne({_id:fineId},{fields:{imageData:1}});
         },
         reverseGeocode: function (lat, lon) {
             this.unblock();

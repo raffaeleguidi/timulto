@@ -62,7 +62,8 @@
 <template name="fineToApprove">
     <tr>
         <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span><br /></td>
-        <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
+        <td><img class="mini-shot" name="imageData{{_id}}"/></td>
+<!--        <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>-->
     </tr>
     <tr>
         <td></td>

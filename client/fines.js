@@ -84,7 +84,7 @@ Template.fineToApprove.events({
         Session.set("detailText",this.text);
         Session.set("detailAddress",this.address);
         Session.set("detailCategory",this.category);
-        Session.set("detailImageData",this.imageData);
+        Session.set("detailImageData",$('img[name="imageData' + this._id + '"]').attr('src'));
         Session.set("isapproved", (this.approved==1?true:false));
 
         Router.go('/dettaglio');
