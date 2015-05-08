@@ -38,15 +38,10 @@ App.accessRule('*.timulto.org/*');
 App.accessRule('*.google.com/*');
 App.accessRule('*.googleapis.com/*');
 App.accessRule('*.gstatic.com/*');
+App.accessRule('*.mqcdn.com/*');
 App.accessRule('*.mapquestapi.com/*');
 App.accessRule('*.openstreetmap.org/*');
 
-/*App.accessRule(
-    "http://timulto.meteor.com/*",
-    {
-        launchExternal: false
-    }
-);*/
 /*
 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).
 480dp: a tweener tablet like the Streak (480x800 mdpi).
