@@ -1,22 +1,13 @@
 <template name="mappa">
     <body>
         {{> navbar}}
-        <div id="finesMap" class="leaflet-container map" >
-<!--          <div id="finesMap" class="map"></div>-->
-<!--            {{> googleMap name="finesMap" options=finesMapOptions}}-->
+
+        <div id="finesMap" class="leaflet-container" style="display:block;" >
             {{> geopulsantino_fixedposition}}
             {{> pulsantone }}
         </div>
 
-    <div class="">
-      <footer class="page-footer orange" >
-        <div class="footer-copyright">
-          <div class="container">
-          &copy; <a onclick="window.open('http://www.timulto.org', '_system');" class="orange-text text-lighten-3" href="http://www.timulto.org">Timulto</a>  2015
-          </div>
-        </div>
-      </footer>
-    </div>
+        {{> footer}}
 
     </body>
 </template>
