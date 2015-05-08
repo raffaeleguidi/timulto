@@ -1,17 +1,20 @@
 
 var map;
+var cluster;
 var markers = {};
+
 var myIcon;
+
 var defaultZoomLevel = 16;
 var defaultIconUrl = 'icon_20X20.png';
 var defaultIconH = 20;
 var defaultIconW = 20;
 
+
 Template.mappa.events({
     "click #manualgeocode": function(event) {
         event.preventDefault();
-        
-//        Meteor.geolocalization.geocode();
+
         Meteor.geolocalization.latLng();
         
         map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
@@ -19,12 +22,14 @@ Template.mappa.events({
     },
     "click #clickableMapElement":function(event) {
         event.preventDefault();
+        var selectedId = $('input[type=\'hidden\']').attr("id");
         
-        var selectedId = Session.get("_id");
+//        var selectedId = Session.get("_id");
         var fine = Fines.findOne({_id:selectedId});
 
         if(fine) {
-            console.log(JSON.stringify(fine));
+//            console.log(JSON.stringify(fine));
+            Session.set("_id",fine._id);
             Session.set("createdAt", fine.createdAt);
             Session.set("detailUsername", fine.username);
             Session.set("detailText",fine.text);
@@ -48,6 +53,8 @@ Template.mappa.created = function () {
         iconSize: [defaultIconW, defaultIconH]
     });
     
+    cluster = new L.MarkerClusterGroup();
+
     Fines.find({approved: 1}).observe({
         added: function(fine) {/* see previous post */
             var lat = fine.loc.coordinates[1];
@@ -66,28 +73,29 @@ Template.mappa.created = function () {
             
             marker.bindPopup(popupContent).openPopup();
             markers[marker.options._id] = marker;
-            
-            map.addLayer(marker);
+//            map.addLayer(marker);
+            cluster.addLayer(marker);
         },
-        changed: function(fine) {
-          var marker = markers[fine._id];
-          if (marker) 
-              marker.setIcon(myIcon);
-        },
+//        changed: function(fine) {
+//          var marker = markers[fine._id];
+//          if (marker) {
+//              marker.setIcon(myIcon);
+//          }
+//        },
         removed: function(fine) {
-          var marker = markers[fine._id];
-          if (map.hasLayer(marker)) {
-            map.removeLayer(marker);
-            delete markers[fine._id];
-          }
+            var marker = markers[fine._id];
+
+            if (cluster.hasLayer(marker)) {
+                cluster.removeLayer(marker);
+                delete markers[fine._id];
+            }
         }
     });
 };
 
 Template.mappa.rendered = function () {
     Meteor.geolocalization.latLng();
-    
-    
+
     $(function () {
         $(window).resize(function () {
             $('.map').css('height', window.innerHeight - 82 - 45);
@@ -115,8 +123,9 @@ Template.mappa.rendered = function () {
 
     L.tileLayer.provider('MapQuestOpen').addTo(map);
 
+    map.addLayer(cluster);
             
-    for( index in markers ) {
-        map.addLayer(markers[index]);
-    }
+//    for( index in markers ) {
+//        map.addLayer(markers[index]);
+//    }
 };
