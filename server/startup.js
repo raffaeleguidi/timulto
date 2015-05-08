@@ -57,7 +57,7 @@ Meteor.startup(function () {
 
 
     Meteor.publish("fines", function () {
-        return Fines.find({}, {sort: {createdAt: -1}});
+        return Fines.find({},{fields:{imageData:0}}, {sort: {createdAt: -1}});
     });
 
     Meteor.publish("categories", function () {
