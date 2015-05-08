@@ -23,4 +23,6 @@ jparker:crypto-md5
 jparker:crypto-hmac
 momentjs:moment
 bevanhunt:leaflet
+meteorhacks:npm
+npm-container
 herrhelms:meteor-leaflet-markercluster
