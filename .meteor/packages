@@ -25,3 +25,4 @@ momentjs:moment
 bevanhunt:leaflet
 meteorhacks:npm
 npm-container
+herrhelms:meteor-leaflet-markercluster
