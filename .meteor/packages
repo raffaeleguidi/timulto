@@ -21,6 +21,5 @@ iron:router
 nimble:restivus
 jparker:crypto-md5
 jparker:crypto-hmac
-dburles:google-maps
 momentjs:moment
 bevanhunt:leaflet
