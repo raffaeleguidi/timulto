@@ -46,6 +46,20 @@ function clientGeocode (lat, lon, cb) {
 
 Meteor.geolocalization = {
 
+    latLng: function() {
+        try {
+//            console.log("latLng");
+            var coords = Geolocation.latLng();
+            
+            if (coords && coords.lat && coords.lng) {
+//                console.log("nuove coordinate trovate");
+                Session.set("lat",coords.lat);
+                Session.set("lon",coords.lng);
+            }
+        } catch(err) {
+            console.log("error geocoding " + err.message);
+        }
+    },
     geocode: function() {
         try {
             var coords = Geolocation.latLng();
