@@ -34,12 +34,12 @@ App.accessRule(
     }
 );
 
+App.accessRule('*.timulto.org/*');
 App.accessRule('*.google.com/*');
 App.accessRule('*.googleapis.com/*');
 App.accessRule('*.gstatic.com/*');
 App.accessRule('*.mapquestapi.com/*');
 App.accessRule('*.openstreetmap.org/*');
-
 
 /*App.accessRule(
     "http://timulto.meteor.com/*",
