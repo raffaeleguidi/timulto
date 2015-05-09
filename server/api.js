@@ -138,22 +138,6 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
 });
 
 
-Router.map(function() {
-    this.route('serverFile', {
-        where: 'server',
-        path: /^\/uploads_url_prefix\/(.*)$/,
-        action: function() {
-           var filePath = process.env.PWD + '/.uploads_dir_on_server/' + this.params[1];
-           var data = fs.readFileSync(filePath);
-           this.response.writeHead(200, {
-                'Content-Type': 'image'
-           });
-           this.response.write(data);
-           this.response.end();
-        }
-    });
-});
-
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
 
@@ -174,10 +158,10 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
 
         return {
-          statusCode: 304,
+          statusCode: 200,
           headers: {
-            'Content-Type': 'image/png',
-            'Cache-Control': 'max-age=86400'
+            'Content-Type': 'image/png'/*,
+            'Cache-Control': 'max-age=86400'*/
           },
           body: decodeBase64Image(fine.imageData).data
         };
