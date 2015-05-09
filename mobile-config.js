@@ -27,25 +27,16 @@ App.icons({
   'android_xhdpi': 'resources/icons/320.png'
 });
 
-App.accessRule('*', { launchExternal: false });
+App.accessRule('http://*.meteor.local/*');
 
-App.accessRule(
-    "https://api.twitter.com/*",
-    {
-        launchExternal: false
-    }
-);
-
-/*
-App.accessRule('*.timulto.org/*');
-App.accessRule('*.google.com/*');
-App.accessRule('*.googleapis.com/*');
-App.accessRule('*.gstatic.com/*');
-App.accessRule('*.mqcdn.com/*');
-App.accessRule('*.mapquestapi.com/*');
-App.accessRule('*.openstreetmap.org/*');
-App.accessRule('*.timulto.org/*');
-*/
+App.accessRule( "https://api.twitter.com/*", { launchExternal: false } );
+App.accessRule('http://*.timulto.org/*');
+App.accessRule('http://*.mqcdn.com/*');
+App.accessRule('http://*.mapquestapi.com/*');
+App.accessRule('http://*.openstreetmap.org/*');
+App.accessRule('http://*.google.com/*');
+App.accessRule('http://*.googleapis.com/*');
+App.accessRule('http://*.gstatic.com/*');
 
 /*
 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).

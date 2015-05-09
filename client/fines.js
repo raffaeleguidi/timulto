@@ -1,5 +1,5 @@
 
-Template.fineDetails.rendered = function(){
+/*Template.fineDetails.rendered = function(){
       var canvas = document.getElementById('myCanvas');
       if (!canvas) {
           console.log('myCanvas is null');
@@ -12,7 +12,7 @@ Template.fineDetails.rendered = function(){
         context.drawImage(imageObj, 0, 0,350,350);//,600,600);
       };
       imageObj.src = Session.get("detailImageData");
-};
+};*/
 
 Template.fineDetails.events({
      "click .naviga":function(event) {
@@ -84,7 +84,7 @@ Template.fineInARow.events({
         Session.set("detailText",this.text);
         Session.set("detailAddress",this.address);
         Session.set("detailCategory",this.category);
-        Session.set("detailImageData",$('img[name="imageData' + this._id + '"]').attr('src'));
+        //Session.set("detailImageData",$('img[name="imageData' + this._id + '"]').attr('src'));
         Session.set("isapproved", (this.approved==1?true:false));
 
         Router.go('/dettaglio');
