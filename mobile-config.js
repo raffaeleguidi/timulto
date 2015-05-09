@@ -35,8 +35,11 @@ App.accessRule('http://*.mqcdn.com/*');
 App.accessRule('http://*.mapquestapi.com/*');
 App.accessRule('http://*.openstreetmap.org/*');
 App.accessRule('http://*.google.com/*');
+App.accessRule('https://*.google.com/*');
 App.accessRule('http://*.googleapis.com/*');
+App.accessRule('https://*.googleapis.com/*');
 App.accessRule('http://*.gstatic.com/*');
+App.accessRule('https://*.gstatic.com/*');
 
 /*
 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).
