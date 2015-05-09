@@ -157,20 +157,6 @@ Router.map(function() {
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
 
-        /*var check = CryptoJS.HmacMD5(
-                    this.request.headers.timestamp + '#' +
-                    this.request.headers.app + '#' +
-                    this.urlParams.service + '#' +
-                    this.urlParams.id,
-                key).toString();
-
-        console.log(check);
-
-        if (this.request.headers.token != check) return {
-            statusCode: 401,
-            body: {status: 'unauthorized', message: 'Token is not correct'}
-        };*/
-
         function decodeBase64Image(dataString) {
           var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
           var response = {};
@@ -187,15 +173,11 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
 
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
 
-        /*this.response.writeHead(200, {'Content-Type': 'image/png'});
-        this.response.write(decodeBase64Image(fine.imageData).data);
-        this.done();
-        return "";*/
-
         return {
           statusCode: 200,
           headers: {
-            'Content-Type': 'image/png'
+            'Content-Type': 'image/png',
+            'Cache-Control': 'max-age=86400'
           },
           body: decodeBase64Image(fine.imageData).data
         };
