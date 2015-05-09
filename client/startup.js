@@ -29,16 +29,9 @@ Deps.autorun(function (c) {
     });
   }
 
+  // without var is GLOBAL
+  //ROOT_URL = "http://beta.timulto.org";
   Meteor.startup(function(){
-
-      Meteor.call('rootUrl', function (error, result) {
-          if (error) {
-            return "";
-          } else {
-            console.log("rootUrl=" + result);
-            Session.set("ROOT_URL", result);
-          }
-      });
 
       //loadCategories();
 

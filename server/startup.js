@@ -48,6 +48,13 @@ function setupInitialData() {
 
 Meteor.startup(function () {
 
+    ROOT_URL = process.env.ROOT_URL;
+
+    console.log("ROOT_URL=" + ROOT_URL);
+    console.log("env.ROOT_URL=" + process.env.ROOT_URL);
+    console.log("env.MOBILE_ROOT_URL=" + process.env.MOBILE_ROOT_URL);
+
+
     setupInitialData();
 
     Restivus.configure({
@@ -119,8 +126,9 @@ Meteor.startup(function () {
 //                return isAdministrator();
 //            },
         rootUrl: function() {
-            console.log("ROOT_URL" + process.env.ROOT_URL);
-            console.log("MOBILE_ROOT_URL" + process.env.MOBILE_ROOT_URL);
+            console.log("ROOT_URL=" + process.env.ROOT_URL);
+            console.log("env.ROOT_URL=" + process.env.ROOT_URL);
+            console.log("env.MOBILE_ROOT_URL=" + process.env.MOBILE_ROOT_URL);
             return process.env.ROOT_URL
         },
         approveFine: function (fineId) {
