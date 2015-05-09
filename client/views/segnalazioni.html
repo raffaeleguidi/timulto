@@ -14,7 +14,7 @@
                 <h5 class="header center blue-text">{{_ "Segnalazioni da verificare"}} ({{finesToApprove.count}})</h5>
                 <table class="striped">
                     <tbody>
-                        {{#each finesToApprove}} {{> fineToApprove}} {{/each}}
+                        {{#each finesToApprove}} {{> fineInARow}} {{/each}}
                     </tbody>
                 </table>
             </div>
@@ -24,7 +24,7 @@
             <h5 class="header center blue-text">{{_ "Ultime segnalazioni"}} ({{latestFines.count}})</h5>
             <table class="striped">
                 <tbody>
-                    {{#each latestFines}} {{> fineToApprove}} {{/each}}
+                    {{#each latestFines}} {{> fineInARow}} {{/each}}
                 </tbody>
             </table>
         </div>

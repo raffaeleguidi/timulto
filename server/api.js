@@ -156,7 +156,6 @@ Router.map(function() {
 
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
-        console.log("here to decode you");
 
         /*var check = CryptoJS.HmacMD5(
                     this.request.headers.timestamp + '#' +
@@ -188,39 +187,20 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
 
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
 
+        /*this.response.writeHead(200, {'Content-Type': 'image/png'});
+        this.response.write(decodeBase64Image(fine.imageData).data);
+        this.done();
+        return "";*/
+
         return {
-
-          body: fine.imageData,
+          statusCode: 200,
           headers: {
-            'Content-Type': 'text/plain'
-          }
-
+            'Content-Type': 'image/png'
+          },
+          body: decodeBase64Image(fine.imageData).data
         };
     }
 });
-
-
-WebApp.connectHandlers.use(function(req, res, next) {
-
-//    var fs = Npm.require('fs');
-//    var filePath = process.env.PWD + '/.ciccio/' + fileName;
-//    fs.writeFileSync(filePath, data, 'binary');
-//
-
-    var re = /^\/uploads_url_prefix\/(.*)$/.exec(req.url);
-    if (re !== null) {   // Only handle URLs that start with /uploads_url_prefix/*
-        var filePath = process.env.PWD + '/.ciccio/' + re[1];
-        var data = fs.readFileSync(filePath);
-        res.writeHead(200, {
-                'Content-Type': 'image'
-            });
-        res.write(data);
-        res.end();
-    } else {  // Other urls will have default behaviors
-        next();
-    }
-});
-
 
 Restivus.addRoute('categories', {authRequired: false}, {
     get: function () {

@@ -1,12 +1,3 @@
-<template name="fine">
-  <tr>
-      <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
-      <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>-->
-    </td>
-  </tr>
-</template>
-
 <template name="fineDetails">
     {{> navbar}}
 
@@ -18,17 +9,11 @@
 
       <div class="section">
 
-        <h5 class="header center blue-text">Dettaglio segnalazione</h5>
+        <h5 class="header center blue-text">{{_ category}} #{{_id}}</h5>
           <div class="row center">
               <div>
-                  <canvas id="myCanvas" style="width: 100%; float: center" width="400" height="400"></canvas>
-              </div>
-
-<!--              <img class="mini-shot" name="imageData" style="width: 100%; float: center;" width="500" height="500" src="{{imageData}}" /><br />-->
-
-              <div>
+                 <img src="/api/image/{{_id}}" />
                  <p class="card-panel orange lighten-4">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
-<!--                  Tipologia segnalazione: {{category}}-->
               </div>
 
           </div>
@@ -44,36 +29,31 @@
               </div>
           </div>
           {{/if}}
-<!--
-          
-           <div class="row center">
-             <button class="naviga btn waves-light" type="submit" name="action">Naviga
-                      <i class="mdi-login right"></i>
-            </button>
-        
-          </div>
--->
         </div>
     </div>
 
     {{> footer}}
 </template>
 
-<template name="fineToApprove">
-    <tr>
-        <td><span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span><br /></td>
-        <td><img class="mini-shot" name="imageData{{_id}}"/></td>
+<template name="fineInARow">
+    <tr class="fine">
+        <td>
+            <h6 class="blue-text">{{_ category}} #{{_id}}</h6>
+            <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span>
+        </td>
+        <td>
+            <img class="mini-shot" src="/api/image/{{_id}}"/>
+        </td>
 <!--        <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>-->
-    </tr>
-    <tr>
-        <td></td>
-        
+<!--        <td><img class="mini-shot" name="imageData{{_id}}"/></td> -->
     </tr>
 </template>
 
-<template name="foundfine">
+<template name="fine">
   <tr>
-      <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>
-      <td><span id="{{_id}}" class="text">{{formatDate createdAt}} - Da {{username}}: {{category}} - {{text}}, in {{address}}</span></td>
+      <td><img class="mini-shot" name="imageData" src="/api/image/{{_id}}" /></td>
+      <td><span class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
+      <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>-->
+    </td>
   </tr>
 </template>

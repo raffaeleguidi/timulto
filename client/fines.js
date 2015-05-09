@@ -74,8 +74,8 @@ Template.fineDetails.helpers({
     }
 });
 
-Template.fineToApprove.events({
-    "click .mini-shot":function(){
+Template.fineInARow.events({
+    "click .fine":function(){
         Session.set("lat",this.loc.coordinates[1]);
         Session.set("lon",this.loc.coordinates[0]);
         Session.set("_id", this._id);
