@@ -147,7 +147,8 @@ WebApp.connectHandlers.use(function(req, res, next) {
         var fine = Fines.findOne({_id: re[1], approved: 1});
         if (fine) {
             res.writeHead(200, {
-                    'Content-Type': 'image/png'
+                    'Content-Type': 'image/png',
+                    'transfer-encoding', ''
                     /*'Content-Type': 'text/plain'*/
             });
             res.write(decodeBase64Image(fine.imageData).data);
