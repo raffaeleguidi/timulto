@@ -5,7 +5,7 @@ App.info({
   author: 'TiMulto',
   email: 'info@timulto.org',
   website: 'http://www.timulto.org',
-  version: '0.0.8'
+  version: '0.0.9'
 });
 
 App.launchScreens({
@@ -27,6 +27,8 @@ App.icons({
   'android_xhdpi': 'resources/icons/320.png'
 });
 
+App.accessRule('*', { launchExternal: false });
+
 App.accessRule(
     "https://api.twitter.com/*",
     {
@@ -34,7 +36,6 @@ App.accessRule(
     }
 );
 
-App.accessRule('*');
 /*
 App.accessRule('*.timulto.org/*');
 App.accessRule('*.google.com/*');
