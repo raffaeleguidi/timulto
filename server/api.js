@@ -198,7 +198,7 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
         } else {
             return {
               statusCode: 404,
-              body: 'cannot find timulto #' + this.urlParams.fineId;
+              body: 'cannot find timulto #' + this.urlParams.fineId
             }
         }
 
