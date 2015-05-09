@@ -1,8 +1,3 @@
-        this.statusCode = 200;
-// Generates: GET, POST on /api/users and GET, DELETE /api/users/:id for
-//Restivus.addCollection(Fines, {excludedEndpoints: ['post', 'put','deleteAll', 'delete']});
-
-
 function sanitize(fine) {
     delete fine.username;
     delete fine.owner;
