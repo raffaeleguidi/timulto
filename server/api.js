@@ -137,23 +137,48 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
     }
 });
 
+WebApp.connectHandlers.use(function(req, res, next) {
+    var re = /^\/api\/image\/(.*)$/.exec(req.url);
+    if (re !== null) {   // Only handle URLs that start with /url_path/*
 
-Restivus.addRoute('image/:fineId', {authRequired: false}, {
-    get: function () {
-
-        function decodeBase64Image(dataString) {
-          var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
-          var response = {};
-
-          if (matches.length !== 3) {
-            return new Error('Invalid input string');
-          }
-
-          response.type = matches[1];
-          response.data = new Buffer(matches[2], 'base64');
-
-          return response;
+        console.log(re[1]);
+       /* var filePath = process.env.PWD + '/.server_path/' + re[1];
+        var data = fs.readFileSync(filePath, data);*/
+        var fine = Fines.findOne({_id: re[1], approved: 1});
+        if (fine) {
+            res.writeHead(200, {
+                    'Content-Type': 'image/png'
+                    /*'Content-Type': 'text/plain'*/
+            });
+            res.write(decodeBase64Image(fine.imageData).data);
+        } else {
+            res.writeHead(404);
         }
+
+        res.end();
+    } else {  // Other urls will have default behaviors
+        next();
+    }
+});
+
+
+
+function decodeBase64Image(dataString) {
+  var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+  var response = {};
+
+  if (matches.length !== 3) {
+    return new Error('Invalid input string');
+  }
+
+  response.type = matches[1];
+  response.data = new Buffer(matches[2], 'base64');
+
+  return response;
+}
+
+Restivus.addRoute('nooooimage/:fineId', {authRequired: false}, {
+    get: function () {
 
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
 
@@ -165,6 +190,56 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
           },
           body: decodeBase64Image(fine.imageData).data
         };
+
+        /*
+
+Remote Address:127.0.0.1:3000
+Request URL:http://localhost:3000/images/timulto.png
+Request Method:GET
+Status Code:304 Not Modified
+Request Headers
+    Accept:image/webp,;q=0.8
+    Accept-Encoding:gzip, deflate, sdch
+    Accept-Language:en-US,en;q=0.8,it;q=0.6
+    Cache-Control:max-age=0
+    Connection:keep-alive
+    Host:localhost:3000
+    If-Modified-Since:Sat, 09 May 2015 14:03:33 GMT
+    If-None-Match:"13516-1431180213000"
+    Referer:http://localhost:3000/
+    User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.95 Safari/537.36
+Response Headers
+    accept-ranges:bytes
+    cache-control:public, max-age=86400
+    connection:keep-alive
+    date:Sat, 09 May 2015 14:05:03 GMT
+    etag:"13516-1431180213000"
+    last-modified:Sat, 09 May 2015 14:03:33 GMT
+    vary:Accept-Encoding
+
+Remote Address:127.0.0.1:3000
+Request URL:http://localhost:3000/api/image/uzyYKjhSwSKgzNrKc
+Request Method:GET
+Status Code:200 OK
+Request Headersview source
+    Accept:image/webp,;q=0.8
+    Accept-Encoding:gzip, deflate, sdch
+    Accept-Language:en-US,en;q=0.8,it;q=0.6
+    Cache-Control:max-age=0
+    Connection:keep-alive
+    Host:localhost:3000
+    Referer:http://localhost:3000/
+    User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.95 Safari/537.36
+Response Headersview source
+    access-control-allow-origin:*
+    connection:keep-alive
+    content-type:image/png
+    date:Sat, 09 May 2015 14:05:04 GMT
+    transfer-encoding:chunked
+    vary:Accept-Encoding
+
+        */
+
     }
 });
 
