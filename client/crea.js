@@ -67,7 +67,7 @@ Template.crea.helpers({
 });
 
 Template.crea.events({
-     "change #category":function(event) {
+    "change #category":function(event) {
         console.log("set category");
         Session.set("categoryselected", true);
     },

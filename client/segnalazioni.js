@@ -4,9 +4,9 @@
 // to load data from restful services
 // instead of meteor collections
 Template.segnalazioni.created = function(){
-    $.get("/api/segnalazioni", function(data){
+    /*$.get("/api/segnalazioni", function(data){
         Session.set("segnalazioni", data);
-    });
+    });*/
 
     Fines.find({approved: 1}).observe({
         added: function(fine) {/* see previous post */
