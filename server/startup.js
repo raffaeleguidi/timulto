@@ -118,6 +118,11 @@ Meteor.startup(function () {
 //            isAdministrator: function () {
 //                return isAdministrator();
 //            },
+        rootUrl: function() {
+            console.log("ROOT_URL" + process.env.ROOT_URL);
+            console.log("MOBILE_ROOT_URL" + process.env.MOBILE_ROOT_URL);
+            return process.env.ROOT_URL
+        },
         approveFine: function (fineId) {
 
             if (fineId && isAdministrator()) {

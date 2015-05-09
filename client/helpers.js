@@ -1,3 +1,15 @@
+Template.registerHelper("rootUrl", function() {
+    Session.get("ROOT_URL");
+    /*Meteor.call('rootUrl', function (error, result) {
+      if (error) {
+        return "";
+      } else {
+        console.log("rootUrl=" + result);
+        return result;
+      }
+    });*/
+});
+
 Template.registerHelper("categories",  function() {
     //Meteor.call("getCategoriesValues");
     return Categories.find({}).fetch()

@@ -31,6 +31,15 @@ Deps.autorun(function (c) {
 
   Meteor.startup(function(){
 
+      Meteor.call('rootUrl', function (error, result) {
+          if (error) {
+            return "";
+          } else {
+            console.log("rootUrl=" + result);
+            Session.set("ROOT_URL", result);
+          }
+      });
+
       //loadCategories();
 
       TAPi18n.setLanguage(getUserLanguage())

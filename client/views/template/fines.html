@@ -12,7 +12,7 @@
         <h5 class="header center blue-text">{{_ category}} #{{_id}}</h5>
           <div class="row center">
               <div>
-                 <img src="http://beta.timulto.org/api/image/{{_id}}" />
+                 <img src="{{rootUrl}}/api/image/{{_id}}" />
                  <p class="card-panel orange lighten-4">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
               </div>
 
@@ -42,7 +42,7 @@
             <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span>
         </td>
         <td>
-            <img class="mini-shot" src="http://beta.timulto.org/api/image/{{_id}}"/>
+            <img class="mini-shot" src="{{rootUrl}}/api/image/{{_id}}"/>
         </td>
 <!--        <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>-->
 <!--        <td><img class="mini-shot" name="imageData{{_id}}"/></td> -->
@@ -51,7 +51,7 @@
 
 <template name="fine">
   <tr>
-      <td><img class="mini-shot" name="imageData" src="http://beta.timulto.org/api/image/{{_id}}" /></td>
+      <td><img class="mini-shot" name="imageData" src="{{rootUrl}}/api/image/{{_id}}" /></td>
       <td><span class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
       <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>-->
     </td>
