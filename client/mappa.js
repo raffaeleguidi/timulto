@@ -15,6 +15,10 @@ var defaultIconW = 30;
 
 
 Template.mappa.events({
+    'click a[target=_blank]': function (event) {
+        event.preventDefault();
+        window.open(event.target.href, '_blank');
+    },
     "click #manualgeocode": function(event) {
         event.preventDefault();
 
