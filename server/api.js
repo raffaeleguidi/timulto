@@ -174,7 +174,7 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
 
         return {
-          statusCode: 200,
+          statusCode: 304,
           headers: {
             'Content-Type': 'image/png',
             'Cache-Control': 'max-age=86400'
