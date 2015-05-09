@@ -11,7 +11,7 @@ Template.registerHelper("rootUrl", function() {
                 console.log("errore");
             }
             console.log("terza"  + Session.get("rootUrl"));
-            Session.set("rootUrl", res)
+            Session.set("rootUrl", res + '/')
             return res;
         });
     } else {
