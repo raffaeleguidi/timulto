@@ -144,8 +144,8 @@ WebApp.connectHandlers.use(function(req, res, next) {
         /* var filePath = process.env.PWD + '/.server_path/' + re[1];
         var data = fs.readFileSync(filePath, data);*/
         var fine = Fines.findOne({_id: re[1], approved: 1});
-        var rawData = decodeBase64Image(fine.imageData).data
         if (fine) {
+            var rawData = decodeBase64Image(fine.imageData).data
             res.writeHead(200, {
                     'Content-Type': 'image/png',
                     'Content-Length': rawData.length,
@@ -183,17 +183,24 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
 
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
-        var rawData = decodeBase64Image(fine.imageData).data;
-        return {
-          statusCode: 200,
-          headers: {
-            'Content-Type': 'image/png',
-            'Content-Length': rawData.length,
-            'transfer-encoding': ''/*,
-            'Cache-Control': 'max-age=86400'*/
-          },
-          body: rawData
-        };
+        if (fine) {
+            var rawData = decodeBase64Image(fine.imageData).data;
+            return {
+              statusCode: 200,
+              headers: {
+                'Content-Type': 'image/png',
+                'Content-Length': rawData.length,
+                'transfer-encoding': ''/*,
+                'Cache-Control': 'max-age=86400'*/
+              },
+              body: rawData
+            }
+        } else {
+            return {
+              statusCode: 404,
+              body: 'cannot find timulto #' + this.urlParams.fineId;
+            }
+        }
 
         /*
 
