@@ -12,13 +12,11 @@ Template.registerHelper("rootUrl", function() {
             }
 //            console.log("terza"  + Session.get("rootUrl"));
             Session.set("rootUrl", res)
-            return res;
         });
     } else {
 //        console.log("ultima" + Session.get("rootUrl"));
         return Session.get("rootUrl");
     }
-    return Session.get("rootUrl");
 });
 
 Template.registerHelper("categories",  function() {
