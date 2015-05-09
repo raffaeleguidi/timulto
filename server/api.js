@@ -141,17 +141,18 @@ WebApp.connectHandlers.use(function(req, res, next) {
     var re = /^\/api\/image\/(.*)$/.exec(req.url);
     if (re !== null) {   // Only handle URLs that start with /url_path/*
 
-        console.log(re[1]);
-       /* var filePath = process.env.PWD + '/.server_path/' + re[1];
+        /* var filePath = process.env.PWD + '/.server_path/' + re[1];
         var data = fs.readFileSync(filePath, data);*/
         var fine = Fines.findOne({_id: re[1], approved: 1});
+        var rawData = decodeBase64Image(fine.imageData).data
         if (fine) {
             res.writeHead(200, {
                     'Content-Type': 'image/png',
+                    'Content-Length': rawData.length,
                     'transfer-encoding': ''
                     /*'Content-Type': 'text/plain'*/
             });
-            res.write(decodeBase64Image(fine.imageData).data);
+            res.write(rawData);
         } else {
             res.writeHead(404);
         }
