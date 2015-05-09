@@ -6,9 +6,9 @@ var markers = {};
 var myIcon;
 
 var defaultZoomLevel = 16;
-var defaultIconUrl = 'icon_20X20.png';
-var defaultIconH = 20;
-var defaultIconW = 20;
+var defaultIconUrl = 'icon_30X30.png';
+var defaultIconH = 30;
+var defaultIconW = 30;
 
 
 Template.mappa.events({
