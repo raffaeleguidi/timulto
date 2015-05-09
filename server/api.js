@@ -183,12 +183,12 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
 
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
-        console.log("fine found :  " + JSON.stringify(JSON));
+       
         if (fine) {
-            console.log("fineId= " + this.urlParams.fineId);
-            console.log("image data= " + (fine.imageData != null));
+//            console.log("fineId= " + this.urlParams.fineId);
+//            console.log("image data= " + (fine.imageData != null));
             var rawData = decodeBase64Image(fine.imageData).data;
-            console.log("content length= " + rawData.length);
+//            console.log("content length= " + rawData.length);
             return {
               statusCode: 200,
               headers: {
