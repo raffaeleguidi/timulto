@@ -191,7 +191,7 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
             return {
               statusCode: 200,
               headers: {
-                'Content-Type': 'image/png',
+                'Content-Type': 'text/plain',
                 'Content-Length': rawData.length,
                 'transfer-encoding': 'identity'/*,
                 'Cache-Control': 'max-age=86400'*/
