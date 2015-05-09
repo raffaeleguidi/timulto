@@ -71,13 +71,13 @@ Template.crea.events({
         console.log("set category");
         Session.set("categoryselected", true);
     },
-    "input #address": function(event){
+   /* "input #address": function(event){
         if(!$("#address").val()) {
             Session.set("address","");
         } else {
             Session.set("address","a");
         }
-    },
+    },*/
     "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();
