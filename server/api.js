@@ -177,7 +177,7 @@ function decodeBase64Image(dataString) {
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
 
-        var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
+        var fine = Fines.findOne({_id: this.urlParams.fineId});
 
         if (fine) {
 //            console.log("fineId= " + this.urlParams.fineId);
@@ -188,9 +188,9 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
               statusCode: 200,
               headers: {
                 'Content-Type': 'text/plain',
-                'Content-Length': rawData.length,
-                'transfer-encoding': 'identity'/*,
-                'Cache-Control': 'max-age=86400'*/
+                //'Content-Length': rawData.length,
+                //'transfer-encoding': 'identity',
+                'Cache-Control': 'public,max-age=86400'
               },
               body: rawData
             }

@@ -1,5 +1,5 @@
 function rootUrl() {
-    return "http://beta.timulto.org/";
+    return Session.get("rootUrl");
 }
 
 var map;

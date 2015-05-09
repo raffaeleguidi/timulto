@@ -6,7 +6,7 @@ Template.registerHelper("rootUrl", function() {
     if (!Session.get("rootUrl")) {
         Meteor.call("rootUrl", function(err, res){
             if (err) {
-                console.log("errore");
+                console.log("error "+err);
             }
             Session.set("rootUrl", res)
             return res;
