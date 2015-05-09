@@ -138,7 +138,7 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
 });
 
 WebApp.connectHandlers.use(function(req, res, next) {
-    var re = /^\/api\/image\/(.*)$/.exec(req.url);
+    var re = /^\/webappapi\/image\/(.*)$/.exec(req.url);
     if (re !== null) {   // Only handle URLs that start with /url_path/*
 
         /* var filePath = process.env.PWD + '/.server_path/' + re[1];
@@ -179,18 +179,20 @@ function decodeBase64Image(dataString) {
   return response;
 }
 
-Restivus.addRoute('nooooimage/:fineId', {authRequired: false}, {
+Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
 
         var fine = Fines.findOne({_id: this.urlParams.fineId, approved: 1});
-
+        var rawData = decodeBase64Image(fine.imageData).data;
         return {
           statusCode: 200,
           headers: {
-            'Content-Type': 'image/png'/*,
+            'Content-Type': 'image/png',
+            'Content-Length': rawData.length,
+            'transfer-encoding': ''/*,
             'Cache-Control': 'max-age=86400'*/
           },
-          body: decodeBase64Image(fine.imageData).data
+          body: rawData
         };
 
         /*
