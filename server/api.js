@@ -148,7 +148,7 @@ WebApp.connectHandlers.use(function(req, res, next) {
         if (fine) {
             res.writeHead(200, {
                     'Content-Type': 'image/png',
-                    'transfer-encoding', ''
+                    'transfer-encoding': ''
                     /*'Content-Type': 'text/plain'*/
             });
             res.write(decodeBase64Image(fine.imageData).data);
