@@ -22,6 +22,10 @@
     }});*/
 //};
 
+Template.segnalazioni.rendered = function () {
+    depth = 0;
+}
+
 Template.segnalazioni.helpers({
     /*segnalazioni: function() {
         return Session.get("segnalazioni");

@@ -10,6 +10,7 @@ getUserLanguage = function () {
 ////////////// Crea /////////////////
 
 Template.crea.rendered = function () {
+    depth = 1;
     Meteor.photoHandling.resetPicture();
     if (Meteor.isCordova) {
         Meteor.photoHandling.takePhoto();

@@ -14,6 +14,10 @@
       imageObj.src = Session.get("detailImageData");
 };*/
 
+Template.fineDetails.rendered = function(){
+    depth = 1;
+}
+
 Template.fineDetails.events({
     "click .fineonmap": function(event) {
         Session.set("selectedLat",Session.get("lat"));
