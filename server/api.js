@@ -220,6 +220,53 @@ function readFile(fileName) {
     return fs.readFileSync(fileName);
 }
 
+Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
+    get: function () {
+        var fine = Fines.findOne({_id: this.urlParams.fineId});
+
+        if (fine) {
+            var tmpfile = os.tmpdir() + '/' + fine._id + '.png';
+            if (!fs.existsSync(tmpfile)) {
+                writeToFile(tmpfile, decodeBase64Image(fine.imageData));
+            }
+            var tmpthumb = os.tmpdir() + '/' + fine._id + '-thumb.png';
+
+            if (!fs.existsSync(tmpthumb)) {
+                Imagemagick.crop({
+                  srcPath: tmpfile,
+                  dstPath: tmpthumb,
+                  width: 100,
+                  height: 100,
+                  quality: 1,
+                  gravity: "Center"
+                });
+            }
+
+            var buffer = readFile(tmpthumb);
+            return {
+              statusCode: 200,
+              headers: {
+                'Content-Type': 'image/png',
+                'Cache-Control': 'public,max-age=86400'
+              },
+              /*this switches off chunked transfer
+              headers: {
+                'Content-Type': 'text/plain',
+                'Content-Length': buffer.length,
+                'transfer-encoding': 'identity',
+                'Cache-Control': 'public,max-age=86400'
+              },*/
+              body: buffer
+            }
+        } else {
+            return {
+              statusCode: 404,
+              body: 'cannot find timulto #' + this.urlParams.fineId
+            }
+        }
+    }
+});
+
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
         var fine = Fines.findOne({_id: this.urlParams.fineId});

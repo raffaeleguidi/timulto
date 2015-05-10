@@ -27,8 +27,10 @@ i.mdi-navigation-arrow-drop-down {
 }
 
 .mini-shot {
-    max-width: 100px;
-    max-height: 128px;
+    width: 100px;
+    height: 100px;
+    /*max-width: 100px;
+    max-height: 128px;*/
     vertical-align: middle;
 }
 
