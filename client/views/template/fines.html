@@ -12,7 +12,7 @@
         <h5 class="header center blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h5>
           <div class="row center">
               <div>
-                 <img src="{{rootUrl}}api/image/{{_id}}" />
+                 <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}" />
                  <p class="card-panel orange lighten-4">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
               </div>
 
@@ -42,7 +42,7 @@
             <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span>
         </td>
         <td>
-            <img class="mini-shot" src="{{rootUrl}}api/thumb/{{_id}}"/>
+            <img alt="caricamento in corso" class="mini-shot" src="{{rootUrl}}api/thumb/{{_id}}"/>
         </td>
     </tr>
 </template>

@@ -26,11 +26,17 @@ i.mdi-navigation-arrow-drop-down {
     /*border: 1px solid lightgray;*/
 }
 
+.normal-shot {
+    width: 240px;
+    height: 240px;
+    background-color: white;
+    vertical-align: middle;
+}
+
 .mini-shot {
     width: 100px;
     height: 100px;
-    /*max-width: 100px;
-    max-height: 128px;*/
+    background-color: white;
     vertical-align: middle;
 }
 
