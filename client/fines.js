@@ -36,6 +36,20 @@ Template.fineDetails.events({
            //drawLogo('myCanvas', event.offsetX, event.offsetY);
         }
      },
+    "click .ilikeit": function () {
+        console.log("i like it!!" + Session.get("_id"));
+        Meteor.call("likeFine", Session.get("_id"), true, function(err) {
+            if(err)
+                console.log("error " + err);
+        });
+      },
+    "click .idontlikeit": function () {
+        console.log("i don't like it!!" + Session.get("_id"));
+        Meteor.call("likeFine", Session.get("_id"), false, function(err) {
+            if(err)
+                console.log("error " + err);
+        });
+      },
     "click .delete": function () {
         Meteor.call("deleteFine", Session.get("_id"), function(err){
             if(err)

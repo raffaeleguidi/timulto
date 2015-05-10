@@ -129,6 +129,17 @@ Meteor.startup(function () {
 //            isAdministrator: function () {
 //                return isAdministrator();
 //            },
+        //like -> boolean, true indica approvazione, false indica non approvazione dell'utente
+        likeFine: function(fineId, like){
+            var username = "";
+
+            if(Meteor.user().services.twitter) {
+                username = Meteor.user().services.twitter.screenName;
+            } else  if(Meteor.user().services.facebook) {
+                username = services.facebook.email;
+            }
+            console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
+        },
         rootUrl: function() {
             /*console.log("ROOT_URL=" + process.env.ROOT_URL);
             console.log("env.ROOT_URL=" + process.env.ROOT_URL);
