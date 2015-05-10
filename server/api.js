@@ -174,24 +174,25 @@ function decodeBase64Image(dataString) {
   return response;
 }
 
-Restivus.addRoute('image/:fineId', {authRequired: false}, {
+Restivus.addRoute('imageold/:fineId', {authRequired: false}, {
     get: function () {
-
         var fine = Fines.findOne({_id: this.urlParams.fineId});
 
         if (fine) {
-//            console.log("fineId= " + this.urlParams.fineId);
-//            console.log("image data= " + (fine.imageData != null));
             var rawData = decodeBase64Image(fine.imageData).data;
-//            console.log("content length= " + rawData.length);
             return {
               statusCode: 200,
               headers: {
-                'Content-Type': 'text/plain',
-                //'Content-Length': rawData.length,
-                //'transfer-encoding': 'identity',
+                'Content-Type': 'image/png',
                 'Cache-Control': 'public,max-age=86400'
               },
+              /* this switches off chunked transfer
+              headers: {
+                'Content-Type': 'image/png',
+                'Content-Length': rawData.length,
+                'transfer-encoding': 'identity',
+                'Cache-Control': 'public,max-age=86400'
+              },*/
               body: rawData
             }
         } else {
@@ -200,56 +201,56 @@ Restivus.addRoute('image/:fineId', {authRequired: false}, {
               body: 'cannot find timulto #' + this.urlParams.fineId
             }
         }
+    }
+});
 
-        /*
+var fs = Npm.require('fs');
+var os = Npm.require('os');
 
-Remote Address:127.0.0.1:3000
-Request URL:http://localhost:3000/images/timulto.png
-Request Method:GET
-Status Code:304 Not Modified
-Request Headers
-    Accept:image/webp,;q=0.8
-    Accept-Encoding:gzip, deflate, sdch
-    Accept-Language:en-US,en;q=0.8,it;q=0.6
-    Cache-Control:max-age=0
-    Connection:keep-alive
-    Host:localhost:3000
-    If-Modified-Since:Sat, 09 May 2015 14:03:33 GMT
-    If-None-Match:"13516-1431180213000"
-    Referer:http://localhost:3000/
-    User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.95 Safari/537.36
-Response Headers
-    accept-ranges:bytes
-    cache-control:public, max-age=86400
-    connection:keep-alive
-    date:Sat, 09 May 2015 14:05:03 GMT
-    etag:"13516-1431180213000"
-    last-modified:Sat, 09 May 2015 14:03:33 GMT
-    vary:Accept-Encoding
+function writeToFile(fileName, buffer) {
+    //console.log("will write to %s", fileName);
+    var fd = fs.openSync(fileName, 'w');
+    var bytes = fs.writeSync(fd, buffer.data, 0, buffer.data.length);
+    //console.log("written %d bytes", bytes);
+    fs.closeSync(fd);
+    //console.log("written %s", fileName);
+}
 
-Remote Address:127.0.0.1:3000
-Request URL:http://localhost:3000/api/image/uzyYKjhSwSKgzNrKc
-Request Method:GET
-Status Code:200 OK
-Request Headersview source
-    Accept:image/webp,;q=0.8
-    Accept-Encoding:gzip, deflate, sdch
-    Accept-Language:en-US,en;q=0.8,it;q=0.6
-    Cache-Control:max-age=0
-    Connection:keep-alive
-    Host:localhost:3000
-    Referer:http://localhost:3000/
-    User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.95 Safari/537.36
-Response Headersview source
-    access-control-allow-origin:*
-    connection:keep-alive
-    content-type:image/png
-    date:Sat, 09 May 2015 14:05:04 GMT
-    transfer-encoding:chunked
-    vary:Accept-Encoding
+function readFile(fileName) {
+    return fs.readFileSync(fileName);
+}
 
-        */
+Restivus.addRoute('image/:fineId', {authRequired: false}, {
+    get: function () {
+        var fine = Fines.findOne({_id: this.urlParams.fineId});
 
+        if (fine) {
+            var tmpfile = os.tmpdir() + '/' + fine._id + '.png';
+            if (!fs.existsSync(tmpfile)) {
+                writeToFile(tmpfile, decodeBase64Image(fine.imageData));
+            }
+            var buffer = readFile(tmpfile);
+            return {
+              statusCode: 200,
+              headers: {
+                'Content-Type': 'image/png',
+                'Cache-Control': 'public,max-age=86400'
+              },
+              /*this switches off chunked transfer
+              headers: {
+                'Content-Type': 'text/plain',
+                'Content-Length': buffer.length,
+                'transfer-encoding': 'identity',
+                'Cache-Control': 'public,max-age=86400'
+              },*/
+              body: buffer
+            }
+        } else {
+            return {
+              statusCode: 404,
+              body: 'cannot find timulto #' + this.urlParams.fineId
+            }
+        }
     }
 });
 
