@@ -1,6 +1,5 @@
 function rootUrl() {
-    //return Session.get("rootUrl");
-    return "";
+    return Session.get("rootUrl");
 }
 
 var map;

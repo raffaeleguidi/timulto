@@ -1,10 +1,5 @@
-function rootUrl() {
-    return "http://beta.timulto.org/";
-}
-
 Template.registerHelper("rootUrl", function() {
-    return "";
-    /*if (!Session.get("rootUrl")) {
+    if (!Session.get("rootUrl")) {
         Meteor.call("rootUrl", function(err, res){
             if (err) {
                 console.log("error "+err);
@@ -14,7 +9,7 @@ Template.registerHelper("rootUrl", function() {
         });
     } else {
         return Session.get("rootUrl");
-    }*/
+    }
 });
 
 Template.registerHelper("categories",  function() {
