@@ -115,6 +115,7 @@ Template.mappa.created = function () {
 };
 
 Template.mappa.rendered = function () {
+    depth = 1;
     Meteor.geolocalization.latLng();
 
     $(function () {
