@@ -6,6 +6,9 @@
 /*  margin: 15px auto 0 auto;*/
 }
 
+.leaflet-popup {
+    width: 250px;
+}
 .map {
     height:auto;
     min-height: 100%;
