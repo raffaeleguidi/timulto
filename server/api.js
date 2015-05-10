@@ -232,14 +232,19 @@ Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
             var tmpthumb = os.tmpdir() + '/' + fine._id + '-thumb.png';
 
             if (!fs.existsSync(tmpthumb)) {
-                Imagemagick.crop({
-                  srcPath: tmpfile,
-                  dstPath: tmpthumb,
-                  width: 100,
-                  height: 100,
-                  quality: 1,
-                  gravity: "Center"
-                });
+                try {
+                    Imagemagick.crop({
+                      srcPath: tmpfile,
+                      dstPath: tmpthumb,
+                      width: 100,
+                      height: 100,
+                      quality: 1,
+                      gravity: "Center"
+                    });
+                } catch(ex) {
+                    console.log("error creating thumb for %s: is imagemagick installed? Falling back to normal image", fine._id);
+                    tmpthumb = tmpfile;
+                }
             }
 
             var buffer = readFile(tmpthumb);
