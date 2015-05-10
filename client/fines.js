@@ -16,12 +16,10 @@
 
 Template.fineDetails.events({
     "click .fineonmap": function(event) {
-//        console.log("vuoi vedere sulla mappa:" + Session.get("_id"));
-        Session.set("finecenter",Session.get("_id"));
-        Session.set("lat",Session.get("lat"));
-        Session.set("lon",Session.get("lon"));
+        Session.set("selectedLat",Session.get("lat"));
+        Session.set("selectedLon",Session.get("lon"));
         Session.set("zoom",18);
-//       console.log("lat " + Session.get("lat")+",lon " + Session.get("lon"));
+
         Router.go("/mappa");
     },
      "click .naviga":function(event) {

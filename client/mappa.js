@@ -22,9 +22,7 @@ Template.mappa.events({
     "click #manualgeocode": function(event) {
         event.preventDefault();
 
-        var coords = Meteor.geolocalization.latLng();
-        Session.set("lat",coords.lat);
-        Session.set("lon",coords.lat);
+        Meteor.geolocalization.latLng();
         
         map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
         map.setZoom(defaultZoomLevel);
@@ -62,14 +60,11 @@ Template.mappa.events({
 var rendered = false;
 
 Template.mappa.created = function () {
-    if(!Session.get("lat") || !Session.get("lon")){
-        Meteor.geolocalization.latLng();
-    }
+    Meteor.geolocalization.latLng();
     
     if (!this.rendered){
-    // run my code
+        // run my code only once
         this.rendered = true;
-
 
         myIcon = L.icon({
             iconUrl: defaultIconUrl,
@@ -120,7 +115,7 @@ Template.mappa.created = function () {
 };
 
 Template.mappa.rendered = function () {
-//    Meteor.geolocalization.latLng();
+    Meteor.geolocalization.latLng();
 
     $(function () {
         $(window).resize(function () {
@@ -131,9 +126,21 @@ Template.mappa.rendered = function () {
     
     L.Icon.Default.imagePath = '/images';
 
-    var lat = Session.get("lat");
-    var lon = Session.get("lon");
+    var lat;
+    var lon;
     var zoom = Session.get("zoom");
+
+    if(Session.get("selectedLat")) {
+        lat = Session.get("selectedLat");
+        lon = Session.get("selectedLon");
+
+        Session.set("selectedLat","");
+        Session.set("selectedLon","");
+        Session.set("zoom","");
+    } else {
+        lat = Session.get("lat");
+        lon = Session.get("lon");
+    }
 
     if(!zoom)
         zoom = defaultZoomLevel;
@@ -149,7 +156,6 @@ Template.mappa.rendered = function () {
             lon = 12.501991;
         }
     }
-//    console.log("FOUND: lat " + lat+",lon " + lon);
 
     map = L.map('finesMap', {
         doubleClickZoom: true,
@@ -159,8 +165,4 @@ Template.mappa.rendered = function () {
     L.tileLayer.provider('MapQuestOpen').addTo(map);
 
     map.addLayer(cluster);
-            
-//    for( index in markers ) {
-//        map.addLayer(markers[index]);
-//    }
 };
