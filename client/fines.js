@@ -30,6 +30,26 @@ Template.fineDetails.events({
          
         Router.go('/naviga');
     },
+    "click .normal-shot": function() {
+        if(Session.get("isadmin")/* && !Session.get("isapproved")*/){
+            console.log(event);
+            var canvas=document.createElement("canvas");
+            var ctx=canvas.getContext("2d");
+            var image=document.getElementsByClassName("normal-shot")[0];
+
+            canvas.setAttribute("id","canvas"+Session.get("_id"));
+            document.body.appendChild(canvas);
+
+            canvas.width  = image.width;
+            canvas.height = image.height;
+
+            var context = canvas.getContext("2d");
+
+            context.drawImage(image, 0, 0);
+            console.log($("#canvas"+Session.get("_id")));
+            Meteor.photoHandling.drawLogo("canvas"+Session.get("_id"), event.offsetX, event.offsetY);
+        }
+    },
     "click #myCanvas": function (event) {
         if(Session.get("isadmin")/* && !Session.get("isapproved")*/){
             console.log(event);
