@@ -6,19 +6,26 @@
     </div>
 
     <div class="container">
-
       <div class="section">
-
-        <h5 class="header center blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h5>
+<!--
+          <h5 class="header center blue-text">{{_ category}}
+            <div style="display: none">{{_id}}</div>
+          </h5>
+-->
           <div class="row center">
-              <div>
+              <div class="col s12 m6">
                  <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}" />
-                 <p class="card-panel orange lighten-4">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
+              </div><div class="col s12 m6">
+                 <p class="card-panel light-blue lighten-5">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
               </div>
-
+              <input type="hidden" value="{{lat}}" />
+              <input type="hidden" value="{{lon}}" />
+          </div>
+          <div class="row center fineonmap">
+              <a class="blue lighten-1 btn-large"><i class="mdi-maps-place right"></i>Vedi sulla mappa</a>
           </div>
 
-         {{#if isadmin}}
+<!--
           <div class="row center">
               <div>
                 <p class="adminThumb">
@@ -28,7 +35,26 @@
                 </p>
               </div>
           </div>
-          {{/if}}
+
+-->
+            <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                <a class="btn-floating btn-large orange">
+                    <i class="large mdi-action-thumbs-up-down"></i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one"></i></a>
+                    </li>
+                    <li><a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1"></i></a>
+                    </li>
+                     {{#if isadmin}}
+                    <li><a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
+                    </li>
+                    <li><a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up"></i></a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+
         </div>
     </div>
 
