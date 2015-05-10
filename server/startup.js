@@ -48,6 +48,10 @@ function setupInitialData() {
 
 Meteor.startup(function () {
 
+    // <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    Inject.meta("viewport", "width=device-width, initial-scale=1");
+
     ROOT_URL = process.env.ROOT_URL;
 
     console.log("ROOT_URL=" + ROOT_URL);
