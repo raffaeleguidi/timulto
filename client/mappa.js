@@ -77,7 +77,7 @@ Template.mappa.created = function () {
                 '<div class="col s6"><img class="mini-shot" name="imageData" src="' + rootUrl() + 'api/thumb/' + fine._id + '" />' +
                 '</div>' +
                 '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
-                '</div><div class="row center" style="margin-top: 5px">'+'<a href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
+                '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
             var marker = L.marker([lat, lng], {
                 _id: fine._id,
                 icon: myIcon,
