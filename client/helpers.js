@@ -3,7 +3,8 @@ function rootUrl() {
 }
 
 Template.registerHelper("rootUrl", function() {
-    if (!Session.get("rootUrl")) {
+    return "";
+    /*if (!Session.get("rootUrl")) {
         Meteor.call("rootUrl", function(err, res){
             if (err) {
                 console.log("error "+err);
@@ -13,7 +14,7 @@ Template.registerHelper("rootUrl", function() {
         });
     } else {
         return Session.get("rootUrl");
-    }
+    }*/
 });
 
 Template.registerHelper("categories",  function() {
