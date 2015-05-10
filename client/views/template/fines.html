@@ -9,7 +9,7 @@
 
       <div class="section">
 
-        <h5 class="header center blue-text">{{_ category}} #{{_id}}</h5>
+        <h5 class="header center blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h5>
           <div class="row center">
               <div>
                  <img src="{{rootUrl}}api/image/{{_id}}" />
@@ -38,14 +38,12 @@
 <template name="fineInARow">
     <tr class="fine">
         <td>
-            <h6 class="blue-text">{{_ category}} #{{_id}}</h6>
+            <h6 class="blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h6>
             <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span>
         </td>
         <td>
             <img class="mini-shot" src="{{rootUrl}}api/thumb/{{_id}}"/>
         </td>
-<!--        <td><img class="mini-shot" name="imageData" src="{{imageData}}" /></td>-->
-<!--        <td><img class="mini-shot" name="imageData{{_id}}"/></td> -->
     </tr>
 </template>
 
