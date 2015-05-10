@@ -15,6 +15,15 @@
 };*/
 
 Template.fineDetails.events({
+    "click .fineonmap": function(event) {
+//        console.log("vuoi vedere sulla mappa:" + Session.get("_id"));
+        Session.set("finecenter",Session.get("_id"));
+        Session.set("lat",Session.get("lat"));
+        Session.set("lon",Session.get("lon"));
+        Session.set("zoom",18);
+//       console.log("lat " + Session.get("lat")+",lon " + Session.get("lon"));
+        Router.go("/mappa");
+    },
      "click .naviga":function(event) {
          
         Session.set("selectedLat",Session.get("lat"));
@@ -71,6 +80,12 @@ Template.fineDetails.helpers({
     },
     imageData: function(){
         return Session.get("detailImageData");
+    },
+    lat: function() {
+        return Session.get("lat");
+    },
+    lon: function() {
+        return Session.get("lon");
     }
 });
 

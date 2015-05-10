@@ -55,6 +55,10 @@ Meteor.geolocalization = {
 //                console.log("nuove coordinate trovate");
                 Session.set("lat",coords.lat);
                 Session.set("lon",coords.lng);
+                return {
+                        lat:coords.lat,
+                        lon:coords.lng
+                       }
             }
         } catch(err) {
             console.log("error geocoding " + err.message);
