@@ -167,11 +167,20 @@ Meteor.startup(function () {
                 }
                 console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
 
-                if(like && fineId) {
+                if(like) {
                     Fines.update({_id:fineId},{$addToSet:{likes:username}},
                                 function(err,result){
                         if(err) {
                             console.log("error in liking:" + err);
+                            throw new Meteor.Error("Error:"+ err);
+                        }
+                        console.log("Result:" + result);
+                    });
+                } else {
+                    Fines.update({_id:fineId},{$pull:{likes:username}},
+                                function(err,result){
+                        if(err) {
+                            console.log("error in not liking:" + err);
                             throw new Meteor.Error("Error:"+ err);
                         }
                         console.log("Result:" + result);
