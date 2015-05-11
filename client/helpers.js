@@ -1,3 +1,7 @@
+Template.registerHelper("platform",  function() {
+    return Session.get("platform");
+});
+
 Template.registerHelper("rootUrl", function() {
     if (!Session.get("rootUrl")) {
         Meteor.call("rootUrl", function(err, res){
