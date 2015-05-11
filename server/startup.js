@@ -234,6 +234,20 @@ Meteor.startup(function () {
         fineImage: function(fineId){
             return Fines.findOne({_id:fineId},{fields:{imageData:1}});
         },
+        updateImage: function(fineId, newImageData) {
+            if(fineId && isAdministrator()) {
+                Fines.update(
+                    { _id:fineId },
+                    { $set: { imageData:newImageData }},
+                    function(err,result){
+                        if(err) {
+                            console.log("Error in updating image: "+err);
+                        } else {
+                            console.log("Update image result:" + result);
+                        }
+                    });
+            }
+        },
         reverseGeocode: function (lat, lon) {
             this.unblock();
             try {

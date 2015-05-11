@@ -14,15 +14,27 @@
 
           <div class="row center">
               <div class="col s12 m6">
-                 <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}" />
+                {{#if isadmin}}
+<!--                    <canvas id="customcanvas"></canvas>-->
+                  <canvas id="herecanvas" width="240" height="240"></canvas>
+                {{else}}
+                    <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}" />
+                {{/if}}
               </div><div class="col s12 m6">
                  <p class="card-panel light-blue lighten-5">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
               </div>
               <input type="hidden" value="{{lat}}" />
               <input type="hidden" value="{{lon}}" />
           </div>
-          <div class="row center fineonmap">
-              <a class="blue lighten-1 btn-large"><i class="mdi-maps-place right"></i>Vedi sulla mappa</a>
+          <div class="row center ">
+              {{#if isadmin}}
+              <div class="col s6 upateImage">
+                <a class="blue lighten-1 btn"><i class="mdi-content-save right"></i>Salva immagine</a>
+              </div>
+              {{/if}}
+              <div class="col s6 fineonmap">
+                <a class="blue lighten-1 btn"><i class="mdi-maps-place right"></i>Vedi sulla mappa</a>
+              </div>
           </div>
 
 <!--

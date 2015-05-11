@@ -14,11 +14,40 @@
       imageObj.src = Session.get("detailImageData");
 };*/
 
+
 Template.fineDetails.rendered = function(){
     depth = 1;
+
+    if(Session.get("isadmin")) {
+        var canvas=document.getElementById("herecanvas");
+        var data = Session.get("rootUrl") + "api/image/" + Session.get("_id");
+
+        Meteor.photoHandling.fitImageInCanvas(data,canvas);
+    }
 }
 
 Template.fineDetails.events({
+    "click #herecanvas": function(event) {
+        if(Session.get("isadmin"))
+            Meteor.photoHandling.drawLogo('herecanvas', event.offsetX, event.offsetY);
+    },
+    "click .upateImage": function(event) {
+        if(Session.get("isadmin")) {
+            var canvas = null;
+            try {
+                canvas = document.getElementById('herecanvas');
+            } catch(ex) {
+                //noop
+                return false;
+            }
+            var imageData = canvas.toDataURL();
+            var fineId = Session.get("_id");
+
+            Meteor.call("updateImage", fineId, imageData);
+
+            Materialize.toast("Foto aggiornata", 4000, 'rounded center');
+        }
+    },
     "click .fineonmap": function(event) {
         Session.set("selectedLat",Session.get("lat"));
         Session.set("selectedLon",Session.get("lon"));
@@ -95,6 +124,7 @@ Template.fineDetails.events({
         });
       }
 });
+
 
 Template.fineDetails.helpers({
     createdAt: function(){
