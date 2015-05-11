@@ -1,6 +1,6 @@
 /////////////////////////////////////
 ////////////// Navbar ///////////////
-var rendered = false;
+
 var help = new Array();
 
 function initHelp() {
@@ -15,7 +15,6 @@ function initHelp() {
     Session.set("currentHelp",0);
 }
 
-
 Template.navbar.rendered = function(){
     $('.modal-trigger').leanModal();
     $('.button-collapse').sideNav({
@@ -25,14 +24,19 @@ Template.navbar.rendered = function(){
     });
     $('collapsible').collapsible();
 
-//    if(!rendered) {
-//        rendered = true;
-//        //init once
-//        initHelp();
-//
-//        //Show help at startup
-//        $('#helpbox').openModal();
-//    }
+    if(!localStorage.getItem("showstartuphelp")) {
+        localStorage.setItem("showstartuphelp",false);
+
+        console.log("rendering");
+        //init once
+        initHelp();
+
+        //Show help at startup
+        $('#helpbox').openModal();
+
+
+    }
+
 };
 
 Template.navbar.helpers({
