@@ -4,12 +4,13 @@ Categories = new Mongo.Collection("categories");
 
 if(Meteor.isCordova){
 
-    console.log("platform: %s, v%s", device.platform, device.version);
-    if (device.platform == "Android" && device.version >= "4.0.0") {
+    console.log("platform: " + device.platform + " v" + device.version);
+
+    if (device.platform == "Android" && device.version >= "4.2.0") {
         Ground.Collection(Fines);
         Ground.Collection(Categories);
         Ground.Collection(Administrators);
-        console.log("Offline support enabled");
+        console.log("HW requirements are met: offline support enabled");
     } else {
         console.log("HW requirements not met: offline support disabled");
     }
@@ -29,7 +30,9 @@ if(Meteor.isCordova){
         I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:14) device.platform Android
         I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:15) device.uuid ac20ff2e59fe24ad
         I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:16) device.version 4.4.2
-        I20150511-15:47:35.869(2) (android:http://meteor.local/timulto.js:17) device.model Android SDK built for x86        */
+        I20150511-15:47:35.869(2) (android:http://meteor.local/timulto.js:17) device.model Android SDK built for x86
+        */
+
         document.addEventListener("backbutton", function() {
             /*if (document.location.pathname == "/" || document.location.pathname == "/home"){
                 navigator.app.exitApp();
