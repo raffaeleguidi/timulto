@@ -220,6 +220,47 @@ function readFile(fileName) {
     return fs.readFileSync(fileName);
 }
 
+//TODO - This should require auth?
+Restivus.addRoute('image/clean/:fineId', {authRequired: false}, {
+    get: function() {
+        var fine = Fines.findOne({_id: this.urlParams.fineId});
+         if (fine) {
+            var tmpthumb = os.tmpdir() + '/' + fine._id + '-thumb.png';
+            var tmpfile = os.tmpdir() + '/' + fine._id + '.png';
+            var result = "";
+            var error = "";
+
+            if (fs.existsSync(tmpthumb)) {
+                fs.unlink(tmpthumb, function (err,res) {
+                  if (err) {
+                    error = err + ".";
+                  } else {
+                    console.log('successfully deleted thumb');
+                    result = result + res + ".";
+                  }
+                });
+            }
+
+            if (fs.existsSync(tmpfile)) {
+                fs.unlink(tmpfile, function (err,res) {
+                  if (err) {
+                    error = error + err + ".";
+                  } else {
+                    console.log('successfully deleted original photo');
+                    result = result + res + ".";
+                  }
+                });
+            }
+             var result = { error: error, result:result};
+
+             return result;
+         }
+
+        return {error:"no such fine", result:null};
+    }
+});
+
+
 Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
     get: function () {
         var fine = Fines.findOne({_id: this.urlParams.fineId});

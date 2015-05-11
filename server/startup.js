@@ -243,7 +243,16 @@ Meteor.startup(function () {
                         if(err) {
                             console.log("Error in updating image: "+err);
                         } else {
-                            console.log("Update image result:" + result);
+//                            console.log("Update image result:" + result);
+                            HTTP.call('GET', ROOT_URL+'api/image/clean/'+fineId, function(result) {
+                                if(!result){
+                                    console.log("no result returned");
+                                } else if(result.error) {
+                                    console.log("cannot update cached image: " + result.error);
+                                } else {
+                                    console.log("finished cleaning image: " + result.result);
+                                }
+                            });
                         }
                     });
             }
