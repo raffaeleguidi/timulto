@@ -61,18 +61,22 @@ Template.fineDetails.events({
         }
      },
     "click .ilikeit": function () {
-        console.log("i like it!!" + Session.get("_id"));
-        Meteor.call("likeFine", Session.get("_id"), true, function(err) {
-            if(err)
-                console.log("error " + err);
-        });
+        if(Meteor.user()){
+            console.log("i like it!!" + Session.get("_id"));
+            Meteor.call("likeFine", Session.get("_id"), true, function(err) {
+                if(err)
+                    console.log("error " + err);
+            });
+        }
       },
     "click .idontlikeit": function () {
-        console.log("i don't like it!!" + Session.get("_id"));
-        Meteor.call("likeFine", Session.get("_id"), false, function(err) {
-            if(err)
-                console.log("error " + err);
-        });
+        if(Meteor.user()){
+            console.log("i don't like it!!" + Session.get("_id"));
+            Meteor.call("likeFine", Session.get("_id"), false, function(err) {
+                if(err)
+                    console.log("error " + err);
+            });
+        }
       },
     "click .delete": function () {
         Meteor.call("deleteFine", Session.get("_id"), function(err){
@@ -122,6 +126,13 @@ Template.fineDetails.helpers({
     },
     lon: function() {
         return Session.get("lon");
+    }
+});
+
+
+Template.fineInARow.helpers({
+    likes: function() {
+        return this.likes?this.likes.length:0;
     }
 });
 

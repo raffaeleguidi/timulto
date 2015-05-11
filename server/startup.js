@@ -129,21 +129,55 @@ Meteor.startup(function () {
 //            isAdministrator: function () {
 //                return isAdministrator();
 //            },
+        getLikes: function(fineId) {
+            var likes = 0;
+            if(fineId) {
+                try{db.fines.aggregate([{$unwind:"$likes"},{$group:{_id:"$_id",count:{$sum:1}}}])
+                    likes = Fines.aggregate(
+                        [{
+                            $match:
+                                { _id:fineId }
+                         },
+                         {
+                             $project: {
+                                _id: 1,
+                                count: { $size: "$likes" }
+                             }
+                        }]);
+
+                    console.log("found likes : " + JSON.stringify(likes));
+                    likes = likes.count;
+                } catch (error) {
+                    console.log("caught an error!");
+                    console.error(error);
+                }
+            }
+
+            return likes;
+        },
         //like -> boolean, true indica approvazione, false indica non approvazione dell'utente
-        likeFine: function(fineId, like){
+        likeFine: function(fineId, like) {
             var username = "";
 
-            if(Meteor.user().services.twitter) {
-                username = Meteor.user().services.twitter.screenName;
-            } else  if(Meteor.user().services.facebook) {
-                username = services.facebook.email;
-            }
-            console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
+            if(Meteor.user() && fineId) {
+                if(Meteor.user().services.twitter) {
+                    username = Meteor.user().services.twitter.screenName;
+                } else  if(Meteor.user().services.facebook) {
+                    username = services.facebook.email;
+                }
+                console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
 
-            return null;
-//            Fines.update({
-//                "_id":fineId
-//            });
+                if(like && fineId) {
+                    Fines.update({_id:fineId},{$addToSet:{likes:username}},
+                                function(err,result){
+                        if(err) {
+                            console.log("error in liking:" + err);
+                            throw new Meteor.Error("Error:"+ err);
+                        }
+                        console.log("Result:" + result);
+                    });
+                }
+            }
         },
         rootUrl: function() {
             /*console.log("ROOT_URL=" + process.env.ROOT_URL);

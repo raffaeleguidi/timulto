@@ -65,7 +65,7 @@
     <tr class="fine">
         <td>
             <h6 class="blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h6>
-            <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span>
+            <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}. Likes {{likes}}</span>
         </td>
         <td>
             <img alt="caricamento in corso" class="mini-shot" src="{{rootUrl}}api/thumb/{{_id}}"/>
