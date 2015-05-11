@@ -4,17 +4,32 @@ Categories = new Mongo.Collection("categories");
 
 if(Meteor.isCordova){
 
-    Ground.Collection(Fines);
-    Ground.Collection(Categories);
-    Ground.Collection(Administrators);
+    console.log("platform: %s, v%s", device.platform, device.version);
+    if (device.platform == "Android" && device.version >= "4.0.0") {
+        Ground.Collection(Fines);
+        Ground.Collection(Categories);
+        Ground.Collection(Administrators);
+        console.log("Offline support enabled");
+    } else {
+        console.log("HW requirements not met: offline support disabled");
+    }
 
     Meteor.startup(function(){
-//        console.log("device.name " + device.name);
-//        console.log("device.cordova " + device.cordova);
-//        console.log("device.platform " + device.platform);
-//        console.log("device.uuid " + device.uuid);
-//        console.log("device.version " + device.version);
-//        console.log("device.model " + device.model);
+        /*
+        console.log("device.name " + device.name);
+        console.log("device.cordova " + device.cordova);
+        console.log("device.platform " + device.platform);
+        console.log("device.uuid " + device.uuid);
+        console.log("device.version " + device.version);
+        console.log("device.model " + device.model);
+
+        // output on android emulator:
+        I20150511-15:47:35.753(2) (android:http://meteor.local/timulto.js:12) device.name undefined
+        I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:13) device.cordova 3.6.4
+        I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:14) device.platform Android
+        I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:15) device.uuid ac20ff2e59fe24ad
+        I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:16) device.version 4.4.2
+        I20150511-15:47:35.869(2) (android:http://meteor.local/timulto.js:17) device.model Android SDK built for x86        */
         document.addEventListener("backbutton", function() {
             /*if (document.location.pathname == "/" || document.location.pathname == "/home"){
                 navigator.app.exitApp();
