@@ -1,6 +1,6 @@
 /////////////////////////////////////
 ////////////// Navbar ///////////////
-
+var alreadyRendered = false;
 var help = new Array();
 
 function initHelp() {
@@ -16,7 +16,11 @@ function initHelp() {
 }
 
 Template.navbar.rendered = function(){
-    initHelp();
+    if(!alreadyRendered) {
+        alreadyRendered = true;
+        initHelp();
+    }
+
     $('.modal-trigger').leanModal();
     $('.button-collapse').sideNav({
       //menuWidth: 300, // Default is 240
