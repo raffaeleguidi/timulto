@@ -4,15 +4,20 @@ Categories = new Mongo.Collection("categories");
 
 if(Meteor.isCordova){
 
-    console.log("platform: " + device.platform + " v" + device.version);
+    try  {
+        Session.set("platform", device.platform + " v" + device.version);
+        console.log("platform: " + device.platform + " v" + device.version);
 
-    if (device.platform == "Android" && device.version >= "4.2.0") {
-        Ground.Collection(Fines);
-        Ground.Collection(Categories);
-        Ground.Collection(Administrators);
-        console.log("HW requirements are met: offline support enabled");
-    } else {
-        console.log("HW requirements not met: offline support disabled");
+        if (device.platform == "Android" && device.version >= "4.2.0") {
+            Ground.Collection(Fines);
+            Ground.Collection(Categories);
+            Ground.Collection(Administrators);
+            console.log("HW requirements are met: offline support enabled");
+        } else {
+            console.log("HW requirements not met: offline support disabled");
+        }
+    } catch(ex) {
+        Session.set("platform", "unknown: " + ex.message);
     }
 
     Meteor.startup(function(){
