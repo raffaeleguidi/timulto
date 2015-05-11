@@ -1,6 +1,7 @@
 <template name="navbar">
 
-    <div id="helpbox" class="modal">
+    <div id="helpbox" class="modal blue lighten-5">
+<!--
         <div class="modal-content">
             <h4>{{_ "aiuto"}}!</h4>
             <p>Come fare per...</p>
@@ -10,6 +11,18 @@
             <a href="#" id="closeHelp" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
             <a href="#" id="showHelp" class="btn-flat">Avanti</a>
         </div>
+-->
+        <div class="modal-content">
+            <h4>{{_ "aiuto"}}!</h4>
+            <p>Come fare per...</p>
+                {{helpMessage}}
+        </div>
+        <div class="divider blue-grey lighten-1"></div>
+
+        <div class="modal-footer blue lighten-5">
+                <a href="#" id="showHelp" class="btn-flat"><i class="mdi-navigation-arrow-forward"></i></a>
+                <a href="#" id="closeHelp" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="mdi-navigation-close"></i></a>
+         </div>
     </div>
 
     <nav class="light-blue lighten-1" role="navigation">
