@@ -25,15 +25,14 @@ Template.navbar.rendered = function(){
     });
     $('collapsible').collapsible();
 
-    if(!rendered) {
-        console.log("now created " + rendered);
-        rendered = true;
-        //init once
-        initHelp();
-
-        //Show help at startup
-        $('#helpbox').openModal();
-    }
+//    if(!rendered) {
+//        rendered = true;
+//        //init once
+//        initHelp();
+//
+//        //Show help at startup
+//        $('#helpbox').openModal();
+//    }
 };
 
 Template.navbar.helpers({

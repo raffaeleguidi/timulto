@@ -139,6 +139,11 @@ Meteor.startup(function () {
                 username = services.facebook.email;
             }
             console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
+
+            return null;
+//            Fines.update({
+//                "_id":fineId
+//            });
         },
         rootUrl: function() {
             /*console.log("ROOT_URL=" + process.env.ROOT_URL);
