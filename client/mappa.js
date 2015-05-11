@@ -62,9 +62,9 @@ var rendered = false;
 Template.mappa.created = function () {
     Meteor.geolocalization.latLng();
     
-    if (!this.rendered){
+    if (!rendered){
         // run my code only once
-        this.rendered = true;
+        rendered = true;
 
         myIcon = L.icon({
             iconUrl: defaultIconUrl,
