@@ -2,10 +2,34 @@ Fines = new Mongo.Collection("fines");
 Administrators = new Mongo.Collection("administrators");
 Categories = new Mongo.Collection("categories");
 
-Ground.Collection(Fines);
-Ground.Collection(Administrators);
-Ground.Collection(Categories);
+if(Meteor.isCordova){
 
+    Ground.Collection(Fines);
+    Ground.Collection(Categories);
+    Ground.Collection(Administrators);
+
+    Meteor.startup(function(){
+//        console.log("device.name " + device.name);
+//        console.log("device.cordova " + device.cordova);
+//        console.log("device.platform " + device.platform);
+//        console.log("device.uuid " + device.uuid);
+//        console.log("device.version " + device.version);
+//        console.log("device.model " + device.model);
+        document.addEventListener("backbutton", function() {
+            /*if (document.location.pathname == "/" || document.location.pathname == "/home"){
+                navigator.app.exitApp();
+            } else if( document.activeElement.className === "button-collapse" && document.activeElement.tagName.toUpperCase() === "A" ) {//close navbar on mobile
+                document.activeElement.click();
+            } else {
+                history.go(-1);
+            };*/
+            if (depth > 0)
+                history.back();
+            else
+                navigator.app.exitApp();
+        });
+    });
+}
 function isAdministrator() {
     var username = "";
     var service = "";
@@ -207,29 +231,3 @@ Meteor.methods({
     },
 });
 
-if(Meteor.isCordova){
-    Meteor.startup(function(){
-        document.addEventListener("backbutton", function() {
-            /*if (document.location.pathname == "/" || document.location.pathname == "/home"){
-                navigator.app.exitApp();
-            } else if( document.activeElement.className === "button-collapse" && document.activeElement.tagName.toUpperCase() === "A" ) {//close navbar on mobile
-                document.activeElement.click();
-            } else {
-                history.go(-1);
-            };*/
-            if (depth > 0)
-                history.back();
-            else
-                navigator.app.exitApp();
-        });
-
-        /*window.onpopstate = function () {
-            if (history.state && history.state.initial === true){
-                navigator.app.exitApp();
-
-                //or to suspend meteor add cordova:org.android.tools.suspend@0.1.2
-                //window.plugins.Suspend.suspendApp();
-            }
-        };*/
-    });
-}
