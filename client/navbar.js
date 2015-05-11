@@ -1,33 +1,39 @@
 /////////////////////////////////////
 ////////////// Navbar ///////////////
-var alreadyRendered = false;
+var rendered = false;
 var help = new Array();
 
 function initHelp() {
-      help.push("Segnalare un'infrazione?");
-      help.push("Attiva il GPS per abilitare la geolocalizzazione..");
-      help.push("..Fai una foto alla presunta infrazione..");
-      help.push("..Fai \"tap\" sulla foto per mascherare targhe e visi..");
-      help.push("..Completa la scheda inserendo il tipo di segnalazione ed eventuali note..");
-      help.push("..premi \"Multa\" ed è fatta!");
+    help.push("Segnalare un'infrazione?");
+    help.push("Attiva il GPS per abilitare la geolocalizzazione..");
+    help.push("..Fai una foto alla presunta infrazione..");
+    help.push("..Fai \"tap\" sulla foto per mascherare targhe e visi..");
+    help.push("..Completa la scheda inserendo il tipo di segnalazione ed eventuali note..");
+    help.push("..premi \"Multa\" ed è fatta!");
 
-      Session.set("help",help);
-      Session.set("currentHelp",0);
+    Session.set("help",help);
+    Session.set("currentHelp",0);
 }
 
-Template.navbar.rendered = function(){
-    if(!alreadyRendered) {
-        alreadyRendered = true;
-        initHelp();
-    }
 
+Template.navbar.rendered = function(){
     $('.modal-trigger').leanModal();
     $('.button-collapse').sideNav({
-      //menuWidth: 300, // Default is 240
-      //edge: 'right', // Choose the horizontal origin
-      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        //menuWidth: 300, // Default is 240
+        //edge: 'right', // Choose the horizontal origin
+        closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
     });
     $('collapsible').collapsible();
+
+    if(!rendered) {
+        console.log("now created " + rendered);
+        rendered = true;
+        //init once
+        initHelp();
+
+        //Show help at startup
+        $('#helpbox').openModal();
+    }
 };
 
 Template.navbar.helpers({
