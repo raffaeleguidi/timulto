@@ -31,7 +31,10 @@
             <input type="hidden" id="lng" name="lng" value="{{loc.lng}}" />
             {{#if currentUser}}
             <div class="row">
-                <button id="send" class="btn waves-light" type="submit" name="action" disabled="{{#if disabled}} disabled {{/if}}">{{_ "multare"}}
+                <button id="shoot" class="btn waves-light" type="submit" name="action">
+                   <i class="mdi-action-autorenew center"></i>
+                </button>
+                <button id="send" class="btn waves-light" name="action" disabled="{{#if disabled}} disabled {{/if}}">{{_ "multare"}}
                    <i class="mdi-content-send right"></i>
                 </button>
             </div>
@@ -53,7 +56,7 @@
           <i class="large mdi-image-camera-alt"></i>
         </a>
       </div>-->
-        {{> pulsantone }}
+      <!--{{> pulsantone }}-->
     </div>
   </div>
 

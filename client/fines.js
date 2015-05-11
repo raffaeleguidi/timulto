@@ -31,7 +31,7 @@ Template.fineDetails.events({
         if(Session.get("isadmin"))
             Meteor.photoHandling.drawLogo('herecanvas', event.offsetX, event.offsetY);
     },
-    "click .upateImage": function(event) {
+    "click #save": function(event) {
         if(Session.get("isadmin")) {
             var canvas = null;
             try {
@@ -48,7 +48,7 @@ Template.fineDetails.events({
             Materialize.toast("Foto aggiornata", 4000, 'rounded center');
         }
     },
-    "click .fineonmap": function(event) {
+    "click #findonmap": function(event) {
         Session.set("selectedLat",Session.get("lat"));
         Session.set("selectedLon",Session.get("lon"));
         Session.set("zoom",18);

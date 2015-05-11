@@ -52,9 +52,9 @@ Template.mappa.events({
         Router.go('/crea');
     },
     'click a[target=_blank]': function (event) {
-    event.preventDefault();
-    window.open(event.target.href, '_blank');
-  }
+        event.preventDefault();
+        window.open(event.target.href, '_blank');
+    }
 });
 
 var rendered = false;

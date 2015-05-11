@@ -26,10 +26,21 @@
               <input type="hidden" value="{{lat}}" />
               <input type="hidden" value="{{lon}}" />
           </div>
-          <div class="row center ">
-              {{#if isadmin}}
+          <div class="row center">
+              <div class="row">
+                {{#if isadmin}}
+                <button id="save" class="btn waves-light" name="action">{{_ "Salva"}}
+                   <i class="mdi-content-save right"></i>
+                </button>
+                {{/if}}
+                <!--<button id="findonmap" class="btn waves-light" name="action" disabled="{{#if disabled}} disabled {{/if}}">{{_ "Mappa"}}
+                   <i class="mdi-maps-place right"></i>
+                </button>-->
+            </div>
+
+              <!--{{#if isadmin}}
               <div class="col s6 upateImage">
-                <a class="blue lighten-1 btn"><i class="mdi-content-save right"></i>Salva immagine</a>
+                <a class="btn waves-light"><i class="mdi-content-save right"></i>Salva</a>
               </div>
               <div class="col s6 fineonmap">
                 <a class="blue lighten-1 btn"><i class="mdi-maps-place right"></i>Vedi sulla mappa</a>
@@ -39,6 +50,8 @@
                   <a class="blue lighten-1 btn"><i class="mdi-maps-place right"></i>Vedi sulla mappa</a>
               </div>
               {{/if}}
+                <a class="blue lighten-1 btn"><i class="mdi-maps-place right"></i>Mappa</a>
+              </div>-->
           </div>
 
 <!--
@@ -59,14 +72,21 @@
                     <i class="large mdi-action-thumbs-up-down"></i>
                 </a>
                 <ul>
-                    <li><a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one ilikeit"></i></a>
+                    <!--<li>
+                        <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one ilikeit"></i></a>
                     </li>
-                    <li><a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 idontlikeit"></i></a>
+                    <li>
+                        <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 idontlikeit"></i></a>
+                    </li>-->
+                    <li>
+                        <a id="findonmap" class="btn-floating blue lighten-1"><i class="large mdi-maps-place place"></i></a>
                     </li>
                      {{#if isadmin}}
-                    <li><a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
+                    <li>
+                        <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
                     </li>
-                    <li><a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up"></i></a>
+                    <li>
+                        <a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up"></i></a>
                     </li>
                     {{/if}}
                 </ul>
