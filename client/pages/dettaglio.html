@@ -38,39 +38,9 @@
                    <i class="mdi-content-save right"></i>
                 </button>
                 {{/if}}
-                <!--<button id="findonmap" class="btn waves-light" name="action" disabled="{{#if disabled}} disabled {{/if}}">{{_ "Mappa"}}
-                   <i class="mdi-maps-place right"></i>
-                </button>-->
             </div>
-
-              <!--{{#if isadmin}}
-              <div class="col s6 upateImage">
-                <a class="btn waves-light"><i class="mdi-content-save right"></i>Salva</a>
-              </div>
-              <div class="col s6 fineonmap">
-                <a class="blue lighten-1 btn"><i class="mdi-maps-place right"></i>Vedi sulla mappa</a>
-              </div>
-              {{else}}
-              <div class="fineonmap">
-                  <a class="blue lighten-1 btn"><i class="mdi-maps-place right"></i>Vedi sulla mappa</a>
-              </div>
-              {{/if}}
-                <a class="blue lighten-1 btn"><i class="mdi-maps-place right"></i>Mappa</a>
-              </div>-->
           </div>
 
-<!--
-          <div class="row center">
-              <div>
-                <p class="adminThumb">
-                    <a class="btn-floating orange"><i class="large mdi-action-thumb-up thumb-up"></i></a>
-                &nbsp;
-                    <a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a>
-                </p>
-              </div>
-          </div>
-
--->
         {{#if currentUser}}
             <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
                 <a class="btn-floating btn-large orange">
@@ -83,9 +53,11 @@
                     <li>
                         <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 idontlikeit"></i></a>
                     </li>
+<!--
                     <li>
                         <a id="findonmap" class="btn-floating blue lighten-1"><i class="large mdi-maps-place place"></i></a>
                     </li>
+-->
                 {{#if isadmin}}
                     <li>
                         <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>

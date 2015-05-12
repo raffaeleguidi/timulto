@@ -44,7 +44,7 @@ function clientGeocode (lat, lon, cb) {
 
 }
 
-geolocalization = {
+geoLocalization = {
 
     latLng: function() {
         try {

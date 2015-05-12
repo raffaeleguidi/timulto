@@ -46,7 +46,7 @@ Template.body.events({
         photoHandling.takePhoto();
     },
     "click #manualgeocode": function (event) {
-        geolocalization.geocode();
+        geoLocalization.geocode();
     },
     "click #canvas": function (event) {
         if (!photoHandling.photoTaken()) {

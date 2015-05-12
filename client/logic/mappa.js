@@ -58,7 +58,7 @@ Template.mappa.events({
 var rendered = false;
 
 Template.mappa.created = function () {
-    geolocalization.latLng();
+    geoLocalization.latLng();
 
     if (!rendered){
         // run my code only once
@@ -115,7 +115,7 @@ Template.mappa.created = function () {
 
 Template.mappa.rendered = function () {
     depth = 1;
-    geolocalization.latLng();
+    geoLocalization.latLng();
 
     $(function () {
         $(window).resize(function () {
@@ -147,7 +147,7 @@ Template.mappa.rendered = function () {
 
 
     if(!lat || !lon || lat==0 || lon==0) {
-        geolocalization.latLng();
+        geoLocalization.latLng();
 
         if(!Session.get("lat") || !Session.get("lon")) {
             //In extremis
