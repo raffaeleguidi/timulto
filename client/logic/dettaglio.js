@@ -43,9 +43,9 @@ Template.dettaglio.events({
             var imageData = canvas.toDataURL();
             var fineId = Session.get("_id");
 
-            console.log("before update");
             Meteor.call("updateImage", fineId, imageData);
-            console.log("after update");
+
+            imageHandling.reload('#img_' + fineId);
 
             Materialize.toast("Foto aggiornata", 4000, 'rounded center');
         }
