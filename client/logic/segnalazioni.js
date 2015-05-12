@@ -40,7 +40,7 @@ Template.segnalazioni.helpers({
         });
 
         return Fines.find(
-            { approved:false },
+            { approved: false },
             { sort: {createdAt: -1} });
     },
     latestFines: function() {
@@ -54,10 +54,10 @@ Template.segnalazioni.helpers({
         });
         return Fines.find(
             {
-                approved:true,
+                approved: true,
                 createdAt: { $gte: Timulto.yesterday() }
             }, {
-                sort: { createdAt:-1 }
+                sort: { createdAt: -1 }
             });
         /*return Session.get("latestFines");*/
     },
