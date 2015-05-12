@@ -47,6 +47,6 @@ Deps.autorun(function (c) {
 
       Session.set("foundfines",[]);
       Session.set("finesToApprove",[]);
+
       photoHandling.resetPicture();
-//      GoogleMaps.load();
   });

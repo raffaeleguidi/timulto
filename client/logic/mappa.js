@@ -29,13 +29,11 @@ Template.mappa.events({
     },
     "click #clickableMapElement":function(event) {
         event.preventDefault();
-        var selectedId = $('input[type=\'hidden\']').attr("id");
 
-//        var selectedId = Session.get("_id");
+        var selectedId = $('input[type=\'hidden\']').attr("id");
         var fine = Fines.findOne({_id:selectedId});
 
         if(fine) {
-//            console.log(JSON.stringify(fine));
             Session.set("_id",fine._id);
             Session.set("createdAt", fine.createdAt);
             Session.set("detailUsername", fine.username);
@@ -73,12 +71,13 @@ Template.mappa.created = function () {
 
         cluster = new L.MarkerClusterGroup();
 
-        Fines.find({approved: 1}).observe({
-            added: function(fine) {/* see previous post */
+        Fines.find({ approved:true }).observe({
+
+            added: function(fine) {
                 var lat = fine.loc.coordinates[1];
                 var lng = fine.loc.coordinates[0];
                 var googleMapsUrl = 'http://maps.google.com/maps/?q='+lat+','+lng+'&ll='+lat+','+lng+'&z=17';
-    //            var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
+                //var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
                 var popupContent =
                     '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
                     '<div class="col s6"><img class="mini-shot" name="imageData" src="' + rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
@@ -93,7 +92,7 @@ Template.mappa.created = function () {
 
                 marker.bindPopup(popupContent).openPopup();
                 markers[marker.options._id] = marker;
-    //            map.addLayer(marker);
+                //map.addLayer(marker);
                 cluster.addLayer(marker);
             },
     //        changed: function(fine) {

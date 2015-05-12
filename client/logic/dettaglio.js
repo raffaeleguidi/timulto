@@ -152,10 +152,10 @@ Template.dettaglio.helpers({
         return Session.get("_id");
     },
     isapproved:function() {
-        return Session.get("isapproved");
+        return Session.get("approved");
     },
     notApproved:function() {
-        return !Session.get("isapproved");
+        return !Session.get("approved");
     },
     text: function(){
         return Session.get("detailText");
