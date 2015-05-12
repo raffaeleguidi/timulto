@@ -134,7 +134,9 @@ Template.crea.events({
         //geolocalization.geocode();
     },
      "click #manualgeocode": function (event) {
+        console.log("manual geocode");
         geoLocalization.geocode();
+        console.log("manual geocode end");
     },
     "click #canvas": function (event) {
         if (!photoHandling.photoTaken()) {

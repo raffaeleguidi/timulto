@@ -66,12 +66,14 @@ geoLocalization = {
     },
     geocode: function() {
         try {
+            console.log("in geocode");
             var coords = Geolocation.latLng();
+            console.log("geocode coords %s", JSON.stringify(coords));
             if (coords && coords.lat && coords.lng) {
                 /*Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {*/
                 clientGeocode( coords.lat, coords.lng, function(error, results) {
                     if (error) {
-                        console.log('skipping reverse geocode becaus of error: ' + error.message + ' (' + error.code + ')');
+                        console.error('skipping reverse geocode becaus of error: ' + error.message + ' (' + error.code + ')');
                         return;
                     }
 
@@ -84,10 +86,10 @@ geoLocalization = {
                     $('#address').val(address);
                 });
             } else {
-                console.log("#geocode - Not lat/lng");
+                console.error("#geocode - lat/lng not set");
             }
         } catch(err) {
-            console.log("error geocoding " + err.message);
+            console.error("error geocoding " + err.message);
         }
     }
 };

@@ -22,7 +22,7 @@ Template.mappa.events({
     "click #manualgeocode": function(event) {
         event.preventDefault();
 
-        geolocalization.latLng();
+        geoLocalization.latLng();
 
         map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
         map.setZoom(defaultZoomLevel);

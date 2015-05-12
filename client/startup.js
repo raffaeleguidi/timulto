@@ -31,7 +31,6 @@ Deps.autorun(function (c) {
 
   Meteor.startup(function(){
 
-      //loadCategories();
       depth = 0;
 
       TAPi18n.setLanguage(getUserLanguage())

@@ -8,7 +8,7 @@ if(Meteor.isCordova){
         Session.set("platform", device.platform + " v" + device.version);
         console.log("platform: " + device.platform + " v" + device.version);
 
-        if (device.platform == "Android" && device.version >= "4.2.0") {
+        if (false && device.platform == "Android" && device.version >= "4.2.0") {
             Ground.Collection(Fines);
             Ground.Collection(Categories);
             Ground.Collection(Administrators);

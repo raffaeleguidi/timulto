@@ -24,18 +24,18 @@ Template.navbar.rendered = function(){
     });
     $('collapsible').collapsible();
 
-    if(!localStorage.getItem("showstartuphelp")) {
-        localStorage.setItem("showstartuphelp",false);
-
-        console.log("rendering");
-        //init once
-        initHelp();
-
-        //Show help at startup
-        $('#helpbox').openModal();
-
-
-    }
+//    if(!localStorage.getItem("showstartuphelp")) {
+//        localStorage.setItem("showstartuphelp",false);
+//
+//        console.log("rendering");
+//        //init once
+//        initHelp();
+//
+//        //Show help at startup
+//        $('#helpbox').openModal();
+//
+//
+//    }
 
 };
 
