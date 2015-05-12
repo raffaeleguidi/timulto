@@ -101,8 +101,8 @@ Template.crea.events({
 
         Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
 
-        Meteor.photoHandling.resetPicture();
-        Session.set("categoryselected",false);
+        /*Meteor.photoHandling.resetPicture();
+        Session.set("categoryselected",false);*/
 
         $("#address").val(Session.get("address"));
         $("#description").val("");
