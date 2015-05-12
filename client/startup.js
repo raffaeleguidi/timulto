@@ -15,7 +15,7 @@ Tracker.autorun(function () {
 });
 
 /* maybe it should become main.js? */
-Deps.autorun(function (c) {
+Tracker.autorun(function () {
     if(!Meteor.userId()){
         if(userWasLoggedIn){
             Session.set('isadmin', false);
@@ -31,13 +31,13 @@ Deps.autorun(function (c) {
         });
         userWasLoggedIn = true;
     }
-    });
+});
     
-  function loadCategories () {
-    $.get("/api/categories", function(data){
-        Session.set("categories", data);
-    });
-  }
+function loadCategories () {
+$.get("/api/categories", function(data){
+    Session.set("categories", data);
+});
+}
 
   Meteor.startup(function(){
 
