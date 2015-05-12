@@ -44,7 +44,7 @@ function clientGeocode (lat, lon, cb) {
 
 }
 
-Meteor.geolocalization = {
+geolocalization = {
 
     latLng: function() {
         try {

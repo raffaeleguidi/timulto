@@ -22,14 +22,14 @@ Template.dettaglio.rendered = function(){
         var canvas=document.getElementById("herecanvas");
         var data = Session.get("rootUrl") + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
 
-        Meteor.photoHandling.fitImageInCanvas(data,canvas);
+        photoHandling.fitImageInCanvas(data,canvas);
     }
 }
 
 Template.dettaglio.events({
     "click #herecanvas": function(event) {
         if(Session.get("isadmin"))
-            Meteor.photoHandling.drawLogo('herecanvas', event.offsetX, event.offsetY);
+            photoHandling.drawLogo('herecanvas', event.offsetX, event.offsetY);
     },
     "click #save": function(event) {
         if(Session.get("isadmin")) {
@@ -82,7 +82,7 @@ Template.dettaglio.events({
 
             context.drawImage(image, 0, 0);
             console.log($("#canvas"+Session.get("_id")));
-            Meteor.photoHandling.drawLogo("canvas"+Session.get("_id"), event.offsetX, event.offsetY);
+            photoHandling.drawLogo("canvas"+Session.get("_id"), event.offsetX, event.offsetY);
         }
     },
     "click .ilikeit": function () {

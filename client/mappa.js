@@ -22,7 +22,7 @@ Template.mappa.events({
     "click #manualgeocode": function(event) {
         event.preventDefault();
 
-        Meteor.geolocalization.latLng();
+        geolocalization.latLng();
         
         map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
         map.setZoom(defaultZoomLevel);
@@ -60,7 +60,7 @@ Template.mappa.events({
 var rendered = false;
 
 Template.mappa.created = function () {
-    Meteor.geolocalization.latLng();
+    geolocalization.latLng();
     
     if (!rendered){
         // run my code only once
@@ -116,7 +116,7 @@ Template.mappa.created = function () {
 
 Template.mappa.rendered = function () {
     depth = 1;
-    Meteor.geolocalization.latLng();
+    geolocalization.latLng();
 
     $(function () {
         $(window).resize(function () {
@@ -148,7 +148,7 @@ Template.mappa.rendered = function () {
 
 
     if(!lat || !lon || lat==0 || lon==0) {
-        Meteor.geolocalization.latLng();
+        geolocalization.latLng();
 
         if(!Session.get("lat") || !Session.get("lon")) {
             //In extremis

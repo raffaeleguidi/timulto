@@ -49,6 +49,6 @@ Deps.autorun(function (c) {
 
       Session.set("foundfines",[]);
       Session.set("finesToApprove",[]);
-      Meteor.photoHandling.resetPicture();
+      photoHandling.resetPicture();
 //      GoogleMaps.load();
   });

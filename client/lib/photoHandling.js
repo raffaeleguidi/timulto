@@ -2,14 +2,14 @@ var blank = "splash.png";
 var isPhotoTaken = false;
 
 
-Meteor.photoHandling = {
+photoHandling = {
 
     photoTaken: function(){
-        return Meteor.photoHandling.isPhotoTaken;
+        return photoHandling.isPhotoTaken;
     },
     resetPicture: function () {
-        Meteor.photoHandling.isPhotoTaken = false;
-        Session.set("isphototaken",Meteor.photoHandling.isPhotoTaken);
+        photoHandling.isPhotoTaken = false;
+        Session.set("isphototaken", photoHandling.isPhotoTaken);
         
         Session.set("photo", blank);
         var canvas = document.getElementById('canvas');
@@ -47,19 +47,19 @@ Meteor.photoHandling = {
         MeteorCamera.getPicture({ width: 800, height: 600, correctOrientation: true }, function(error, data) {
             context.clearRect(0, 0, canvas.width, canvas.height);
             if (data) {
-                Meteor.photoHandling.isPhotoTaken = true;
+                photoHandling.isPhotoTaken = true;
 
-                Meteor.photoHandling.fitImageInCanvas(data, canvas);
+                photoHandling.fitImageInCanvas(data, canvas);
                 Materialize.toast("Fai tap sulla foto per mascherare targhe e visi", 4000 , 'rounded');
                 //Materialize.toast("Completa la scheda e premi \"Multa\"", 4000 , 'rounded');
                 Session.set("photo", data);
                 $('body').scrollTop(0);
                 
-                Session.set("isphototaken",Meteor.photoHandling.isPhotoTaken);
-                Meteor.geolocalization.geocode();
+                Session.set("isphototaken", photoHandling.isPhotoTaken);
+                geolocalization.geocode();
         
             } else {
-                Meteor.photoHandling.resetPicture();
+                photoHandling.resetPicture();
             }
         });
     },

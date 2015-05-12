@@ -11,11 +11,11 @@ getUserLanguage = function () {
 
 Template.crea.rendered = function () {
     depth = 1;
-    Meteor.photoHandling.resetPicture();
+    photoHandling.resetPicture();
     if (Meteor.isCordova) {
-        Meteor.photoHandling.takePhoto();
+        photoHandling.takePhoto();
     }
-    //Meteor.geolocalization.geocode();
+    //geolocalization.geocode();
 };
 
 Template.crea.helpers({
@@ -101,7 +101,7 @@ Template.crea.events({
 
         Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
 
-        /*Meteor.photoHandling.resetPicture();
+        /*photoHandling.resetPicture();
         Session.set("categoryselected",false);*/
 
         $("#address").val(Session.get("address"));
@@ -130,17 +130,17 @@ Template.crea.events({
         $('.button-collapse').sideNav('show');
     },
     "click #shoot": function (event) {
-        Meteor.photoHandling.takePhoto();
-        //Meteor.geolocalization.geocode();
+        photoHandling.takePhoto();
+        //geolocalization.geocode();
     },
      "click #manualgeocode": function (event) {
-        Meteor.geolocalization.geocode();
+        geolocalization.geocode();
     },
     "click #canvas": function (event) {
-        if (!Meteor.photoHandling.photoTaken()) {
-            Meteor.photoHandling.takePhoto();
+        if (!photoHandling.photoTaken()) {
+            photoHandling.takePhoto();
         } else {
-            Meteor.photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
+            photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
         }
     }
 

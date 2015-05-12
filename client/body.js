@@ -43,16 +43,16 @@ Template.body.events({
         $('.button-collapse').sideNav('show');
     },
     "click #shoot": function (event) {
-        Meteor.photoHandling.takePhoto();
+        photoHandling.takePhoto();
     },
     "click #manualgeocode": function (event) {
-        Meteor.geolocalization.geocode();
+        geolocalization.geocode();
     },
     "click #canvas": function (event) {
-        if (!Meteor.photoHandling.photoTaken()) {
-            Meteor.photoHandling.takePhoto();
+        if (!photoHandling.photoTaken()) {
+            photoHandling.takePhoto();
         } else {
-            Meteor.photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
+            photoHandling.drawLogo('canvas', event.offsetX, event.offsetY);
         }
     },
 
