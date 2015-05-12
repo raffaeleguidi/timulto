@@ -115,21 +115,10 @@ Meteor.startup(function () {
     } */
 
     function isAdministrator() {
-        var username;
-        var service;
+        var cu = UserUtil.getCurrentUsernameService();
 
-        if (Meteor.user()) {
-            if (Meteor.user().services.facebook) {
-                username = Meteor.user().services.facebook.email;
-                service  = "facebook";
-            } else if (Meteor.user().services.twitter) {
-                username = Meteor.user().services.twitter.screenName;
-                service  = "twitter";
-            } else if (Meteor.user().services.google) {
-                username = Meteor.user().services.google.email;
-                service  = "google";
-            }
-        }
+        var username = cu.username;
+        var service  = cu.service;
 
         //var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
         var userAdm = Administrators.findOne({$and:[{username: username},{service:service}]});
@@ -180,18 +169,9 @@ Meteor.startup(function () {
         },
         //like -> boolean, true indica approvazione, false indica non approvazione dell'utente
         likeFine: function(fineId, like) {
-            var username = "";
-
             if(Meteor.user() && fineId) {
-                if (Meteor.user().services.facebook) {
-                    username = Meteor.user().services.facebook.email;
-                } else if (Meteor.user().services.twitter) {
-                    username = Meteor.user().services.twitter.screenName;
-                } else if (Meteor.user().services.google) {
-                    username = Meteor.user().services.google.email;
-                }
-
-//                console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
+                var username = UserUtils.getCurrentUsername();
+                //console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
                 if(like) {
                     Fines.update({_id:fineId},{$addToSet:{likes:username}},
                                 function(err,result){
