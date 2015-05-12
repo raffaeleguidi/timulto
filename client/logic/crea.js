@@ -15,7 +15,7 @@ Template.crea.rendered = function () {
     if (Meteor.isCordova) {
         photoHandling.takePhoto();
     }
-    //geolocalization.geocode();
+    //geoLocalization.geocode();
 };
 
 Template.crea.helpers({
@@ -134,7 +134,7 @@ Template.crea.events({
         //geolocalization.geocode();
     },
      "click #manualgeocode": function (event) {
-        geolocalization.geocode();
+        geoLocalization.geocode();
     },
     "click #canvas": function (event) {
         if (!photoHandling.photoTaken()) {

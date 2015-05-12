@@ -56,7 +56,7 @@ photoHandling = {
                 $('body').scrollTop(0);
                 
                 Session.set("isphototaken", photoHandling.isPhotoTaken);
-                geolocalization.geocode();
+                geoLocalization.geocode();
         
             } else {
                 photoHandling.resetPicture();
