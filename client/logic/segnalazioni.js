@@ -32,16 +32,16 @@ Template.segnalazioni.helpers({
     },*/
     finesToApprove: function() {
         return Fines.find(
-            { approved:false },
+            { approved: false },
             { sort: {createdAt: -1} });
     },
     latestFines: function() {
         return Fines.find(
             {
-                approved:true,
+                approved: true,
                 createdAt: { $gte: Timulto.yesterday() }
             }, {
-                sort: { createdAt:-1 }
+                sort: { createdAt: -1 }
             });
         /*return Session.get("latestFines");*/
     },
