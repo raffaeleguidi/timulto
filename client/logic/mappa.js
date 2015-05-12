@@ -19,13 +19,17 @@ Template.mappa.events({
     },
     "click #manualgeocode": function(event) {
         event.preventDefault();
-        console.log("clicked manual");
+//        console.log("clicked manual");
         if(!Session.get("lat") || !Session.get("lon")) {
-            console.log("resetting coords");
+//            console.log("resetting coords");
             geoLocalization.latLng();
         }
-        console.log("lat: "+Session.get("lat")+",lon: "+Session.get("lon"));
-        map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
+        var lat = Session.get("lat");
+        var lon = Session.get("lon");
+
+        console.log("lat: "+ lat + ",lon: " + lon);
+
+        map.panTo(new L.LatLng(lat, lon));
         map.setZoom(defaultZoomLevel);
 
         return false;
@@ -69,48 +73,47 @@ function init() {
             iconUrl: defaultIconUrl,
             iconSize: [defaultIconW, defaultIconH]
         });
-
-        cluster = new L.MarkerClusterGroup();
-
-        Fines.find({ approved:true }).observe({
-            added: function(fine) {
-                var lat = fine.loc.coordinates[1];
-                var lng = fine.loc.coordinates[0];
-                var googleMapsUrl = 'http://maps.google.com/maps/?q='+lat+','+lng+'&ll='+lat+','+lng+'&z=17';
-                //var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
-                var popupContent =
-                    '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
-                    '<div class="col s6"><img class="mini-shot" name="imageData" src="' + urlHandling.rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
-                    '</div>' +
-                    '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
-                    '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
-                var marker = L.marker([lat, lng], {
-                    _id: fine._id,
-                    icon: myIcon,
-                    clickable: true
-                });
-
-                marker.bindPopup(popupContent).openPopup();
-                markers[marker.options._id] = marker;
-                //map.addLayer(marker);
-                cluster.addLayer(marker);
-            },
-    //        changed: function(fine) {
-    //          var marker = markers[fine._id];
-    //          if (marker) {
-    //              marker.setIcon(myIcon);
-    //          }
-    //        },
-            removed: function(fine) {
-                var marker = markers[fine._id];
-
-                if (cluster.hasLayer(marker)) {
-                    cluster.removeLayer(marker);
-                    delete markers[fine._id];
-                }
-            }
-        });
     }
+    cluster = new L.MarkerClusterGroup();
+
+    Fines.find({ approved:true }).observe({
+        added: function(fine) {
+            var lat = fine.loc.coordinates[1];
+            var lng = fine.loc.coordinates[0];
+            var googleMapsUrl = 'http://maps.google.com/maps/?q='+lat+','+lng+'&ll='+lat+','+lng+'&z=17';
+            //var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
+            var popupContent =
+                '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
+                '<div class="col s6"><img class="mini-shot" name="imageData" src="' + urlHandling.rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
+                '</div>' +
+                '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
+                '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
+            var marker = L.marker([lat, lng], {
+                _id: fine._id,
+                icon: myIcon,
+                clickable: true
+            });
+
+            marker.bindPopup(popupContent).openPopup();
+            markers[marker.options._id] = marker;
+            //map.addLayer(marker);
+            cluster.addLayer(marker);
+        },
+//        changed: function(fine) {
+//          var marker = markers[fine._id];
+//          if (marker) {
+//              marker.setIcon(myIcon);
+//          }
+//        },
+        removed: function(fine) {
+            var marker = markers[fine._id];
+
+            if (cluster.hasLayer(marker)) {
+                cluster.removeLayer(marker);
+                delete markers[fine._id];
+            }
+        }
+    });
 }
 
 Template.mappa.rendered = function () {
