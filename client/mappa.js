@@ -81,7 +81,7 @@ Template.mappa.created = function () {
     //            var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
                 var popupContent =
                     '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
-                    '<div class="col s6"><img class="mini-shot" name="imageData" src="' + rootUrl() + 'api/thumb/' + fine._id + '" />' +
+                    '<div class="col s6"><img class="mini-shot" name="imageData" src="' + rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
                     '</div>' +
                     '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
                     '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
