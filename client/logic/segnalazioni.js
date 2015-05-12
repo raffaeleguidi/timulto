@@ -37,7 +37,7 @@ Template.segnalazioni.helpers({
         return Fines.find(
             {
                 approved: true,
-                createdAt: { $gte: Timulto.yesterday() }
+                createdAt: { $gte: Common.yesterday() }
             }, {
                 sort: { createdAt: -1 }
             });
