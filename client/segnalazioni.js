@@ -34,7 +34,7 @@ Template.segnalazioni.helpers({
         return Fines.find({approved:0}, {sort: {createdAt: -1}});
     },
     latestFines: function() {
-        return Fines.find({approved:1}, {sort: {createdAt: -1}});
+        return Fines.find({approved:1, createdAt: {$gte: Timulto.yesterday()}}, {sort: {createdAt: -1}});
         /*return Session.get("latestFines");*/
     },
     hide:function(){

@@ -21,7 +21,12 @@
                     <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}/{{#if version}}{{version}}{{else}}0{{/if}}" />
                 {{/if}}
               </div><div class="col s12 m6">
-                 <p class="card-panel light-blue lighten-5">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
+                 <p class="card-panel light-blue lighten-5">
+                     {{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.
+                  {{#if notApproved}}
+                     <span class="red" style="color: white; padding: 2px">Non approvato</span>
+                  {{/if}}
+                 </p>
               </div>
               <input type="hidden" value="{{lat}}" />
               <input type="hidden" value="{{lon}}" />

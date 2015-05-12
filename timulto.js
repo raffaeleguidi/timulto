@@ -2,6 +2,12 @@ Fines = new Mongo.Collection("fines");
 Administrators = new Mongo.Collection("administrators");
 Categories = new Mongo.Collection("categories");
 
+Timulto = {
+    yesterday: function() {
+        return new Date( Date.now() - 24*60*60*1000 );
+    }
+}
+
 if(Meteor.isCordova){
 
     try  {
