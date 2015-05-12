@@ -74,13 +74,17 @@ geolocalization = {
                         console.log('skipping reverse geocode becaus of error: ' + error.message + ' (' + error.code + ')');
                         return;
                     }
-                    Session.set("address", results.address + ' - ' + results.postcode + ' ' + results.city);
+
+                    var address = results.address + ' - ' + results.postcode + ' ' + results.city;
+                    Session.set("address", address);
                     Session.set("city", results.city);
                     Session.set("lat",coords.lat);
                     Session.set("lon",coords.lng);
                     console.log("address taken in geoLocalization");
-                    $('#address').val(Session.get("address"));
+                    $('#address').val(address);
                 });
+            } else {
+                console.log("#geocode - Not lat/lng");
             }
         } catch(err) {
             console.log("error geocoding " + err.message);
