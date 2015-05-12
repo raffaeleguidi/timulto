@@ -136,10 +136,10 @@ Meteor.methods({
 //        if( !address || address === "" || !category || category === "" || !imageData || imageData === "") {
 //          throw new Meteor.Error("cannot insert empty fine.");
 //        }
-        var approved = 0;
+        var approved = false;
 
         if(isAdministrator()){
-            approved = 1;
+            approved = true;
         }
         console.log("inserted element " + Fines.insert({
           text: text,
