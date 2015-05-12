@@ -13,6 +13,10 @@ var defaultIconUrl = 'icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
+Tracker.autorun(function () {
+
+    map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
+});
 
 Template.mappa.events({
     'click a[target=_blank]': function (event) {
@@ -22,7 +26,7 @@ Template.mappa.events({
     "click #manualgeocode": function(event) {
         event.preventDefault();
 
-        geoLocalization.latLng();
+//        geoLocalization.latLng();
 
         map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
         map.setZoom(defaultZoomLevel);
@@ -58,7 +62,7 @@ Template.mappa.events({
 var rendered = false;
 
 Template.mappa.created = function () {
-    geoLocalization.latLng();
+//    geoLocalization.latLng();
 
     if (!rendered){
         // run my code only once

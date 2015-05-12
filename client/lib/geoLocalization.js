@@ -44,6 +44,16 @@ function clientGeocode (lat, lon, cb) {
 
 }
 
+Tracker.autorun(function () {
+  var coords = Geolocation.latLng();
+
+    if (coords && coords.lat && coords.lng) {
+        Session.set("lat",coords.lat);
+        Session.set("lon",coords.lon);
+        console.log("coords  " + JSON.stringify(coords));
+    }
+});
+
 geoLocalization = {
 
     latLng: function() {
