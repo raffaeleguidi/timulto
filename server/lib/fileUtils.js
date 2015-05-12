@@ -10,18 +10,24 @@ function getImageFileNames(fine) {
     }
 }
 function cleanTmpImages(fine) {
+    var filename = getImageFileNames(fine);
     try {
-        var filename = getImageFileNames(fine);
         fs.unlinkSync(filename.image);
+        console.log('fine %s image deleted', fine._id);
+    } catch(ex) {
+        // noop
+        console.error('error: ', ex.message);
+    }
+    try {
         fs.unlinkSync(filename.thumb);
-        console.log('fine %s images deleted', fine._id);
+        console.log('fine %s thumb deleted', fine._id);
     } catch(ex) {
         // noop
         console.error('error: ', ex.message);
     }
 }
 
-Meteor.fileUtils = {
+fileUtils = {
     cleanTmpImages : function(fine){
         console.log('before cleanTmpImages');
         cleanTmpImages(fine);

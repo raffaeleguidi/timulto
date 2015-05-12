@@ -249,7 +249,7 @@ Meteor.startup(function () {
                             return { error : err };
                         } else {
                             console.log("before clean");
-                            Meteor.fileUtils.cleanTmpImages(Fines.findOne({_id: fineId}));
+                            fileUtils.cleanTmpImages(Fines.findOne({_id: fineId}));
                             console.log("after clean");
 
                             return {
