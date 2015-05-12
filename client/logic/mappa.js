@@ -13,10 +13,7 @@ var defaultIconUrl = 'icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
-Tracker.autorun(function () {
 
-    map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
-});
 
 Template.mappa.events({
     'click a[target=_blank]': function (event) {
@@ -74,52 +71,53 @@ Template.mappa.created = function () {
         });
 
         cluster = new L.MarkerClusterGroup();
-
-        Fines.find({ approved:true }).observe({
-
-            added: function(fine) {
-                var lat = fine.loc.coordinates[1];
-                var lng = fine.loc.coordinates[0];
-                var googleMapsUrl = 'http://maps.google.com/maps/?q='+lat+','+lng+'&ll='+lat+','+lng+'&z=17';
-                //var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
-                var popupContent =
-                    '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
-                    '<div class="col s6"><img class="mini-shot" name="imageData" src="' + rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
-                    '</div>' +
-                    '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
-                    '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
-                var marker = L.marker([lat, lng], {
-                    _id: fine._id,
-                    icon: myIcon,
-                    clickable: true
-                });
-
-                marker.bindPopup(popupContent).openPopup();
-                markers[marker.options._id] = marker;
-                //map.addLayer(marker);
-                cluster.addLayer(marker);
-            },
-    //        changed: function(fine) {
-    //          var marker = markers[fine._id];
-    //          if (marker) {
-    //              marker.setIcon(myIcon);
-    //          }
-    //        },
-            removed: function(fine) {
-                var marker = markers[fine._id];
-
-                if (cluster.hasLayer(marker)) {
-                    cluster.removeLayer(marker);
-                    delete markers[fine._id];
-                }
-            }
-        });
     }
+    
+    Fines.find({ approved:true }).observe({
+
+        added: function(fine) {
+            var lat = fine.loc.coordinates[1];
+            var lng = fine.loc.coordinates[0];
+            var googleMapsUrl = 'http://maps.google.com/maps/?q='+lat+','+lng+'&ll='+lat+','+lng+'&z=17';
+            //var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
+            var popupContent =
+                '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
+                '<div class="col s6"><img class="mini-shot" name="imageData" src="' + rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
+                '</div>' +
+                '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
+                '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
+            var marker = L.marker([lat, lng], {
+                _id: fine._id,
+                icon: myIcon,
+                clickable: true
+            });
+
+            marker.bindPopup(popupContent).openPopup();
+            markers[marker.options._id] = marker;
+            //map.addLayer(marker);
+            cluster.addLayer(marker);
+        },
+//        changed: function(fine) {
+//          var marker = markers[fine._id];
+//          if (marker) {
+//              marker.setIcon(myIcon);
+//          }
+//        },
+        removed: function(fine) {
+            var marker = markers[fine._id];
+
+            if (cluster.hasLayer(marker)) {
+                cluster.removeLayer(marker);
+                delete markers[fine._id];
+            }
+        }
+    });
+
 };
 
 Template.mappa.rendered = function () {
     depth = 1;
-    geoLocalization.latLng();
+//    geoLocalization.latLng();
 
     $(function () {
         $(window).resize(function () {
@@ -134,7 +132,7 @@ Template.mappa.rendered = function () {
     var lon;
     var zoom = Session.get("zoom");
 
-    if(Session.get("selectedLat")) {
+    if(Session.get("selectedLat") && Session.get("selectedLon")) {
         lat = Session.get("selectedLat");
         lon = Session.get("selectedLon");
 

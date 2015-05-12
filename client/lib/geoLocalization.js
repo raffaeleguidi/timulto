@@ -49,7 +49,7 @@ Tracker.autorun(function () {
 
     if (coords && coords.lat && coords.lng) {
         Session.set("lat",coords.lat);
-        Session.set("lon",coords.lon);
+        Session.set("lon",coords.lng);
         console.log("coords  " + JSON.stringify(coords));
     }
 });
