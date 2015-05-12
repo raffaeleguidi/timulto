@@ -239,23 +239,35 @@ Meteor.startup(function () {
 
                 Fines.update(
                     { _id:fineId },
-                    { $set: { imageData:newImageData }},
+                    {
+                        $set: { imageData:newImageData},
+                        $inc:{version:1}
+                    },
                     function(err,result){
                         if(err) {
                             console.log("Error in updating image: "+err);
                             return { error : err };
                         } else {
-                            return HTTP.call('GET', ROOT_URL+'api/image/clean/'+fineId, function(result) {
-                                if(!result){
-                                    console.log("no result returned");
-                                } else if(result.error) {
-                                    console.log("cannot update cached image: " + result.error);
-                                    return { error  :result.error };
-                                } else {
-                                    console.log("finished cleaning image: " + result);
-                                    return {error:null, result : result.result };
-                                }
-                            });
+                            console.log("before clean");
+                            Meteor.fileUtils.cleanTmpImages(Fines.findOne({_id: fineId}));
+                            console.log("after clean");
+
+                            return {
+                                error:null,
+                                result : 'ok'
+                            }
+
+//                            return HTTP.call('GET', ROOT_URL+'api/image/clean/'+fineId, function(result) {
+//                                if(!result){
+//                                    console.log("no result returned");
+//                                } else if(result.error) {
+//                                    console.log("cannot update cached image: " + result.error);
+//                                    return { error  :result.error };
+//                                } else {
+//                                    console.log("finished cleaning image: " + result);
+//                                    return {error:null, result : result.result };
+//                                }
+//                            });
                         }
                     });
             }

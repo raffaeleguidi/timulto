@@ -220,51 +220,51 @@ function readFile(fileName) {
     return fs.readFileSync(fileName);
 }
 
-//TODO - This should require auth?
-Restivus.addRoute('image/clean/:fineId', {authRequired: false}, {
-    get: function() {
-        var fine = Fines.findOne({_id: this.urlParams.fineId});
-         if (fine) {
-            var tmpthumb = os.tmpdir() + '/' + fine._id + '-thumb.png';
-            var tmpfile  = os.tmpdir() + '/' + fine._id + '.png';
-            var result   = "";
-            var error    = "";
+////TODO - This should require auth?
+//Restivus.addRoute('image/clean/:fineId', {authRequired: false}, {
+//    get: function() {
+//        var fine = Fines.findOne({_id: this.urlParams.fineId});
+//         if (fine) {
+//            var tmpthumb = os.tmpdir() + '/' + fine._id + '-thumb.png';
+//            var tmpfile  = os.tmpdir() + '/' + fine._id + '.png';
+//            var result   = "";
+//            var error    = "";
+//
+//            try{
+//                if (fs.existsSync(tmpthumb)) {
+//                    fs.unlinkSync(tmpthumb);
+//                    console.log('successfully deleted thumb');
+//                    result = "successfully deleted thumb.";
+//                }
+//            } catch(err){
+//                error = err + ".";
+//                console.log("error " + err + " in deleting tmpthumb");
+//            }
+//
+//            try{
+//                if (fs.existsSync(tmpfile)) {
+//                    fs.unlinkSync(tmpfile);
+//                    console.log('successfully deleted original photo');
+//                    result = result + "Successfully deleted original photo.";
+//                }
+//            } catch(err){
+//                error = error + err + ".";
+//                console.log("error " + err + " in deleting tmpfile");
+//            }
+//
+//             var response = { error: error, result:result};
+//             console.log("api returining "+JSON.stringify(response));
+//
+//             return response;
+//         }
+//        console.log("##API##image-clean# fine not found");
+//
+//        return {error:"no such fine", result:null};
+//    }
+//});
 
-            try{
-                if (fs.existsSync(tmpthumb)) {
-                    fs.unlinkSync(tmpthumb);
-                    console.log('successfully deleted thumb');
-                    result = "successfully deleted thumb.";
-                }
-            } catch(err){
-                error = err + ".";
-                console.log("error " + err + " in deleting tmpthumb");
-            }
 
-            try{
-                if (fs.existsSync(tmpfile)) {
-                    fs.unlinkSync(tmpfile);
-                    console.log('successfully deleted original photo');
-                    result = result + "Successfully deleted original photo.";
-                }
-            } catch(err){
-                error = error + err + ".";
-                console.log("error " + err + " in deleting tmpfile");
-            }
-
-             var response = { error: error, result:result};
-             console.log("api returining "+JSON.stringify(response));
-
-             return response;
-         }
-        console.log("##API##image-clean# fine not found");
-
-        return {error:"no such fine", result:null};
-    }
-});
-
-
-Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
+Restivus.addRoute('thumb/:fineId/:version', {authRequired: false}, {
     get: function () {
         var fine = Fines.findOne({_id: this.urlParams.fineId});
 
@@ -316,7 +316,7 @@ Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
     }
 });
 
-Restivus.addRoute('image/:fineId', {authRequired: false}, {
+Restivus.addRoute('image/:fineId/:version', {authRequired: false}, {
     get: function () {
         var fine = Fines.findOne({_id: this.urlParams.fineId});
 

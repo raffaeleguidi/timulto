@@ -1,4 +1,4 @@
-<template name="fineDetails">
+<template name="dettaglio">
     {{> navbar}}
 
     <div class="section no-pad-bot">
@@ -18,7 +18,7 @@
 <!--                    <canvas id="customcanvas"></canvas>-->
                   <canvas id="herecanvas" width="240" height="240"></canvas>
                 {{else}}
-                    <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}" />
+                    <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}/{{#if version}}{{version}}{{else}}0{{/if}}" />
                 {{/if}}
               </div><div class="col s12 m6">
                  <p class="card-panel light-blue lighten-5">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</p>
@@ -96,25 +96,4 @@
     </div>
 
     {{> footer}}
-</template>
-
-<template name="fineInARow">
-    <tr class="fine">
-        <td>
-            <h6 class="blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h6>
-            <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}. (+{{likes}})</span>
-        </td>
-        <td>
-            <img alt="caricamento in corso" class="mini-shot" src="{{rootUrl}}api/thumb/{{_id}}"/>
-        </td>
-    </tr>
-</template>
-
-<template name="fine">
-  <tr>
-      <td><img class="mini-shot" name="imageData" src="{{rootUrl}}api/image/{{_id}}" /></td>
-      <td><span class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.</span></td>
-      <td><a class="btn-floating orange"><i class="large mdi-action-delete delete"></i></a><!--<button class="delete">&times;</button>-->
-    </td>
-  </tr>
 </template>

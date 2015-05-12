@@ -24,7 +24,7 @@ Router.map(function(){
 });
 
 Router.map(function(){
-  this.route('fineDetails', {path: '/dettaglio'});
+  this.route('dettaglio', {path: '/dettaglio'});
 });
 
 Router.map(function(){
