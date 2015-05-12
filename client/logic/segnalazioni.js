@@ -31,10 +31,18 @@ Template.segnalazioni.helpers({
         return Session.get("segnalazioni");
     },*/
     finesToApprove: function() {
-        return Fines.find({approved:0}, {sort: {createdAt: -1}});
+        return Fines.find(
+            { approved:false },
+            { sort: {createdAt: -1} });
     },
     latestFines: function() {
-        return Fines.find({approved:1, createdAt: {$gte: Timulto.yesterday()}}, {sort: {createdAt: -1}});
+        return Fines.find(
+            {
+                approved:true,
+                createdAt: { $gte: Timulto.yesterday() }
+            }, {
+                sort: { createdAt:-1 }
+            });
         /*return Session.get("latestFines");*/
     },
     hide:function(){

@@ -159,7 +159,7 @@ Meteor.methods({
         //Fines.update(taskId, { $set: { checked: setChecked} });
     },
     findNearUserFine: function(orderbydate, latitude, longitude, minDistance, maxDistance) {
-        //Con la seguente query vengono restituite tutte le segnalazioni in prossimità delle coordinate specificate e che siano approved=1 se di altri utenti, o anche approved=0 se sono dell'utente corrente. La discriminante più forte è la vicinanza che potrebbe non includere le segnalazioni dell'utente corrente
+        //Con la seguente query vengono restituite tutte le segnalazioni in prossimità delle coordinate specificate e che siano approved=true se di altri utenti, o anche approved=false se sono dell'utente corrente. La discriminante più forte è la vicinanza che potrebbe non includere le segnalazioni dell'utente corrente
 //        console.log("Calling findNearUserFine. Lat:" + latitude + " parsed " +parseFloat(latitude)+
 //                    ",lon:"+longitude+" parsed " +parseFloat(longitude)+
 //                    ", maxD:"+maxDistance+" minD:"+minDistance);
@@ -197,7 +197,7 @@ Meteor.methods({
 
         if(cursor){
             cursor.forEach(function (doc) {
-                if(doc && ((doc.approved == 1 ) || doc.username ==  currentUsername)){
+                if(doc && ( doc.approved || doc.username ==  currentUsername )){
                     console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
                     finalResult.push(doc);
                 }
@@ -225,7 +225,7 @@ Meteor.methods({
 
         if(cursor){
             cursor.forEach(function (doc) {
-                if(doc && (doc.approved == 1 )){// || doc.username ===  currentUsername)){
+                if(doc && doc.approved ){// || doc.username ===  currentUsername)){
                     console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
                     finalResult.push(doc);
                 }
@@ -234,11 +234,11 @@ Meteor.methods({
 
         return finalResult;
     },
-    findFinesByApproval: function(approved) {//TODO da aggiungere la logica che controlla se l'utente è admin
-        var filter = 1;
+    findFinesByApproval: function(approved) {
+        var filter = true;
 
         if(approved == false || approved == 0) {
-            filter = 0;
+            filter = false;
         }
         var cursor;
 

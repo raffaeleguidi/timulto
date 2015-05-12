@@ -8,8 +8,8 @@ function sanitize(fine) {
 
 function findFinesFor(service) {
     var cursor = Fines.find(
-        {$and:[{approved: 1}, service]},
-        {sort:{createdAt: 1}}
+        { $and:[{ approved:true }, service ]},
+        { sort:{ createdAt:1 }}
     );
     var res = new Array();
 
@@ -24,7 +24,7 @@ function findFinesFor(service) {
 function allFines() {
     var cursor = Fines.find(
         {},
-        {sort:{createdAt: -1}}
+        { sort:{ createdAt: -1 }}
     );
     var res = new Array();
 
@@ -121,7 +121,10 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
         };*/
 
         var filter = {}; filter[this.urlParams.service] = this.bodyParams.postId;
-        var updatedCount = Fines.update({_id: this.urlParams.id, approved: 1}, {$set: filter});
+        var updatedCount = Fines.update(
+                                { _id: this.urlParams.id, approved:true },
+                                { $set: filter });
+
         if (updatedCount == 1) {
           return {status: "success"};
         }
@@ -138,7 +141,8 @@ WebApp.connectHandlers.use(function(req, res, next) {
 
         /* var filePath = process.env.PWD + '/.server_path/' + re[1];
         var data = fs.readFileSync(filePath, data);*/
-        var fine = Fines.findOne({_id: re[1], approved: 1});
+        var fine = Fines.findOne({ _id: re[1], approved:true });
+
         if (fine) {
             var rawData = decodeBase64Image(fine.imageData).data
             res.writeHead(200, {
