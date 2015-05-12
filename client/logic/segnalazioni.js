@@ -31,11 +31,27 @@ Template.segnalazioni.helpers({
         return Session.get("segnalazioni");
     },*/
     finesToApprove: function() {
+        var cursor = Fines.find(
+            { approved:false },
+            { sort: {createdAt: -1} });
+
+        cursor.forEach(function(doc){
+            console.log("not approved " + doc._id);
+        });
+
         return Fines.find(
             { approved: false },
             { sort: {createdAt: -1} });
     },
     latestFines: function() {
+        var cursor =  Fines.find(
+            {
+                approved:true,
+                createdAt: { $gte: Timulto.yesterday() }
+            });
+        cursor.forEach(function(doc){
+            console.log("approved " + doc._id);
+        });
         return Fines.find(
             {
                 approved: true,
