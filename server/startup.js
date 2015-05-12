@@ -1,5 +1,12 @@
 function setupInitialData() {
 
+    function updateApproved() {
+        Fines.update({ approved:0 },{ $set: { approved: false }}, { multi: true}, function(err,res){ console.log("err: " +err + ", for approved=0 updated rows: " + res); });
+        Fines.update({ approved:1 },{ $set: { approved: true }}, { multi: true}, function(err,res){ console.log("err: " +err + ", for approved=1 updated rows: " + res); });
+    }
+
+    updateApproved();
+
     function addCategory(key, value) {
         if (Categories.find({key: key}).count() == 0) {
             Categories.insert({
@@ -65,10 +72,6 @@ Meteor.startup(function () {
       useAuth: false,
       prettyJson: true
     });
-
-
-    Fines.update({ approved:0 },{ $set: { approved: false }}, { multi: true}, function(err,res){ console.log("err:" +err + ", res:" + res); });
-    Fines.update({ approved:1 },{ $set: { approved: true }}, { multi: true}, function(err,res){ console.log("err:" +err + ", res:" + res); });
 
     Meteor.publish("fines", function () {
         return Fines.find({ createdAt: { $gte: Common.yesterday() } },{fields:{imageData:0}},{ sort: {createdAt: -1} });
