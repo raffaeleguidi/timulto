@@ -67,8 +67,8 @@ Meteor.startup(function () {
     });
 
 
-    Fines.update({ approved:0 },{ $set: { approved: false }});
-    Fines.update({ approved:1 },{ $set: { approved: true }});
+    Fines.update({ approved:0 },{ $set: { approved: false }}, function(err,res){ console.log("err:" +err + ", res:" + res); });
+    Fines.update({ approved:1 },{ $set: { approved: true }}, function(err,res){ console.log("err:" +err + ", res:" + res); });
 
     Meteor.publish("fines", function () {
         return Fines.find({ createdAt: { $gte: Timulto.yesterday() } },{fields:{imageData:0}},{ sort: {createdAt: -1} });
