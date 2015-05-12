@@ -23,14 +23,14 @@ Template.mappa.events({
         event.preventDefault();
 
         geolocalization.latLng();
-        
+
         map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
         map.setZoom(defaultZoomLevel);
     },
     "click #clickableMapElement":function(event) {
         event.preventDefault();
         var selectedId = $('input[type=\'hidden\']').attr("id");
-        
+
 //        var selectedId = Session.get("_id");
         var fine = Fines.findOne({_id:selectedId});
 
@@ -46,7 +46,7 @@ Template.mappa.events({
             Session.set("isapproved", (fine.approved==1?true:false));
 
             Router.go('/dettaglio');
-        }        
+        }
     },
     "click #shoot": function (event) {
         Router.go('/crea');
@@ -61,7 +61,7 @@ var rendered = false;
 
 Template.mappa.created = function () {
     geolocalization.latLng();
-    
+
     if (!rendered){
         // run my code only once
         rendered = true;
@@ -124,7 +124,7 @@ Template.mappa.rendered = function () {
         });
         $(window).resize(); // trigger resize event
     });
-    
+
     L.Icon.Default.imagePath = '/images';
 
     var lat;

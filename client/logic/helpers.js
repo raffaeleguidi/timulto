@@ -22,7 +22,7 @@ Template.registerHelper("categories",  function() {
     //return Session.get("categories");
 });
 
-Template.registerHelper("isadmin", function() { 
+Template.registerHelper("isadmin", function() {
     return Session.get("isadmin");
 });
 
@@ -30,7 +30,7 @@ Template.registerHelper('formatDate', function(date) {
   return moment(date).format('DD/MM/YYYY HH:mm');
 });
 
-Template.registerHelper("user", function() { 
+Template.registerHelper("user", function() {
      return Meteor.user().profile.name;
 });
 

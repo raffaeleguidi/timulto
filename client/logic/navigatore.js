@@ -20,7 +20,7 @@ function calcRoute() {
 //  avoidTolls: Boolean,
 //  region: String
 //}
- 
+
    var request = {
         origin: currentLocation,
         destination: selectedLocation,
@@ -29,7 +29,7 @@ function calcRoute() {
     console.log("starting navigation");
     directionsService.route(request, function (response, status) {
         console.log("some response frome google. Status " + status);
-        
+
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
         }
@@ -42,7 +42,7 @@ Template.navigatore.helpers({
             var lat = Session.get("selectedLat");
             var lon = Session.get("selectedLon");
             selectedLocation = new google.maps.LatLng(lat, lon);
-            
+
             return {
                 center: selectedLocation,
                 zoom: 10
@@ -54,10 +54,10 @@ Template.navigatore.helpers({
 Template.navigatore.events({
     "click #manualgeocode": function (event) {
         var coords = Geolocation.latLng();
-        
+
         console.log("new position " + JSON.stringify(coords));
         currentLocation = new google.maps.LatLng(coords.lat, coords.lng);
-            
+
         var markerCurrentPos = new google.maps.Marker({
             position: currentLocation,
             map:curmap.instance
@@ -80,13 +80,13 @@ Template.navigatore.onCreated(function () {
 //            console.log("setting current position "+ lat+ ","+lon);
 
             currentLocation = new google.maps.LatLng(lat, lon);
-            
+
             var markerCurrentPos = new google.maps.Marker({
                 position: currentLocation,
                 map:map.instance
             });
         }
-        
+
         var lat = Session.get("selectedLat");
         var lon = Session.get("selectedLon");
 //            console.log("Selected position: lat " + lat + " lon " + lon);
@@ -95,7 +95,7 @@ Template.navigatore.onCreated(function () {
             map:map.instance,
             icon: 'icon_20X20.png'
         });
-        
+
         directionsService = new google.maps.DirectionsService();
         directionsDisplay = new google.maps.DirectionsRenderer();
         directionsDisplay.setMap(map.instance);
