@@ -71,7 +71,7 @@ Meteor.startup(function () {
     Fines.update({ approved:1 },{ $set: { approved: true }});
 
     Meteor.publish("fines", function () {
-        return Fines.find({ createdAt: { $gte: Timulto.yesterday() } },{fields:{imageData:0}},{ sort: {createdAt: -1} });
+        return Fines.find({ createdAt: { $gte: Common.yesterday() } },{fields:{imageData:0}},{ sort: {createdAt: -1} });
     });
 
     Meteor.publish("categories", function () {
