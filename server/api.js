@@ -226,35 +226,38 @@ Restivus.addRoute('image/clean/:fineId', {authRequired: false}, {
         var fine = Fines.findOne({_id: this.urlParams.fineId});
          if (fine) {
             var tmpthumb = os.tmpdir() + '/' + fine._id + '-thumb.png';
-            var tmpfile = os.tmpdir() + '/' + fine._id + '.png';
-            var result = "";
-            var error = "";
+            var tmpfile  = os.tmpdir() + '/' + fine._id + '.png';
+            var result   = "";
+            var error    = "";
 
-            if (fs.existsSync(tmpthumb)) {
-                fs.unlink(tmpthumb, function (err,res) {
-                  if (err) {
-                    error = err + ".";
-                  } else {
+            try{
+                if (fs.existsSync(tmpthumb)) {
+                    fs.unlinkSync(tmpthumb);
                     console.log('successfully deleted thumb');
-                    result = result + res + ".";
-                  }
-                });
+                    result = "successfully deleted thumb.";
+                }
+            } catch(err){
+                error = err + ".";
+                console.log("error " + err + " in deleting tmpthumb");
             }
 
-            if (fs.existsSync(tmpfile)) {
-                fs.unlink(tmpfile, function (err,res) {
-                  if (err) {
-                    error = error + err + ".";
-                  } else {
+            try{
+                if (fs.existsSync(tmpfile)) {
+                    fs.unlinkSync(tmpfile);
                     console.log('successfully deleted original photo');
-                    result = result + res + ".";
-                  }
-                });
+                    result = result + "Successfully deleted original photo.";
+                }
+            } catch(err){
+                error = error + err + ".";
+                console.log("error " + err + " in deleting tmpfile");
             }
-             var result = { error: error, result:result};
 
-             return result;
+             var response = { error: error, result:result};
+             console.log("api returining "+JSON.stringify(response));
+
+             return response;
          }
+        console.log("##API##image-clean# fine not found");
 
         return {error:"no such fine", result:null};
     }

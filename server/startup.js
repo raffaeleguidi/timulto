@@ -236,21 +236,24 @@ Meteor.startup(function () {
         },
         updateImage: function(fineId, newImageData) {
             if(fineId && isAdministrator()) {
+
                 Fines.update(
                     { _id:fineId },
                     { $set: { imageData:newImageData }},
                     function(err,result){
                         if(err) {
                             console.log("Error in updating image: "+err);
+                            return { error : err };
                         } else {
-//                            console.log("Update image result:" + result);
-                            HTTP.call('GET', ROOT_URL+'api/image/clean/'+fineId, function(result) {
+                            return HTTP.call('GET', ROOT_URL+'api/image/clean/'+fineId, function(result) {
                                 if(!result){
                                     console.log("no result returned");
                                 } else if(result.error) {
                                     console.log("cannot update cached image: " + result.error);
+                                    return { error  :result.error };
                                 } else {
-                                    console.log("finished cleaning image: " + result.result);
+                                    console.log("finished cleaning image: " + result);
+                                    return {error:null, result : result.result };
                                 }
                             });
                         }
