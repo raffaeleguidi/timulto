@@ -91,34 +91,45 @@ Template.fineDetails.events({
      },
     "click .ilikeit": function () {
         if(Meteor.user()){
-            console.log("i like it!!" + Session.get("_id"));
+//            console.log("i like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), true, function(err) {
                 if(err)
                     console.log("error " + err);
+                else
+                    Materialize.toast("Like aggiunto :)", 2000, 'rounded center');
             });
         }
       },
     "click .idontlikeit": function () {
         if(Meteor.user()){
-            console.log("i don't like it!!" + Session.get("_id"));
+//            console.log("i don't like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), false, function(err) {
                 if(err)
                     console.log("error " + err);
+                 else
+                    Materialize.toast("Like rimosso :(", 2000, 'rounded center');
             });
         }
       },
     "click .delete": function () {
         Meteor.call("deleteFine", Session.get("_id"), function(err){
-            if(err)
+            if(err){
                 console.log(err);
-
+                Materialize.toast("Errore nella cancellazione", 3000, 'rounded center');
+            } else {
+                Materialize.toast("Segnalazione cancellata!", 3000, 'rounded center');
+            }
             Router.go('/segnalazioni');
         });
       },
     "click .thumb-up": function () {
         Meteor.call("approveFine",Session.get("_id"), function(err){
-            if(err)
+            if(err) {
                 console.log(err);
+                Materialize.toast("Errore in fase di approvazione", 3000, 'rounded center');
+            } else {
+                Materialize.toast("Segnalazione approvata!", 3000, 'rounded center');
+            }
 
             Router.go('/segnalazioni');
         });
