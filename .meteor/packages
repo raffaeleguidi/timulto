@@ -30,3 +30,4 @@ mrt:imagemagick
 meteorhacks:inject-initial
 ground:db
 meteorhacks:aggregate
+hybrid:device
