@@ -67,8 +67,8 @@ Meteor.startup(function () {
     });
 
 
-    Fines.update({ approved:0 },{ $set: { approved: false }}, function(err,res){ console.log("err:" +err + ", res:" + res); });
-    Fines.update({ approved:1 },{ $set: { approved: true }}, function(err,res){ console.log("err:" +err + ", res:" + res); });
+    Fines.update({ approved:0 },{ $set: { approved: false }}, { multi: true}, function(err,res){ console.log("err:" +err + ", res:" + res); });
+    Fines.update({ approved:1 },{ $set: { approved: true }}, { multi: true}, function(err,res){ console.log("err:" +err + ", res:" + res); });
 
     Meteor.publish("fines", function () {
         return Fines.find({ createdAt: { $gte: Common.yesterday() } },{fields:{imageData:0}},{ sort: {createdAt: -1} });
