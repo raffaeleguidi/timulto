@@ -20,7 +20,7 @@ Template.dettaglio.rendered = function(){
 
     if(Session.get("isadmin")) {
         var canvas=document.getElementById("herecanvas");
-        var data = Session.get("rootUrl") + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
+        var data = urlHandling.rootUrl() + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
 
         photoHandling.fitImageInCanvas(data,canvas);
     }

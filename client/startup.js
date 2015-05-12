@@ -33,6 +33,13 @@ Deps.autorun(function (c) {
 
       depth = 0;
 
+      Meteor.call("rootUrl", function(err, res){
+        if (err) {
+            console.log("error "+err);
+        }
+        Session.set("rootUrl", res)
+      });
+
       TAPi18n.setLanguage(getUserLanguage())
           .done(function () {
             Session.set("showLoadingIndicator", false);
