@@ -23,9 +23,11 @@
               </div><div class="col s12 m6">
                  <p class="card-panel light-blue lighten-5">
                      {{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.
-                  {{#if notApproved}}
-                     <span class="red" style="color: white; padding: 2px">Non approvato</span>
-                  {{/if}}
+                     {{#if notApproved}}
+                     <p>
+                        <span class="orange" style="color: white; padding: 2px">In attesa di approvazione</span>
+                     </p>
+                     {{/if}}
                  </p>
               </div>
               <input type="hidden" value="{{lat}}" />
