@@ -201,14 +201,17 @@ Meteor.startup(function () {
                     "_id": fineId
                 }, {
                     $set: {
-                        "approved": 1
+                        "approved": true
                     }
                 });
+
+                return true;
 //                    var fine = Fines.find({_id:fineId});
                 //Send notification
                 //serverNotification(fine);
             } else {
                 console.log("Trying to approve fine "+ fineId +".User is not an administrator: " + JSON.stringify(Meteor.user().profile.name));
+                return null;
             }
         },
         deleteFine: function (fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin o l'utente corrente "possiede" il fine
@@ -256,18 +259,6 @@ Meteor.startup(function () {
                                 error:null,
                                 result : 'ok'
                             }
-
-//                            return HTTP.call('GET', ROOT_URL+'api/image/clean/'+fineId, function(result) {
-//                                if(!result){
-//                                    console.log("no result returned");
-//                                } else if(result.error) {
-//                                    console.log("cannot update cached image: " + result.error);
-//                                    return { error  :result.error };
-//                                } else {
-//                                    console.log("finished cleaning image: " + result);
-//                                    return {error:null, result : result.result };
-//                                }
-//                            });
                         }
                     });
             }
