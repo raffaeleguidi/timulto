@@ -83,12 +83,6 @@ Template.fineDetails.events({
             Meteor.photoHandling.drawLogo("canvas"+Session.get("_id"), event.offsetX, event.offsetY);
         }
     },
-    "click #myCanvas": function (event) {
-        if(Session.get("isadmin")/* && !Session.get("isapproved")*/){
-            console.log(event);
-           //drawLogo('myCanvas', event.offsetX, event.offsetY);
-        }
-     },
     "click .ilikeit": function () {
         if(Meteor.user()){
 //            console.log("i like it!!" + Session.get("_id"));
@@ -112,27 +106,35 @@ Template.fineDetails.events({
         }
       },
     "click .delete": function () {
-        Meteor.call("deleteFine", Session.get("_id"), function(err){
-            if(err){
-                console.log(err);
-                Materialize.toast("Errore nella cancellazione", 3000, 'rounded center');
-            } else {
-                Materialize.toast("Segnalazione cancellata!", 3000, 'rounded center');
-            }
-            Router.go('/segnalazioni');
-        });
+        if(Meteor.user() && Session.get("isadmin")){
+            Meteor.call("deleteFine", Session.get("_id"), function(err){
+                if(err){
+                    console.log(err);
+                    Materialize.toast("Errore nella cancellazione", 3000, 'rounded center');
+                } else {
+                    Materialize.toast("Segnalazione cancellata!", 3000, 'rounded center');
+                }
+                Router.go('/segnalazioni');
+            });
+        } else {
+            Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
+        }
       },
     "click .thumb-up": function () {
-        Meteor.call("approveFine",Session.get("_id"), function(err){
-            if(err) {
-                console.log(err);
-                Materialize.toast("Errore in fase di approvazione", 3000, 'rounded center');
-            } else {
-                Materialize.toast("Segnalazione approvata!", 3000, 'rounded center');
-            }
+        if(Meteor.user() && Session.get("isadmin")){
+            Meteor.call("approveFine",Session.get("_id"), function(err){
+                if(err) {
+                    console.log(err);
+                    Materialize.toast("Errore in fase di approvazione", 3000, 'rounded center');
+                } else {
+                    Materialize.toast("Segnalazione approvata!", 3000, 'rounded center');
+                }
 
-            Router.go('/segnalazioni');
-        });
+                Router.go('/segnalazioni');
+            });
+        } else {
+            Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
+        }
       }
 });
 
