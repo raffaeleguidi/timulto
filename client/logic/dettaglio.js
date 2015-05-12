@@ -14,6 +14,9 @@
       imageObj.src = Session.get("detailImageData");
 };*/
 
+function hideFixedActionButton() {
+    $('.fixed-action-btn').mouseout();
+}
 
 Template.dettaglio.rendered = function(){
     depth = 1;
@@ -86,6 +89,9 @@ Template.dettaglio.events({
         }
     },
     "click .ilikeit": function () {
+
+        hideFixedActionButton();
+
         if(Meteor.user()){
 //            console.log("i like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), true, function(err) {
@@ -97,6 +103,9 @@ Template.dettaglio.events({
         }
       },
     "click .idontlikeit": function () {
+
+        hideFixedActionButton();
+
         if(Meteor.user()){
 //            console.log("i don't like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), false, function(err) {
@@ -108,6 +117,9 @@ Template.dettaglio.events({
         }
       },
     "click .delete": function () {
+
+        hideFixedActionButton();
+
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("deleteFine", Session.get("_id"), function(err){
                 if(err){
@@ -123,6 +135,9 @@ Template.dettaglio.events({
         }
       },
     "click .thumb-up": function () {
+
+        hideFixedActionButton();
+
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("approveFine",Session.get("_id"), function(err){
                 if(err) {
