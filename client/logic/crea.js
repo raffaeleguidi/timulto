@@ -44,6 +44,9 @@ Template.crea.helpers({
         else if( Meteor.user().services.twitter ) {
             return Meteor.user().services.twitter.screenName;
         }
+        else if (Meteor.user().services.google) {
+            return Meteor.user().services.google.email;
+        }
     },
     userName: function() {
         var user = Meteor.user().username;

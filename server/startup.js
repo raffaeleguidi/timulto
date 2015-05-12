@@ -91,17 +91,33 @@ Meteor.startup(function () {
 //                    'services.facebook':1,
                 'services.facebook.email':1,
                 'services.facebook.picture':1,
-                'services.google.given_name':1
+                'services.google.email':1,
+                'services.google.picture':1,
+                'services.google.locale':1
             }
         });
     });
+    / * Google service schema */
+    /*
+    "{
+        "accessToken":"",
+        "idToken":"",
+        "expiresAt":,
+        "id":"",
+    ->  "email":"youremail@gmail.com",
+        "verified_email":true,
+        "name":"Name Surname",
+        "given_name":"",
+        "family_name":"",
+    ->  "picture":"https://",
+    ->  "locale":"it/en/..",
+        "gender":"male/female"
+    } */
 
     function isAdministrator() {
         var username;
         var service;
-        //    console.log("#isAdministrator: " + JSON.stringify(Meteor.user()));
-        //    console.log("Meteor.user() "+ JSON.stringify(Meteor.user()));
-        //    console.log("Meteor.userId() "+ Meteor.userId());
+
         if (Meteor.user()) {
             if (Meteor.user().services.facebook) {
                 username = Meteor.user().services.facebook.email;
@@ -109,11 +125,13 @@ Meteor.startup(function () {
             } else if (Meteor.user().services.twitter) {
                 username = Meteor.user().services.twitter.screenName;
                 service  = "twitter";
+            } else if (Meteor.user().services.google) {
+                username = Meteor.user().services.google.email;
+                service  = "google";
             }
-            //console.log(username);
         }
 
-        //    var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
+        //var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
         var userAdm = Administrators.findOne({$and:[{username: username},{service:service}]});
 
         if (Meteor.user().services.password) {
@@ -122,10 +140,10 @@ Meteor.startup(function () {
         //    console.log("userAdm " + JSON.stringify(userAdm)+" looking for "+username);
 
         if (!userAdm) {
-            console.log(username + " is not admin");
+//            console.log(username + " is not admin");
             return false;
         } else {
-            console.log(username + " is  admin!!!!");
+//            console.log(username + " is  admin!!!!");
             return true;
         }
     };
@@ -165,13 +183,15 @@ Meteor.startup(function () {
             var username = "";
 
             if(Meteor.user() && fineId) {
-                if(Meteor.user().services.twitter) {
+                if (Meteor.user().services.facebook) {
+                    username = Meteor.user().services.facebook.email;
+                } else if (Meteor.user().services.twitter) {
                     username = Meteor.user().services.twitter.screenName;
-                } else  if(Meteor.user().services.facebook) {
-                    username = services.facebook.email;
+                } else if (Meteor.user().services.google) {
+                    username = Meteor.user().services.google.email;
                 }
-                console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
 
+//                console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
                 if(like) {
                     Fines.update({_id:fineId},{$addToSet:{likes:username}},
                                 function(err,result){
