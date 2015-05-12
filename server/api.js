@@ -1,15 +1,13 @@
 function sanitize(fine) {
     delete fine.username;
     delete fine.owner;
-    delete fine.lat;
-    delete fine.lng;
     return fine;
 }
 
 function findFinesFor(service) {
     var cursor = Fines.find(
-        { $and:[{ approved:true }, service ]},
-        { sort:{ createdAt:1 }}
+        { $and:[{ approved: true }, service ]},
+        { sort:{ createdAt: 1 }}
     );
     var res = new Array();
 
