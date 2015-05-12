@@ -155,7 +155,7 @@ Template.dettaglio.helpers({
         return Session.get("isapproved");
     },
     notApproved:function() {
-        return Session.get("isapproved") == 0 ? true : false;
+        return !Session.get("isapproved");
     },
     text: function(){
         return Session.get("detailText");

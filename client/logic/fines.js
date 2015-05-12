@@ -16,7 +16,7 @@ Template.fineInARow.events({
         Session.set("detailAddress",this.address);
         Session.set("detailCategory",this.category);
         //Session.set("detailImageData",$('img[name="imageData' + this._id + '"]').attr('src'));
-        Session.set("isapproved", (this.approved == 1 ? true: false));
+        Session.set("approved", this.approved);
         Session.set("version", (this.version ? this.version : "1"));
 
         Router.go('/dettaglio');
