@@ -34,15 +34,19 @@ Template.segnalazioni.helpers({
             { sort: {createdAt: -1} });
     },
     latestFines: function() {
+        //console.log(Meteor.user());
         return Fines.find(
             {
-                approved: true,
+                $or: [
+                    { approved: true },
+                    { owner: Meteor.user()._id }
+                ],
                 createdAt: { $gte: Common.yesterday() }
             }, {
                 sort: { createdAt: -1 }
             });
     },
-    hide:function(){
+    hide: function(){
         return !Session.get("isadmin");
     }
 });
