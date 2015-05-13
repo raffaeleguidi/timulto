@@ -19,6 +19,7 @@ Template.dettaglio.events({
             photoHandling.drawLogo('herecanvas', event.offsetX, event.offsetY);
     },
     "click #save": function(event) {
+        hideFixedActionButton();
         if(Session.get("isadmin")) {
             var canvas = null;
             try {
@@ -32,15 +33,12 @@ Template.dettaglio.events({
 
             Meteor.call("updateImage", fineId, imageData, function(err) {
                 if(err) {
-                    hideFixedActionButton();
                     Materialize.toast("Errore di salvataggio: " + err.message, 4000, 'rounded center');
                 } else {
                     Router.go("/");
                     Materialize.toast("Salvataggio completato", 4000, 'rounded center');
                 }
             });
-
-            Router.go("/");
         }
     },
     "click #findonmap": function(event) {
