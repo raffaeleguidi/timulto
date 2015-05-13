@@ -117,7 +117,7 @@ Meteor.startup(function () {
     } */
 
     function isAdministrator() {
-        var cu = UserUtil.getCurrentUsernameService();
+        var cu = userUtils.getCurrentUsernameService();
 
         var username = cu.username;
         var service  = cu.service;
@@ -172,7 +172,7 @@ Meteor.startup(function () {
         //like -> boolean, true indica approvazione, false indica non approvazione dell'utente
         likeFine: function(fineId, like) {
             if(Meteor.user() && fineId) {
-                var username = UserUtils.getCurrentUsername();
+                var username = userUtils.getCurrentUsername();
                 //console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
                 if(like) {
                     Fines.update({_id:fineId},{$addToSet:{likes:username}},

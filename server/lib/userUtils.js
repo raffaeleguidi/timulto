@@ -1,6 +1,6 @@
 var services = ["facebook","twitter","google"];
 
-UserUtils = {
+userUtils = {
     getCurrentUsername: function() {
         var username = "";
         if(Meteor.user()) {
