@@ -13,25 +13,15 @@
           </h5>
 
           <div class="row center">
-<!--
-                {{#if iLikeThis}}
-                    <h1>Mi piace! :)</h1>
-                {{/if}}
-                {{#if iDontLikeThis}}
-                    <h1>Non mi piace! :(</h1>
-                {{/if}}
--->
-
               <div class="col s12 m6">
                 {{#if isadmin}}
-<!--                    <canvas id="customcanvas"></canvas>-->
                   <canvas id="herecanvas" width="240" height="240"></canvas>
                 {{else}}
                     <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}/{{#if version}}{{version}}{{else}}0{{/if}}" />
                 {{/if}}
               </div><div class="col s12 m6">
                  <p class="card-panel light-blue lighten-5">
-                     {{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.
+                     {{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}} {{#if iLikeThis}} [hai fatto +1]{{/if}}.
                      {{#if notApproved}}
                      <p>
                         <span class="orange" style="color: white; padding: 2px">In attesa di approvazione</span>
@@ -58,12 +48,17 @@
                     <i class="large mdi-action-thumbs-up-down"></i>
                 </a>
                 <ul>
+
+                {{#if iDontLikeThis}}
                     <li>
                         <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one ilikeit"></i></a>
                     </li>
+                {{/if}}
+                {{#if iLikeThis}}
                     <li>
                         <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 idontlikeit"></i></a>
                     </li>
+                {{/if}}
                     <li>
                         <a id="findonmap" class="btn-floating blue lighten-1"><i class="large mdi-maps-place place"></i></a>
                     </li>

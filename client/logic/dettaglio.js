@@ -221,13 +221,11 @@ Template.dettaglio.helpers({
 
 function iLikeThis() {
     var arr = Session.get("likes");
-
-    arr.forEach(function(element, index){
-        console.log("liker: " + element);
-        if (element == Meteor.user().username) {
+    for (i in arr) {
+        if (arr[i] == userUtils.getCurrentUsername()) {
             return true;
         }
-    });
+    }
     return false;
 }
 

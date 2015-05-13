@@ -89,6 +89,7 @@ Meteor.startup(function () {
         }, {
             fields: {
                 'services.twitter.screenName': 1,
+                'username': 1,
                 'services.twitter.profile_image_url': 1,
 //                    'services.facebook':1,
                 'services.facebook.email':1,

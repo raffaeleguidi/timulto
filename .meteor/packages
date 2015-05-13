@@ -12,6 +12,7 @@ http
 accounts-facebook
 accounts-twitter
 accounts-google
+accounts-password
 service-configuration
 jquery
 aldeed:template-extension
