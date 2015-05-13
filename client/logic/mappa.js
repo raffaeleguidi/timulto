@@ -55,11 +55,12 @@ Template.mappa.events({
     },
     "click #shoot": function (event) {
         Router.go('/crea');
-    },
-    'click a[target=_blank]': function (event) {
-        event.preventDefault();
-        window.open(event.target.href, '_blank');
     }
+//    ,
+//    'click a[target=_blank]': function (event) {
+//        event.preventDefault();
+//        window.open(event.target.href, '_blank');
+//    }
 });
 
 var rendered = false;
@@ -82,12 +83,19 @@ function init() {
             var lng = fine.loc.coordinates[0];
             var googleMapsUrl = 'http://maps.google.com/maps/?q='+lat+','+lng+'&ll='+lat+','+lng+'&z=17';
             //var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
-            var popupContent =
-                '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
-                '<div class="col s6"><img class="mini-shot" name="imageData" src="' + urlHandling.rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
-                '</div>' +
-                '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
-                '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
+            var popupContent = Blaze.toHTMLWithData(
+                                        Template.popupContent,
+                                        {
+                                            fine: fine,
+                                            googleMapsUrl:googleMapsUrl
+                                        });
+//            console.log(popupContent);
+//            var popupContent =
+//                '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
+//                '<div class="col s6"><img class="mini-shot" name="imageData" src="' + urlHandling.rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
+//                '</div>' +
+//                '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
+//                '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
             var marker = L.marker([lat, lng], {
                 _id: fine._id,
                 icon: myIcon,
