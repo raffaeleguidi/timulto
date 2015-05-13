@@ -4,22 +4,6 @@ Categories = new Mongo.Collection("categories");
 
 if(Meteor.isCordova){
 
-    try  {
-        Session.set("platform", device.platform + " v" + device.version);
-        console.log("platform: " + device.platform + " v" + device.version);
-
-        if (false && device.platform == "Android" && device.version >= "4.2.0") {
-            Ground.Collection(Fines);
-            Ground.Collection(Categories);
-            Ground.Collection(Administrators);
-            console.log("HW requirements are met: offline support enabled");
-        } else {
-            console.log("HW requirements not met: offline support disabled");
-        }
-    } catch(ex) {
-        Session.set("platform", "unknown: " + ex.message);
-    }
-
     Meteor.startup(function(){
         /*
         console.log("device.name " + device.name);
@@ -37,6 +21,23 @@ if(Meteor.isCordova){
         I20150511-15:47:35.868(2) (android:http://meteor.local/timulto.js:16) device.version 4.4.2
         I20150511-15:47:35.869(2) (android:http://meteor.local/timulto.js:17) device.model Android SDK built for x86
         */
+        document.addEventListener("deviceready", function() {
+            try  {
+                Session.set("platform", device.platform + " v" + device.version);
+                console.log("platform: " + device.platform + " v" + device.version);
+
+                if (false && device.platform == "Android" && device.version >= "4.2.0") {
+                    Ground.Collection(Fines);
+                    Ground.Collection(Categories);
+                    Ground.Collection(Administrators);
+                    console.log("HW requirements are met: offline support enabled");
+                } else {
+                    console.log("HW requirements not met: offline support disabled");
+                }
+            } catch(ex) {
+                Session.set("platform", "unknown: " + ex.message);
+            }
+        }, false);
 
         document.addEventListener("backbutton", function() {
             /*if (document.location.pathname == "/" || document.location.pathname == "/home"){
