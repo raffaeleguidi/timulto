@@ -13,21 +13,21 @@ Router.route('/crea', function () {
 //} , { only: ['mappa','navigatore'] });
 
 Router.map(function(){
-  this.route('mappa', {path: '/mappa'});
+  this.route('mappa', { path: '/mappa'} );
 });
 Router.map(function(){
-  this.route('navigatore', {path: '/naviga'});
-});
-
-Router.map(function(){
-  this.route('chisiamo', {path: '/chisiamo'});
+  this.route('navigatore', { path: '/naviga'} );
 });
 
 Router.map(function(){
-  this.route('dettaglio', {path: '/dettaglio'});
+  this.route('chisiamo', { path: '/chisiamo'} );
 });
 
 Router.map(function(){
-  this.route('segnalazioni', {path: '/segnalazioni'});
+  this.route('dettaglio', { path: '/dettaglio'} );
+});
+
+Router.map(function(){
+  this.route('segnalazioni', { path: '/segnalazioni'} );
 });
 
