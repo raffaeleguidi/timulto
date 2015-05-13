@@ -201,18 +201,20 @@ Meteor.startup(function () {
 
             if(Meteor.user() && fineId) {
                 var username = userUtils.getCurrentUsername();
-                var gotIt = Fines.findOne({fields:{imageData:0}}, {
-                                            $and: [
-                                                {_id: fineId}
-//                                                ,
-//                                                {likes: {$elemMatch: {username} }}
-                                            ]
-                                         });
 
-                console.log("got it " + JSON.stringify(gotIt));
+                var match    = { $match: { _id:fineId, likes: { $in: [username.toString()] }}};
+                var group    = { $group: { _id:"$_id", count: { $sum:1 }}};
+                var project  = { $project: { _id:0, count:1 }};
+                var pipeline = [ match, group, project ];
 
-                return gotIt != null;
+                var gotIt    = Fines.aggregate(pipeline);
+
+                if(gotIt && gotIt.length > 0) {
+//                    console.log("returning " + gotIt[0].count + " > 0");
+                    return gotIt[0].count > 0;
+                }
             }
+
             return false;
         },
         rootUrl: function() {
