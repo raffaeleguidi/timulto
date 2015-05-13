@@ -176,6 +176,9 @@ Template.dettaglio.helpers({
     },
     iDontLikeThis: function() {
         return !iLikeThis();
+    },
+    likesCount: function() {
+        return Session.get("likes") ? Session.get("likes").length : 0;
     }
 });
 

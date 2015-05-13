@@ -2,6 +2,12 @@
 Template.fineInARow.helpers({
     likes: function() {
         return this.likes ? this.likes.length : 0;
+    },
+    iLikeThis: function() {
+        if (this.likes) {
+            return this.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
+        }
+        return false;
     }
 });
 
