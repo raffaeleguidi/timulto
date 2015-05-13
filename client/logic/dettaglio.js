@@ -1,19 +1,3 @@
-
-/*Template.dettaglio.rendered = function(){
-      var canvas = document.getElementById('myCanvas');
-      if (!canvas) {
-          console.log('myCanvas is null');
-          return;
-      }
-      var context = canvas.getContext('2d');
-      var imageObj = new Image();
-
-      imageObj.onload = function() {
-        context.drawImage(imageObj, 0, 0,350,350);//,600,600);
-      };
-      imageObj.src = Session.get("detailImageData");
-};*/
-
 function hideFixedActionButton() {
     $('.fixed-action-btn').mouseout();
 }
@@ -46,11 +30,17 @@ Template.dettaglio.events({
             var imageData = canvas.toDataURL();
             var fineId = Session.get("_id");
 
-            Meteor.call("updateImage", fineId, imageData);
+            Meteor.call("updateImage", fineId, imageData, function(err) {
+                if(err) {
+                    hideFixedActionButton();
+                    Materialize.toast("Errore di salvataggio: " + err.message, 4000, 'rounded center');
+                } else {
+                    Router.go("/");
+                    Materialize.toast("Salvataggio completato", 4000, 'rounded center');
+                }
+            });
 
-            imageHandling.reload('#img_' + fineId);
-
-            Materialize.toast("Foto aggiornata", 4000, 'rounded center');
+            Router.go("/");
         }
     },
     "click #findonmap": function(event) {
@@ -61,7 +51,6 @@ Template.dettaglio.events({
         Router.go("/mappa");
     },
      "click .naviga":function(event) {
-
         Session.set("selectedLat",Session.get("lat"));
         Session.set("selectedLon",Session.get("lon"));
         Session.set("selectedId", this._id);
@@ -89,65 +78,57 @@ Template.dettaglio.events({
         }
     },
     "click .ilikeit": function () {
-
         hideFixedActionButton();
-
         if(Meteor.user()){
-//            console.log("i like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), true, function(err) {
-                if(err)
-                    console.log("error " + err);
-                else
-                    Materialize.toast("Like aggiunto :)", 2000, 'rounded center');
+                if(err) {
+                    Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
+                } else {
+                    Router.go("/");
+                    Materialize.toast("+1 aggiunto :)", 4000, 'rounded center');
+                }
             });
         }
       },
     "click .idontlikeit": function () {
-
         hideFixedActionButton();
-
         if(Meteor.user()){
-//            console.log("i don't like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), false, function(err) {
-                if(err)
-                    console.log("error " + err);
-                 else
-                    Materialize.toast("Like rimosso :(", 2000, 'rounded center');
+                if(err) {
+                    Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
+                } else {
+                    Router.go("/");
+                    Materialize.toast("+1 rimosso :(", 4000, 'rounded center');
+                }
             });
         }
       },
     "click .delete": function () {
-
         hideFixedActionButton();
-
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("deleteFine", Session.get("_id"), function(err){
                 if(err){
-                    console.log(err);
-                    Materialize.toast("Errore nella cancellazione", 3000, 'rounded center');
+                    Materialize.toast("Errore nella cancellazione: " + err.message, 3000, 'rounded center');
                 } else {
+                    Router.go('/segnalazioni');
                     Materialize.toast("Segnalazione cancellata!", 3000, 'rounded center');
                 }
-                Router.go('/segnalazioni');
             });
         } else {
+            hideFixedActionButton();
             Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
         }
       },
     "click .thumb-up": function () {
-
         hideFixedActionButton();
-
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("approveFine",Session.get("_id"), function(err){
                 if(err) {
-                    console.log(err);
-                    Materialize.toast("Errore in fase di approvazione", 3000, 'rounded center');
+                    Materialize.toast("Errore in fase di approvazione: " + err.message, 3000, 'rounded center');
                 } else {
+                    Router.go('/segnalazioni');
                     Materialize.toast("Segnalazione approvata!", 3000, 'rounded center');
                 }
-
-                Router.go('/segnalazioni');
             });
         } else {
             Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
@@ -189,6 +170,25 @@ Template.dettaglio.helpers({
     },
     lon: function() {
         return Session.get("lon");
+    },
+    iLikeThis: function() {
+        return iLikeThis();
+    },
+    iDontLikeThis: function() {
+        return !iLikeThis();
+    },
+    likesCount: function() {
+        return Session.get("likes") ? Session.get("likes").length : 0;
     }
 });
+
+function iLikeThis() {
+    var arr = Session.get("likes");
+    for (i in arr) {
+        if (arr[i] == userUtils.getCurrentUsername()) {
+            return true;
+        }
+    }
+    return false;
+}
 

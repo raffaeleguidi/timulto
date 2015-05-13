@@ -57,7 +57,9 @@ Meteor.startup(function () {
 
     // <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    Inject.meta("viewport", "width=device-width, initial-scale=1");
+    // requires package meteorhacks:inject-initial
+    // but it has been replaced by head.html
+    //Inject.meta("viewport", "width=device-width, initial-scale=1");
 
     ROOT_URL = process.env.ROOT_URL;
 
@@ -87,6 +89,7 @@ Meteor.startup(function () {
         }, {
             fields: {
                 'services.twitter.screenName': 1,
+                'username': 1,
                 'services.twitter.profile_image_url': 1,
 //                    'services.facebook':1,
                 'services.facebook.email':1,
@@ -97,7 +100,7 @@ Meteor.startup(function () {
             }
         });
     });
-    / * Google service schema */
+    /* Google service schema */
     /*
     "{
         "accessToken":"",
@@ -115,7 +118,7 @@ Meteor.startup(function () {
     } */
 
     function isAdministrator() {
-        var cu = UserUtil.getCurrentUsernameService();
+        var cu = userUtils.getCurrentUsernameService();
 
         var username = cu.username;
         var service  = cu.service;
@@ -170,7 +173,7 @@ Meteor.startup(function () {
         //like -> boolean, true indica approvazione, false indica non approvazione dell'utente
         likeFine: function(fineId, like) {
             if(Meteor.user() && fineId) {
-                var username = UserUtils.getCurrentUsername();
+                var username = userUtils.getCurrentUsername();
                 //console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
                 if(like) {
                     Fines.update({_id:fineId},{$addToSet:{likes:username}},
@@ -192,6 +195,25 @@ Meteor.startup(function () {
                     });
                 }
             }
+        },
+        // not working
+        iLikeThis: function(fineId) {
+
+            if(Meteor.user() && fineId) {
+                var username = userUtils.getCurrentUsername();
+                var gotIt = Fines.findOne({fields:{imageData:0}}, {
+                                            $and: [
+                                                {_id: fineId}
+//                                                ,
+//                                                {likes: {$elemMatch: {username} }}
+                                            ]
+                                         });
+
+                console.log("got it " + JSON.stringify(gotIt));
+
+                return gotIt != null;
+            }
+            return false;
         },
         rootUrl: function() {
             /*console.log("ROOT_URL=" + process.env.ROOT_URL);

@@ -26,7 +26,7 @@ App.launchScreens({
   'ipad_portrait': 'resources/splash/splash-480x800.png',
   'ipad_portrait_2x': 'resources/splash/splash-480x800.png',
   'ipad_landscape': 'resources/splash/splash-800x480.png',
-  'ipad_landscape_2x': 'resources/splash/splash-800x480.png',
+  'ipad_landscape_2x': 'resources/splash/splash-800x480.png'
 });
 
 App.icons({
@@ -36,10 +36,10 @@ App.icons({
   'android_xhdpi': 'resources/icons/320.png',
 
 // iOS
-  'iphone': 'resources/icons/320.png',
-  'iphone_2x': 'resources/icons/320.png',
-  'ipad': 'resources/icons/320.png',
-  'ipad_2x': 'resources/icons/320.png',
+  'iphone': 'resources/icons/apple-touch-icon-57x57.png',
+  'iphone_2x': 'resources/icons/apple-touch-icon-72x72.png',
+  'ipad': 'resources/icons/apple-touch-icon-57x57.png',
+  'ipad_2x': 'resources/icons/apple-touch-icon-72x72.png'
 });
 
 App.accessRule('http://*.meteor.local/*');

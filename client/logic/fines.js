@@ -2,6 +2,12 @@
 Template.fineInARow.helpers({
     likes: function() {
         return this.likes ? this.likes.length : 0;
+    },
+    iLikeThis: function() {
+        if (this.likes) {
+            return this.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
+        }
+        return false;
     }
 });
 
@@ -15,6 +21,7 @@ Template.fineInARow.events({
         Session.set("detailText",this.text);
         Session.set("detailAddress",this.address);
         Session.set("detailCategory",this.category);
+        Session.set("likes",this.likes);
         //Session.set("detailImageData",$('img[name="imageData' + this._id + '"]').attr('src'));
         Session.set("approved", this.approved);
         Session.set("version", (this.version ? this.version : "1"));

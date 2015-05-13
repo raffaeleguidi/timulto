@@ -10,7 +10,7 @@ userUtils = {
                 username = Meteor.user().services.twitter.screenName;
             } else if (Meteor.user().services.google) {
                 username = Meteor.user().services.google.email;
-            } else if (Meteor.user().services.password) {
+            } else {
                 username = Meteor.user().username;
             }
         }
