@@ -2,7 +2,6 @@ accounts-base@1.2.0
 accounts-facebook@1.0.4
 accounts-google@1.0.4
 accounts-oauth@1.1.5
-accounts-password@1.1.1
 accounts-twitter@1.0.4
 accounts-ui@1.1.5
 accounts-ui-unstyled@1.1.7
@@ -24,7 +23,6 @@ deps@1.0.7
 dispatch:kernel@0.0.3
 dispatch:request-animation-frame@0.0.1
 ejson@1.0.6
-email@1.0.6
 facebook@1.2.0
 fastclick@1.0.3
 geojson-utils@1.0.3
@@ -76,7 +74,6 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mrt:imagemagick@0.1.2
 nimble:restivus@0.6.5
-npm-bcrypt@0.7.8_2
 npm-container@1.0.0
 oauth@1.1.4
 oauth1@1.1.4
@@ -94,10 +91,8 @@ retry@1.0.3
 routepolicy@1.0.5
 service-configuration@1.0.4
 session@1.1.0
-sha@1.0.3
 spacebars@1.0.6
 spacebars-compiler@1.0.6
-srp@1.0.3
 tap:i18n@1.4.1
 templating@1.1.1
 tracker@1.0.7
