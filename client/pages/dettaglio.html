@@ -15,7 +15,7 @@
           <div class="row center">
               <div class="col s12 m6">
                 {{#if isadmin}}
-                  <canvas id="herecanvas" width="240" height="240"></canvas>
+                    <canvas id="herecanvas" width="240" height="240"></canvas>
                 {{else}}
                     <img alt="caricamento in corso" class="normal-shot" src="{{rootUrl}}api/image/{{_id}}/{{#if version}}{{version}}{{else}}0{{/if}}" />
                 {{/if}}

@@ -19,33 +19,30 @@ Template.dettaglio.events({
             photoHandling.drawLogo('herecanvas', event.offsetX, event.offsetY);
     },
     "click #save": function(event) {
-        alert("uno");
         hideFixedActionButton();
-        alert("due");
         if(Session.get("isadmin")) {
-            alert("tre");
-            var canvas = null;
+            alert("before try");
             try {
-                canvas = document.getElementById('herecanvas');
+                var canvas = document.getElementById('herecanvas');
+                var imageData = canvas.toDataURL();
+                var fineId = Session.get("_id");
+
+                alert("got canvas and fineId");
+
+                Meteor.call("updateImage", fineId, imageData, function(err) {
+                    if(err) {
+                        alert("errore: " + err);
+                        Materialize.toast("Errore di salvataggio: " + err.message, 4000, 'rounded center');
+                    } else {
+                        Router.go("/");
+                        Materialize.toast("Salvataggio completato", 4000, 'rounded center');
+                    }
+                });
             } catch(ex) {
-                //noop
+                Materialize.toast("Errore di salvataggio: " + err.message, 4000, 'rounded center');
                 alert("errore: " + ex.message);
-                return false;
             }
-            var imageData = canvas.toDataURL();
-            var fineId = Session.get("_id");
-
-            alert("tre e mezzo");
-
-            Meteor.call("updateImage", fineId, imageData, function(err) {
-                if(err) {
-                    Materialize.toast("Errore di salvataggio: " + err.message, 4000, 'rounded center');
-                } else {
-                    Router.go("/");
-                    Materialize.toast("Salvataggio completato", 4000, 'rounded center');
-                }
-            });
-        alert("quattro");
+        alert("after try");
         }
     },
     "click #findonmap": function(event) {
