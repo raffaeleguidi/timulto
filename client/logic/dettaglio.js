@@ -29,10 +29,13 @@ Template.dettaglio.events({
                 canvas = document.getElementById('herecanvas');
             } catch(ex) {
                 //noop
+                alert("errore: " + ex.message);
                 return false;
             }
             var imageData = canvas.toDataURL();
             var fineId = Session.get("_id");
+
+            alert("tre e mezzo");
 
             Meteor.call("updateImage", fineId, imageData, function(err) {
                 if(err) {
