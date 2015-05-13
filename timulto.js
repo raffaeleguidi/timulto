@@ -58,13 +58,15 @@ function isAdministrator() {
     var service = "";
 
     if(Meteor.user()) {
-        if( Meteor.user().services.facebook ) {
+        if (Meteor.user().services.facebook) {
             username = Meteor.user().services.facebook.email;
             service  = "facebook";
-        }
-        else if( Meteor.user().services.twitter ) {
+        } else if (Meteor.user().services.twitter) {
             username = Meteor.user().services.twitter.screenName;
             service  = "twitter";
+        } else if (Meteor.user().services.google) {
+            username = Meteor.user().services.google.email;
+            service  = "google";
         }
     }
 //    console.log("username : " + username + ", service " + service);

@@ -74,7 +74,7 @@ Meteor.startup(function () {
     });
 
     Meteor.publish("fines", function () {
-        return Fines.find({ createdAt: { $gte: Common.yesterday() } },{fields:{imageData:0}},{ sort: {createdAt: -1} });
+        return Fines.find({ createdAt: { $gte: Common.yesterday() } },{ fields: {imageData: 0}},{ sort: {createdAt: -1} });
     });
 
     Meteor.publish("categories", function () {
@@ -91,29 +91,36 @@ Meteor.startup(function () {
 //                    'services.facebook':1,
                 'services.facebook.email':1,
                 'services.facebook.picture':1,
-                'services.google.given_name':1
+                'services.google.email':1,
+                'services.google.picture':1,
+                'services.google.locale':1
             }
         });
     });
+    / * Google service schema */
+    /*
+    "{
+        "accessToken":"",
+        "idToken":"",
+        "expiresAt":,
+        "id":"",
+    ->  "email":"youremail@gmail.com",
+        "verified_email":true,
+        "name":"Name Surname",
+        "given_name":"",
+        "family_name":"",
+    ->  "picture":"https://",
+    ->  "locale":"it/en/..",
+        "gender":"male/female"
+    } */
 
     function isAdministrator() {
-        var username;
-        var service;
-        //    console.log("#isAdministrator: " + JSON.stringify(Meteor.user()));
-        //    console.log("Meteor.user() "+ JSON.stringify(Meteor.user()));
-        //    console.log("Meteor.userId() "+ Meteor.userId());
-        if (Meteor.user()) {
-            if (Meteor.user().services.facebook) {
-                username = Meteor.user().services.facebook.email;
-                service  = "facebook";
-            } else if (Meteor.user().services.twitter) {
-                username = Meteor.user().services.twitter.screenName;
-                service  = "twitter";
-            }
-            //console.log(username);
-        }
+        var cu = UserUtil.getCurrentUsernameService();
 
-        //    var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
+        var username = cu.username;
+        var service  = cu.service;
+
+        //var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
         var userAdm = Administrators.findOne({$and:[{username: username},{service:service}]});
 
         if (Meteor.user().services.password) {
@@ -122,10 +129,10 @@ Meteor.startup(function () {
         //    console.log("userAdm " + JSON.stringify(userAdm)+" looking for "+username);
 
         if (!userAdm) {
-            console.log(username + " is not admin");
+//            console.log(username + " is not admin");
             return false;
         } else {
-            console.log(username + " is  admin!!!!");
+//            console.log(username + " is  admin!!!!");
             return true;
         }
     };
@@ -162,16 +169,9 @@ Meteor.startup(function () {
         },
         //like -> boolean, true indica approvazione, false indica non approvazione dell'utente
         likeFine: function(fineId, like) {
-            var username = "";
-
             if(Meteor.user() && fineId) {
-                if(Meteor.user().services.twitter) {
-                    username = Meteor.user().services.twitter.screenName;
-                } else  if(Meteor.user().services.facebook) {
-                    username = services.facebook.email;
-                }
-                console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
-
+                var username = UserUtils.getCurrentUsername();
+                //console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
                 if(like) {
                     Fines.update({_id:fineId},{$addToSet:{likes:username}},
                                 function(err,result){

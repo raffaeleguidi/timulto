@@ -19,11 +19,20 @@ Template.mappa.events({
     },
     "click #manualgeocode": function(event) {
         event.preventDefault();
+//        console.log("clicked manual");
+        if(!Session.get("lat") || !Session.get("lon")) {
+//            console.log("resetting coords");
+            geoLocalization.latLng();
+        }
+        var lat = Session.get("lat");
+        var lon = Session.get("lon");
 
-//        geoLocalization.latLng();
+        console.log("lat: "+ lat + ",lon: " + lon);
 
-        map.panTo(new L.LatLng(Session.get("lat"), Session.get("lon")));
+        map.panTo(new L.LatLng(lat, lon));
         map.setZoom(defaultZoomLevel);
+
+        return false;
     },
     "click #clickableMapElement":function(event) {
         event.preventDefault();
@@ -55,9 +64,7 @@ Template.mappa.events({
 
 var rendered = false;
 
-Template.mappa.created = function () {
-//    geoLocalization.latLng();
-
+function init() {
     if (!rendered){
         // run my code only once
         rendered = true;
@@ -66,12 +73,10 @@ Template.mappa.created = function () {
             iconUrl: defaultIconUrl,
             iconSize: [defaultIconW, defaultIconH]
         });
-
-        cluster = new L.MarkerClusterGroup();
     }
-    
-    Fines.find({ approved:true }).observe({
+    cluster = new L.MarkerClusterGroup();
 
+    Fines.find({ approved:true }).observe({
         added: function(fine) {
             var lat = fine.loc.coordinates[1];
             var lng = fine.loc.coordinates[0];
@@ -109,12 +114,12 @@ Template.mappa.created = function () {
             }
         }
     });
-
-};
+}
 
 Template.mappa.rendered = function () {
     depth = 1;
-//    geoLocalization.latLng();
+
+    init();
 
     $(function () {
         $(window).resize(function () {
