@@ -46,11 +46,17 @@ Template.dettaglio.events({
             var imageData = canvas.toDataURL();
             var fineId = Session.get("_id");
 
+            Meteor.call("updateImage", fineId, imageData, function(err) {
+                if(err) {
+                    hideFixedActionButton();
+                    Materialize.toast("Errore di salvataggio: " + err.message, 4000, 'rounded center');
+                } else {
+                    Router.go("/");
+                    Materialize.toast("Salvataggio completato", 4000, 'rounded center');
+                }
+            });
+
             Router.go("/");
-
-            Materialize.toast("Salvataggio completato", 4000, 'rounded center');
-
-            Meteor.call("updateImage", fineId, imageData);
         }
     },
     "click #findonmap": function(event) {
@@ -61,7 +67,6 @@ Template.dettaglio.events({
         Router.go("/mappa");
     },
      "click .naviga":function(event) {
-
         Session.set("selectedLat",Session.get("lat"));
         Session.set("selectedLon",Session.get("lon"));
         Session.set("selectedId", this._id);
@@ -90,47 +95,54 @@ Template.dettaglio.events({
     },
     "click .ilikeit": function () {
 
-        hideFixedActionButton();
+        // not needed as we now navigate back to root
+        // hideFixedActionButton();
 
         if(Meteor.user()){
 //            console.log("i like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), true, function(err) {
-                if(err)
-                    console.log("error " + err);
-                else
-                    Materialize.toast("Like aggiunto :)", 2000, 'rounded center');
+                if(err) {
+                    hideFixedActionButton();
+                    Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
+                } else {
+                    Router.go("/");
+                    Materialize.toast("+1 aggiunto :)", 4000, 'rounded center');
+                }
             });
         }
       },
     "click .idontlikeit": function () {
 
-        hideFixedActionButton();
+        // not needed as we now navigate back to root
+        // hideFixedActionButton();
 
         if(Meteor.user()){
 //            console.log("i don't like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), false, function(err) {
-                if(err)
-                    console.log("error " + err);
-                 else
-                    Materialize.toast("Like rimosso :(", 2000, 'rounded center');
+                if(err) {
+                    hideFixedActionButton();
+                    Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
+                } else {
+                    Router.go("/");
+                    Materialize.toast("+1 rimosso :(", 4000, 'rounded center');
+                }
             });
         }
       },
     "click .delete": function () {
 
-        hideFixedActionButton();
-
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("deleteFine", Session.get("_id"), function(err){
                 if(err){
-                    console.log(err);
-                    Materialize.toast("Errore nella cancellazione", 3000, 'rounded center');
+                    hideFixedActionButton();
+                    Materialize.toast("Errore nella cancellazione" + err.message, 3000, 'rounded center');
                 } else {
+                    Router.go('/segnalazioni');
                     Materialize.toast("Segnalazione cancellata!", 3000, 'rounded center');
                 }
-                Router.go('/segnalazioni');
             });
         } else {
+            hideFixedActionButton();
             Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
         }
       },
@@ -141,13 +153,12 @@ Template.dettaglio.events({
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("approveFine",Session.get("_id"), function(err){
                 if(err) {
-                    console.log(err);
-                    Materialize.toast("Errore in fase di approvazione", 3000, 'rounded center');
+                    hideFixedActionButton();
+                    Materialize.toast("Errore in fase di approvazione: " + err.message, 3000, 'rounded center');
                 } else {
+                    Router.go('/segnalazioni');
                     Materialize.toast("Segnalazione approvata!", 3000, 'rounded center');
                 }
-
-                Router.go('/segnalazioni');
             });
         } else {
             Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
