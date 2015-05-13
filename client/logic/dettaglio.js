@@ -46,11 +46,11 @@ Template.dettaglio.events({
             var imageData = canvas.toDataURL();
             var fineId = Session.get("_id");
 
+            Router.go("/");
+
+            Materialize.toast("Salvataggio completato", 4000, 'rounded center');
+
             Meteor.call("updateImage", fineId, imageData);
-
-            imageHandling.reload('#img_' + fineId);
-
-            Materialize.toast("Foto aggiornata", 4000, 'rounded center');
         }
     },
     "click #findonmap": function(event) {
