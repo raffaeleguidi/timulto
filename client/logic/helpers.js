@@ -2,6 +2,11 @@ Template.registerHelper('isiOS', function(){
   return Session.get("os") == "iOS";
 });
 
+Template.registerHelper('needBackButton', function(){
+  return window.location.pathname != '/';
+});
+
+
 Template.registerHelper('isAndroid', function(){
   return Session.get("os") == "Android";
 });
@@ -25,9 +30,7 @@ Template.registerHelper("rootUrl", function() {
 });
 
 Template.registerHelper("categories",  function() {
-    //Meteor.call("getCategoriesValues");
     return Categories.find({}).fetch()
-    //return Session.get("categories");
 });
 
 Template.registerHelper("isadmin", function() {
