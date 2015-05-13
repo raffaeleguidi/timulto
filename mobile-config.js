@@ -36,11 +36,10 @@ App.icons({
   'android_xhdpi': 'resources/icons/320.png',
 
 // iOS
-  'iphone': 'resources/icons/320.png',
-  'iphone_2x': 'resources/icons/320.png',
-  'ipad': 'resources/icons/320.png',
-  'ipad_2x': 'resources/icons/320.png'
-    // missing exact 57x57 and 72x72
+  'iphone': 'resources/icons/apple-touch-icon-57x57.png',
+  'iphone_2x': 'resources/icons/apple-touch-icon-72x72.png',
+  'ipad': 'resources/icons/apple-touch-icon-57x57.png',
+  'ipad_2x': 'resources/icons/apple-touch-icon-72x72.png'
 });
 
 App.accessRule('http://*.meteor.local/*');
