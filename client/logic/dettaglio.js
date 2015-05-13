@@ -19,8 +19,11 @@ Template.dettaglio.events({
             photoHandling.drawLogo('herecanvas', event.offsetX, event.offsetY);
     },
     "click #save": function(event) {
+        alert("uno");
         hideFixedActionButton();
+        alert("due");
         if(Session.get("isadmin")) {
+            alert("tre");
             var canvas = null;
             try {
                 canvas = document.getElementById('herecanvas');
@@ -39,6 +42,7 @@ Template.dettaglio.events({
                     Materialize.toast("Salvataggio completato", 4000, 'rounded center');
                 }
             });
+        alert("quattro");
         }
     },
     "click #findonmap": function(event) {
