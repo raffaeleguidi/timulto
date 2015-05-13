@@ -26,7 +26,7 @@ App.launchScreens({
   'ipad_portrait': 'resources/splash/splash-480x800.png',
   'ipad_portrait_2x': 'resources/splash/splash-480x800.png',
   'ipad_landscape': 'resources/splash/splash-800x480.png',
-  'ipad_landscape_2x': 'resources/splash/splash-800x480.png',
+  'ipad_landscape_2x': 'resources/splash/splash-800x480.png'
 });
 
 App.icons({
