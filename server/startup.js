@@ -195,6 +195,25 @@ Meteor.startup(function () {
                 }
             }
         },
+        // not working
+        iLikeThis: function(fineId) {
+
+            if(Meteor.user() && fineId) {
+                var username = userUtils.getCurrentUsername();
+                var gotIt = Fines.findOne({fields:{imageData:0}}, {
+                                            $and: [
+                                                {_id: fineId}
+//                                                ,
+//                                                {likes: {$elemMatch: {username} }}
+                                            ]
+                                         });
+
+                console.log("got it " + JSON.stringify(gotIt));
+
+                return gotIt != null;
+            }
+            return false;
+        },
         rootUrl: function() {
             /*console.log("ROOT_URL=" + process.env.ROOT_URL);
             console.log("env.ROOT_URL=" + process.env.ROOT_URL);

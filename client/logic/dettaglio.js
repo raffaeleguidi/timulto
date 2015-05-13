@@ -27,6 +27,16 @@ Template.dettaglio.rendered = function(){
 
         photoHandling.fitImageInCanvas(data,canvas);
     }
+
+//    Meteor.call("iLikeThis", Session.get("_id"), function(err, res) {
+//        if(err) {
+//            // noop
+//        } else {
+//            Session.set("iLikeThis", res);
+//        }
+//    });
+
+
 }
 
 Template.dettaglio.events({
@@ -135,7 +145,7 @@ Template.dettaglio.events({
             Meteor.call("deleteFine", Session.get("_id"), function(err){
                 if(err){
                     hideFixedActionButton();
-                    Materialize.toast("Errore nella cancellazione" + err.message, 3000, 'rounded center');
+                    Materialize.toast("Errore nella cancellazione: " + err.message, 3000, 'rounded center');
                 } else {
                     Router.go('/segnalazioni');
                     Materialize.toast("Segnalazione cancellata!", 3000, 'rounded center');
@@ -200,6 +210,24 @@ Template.dettaglio.helpers({
     },
     lon: function() {
         return Session.get("lon");
+    },
+    iLikeThis: function() {
+        return iLikeThis();
+    },
+    iDontLikeThis: function() {
+        return !iLikeThis();
     }
 });
+
+function iLikeThis() {
+    var arr = Session.get("likes");
+
+    arr.forEach(function(element, index){
+        console.log("liker: " + element);
+        if (element == Meteor.user().username) {
+            return true;
+        }
+    });
+    return false;
+}
 
