@@ -72,7 +72,8 @@ Meteor.startup(function () {
 
     Restivus.configure({
       useAuth: false,
-      prettyJson: true
+      prettyJson: true,
+      enableCors: true
     });
 
     Meteor.publish("fines", function () {
