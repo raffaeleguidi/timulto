@@ -36,7 +36,7 @@ Template.dettaglio.events({
                     }
                 });
             } catch(ex) {
-                Materialize.toast("Errore di salvataggio: " + ex.message, 4000, 'rounded center');
+                //Materialize.toast("Errore di salvataggio: " + ex.message, 4000, 'rounded center');
                 alert("errore: " + ex.message);
             }
         }
