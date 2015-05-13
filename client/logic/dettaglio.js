@@ -7,7 +7,8 @@ Template.dettaglio.rendered = function(){
 
     if(Session.get("isadmin")) {
         var canvas=document.getElementById("herecanvas");
-        var data = urlHandling.rootUrl() + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
+        //var data = urlHandling.rootUrl() + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
+        var data = imageUrl();
 
         photoHandling.fitImageInCanvas(data,canvas);
     }
@@ -133,9 +134,17 @@ Template.dettaglio.events({
       }
 });
 
+function imageUrl(){
+    return Session.get("rootUrl") + "api/image/" + Session.get("_id") + "?v=" + Session.get("version");
+}
 
 Template.dettaglio.helpers({
-    createdAt: function(){
+    imageUrl: function(){
+        imageUrl();
+    },
+    thumbUrl: function(){
+        return Session.get("rootUrl") + "api/thumb/" + Session.get("_id") + "?v=" + Session.get("version");
+    }, createdAt: function(){
         return Session.get("createdAt");
     },
     username: function(){

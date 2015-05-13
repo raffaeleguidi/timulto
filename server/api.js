@@ -223,7 +223,7 @@ function readFile(fileName) {
 }
 
 
-Restivus.addRoute('thumb/:fineId/:version', {authRequired: false}, {
+Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
     get: function () {
         var fine = Fines.findOne({_id: this.urlParams.fineId});
 
@@ -275,7 +275,7 @@ Restivus.addRoute('thumb/:fineId/:version', {authRequired: false}, {
     }
 });
 
-Restivus.addRoute('image/:fineId/:version', {authRequired: false}, {
+Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
         var fine = Fines.findOne({_id: this.urlParams.fineId});
 
