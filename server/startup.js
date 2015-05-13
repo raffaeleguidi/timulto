@@ -99,7 +99,7 @@ Meteor.startup(function () {
             }
         });
     });
-    / * Google service schema */
+    /* Google service schema */
     /*
     "{
         "accessToken":"",
