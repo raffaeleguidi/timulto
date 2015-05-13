@@ -68,7 +68,6 @@ photoHandling = {
         var photo = new Image();
         photo.setAttribute('crossOrigin', 'anonymous');
 
-
         photo.onload = function () {
             // canvas.width : x = photo.width : photo.height
             if (photo.width > photo.height) {
@@ -98,7 +97,6 @@ photoHandling = {
         var context = canvas.getContext('2d');
         var imageObj = new Image();
 
-//        console.log("context:" + context);
         imageObj.onload = function () {
             var w = imageObj.width / 4;
             var h = imageObj.height / 4;
