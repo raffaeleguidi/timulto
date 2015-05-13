@@ -10,8 +10,6 @@ var defaultIconUrl = 'icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
-
-
 Template.mappa.events({
     'click a[target=_blank]': function (event) {
         event.preventDefault();
@@ -48,6 +46,7 @@ Template.mappa.events({
             Session.set("detailAddress",fine.address);
             Session.set("detailCategory",fine.category);
             Session.set("detailImageData",fine.imageData);
+            Session.set("version",fine.version);
             Session.set("isapproved", (fine.approved==1?true:false));
 
             Router.go('/dettaglio');
