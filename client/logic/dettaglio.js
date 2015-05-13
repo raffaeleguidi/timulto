@@ -21,17 +21,13 @@ Template.dettaglio.events({
     "click #save": function(event) {
         hideFixedActionButton();
         if(Session.get("isadmin")) {
-            alert("before try");
             try {
                 var canvas = document.getElementById('herecanvas');
                 var imageData = canvas.toDataURL();
                 var fineId = Session.get("_id");
 
-                alert("got canvas and fineId");
-
                 Meteor.call("updateImage", fineId, imageData, function(err) {
                     if(err) {
-                        alert("errore: " + err);
                         Materialize.toast("Errore di salvataggio: " + err.message, 4000, 'rounded center');
                     } else {
                         Router.go("/");
@@ -42,7 +38,6 @@ Template.dettaglio.events({
                 Materialize.toast("Errore di salvataggio: " + ex.message, 4000, 'rounded center');
                 alert("errore: " + ex.message);
             }
-        alert("after try");
         }
     },
     "click #findonmap": function(event) {
