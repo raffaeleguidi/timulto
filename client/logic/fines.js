@@ -3,9 +3,6 @@ Template.fineInARow.helpers({
     imageUrl: function(){
         return Session.get("rootUrl") + "api/image/" + this._id + "?v=" + this.version;
     },
-    thumbUrl: function(){
-        return Session.get("rootUrl") + "api/thumb/" + this._id + "?v=" + this.version;
-    },
     likes: function() {
         return this.likes ? this.likes.length : 0;
     },

@@ -1,3 +1,7 @@
+Template.registerHelper('thumbUrl', function(){
+    return Session.get("rootUrl") + "api/thumb/" + this._id + "?v=" + this.version;
+});
+
 Template.registerHelper('isiOS', function(){
   return Session.get("os") == "iOS";
 });

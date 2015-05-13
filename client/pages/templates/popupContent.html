@@ -3,7 +3,7 @@
     {{#with fine}}
         <div class="row center" id="clickableMapElement">
             <input type="hidden" id="{{_id}}" />
-            <div class="col s6"><img class="mini-shot" name="imageData" src="{{rootUrl}}api/thumb/{{_id}}/{{#if version}}{{version}}{{else}}0{{/if}}" /></div>
+            <div class="col s6"><img class="mini-shot" name="imageData" src="{{thumbUrl}}" /></div>
             <div id="iw_content" class="col s6">Segnalato in {{address}} </div>
         </div>
     {{/with}}
