@@ -1,19 +1,3 @@
-
-/*Template.dettaglio.rendered = function(){
-      var canvas = document.getElementById('myCanvas');
-      if (!canvas) {
-          console.log('myCanvas is null');
-          return;
-      }
-      var context = canvas.getContext('2d');
-      var imageObj = new Image();
-
-      imageObj.onload = function() {
-        context.drawImage(imageObj, 0, 0,350,350);//,600,600);
-      };
-      imageObj.src = Session.get("detailImageData");
-};*/
-
 function hideFixedActionButton() {
     $('.fixed-action-btn').mouseout();
 }
@@ -27,16 +11,6 @@ Template.dettaglio.rendered = function(){
 
         photoHandling.fitImageInCanvas(data,canvas);
     }
-
-//    Meteor.call("iLikeThis", Session.get("_id"), function(err, res) {
-//        if(err) {
-//            // noop
-//        } else {
-//            Session.set("iLikeThis", res);
-//        }
-//    });
-
-
 }
 
 Template.dettaglio.events({
@@ -104,15 +78,10 @@ Template.dettaglio.events({
         }
     },
     "click .ilikeit": function () {
-
-        // not needed as we now navigate back to root
-        // hideFixedActionButton();
-
+        hideFixedActionButton();
         if(Meteor.user()){
-//            console.log("i like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), true, function(err) {
                 if(err) {
-                    hideFixedActionButton();
                     Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
                 } else {
                     Router.go("/");
@@ -122,15 +91,10 @@ Template.dettaglio.events({
         }
       },
     "click .idontlikeit": function () {
-
-        // not needed as we now navigate back to root
-        // hideFixedActionButton();
-
+        hideFixedActionButton();
         if(Meteor.user()){
-//            console.log("i don't like it!!" + Session.get("_id"));
             Meteor.call("likeFine", Session.get("_id"), false, function(err) {
                 if(err) {
-                    hideFixedActionButton();
                     Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
                 } else {
                     Router.go("/");
@@ -140,11 +104,10 @@ Template.dettaglio.events({
         }
       },
     "click .delete": function () {
-
+        hideFixedActionButton();
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("deleteFine", Session.get("_id"), function(err){
                 if(err){
-                    hideFixedActionButton();
                     Materialize.toast("Errore nella cancellazione: " + err.message, 3000, 'rounded center');
                 } else {
                     Router.go('/segnalazioni');
@@ -157,13 +120,10 @@ Template.dettaglio.events({
         }
       },
     "click .thumb-up": function () {
-
         hideFixedActionButton();
-
         if(Meteor.user() && Session.get("isadmin")){
             Meteor.call("approveFine",Session.get("_id"), function(err){
                 if(err) {
-                    hideFixedActionButton();
                     Materialize.toast("Errore in fase di approvazione: " + err.message, 3000, 'rounded center');
                 } else {
                     Router.go('/segnalazioni');
