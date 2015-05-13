@@ -10,7 +10,7 @@ Template.dettaglio.rendered = function(){
         //var data = urlHandling.rootUrl() + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
         var data = imageUrl();
 
-        photoHandling.fitImageInCanvas(data,canvas);
+        photoHandling.fitImageInCanvas(data, canvas);
     }
 }
 

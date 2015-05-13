@@ -66,6 +66,8 @@ photoHandling = {
     fitImageInCanvas: function (data, canvas) {
         var context = canvas.getContext('2d');
         var photo = new Image();
+        photo.setAttribute('crossOrigin', 'anonymous');
+
 
         photo.onload = function () {
             // canvas.width : x = photo.width : photo.height
