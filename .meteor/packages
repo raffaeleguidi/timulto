@@ -27,6 +27,5 @@ meteorhacks:npm
 herrhelms:meteor-leaflet-markercluster
 npm-container
 mrt:imagemagick
-meteorhacks:inject-initial
 ground:db
 meteorhacks:aggregate
