@@ -1,3 +1,11 @@
+Template.registerHelper('isiOS', function(){
+  return Session.get("os") == "iOS";
+});
+
+Template.registerHelper('isAndroid', function(){
+  return Session.get("os") == "Android";
+});
+
 Template.registerHelper("platform",  function() {
     return Session.get("platform");
 });
@@ -39,6 +47,3 @@ UI.registerHelper('isCordova', function(){
     return true;
   }
 });
-
-
-

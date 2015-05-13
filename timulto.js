@@ -24,7 +24,7 @@ if(Meteor.isCordova){
         document.addEventListener("deviceready", function() {
             try  {
                 Session.set("platform", device.platform + " v" + device.version);
-                console.log("platform: " + device.platform + " v" + device.version);
+                Session.set("os", device.platform);
 
                 if (false && device.platform == "Android" && device.version >= "4.2.0") {
                     Ground.Collection(Fines);

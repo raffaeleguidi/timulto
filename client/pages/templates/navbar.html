@@ -39,8 +39,10 @@
                 <li class="divider"></li>
                 <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
                 {{#if isCordova}}
-                <li class="divider"></li>
-                <li class="bold"><a class="navbutton" onclick="navigator.app.exitApp();" href="#">{{_ "Esci"}}</a></li>
+                    {{#if isAndroid}}
+                    <li class="divider"></li>
+                    <li class="bold"><a class="navbutton" onclick="navigator.app.exitApp();" href="#">{{_ "Esci"}}</a></li>
+                    {{/if}}
                 {{/if}}
             </ul>
 
