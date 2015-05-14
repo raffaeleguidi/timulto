@@ -63,10 +63,11 @@ photoHandling = {
             }
         });
     },
-    fitImageInCanvas: function (data, canvas) {
+    fitImageInCanvas: function (data, canvas, allowCors) {
         var context = canvas.getContext('2d');
         var photo = new Image();
-        photo.setAttribute('crossOrigin', 'anonymous');
+        if (allowCors)
+            photo.setAttribute('crossOrigin', 'anonymous');
 
         photo.onload = function () {
             // canvas.width : x = photo.width : photo.height

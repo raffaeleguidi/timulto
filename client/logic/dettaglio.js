@@ -10,7 +10,7 @@ Template.dettaglio.rendered = function(){
         //var data = urlHandling.rootUrl() + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
         var data = imageUrl();
 
-        photoHandling.fitImageInCanvas(data, canvas);
+        photoHandling.fitImageInCanvas(data, canvas, true);
     }
 }
 
@@ -140,7 +140,7 @@ function imageUrl(){
 
 Template.dettaglio.helpers({
     imageUrl: function(){
-        imageUrl();
+        return imageUrl();
     },
     thumbUrl: function(){
         return Session.get("rootUrl") + "api/thumb/" + Session.get("_id") + "?v=" + Session.get("version");
