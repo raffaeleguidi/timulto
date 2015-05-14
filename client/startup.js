@@ -1,4 +1,4 @@
-Meteor.subscribe("fines");
+var finesSubscription = Meteor.subscribe("fines");
 Meteor.subscribe("categories");
 Meteor.subscribe("userData");
     
@@ -11,6 +11,15 @@ Tracker.autorun(function () {
         Session.set("lat",coords.lat);
         Session.set("lon",coords.lng);
         console.log("coords  " + JSON.stringify(coords));
+    }
+});
+
+
+Tracker.autorun(function () {
+    if( finesSubscription.ready()) {
+        console.log("done loading fines");
+//        console.log($('.spinner-layer'));
+        $('.preloader-wrapper.active').hide();
     }
 });
 
