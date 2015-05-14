@@ -2,7 +2,7 @@
 
 Template.segnalazioni.created = function(){
     depth = 0;
-});
+};
 
 /*
 Template.segnalazioni.rendered = function () {

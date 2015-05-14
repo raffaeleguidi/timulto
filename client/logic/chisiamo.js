@@ -6,7 +6,7 @@ Template.chisiamo.rendered = function () {
 
 Template.chisiamo.created = function(){
     depth = 1;
-});
+};
 
 Template.chisiamo.events({
     "click #shoot": function (event) {
