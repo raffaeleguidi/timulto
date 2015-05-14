@@ -7,7 +7,8 @@ Template.registerHelper('isiOS', function(){
 });
 
 Template.registerHelper('needBackButton', function(){
-  return window.location.pathname != '/';
+  //return window.location.pathname != '/';
+    return depth > 0;
 });
 
 

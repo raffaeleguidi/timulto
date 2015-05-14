@@ -1,3 +1,5 @@
+/////////////////////////////////////
+////////////// Crea /////////////////
 
 getUserLanguage = function () {
   // Put here the logic for determining the user language
@@ -5,12 +7,11 @@ getUserLanguage = function () {
 };
 
 
-
-/////////////////////////////////////
-////////////// Crea /////////////////
+Template.crea.created = function () {
+    depth = 1;
+}
 
 Template.crea.rendered = function () {
-    depth = 1;
     photoHandling.resetPicture();
     if (Meteor.isCordova) {
         photoHandling.takePhoto();

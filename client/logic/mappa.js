@@ -125,6 +125,9 @@ function init() {
 
 Template.mappa.rendered = function () {
     depth = 1;
+}
+
+Template.mappa.rendered = function () {
 
     init();
 

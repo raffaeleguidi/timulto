@@ -2,9 +2,11 @@ function hideFixedActionButton() {
     $('.fixed-action-btn').mouseout();
 }
 
-Template.dettaglio.rendered = function(){
+Template.dettaglio.rendered = function () {
     depth = 1;
+}
 
+Template.dettaglio.rendered = function(){
     if(Session.get("isadmin")) {
         var canvas=document.getElementById("herecanvas");
         //var data = urlHandling.rootUrl() + "api/image/" + Session.get("_id") + "/" + (Session.get("version") ? Session.get("version") : "0" );
