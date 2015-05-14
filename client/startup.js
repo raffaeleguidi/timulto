@@ -22,15 +22,23 @@ Tracker.autorun(function() {
         Session.set("finesLoaded", true);
     }
 });
+var minuteInMillis = 1000 * 60;
 
-//if(Meteor.isCordova && (Session.get("os") == "Android")) {
-    //Check whether or not the application is being used
-    Tracker.autorun(function () {
+if(Meteor.isCordova && (Session.get("os") == "Android")) {
+    //Every 5 minutes check whether or not the application is being used
+    Meteor.setInterval(function () {
         var lastUsed = Session.get("lastUsed");
-        var now = moment();
-        console.log("last used: " + lastUsed + ", now: " + now);
-    });
-//}
+        if(lastUsed) {
+            lastUsed = moment(lastUsed);
+            var now = moment();
+            var fiveMinutes = 5;
+            var lastUsedPlusFive = lastUsed.add(fiveMinutes, "minutes");
+            console.log("lastUsedPlusFive was 5 minutes ago? " + (now.diff(lastUsedPlusFive) >= 0));
+            console.log("last used: " + lastUsed + ", now: " + now.toString());
+
+        }
+    }, minuteInMillis * 5);
+}
 
 /* maybe it should become main.js? */
 Tracker.autorun(function () {
@@ -81,6 +89,10 @@ $.get("/api/categories", function(data){
 
       Session.set("foundfines",[]);
       Session.set("finesToApprove",[]);
+
+      var startupMoment = moment();
+      console.log("[" + startupMoment + "] Starting up ... ");
+      Session.set("lastUsed", startupMoment);
 
       photoHandling.resetPicture();
   });

@@ -10,6 +10,7 @@ var defaultIconUrl = 'icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
+
 Template.mappa.events({
     'click a[target=_blank]': function (event) {
         event.preventDefault();
@@ -130,6 +131,10 @@ Template.mappa.created = function () {
 Template.mappa.rendered = function () {
 
     init();
+
+    var now = moment();
+    console.log("resetting last used to " + now.toString());
+    Session.set("lastUsed", now.toString());
 
     $(function () {
         $(window).resize(function () {

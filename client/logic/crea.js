@@ -16,6 +16,10 @@ Template.crea.rendered = function () {
     if (Meteor.isCordova) {
         photoHandling.takePhoto();
     }
+
+    var now = moment();
+//    console.log("resetting last used to " + now.toString());
+    Session.set("lastUsed", now.toString());
     //geoLocalization.geocode();
 };
 
