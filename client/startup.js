@@ -33,9 +33,11 @@ if(Meteor.isCordova && (Session.get("os") == "Android")) {
             var now = moment();
             var fiveMinutes = 5;
             var lastUsedPlusFive = lastUsed.add(fiveMinutes, "minutes");
-            console.log("lastUsedPlusFive was 5 minutes ago? " + (now.diff(lastUsedPlusFive) >= 0));
-            console.log("last used: " + lastUsed + ", now: " + now.toString());
-
+//            console.log("lastUsedPlusFive was 5 minutes ago? " + (now.diff(lastUsedPlusFive) >= 0));
+//            console.log("last used: " + lastUsed + ", now: " + now.toString());
+            if( now.diff(lastUsedPlusFive) >= 0 ) {
+                navigator.app.exitApp();
+            }
         }
     }, minuteInMillis * 5);
 }
