@@ -16,6 +16,7 @@
             <img style="margin-top: -10px;" src="/images/timulto-badge.png">
         </div>
 
+        {{#if finesNotYetLoaded}}
         <div class="row center">
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue-only">
@@ -31,6 +32,7 @@
                 </div>
             </div>
         </div>
+        {{/if}}
         {{#if finesToApprove.count}}
         <div class="section">
             <div class="row" id="adminApproval" hidden="{{hide}}">

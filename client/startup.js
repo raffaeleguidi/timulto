@@ -2,6 +2,8 @@ var finesSubscription = Meteor.subscribe("fines");
 Meteor.subscribe("categories");
 Meteor.subscribe("userData");
     
+
+
 var userWasLoggedIn = false;
 
 Tracker.autorun(function () {
@@ -10,18 +12,25 @@ Tracker.autorun(function () {
     if (coords && coords.lat && coords.lng) {
         Session.set("lat",coords.lat);
         Session.set("lon",coords.lng);
-        console.log("coords  " + JSON.stringify(coords));
+//        console.log("coords  " + JSON.stringify(coords));
     }
 });
 
 
-Tracker.autorun(function () {
-    if( finesSubscription.ready()) {
-        console.log("done loading fines");
-//        console.log($('.spinner-layer'));
-        $('.preloader-wrapper.active').hide();
+Tracker.autorun(function() {
+    if(finesSubscription.ready()) {
+        Session.set("finesLoaded", true);
     }
 });
+
+//if(Meteor.isCordova && (Session.get("os") == "Android")) {
+    //Check whether or not the application is being used
+    Tracker.autorun(function () {
+        var lastUsed = Session.get("lastUsed");
+        var now = moment();
+        console.log("last used: " + lastUsed + ", now: " + now);
+    });
+//}
 
 /* maybe it should become main.js? */
 Tracker.autorun(function () {
