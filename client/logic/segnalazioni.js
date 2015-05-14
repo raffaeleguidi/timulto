@@ -9,6 +9,10 @@ Template.segnalazioni.rendered = function () {
     var now = moment();
 //    console.log("resetting last used to " + now.toString());
     Session.set("lastUsed", now.toString());
+
+    $(document).ready(function(){
+        $('.preloader-wrapper').pushpin({ top: $('.preloader-wrapper').offset().top });
+    });
 }
 
 Template.segnalazioni.helpers({
