@@ -123,7 +123,7 @@ function init() {
     });
 }
 
-Template.mappa.rendered = function () {
+Template.mappa.created = function () {
     depth = 1;
 }
 

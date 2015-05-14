@@ -2,7 +2,7 @@ function hideFixedActionButton() {
     $('.fixed-action-btn').mouseout();
 }
 
-Template.dettaglio.rendered = function () {
+Template.dettaglio.created = function () {
     depth = 1;
 }
 
