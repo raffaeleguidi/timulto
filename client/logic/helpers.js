@@ -1,3 +1,7 @@
+Template.registerHelper('gaAccount', function(){
+    return "UA-63007561-1";
+});
+
 Template.registerHelper('thumbUrl', function(){
     return Session.get("rootUrl") + "api/thumb/" + this._id + "?v=" + this.version;
 });
