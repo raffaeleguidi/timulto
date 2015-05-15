@@ -4,7 +4,6 @@
 /bower_components/
 /node_modules/
 target/
-settings.json
 npm-debug.log
 scripts/dumps
 /timultoAndroidKeyStore
