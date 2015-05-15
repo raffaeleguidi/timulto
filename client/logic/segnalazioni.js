@@ -11,8 +11,9 @@ Template.segnalazioni.rendered = function () {
     Session.set("lastUsed", now.toString());
 
     $(document).ready(function(){
-        $('.preloader-wrapper').pushpin({ top: $('.preloader-wrapper').offset().top });
+        //$('.preloader-wrapper').pushpin({ top: $('.preloader-wrapper').offset().top });
     });
+
 }
 
 Template.segnalazioni.helpers({

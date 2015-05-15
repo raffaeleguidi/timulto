@@ -4,7 +4,7 @@ Template.registerHelper('gaAccount', function(){
 });
 
 Template.registerHelper('thumbUrl', function(){
-    return Session.get("rootUrl") + "api/thumb/" + this._id + "?v=" + this.version;
+    return Session.get("rootUrl") + "api/thumb/" + this._id + "?v=" + (this.version ? this.version : '0');
 });
 
 Template.registerHelper('isiOS', function(){

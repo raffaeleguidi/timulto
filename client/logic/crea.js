@@ -121,7 +121,15 @@ Template.crea.events({
         Router.go("/");
 
         Materialize.toast("Grazie per la segnalazione", 4000, 'rounded center');
-        //Materialize.toast("non appena vagliata dai nostri amministratori", 5000, 'rounded');
+
+        setTimeout(function() {
+            $(".mini-shot").each( function () {
+                var src = $( this ).attr("src");
+                $( this ).attr("src", "/icon.png");
+                $( this ).attr("src", src);
+                console.log("refreshed src=%s", src);
+            });
+        }, 1000);
 
         return false;
     },

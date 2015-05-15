@@ -149,7 +149,7 @@ Template.dettaglio.helpers({
         return imageUrl();
     },
     thumbUrl: function(){
-        return Session.get("rootUrl") + "api/thumb/" + Session.get("_id") + "?v=" + Session.get("version");
+        return Session.get("rootUrl") + "api/thumb/" + Session.get("_id") + "?v=" + (Session.get("version") ? Session.get("version") : '0');
     }, createdAt: function(){
         return Session.get("createdAt");
     },

@@ -6,7 +6,7 @@ Template.fineInARow.rendered = function() {
 
 Template.fineInARow.helpers({
     imageUrl: function(){
-        return Session.get("rootUrl") + "api/image/" + this._id + "?v=" + this.version;
+        return Session.get("rootUrl") + "api/image/" + this._id + "?v=" + (this.version ? this.version : '0');
     },
     likes: function() {
         return this.likes ? this.likes.length : 0;
