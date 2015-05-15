@@ -1,49 +1,35 @@
 
 Router.map(function () {
     this.route('segnalazioni', {
-      path: '/',
-      trackPageView: true
+      path: '/'
   });
 });
 
-
 Router.map(function () {
     this.route('crea', {
-      path: '/crea',
-      trackPageView: true
+      path: '/crea'
   });
 });
 
 Router.map(function(){
   this.route('mappa', {
-      path: '/mappa',
-      trackPageView: true
+      path: '/mappa'
   });
 });
 Router.map(function(){
   this.route('navigatore', {
-      path: '/naviga',
-      trackPageView: true
+      path: '/naviga'
   });
 });
 
 Router.map(function(){
   this.route('chisiamo', {
-      path: '/chisiamo',
-      trackPageView: true
+      path: '/chisiamo'
   });
 });
 
 Router.map(function(){
   this.route('dettaglio', {
-      path: '/dettaglio',
-      trackPageView: true
+      path: '/dettaglio'
   });
 });
-
-//Router.map(function(){
-//  this.route('segnalazioni', {
-//      path: '/segnalazioni',
-//      trackPageView: true
-//  });
-//});

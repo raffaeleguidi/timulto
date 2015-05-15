@@ -45,6 +45,7 @@ App.icons({
 App.accessRule('http://*.meteor.local/*');
 
 App.accessRule( "https://api.twitter.com/*", { launchExternal: false } );
+
 App.accessRule('http://*.timulto.org/*');
 App.accessRule('http://*.mqcdn.com/*');
 App.accessRule('http://*.mapquestapi.com/*');
@@ -55,6 +56,8 @@ App.accessRule('http://*.googleapis.com/*');
 App.accessRule('https://*.googleapis.com/*');
 App.accessRule('http://*.gstatic.com/*');
 App.accessRule('https://*.gstatic.com/*');
+App.accessRule('http://*..google-analytics.com.com/*');
+App.accessRule('https://*..google-analytics.com.com/*');
 
 /*
 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).

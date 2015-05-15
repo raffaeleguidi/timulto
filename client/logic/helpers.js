@@ -1,5 +1,6 @@
 Template.registerHelper('gaAccount', function(){
-    return "UA-63007561-1";
+    return Meteor.settings.public.ga.account ? Meteor.settings.public.ga.account : '';
+    //return "UA-63007561-1";
 });
 
 Template.registerHelper('thumbUrl', function(){
