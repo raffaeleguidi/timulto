@@ -75,6 +75,7 @@ $.get("/api/categories", function(data){
             console.log(error_message);
           });      
       
+
       $('select').material_select();
 
       Session.set("foundfines",[]);

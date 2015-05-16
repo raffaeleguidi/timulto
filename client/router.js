@@ -1,5 +1,11 @@
 
 Router.map(function () {
+    this.route('webhomepage', {
+      path: '/homepage'
+  });
+});
+
+Router.map(function () {
     this.route('segnalazioni', {
       path: '/'
   });

@@ -1,20 +1,17 @@
  ///////// Ultime Segnalazioni ///////////
 
-Template.segnalazioni.created = function(){
+Template.webhomepage.created = function(){
     depth = 0;
 };
 
-Template.segnalazioni.rendered = function () {
+Template.webhomepage.rendered = function () {
     var now = moment();
 //    console.log("resetting last used to " + now.toString());
     Session.set("lastUsed", now.toString());
-
-    $(document).ready(function(){
-        //$('.preloader-wrapper').pushpin({ top: $('.preloader-wrapper').offset().top });
-    });
+    $(".parallax").parallax();
 }
 
-Template.segnalazioni.helpers({
+Template.webhomepage.helpers({
 
     finesToApprove: function() {
         return Fines.find(
@@ -45,12 +42,5 @@ Template.segnalazioni.helpers({
     },
     hide: function(){
         return !Session.get("isadmin");
-    }
-});
-
-
-Template.segnalazioni.events({
-    "click #shoot": function (event) {
-        Router.go('/crea');
     }
 });
