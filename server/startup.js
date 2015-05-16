@@ -1,3 +1,19 @@
+function setupCronJob() {
+    SyncedCron.add({
+      name: 'FinesArchiving',
+      schedule: function(parser) {
+        return parser.text('every 2 hours');
+      },
+      job: function() {
+        //Archive fines here
+        //Step 1: Retrieve fines older then 24 hours starting from now -> check moment
+        //Step 2: Use collected fines ids to save on a separate collection
+        //Step 3: Remove collected ids from fines collection
+      }
+    });
+}
+
+
 function setupInitialData() {
 
     function updateApproved() {
@@ -69,6 +85,7 @@ Meteor.startup(function () {
 
 
     setupInitialData();
+    setupCronJob();
 
     Restivus.configure({
       useAuth: false,
