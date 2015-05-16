@@ -1,0 +1,46 @@
+<template name="navbarweb">
+
+    <div id="helpbox" class="modal blue lighten-5">
+
+        <div class="modal-content">
+            <h4>{{_ "aiuto"}}!</h4>
+            <p>Come fare per...</p>
+                {{helpMessage}}
+        </div>
+        <div class="divider blue-grey lighten-1"></div>
+
+        <div class="modal-footer blue lighten-5">
+                <a href="#" id="showHelp" class="btn-flat"><i class="mdi-navigation-arrow-forward"></i></a>
+                <a href="#" id="closeHelp" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="mdi-navigation-close"></i></a>
+         </div>
+    </div>
+
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+
+            <!-- mobile -->
+            <ul class="side-nav" id="mobile-demo" style="width: 240px">
+                <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
+                <li class="divider"></li>
+                <li class="bold"><a class="navbutton" href="/" no_onclick="$('.button-collapse').sideNav('hide');">Home</a></li>
+                <li class="bold"><a class="navbutton" href="/mappa" no_onclick="$('.button-collapse').sideNav('hide');">Mappa</a></li>
+                <li class="bold"><a class="navbutton" href="/chisiamo" no_onclick="$('.button-collapse').sideNav('hide');">{{_ "chisiamo"}}</a></li>
+                <li class="divider"></li>
+                <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a></li>
+            </ul>
+
+            <a href="/" class="brand-logo"><span class="orange white-text">Ti</span>Multo!</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li class="bold"><a href="/">Home</a>
+                </li>
+                <li class="bold"><a class="navbutton" href="/mappa">Mappa</a>
+                </li>
+                <li><a href="/chisiamo">{{_ "chisiamo"}}</a>
+                </li>
+                <li><a href="#helpbox" class="modal-trigger">{{_ "aiuto"}}!</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</template>
