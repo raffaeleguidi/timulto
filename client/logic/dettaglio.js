@@ -130,7 +130,7 @@ Template.dettaglio.events({
                 if(err) {
                     Materialize.toast("Errore in fase di approvazione: " + err.message, 3000, 'rounded center');
                 } else {
-                    Router.go('/segnalazioni');
+                    Router.go('/');
                     Materialize.toast("Segnalazione approvata!", 3000, 'rounded center');
                 }
             });
