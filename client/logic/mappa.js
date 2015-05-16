@@ -20,11 +20,18 @@ Template.mappa.events({
         event.preventDefault();
 //        console.log("clicked manual");
         var result = geoLocalization.getLatLng();
-        console.log("res ." + JSON.stringify(result));
-        var lat = Session.get("lat");
-        var lng = Session.get("lng");
+        var lat;
+        var lng;
 
-        console.log("lat: "+ lat + ",lng: " + lng);
+        if(result) {
+            lat = result.lat;
+            lng = result.lng;
+        } else {
+            lat = Session.get("lat");
+            lng = Session.get("lng");
+        }
+
+//        console.log("pan to lat: "+ lat + ",lng: " + lng);
 
         map.panTo(new L.LatLng(lat, lng));
         map.setZoom(defaultZoomLevel);
@@ -120,7 +127,7 @@ Template.mappa.rendered = function () {
     init();
 
     var now = moment();
-    console.log("resetting last used to " + now.toString());
+//    console.log("resetting last used to " + now.toString());
     Session.set("lastUsed", now.toString());
 
     $(function () {
