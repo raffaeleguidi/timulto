@@ -19,16 +19,14 @@ Template.mappa.events({
     "click #manualgeocode": function(event) {
         event.preventDefault();
 //        console.log("clicked manual");
-        if(!Session.get("lat") || !Session.get("lon")) {
-//            console.log("resetting coords");
-            geoLocalization.latLng();
-        }
+        var result = geoLocalization.getLatLng();
+        console.log("res ." + JSON.stringify(result));
         var lat = Session.get("lat");
-        var lon = Session.get("lon");
+        var lng = Session.get("lng");
 
-        console.log("lat: "+ lat + ",lon: " + lon);
+        console.log("lat: "+ lat + ",lng: " + lng);
 
-        map.panTo(new L.LatLng(lat, lon));
+        map.panTo(new L.LatLng(lat, lng));
         map.setZoom(defaultZoomLevel);
 
         return false;
@@ -56,11 +54,6 @@ Template.mappa.events({
     "click #shoot": function (event) {
         Router.go('/crea');
     }
-//    ,
-//    'click a[target=_blank]': function (event) {
-//        event.preventDefault();
-//        window.open(event.target.href, '_blank');
-//    }
 });
 
 var rendered = false;
@@ -89,13 +82,7 @@ function init() {
                                             fine: fine,
                                             googleMapsUrl:googleMapsUrl
                                         });
-//            console.log(popupContent);
-//            var popupContent =
-//                '<div class="row center" id="clickableMapElement"><input type="hidden" id="' + fine._id + '"' +
-//                '<div class="col s6"><img class="mini-shot" name="imageData" src="' + urlHandling.rootUrl() + 'api/thumb/' + fine._id + '/' + (fine.version != null ? fine.version : '0')+ '" />' +
-//                '</div>' +
-//                '<div id="iw_content" class="col s6">' + "Segnalato in " + fine.address + '</div>' +
-//                '</div><div class="row center" style="margin-top: 5px">'+'<a onclick="window.open(\'' + googleMapsUrl + '\', \'_system\');return false;" href="'+googleMapsUrl+'" target="_blank">Ottieni indicazioni</a>'+'</div>';
+
             var marker = L.marker([lat, lng], {
                 _id: fine._id,
                 icon: myIcon,
@@ -146,40 +133,40 @@ Template.mappa.rendered = function () {
     L.Icon.Default.imagePath = '/images';
 
     var lat;
-    var lon;
+    var lng;
     var zoom = Session.get("zoom");
 
-    if(Session.get("selectedLat") && Session.get("selectedLon")) {
+    if(Session.get("selectedLat") && Session.get("selectedLng")) {
         lat = Session.get("selectedLat");
-        lon = Session.get("selectedLon");
+        lng = Session.get("selectedLng");
 
         Session.set("selectedLat","");
-        Session.set("selectedLon","");
+        Session.set("selectedLng","");
         Session.set("zoom","");
     } else {
         lat = Session.get("lat");
-        lon = Session.get("lon");
+        lng = Session.get("lng");
     }
 
     if(!zoom)
         zoom = defaultZoomLevel;
 
 
-    if(!lat || !lon || lat==0 || lon==0) {
-        geoLocalization.latLng();
+    if(!lat || !lng || lat==0 || lng==0) {
+        geoLocalization.getLatLng();
 
-        if(!Session.get("lat") || !Session.get("lon")) {
+        if(!Session.get("lat") || !Session.get("lng")) {
             //In extremis
             //Default termini
             lat = 41.901091;
-            lon = 12.501991;
+            lng = 12.501991;
         }
     }
 
     map = L.map('finesMap', {
         doubleClickZoom: true,
         touchZoom: true
-    }).setView([lat, lon], zoom);
+    }).setView([lat, lng], zoom);
 
     L.tileLayer.provider('MapQuestOpen').addTo(map);
 

@@ -49,14 +49,14 @@ Template.dettaglio.events({
     },
     "click #findonmap": function(event) {
         Session.set("selectedLat",Session.get("lat"));
-        Session.set("selectedLon",Session.get("lon"));
+        Session.set("selectedLng",Session.get("lng"));
         Session.set("zoom",18);
 
         Router.go("/mappa");
     },
      "click .naviga":function(event) {
         Session.set("selectedLat",Session.get("lat"));
-        Session.set("selectedLon",Session.get("lon"));
+        Session.set("selectedLng",Session.get("lng"));
         Session.set("selectedId", this._id);
 
         Router.go('/naviga');
@@ -180,8 +180,8 @@ Template.dettaglio.helpers({
     lat: function() {
         return Session.get("lat");
     },
-    lon: function() {
-        return Session.get("lon");
+    lng: function() {
+        return Session.get("lng");
     },
     iLikeThis: function() {
         return iLikeThis();

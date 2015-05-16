@@ -158,16 +158,16 @@ Meteor.methods({
     findNearUserFine: function(orderbydate, latitude, longitude, minDistance, maxDistance) {
         //Con la seguente query vengono restituite tutte le segnalazioni in prossimità delle coordinate specificate e che siano approved=true se di altri utenti, o anche approved=false se sono dell'utente corrente. La discriminante più forte è la vicinanza che potrebbe non includere le segnalazioni dell'utente corrente
 //        console.log("Calling findNearUserFine. Lat:" + latitude + " parsed " +parseFloat(latitude)+
-//                    ",lon:"+longitude+" parsed " +parseFloat(longitude)+
+//                    ",lng:"+longitude+" parsed " +parseFloat(longitude)+
 //                    ", maxD:"+maxDistance+" minD:"+minDistance);
         var lat = 0.0;
         if(latitude){
             lat = parseFloat(latitude);
         }
 
-        var lon = 0.0;
+        var lng = 0.0;
         if(longitude){
-            lon = parseFloat(longitude);
+            lng = parseFloat(longitude);
         }
 
         var minD = 0.0;
@@ -180,7 +180,7 @@ Meteor.methods({
                 $near:{
                     $geometry:{
                         type:"Point",
-                        coordinates:[lon, lat ]
+                        coordinates:[lng, lat ]
                     },
                     $minDistance:minD,
                     $maxDistance:parseFloat(maxDistance),
@@ -195,7 +195,7 @@ Meteor.methods({
         if(cursor){
             cursor.forEach(function (doc) {
                 if(doc && ( doc.approved || doc.username ==  currentUsername )){
-                    console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
+//                    console.log(doc._id+":"+doc.createdAt+", user:"+doc.username+",approved:"+doc.approved);
                     finalResult.push(doc);
                 }
             });

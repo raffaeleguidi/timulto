@@ -298,14 +298,14 @@ Meteor.startup(function () {
                     });
             }
         },
-        reverseGeocode: function (lat, lon) {
+        reverseGeocode: function (lat, lng) {
             this.unblock();
             try {
                 var obj = HTTP.get("http://nominatim.openstreetmap.org/reverse",
                                    { params: {
                                          format: "json",
                                          lat: lat,
-                                         lon: lon
+                                         lon: lng
                                      }});
                 var address = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
                 var city = obj.data.address.city;
@@ -319,20 +319,18 @@ Meteor.startup(function () {
                     }
                 } else {
                     return {
-                        address: "Lat: " + lat + ", Lon: " + lon,
+                        address: "Lat: " + lat + ", Lng: " + lng,
                         postcode: 'geocoding error',
                         city: obj.statusCode
                     }
                 }
             } catch (ex) {
                 return {
-                    address: "Lat: " + lat + ", Lon: " + lon,
+                    address: "Lat: " + lat + ", Lng: " + lng,
                     postcode: 'geocoding error',
                     city: ex.message
                 }
             }
         }
     });
-
 });
-

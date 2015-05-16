@@ -22,7 +22,7 @@ Template.fineInARow.helpers({
 Template.fineInARow.events({
     "click .fine":function(){
         Session.set("lat",this.loc.coordinates[1]);
-        Session.set("lon",this.loc.coordinates[0]);
+        Session.set("lng",this.loc.coordinates[0]);
         Session.set("_id", this._id);
         Session.set("createdAt", this.createdAt);
         Session.set("detailUsername", this.username);

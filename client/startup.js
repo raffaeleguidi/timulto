@@ -3,20 +3,6 @@ Meteor.subscribe("categories");
 Meteor.subscribe("userData");
     
 
-
-var userWasLoggedIn = false;
-
-Tracker.autorun(function () {
-  var coords = Geolocation.latLng();
-
-    if (coords && coords.lat && coords.lng) {
-        Session.set("lat",coords.lat);
-        Session.set("lon",coords.lng);
-//        console.log("coords  " + JSON.stringify(coords));
-    }
-});
-
-
 Tracker.autorun(function() {
     if(finesSubscription.ready()) {
         Session.set("finesLoaded", true);
@@ -43,6 +29,8 @@ if(Meteor.isCordova && (Session.get("os") == "Android")) {
 }
 
 /* maybe it should become main.js? */
+var userWasLoggedIn = false;
+
 Tracker.autorun(function () {
     if(!Meteor.userId()){
         if(userWasLoggedIn){
