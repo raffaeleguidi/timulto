@@ -1,3 +1,5 @@
+History = new Mongo.Collection("history");
+
 function setupCronJob() {
     SyncedCron.add({
       name: 'FinesArchiving',
@@ -5,13 +7,27 @@ function setupCronJob() {
         return parser.text('every 2 hours');
       },
       job: function() {
-        //Archive fines here
-        //Step 1: Retrieve fines older then 24 hours starting from now -> check moment
-        //Step 2: Use collected fines ids to save on a separate collection
-        //Step 3: Remove collected ids from fines collection
+        finesArchiving();
       }
     });
 }
+
+function finesArchiving() {
+    //Archive fines here
+    //Step 1: Retrieve fines older then 24 hours starting from now -> check moment
+    var nowMoment = moment();
+    var oldFinesMoment = nowMoment.subtract(24, "hours");
+//    console.log("old fines moment " + oldFinesMoment.format());
+    var selector   = { createdAt:{ $lte: new Date(oldFinesMoment.format()) }};
+    var projection = { fields: { _id:1 }};
+    var oldFinesCursor = Fines.find( selector, projection);
+
+    //Step 2: Use collected fines ids to save on a separate collection
+    oldFinesCursor.forEach(function(fine){
+        console.log("Found "+fine._id + " created at " + fine.createdAt + ". Time limit: " + oldFinesMoment.format());
+    });
+    //Step 3: Remove collected ids from fines collection
+};
 
 
 function setupInitialData() {
@@ -70,7 +86,7 @@ function setupInitialData() {
 }
 
 Meteor.startup(function () {
-
+    Meteor.setInterval(finesArchiving, 3000);
     // <meta name="viewport" content="width=device-width, initial-scale=1">
 
     // requires package meteorhacks:inject-initial

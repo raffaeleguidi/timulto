@@ -1,6 +1,6 @@
-Fines = new Mongo.Collection("fines");
-Administrators = new Mongo.Collection("administrators");
-Categories = new Mongo.Collection("categories");
+Fines           = new Mongo.Collection("fines");
+Administrators  = new Mongo.Collection("administrators");
+Categories      = new Mongo.Collection("categories");
 
 if(Meteor.isCordova){
 
