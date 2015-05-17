@@ -130,8 +130,6 @@ Meteor.startup(function () {
     setupInitialData();
     setupCronJob();
 
-    Meteor.setInterval(finesArchiving, 5000);
-
     Restivus.configure({
       useAuth: false,
       prettyJson: true,
