@@ -19,14 +19,37 @@ function finesArchiving() {
     var oldFinesMoment = nowMoment.subtract(24, "hours");
 //    console.log("old fines moment " + oldFinesMoment.format());
     var selector   = { createdAt:{ $lte: new Date(oldFinesMoment.format()) }};
-    var projection = { fields: { _id:1 }};
-    var oldFinesCursor = Fines.find( selector, projection);
+    //TODO - REMOVE images?
+//    var projection = { fields: { imageData:0 }};
+    var oldFinesCursor = Fines.find( selector);//, projection);
 
     //Step 2: Use collected fines ids to save on a separate collection
     oldFinesCursor.forEach(function(fine){
-        console.log("Found "+fine._id + " created at " + fine.createdAt + ". Time limit: " + oldFinesMoment.format());
+//        console.log("Found "+fine._id + " created at " + fine.createdAt + ". Time limit: " + oldFinesMoment.format());
+        console.log("Archiving fine: " + fine._id);
+        if(fine.likes) {
+            console.log("archiving likes " + fine.likes.count);
+            fine.likecount = fine.likes.length;
+            fine.likes = null;
+        } else {
+            fine.likecount = 0;
+        }
+
+//        console.log("new fine : " + JSON.stringify(fine));
+        try {
+            //Archive fine without image
+            History.insert(fine);
+        } catch(ex) {
+            console.log("Cannot archive fine: " + ex.message);
+        }
+
+        //Step 3: Remove collected ids from fines collection
+        try {
+            Fines.remove({ _id:fine._id });
+        } catch(ex) {
+            console.log("Cannot remove online fine: " + ex.message);
+        }
     });
-    //Step 3: Remove collected ids from fines collection
 };
 
 
@@ -37,7 +60,12 @@ function setupInitialData() {
         Fines.update({ approved:1 },{ $set: { approved: true }}, { multi: true}, function(err,res){ console.log("err: " +err + ", for approved=1 updated rows: " + res); });
     }
 
+    function updateLikes() {
+        Fines.update({ likes:{ $exists:false }},{ $set:{ likes:[] }}, { multi: true });
+    }
+
     updateApproved();
+    updateLikes();
 
     function addCategory(key, value) {
         if (Categories.find({key: key}).count() == 0) {
@@ -86,7 +114,6 @@ function setupInitialData() {
 }
 
 Meteor.startup(function () {
-    Meteor.setInterval(finesArchiving, 3000);
     // <meta name="viewport" content="width=device-width, initial-scale=1">
 
     // requires package meteorhacks:inject-initial
@@ -102,6 +129,8 @@ Meteor.startup(function () {
 
     setupInitialData();
     setupCronJob();
+
+    Meteor.setInterval(finesArchiving, 5000);
 
     Restivus.configure({
       useAuth: false,
