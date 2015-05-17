@@ -70,7 +70,6 @@ function isAdministrator() {
             service  = "google";
         }
     }
-//    console.log("username : " + username + ", service " + service);
 
     var userAdm = Administrators.findOne({$and:[{username:username},{service:service}]});
 
@@ -80,10 +79,8 @@ function isAdministrator() {
     }
 
     if(!userAdm) {
-//        console.log(username + " is not admin");
        return false;
     } else {
-//        console.log(username + " is  admin!!!!");
         return true;
     }
 };
@@ -145,15 +142,13 @@ Meteor.methods({
           loc:{type:"Point",coordinates:[parseFloat(lng),parseFloat(lat)]},
           category: category,
           approved:approved,
+          likes:[],
           imageData: imageData,
           owner: Meteor.userId(),
           username: username,
           createdAt: new Date() // current time
         }));
 
-    },
-    setChecked: function (fineId, setChecked) {
-        //Fines.update(taskId, { $set: { checked: setChecked} });
     },
     findNearUserFine: function(orderbydate, latitude, longitude, minDistance, maxDistance) {
         //Con la seguente query vengono restituite tutte le segnalazioni in prossimità delle coordinate specificate e che siano approved=true se di altri utenti, o anche approved=false se sono dell'utente corrente. La discriminante più forte è la vicinanza che potrebbe non includere le segnalazioni dell'utente corrente

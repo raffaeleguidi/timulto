@@ -27,19 +27,24 @@ function finesArchiving() {
 
     //Step 2: Use collected fines ids to save on a separate collection
     oldFinesCursor.forEach(function(fine){
+        var currentId = fine._id;
 
         console.log("Archiving fine: " + fine._id);
-        if(fine.likes) {
+        if(fine.likes && !(typeof fine.likes != 'undefined')) {
             console.log("archiving likes " + fine.likes.count);
             fine.likecount = fine.likes.length;
-            fine.likes = null;
         } else {
             fine.likecount = 0;
         }
 
+        fine.originalId = {};
+        fine.originalId = fine._id;//Original id is saved, new collection id is demanded to mongo
+        delete fine["_id"];
+        delete fine["likes"];
+
         try {
             //Archive fine without image?
-            History.insert(fine);//Should we archive with same fine's id?
+            History.insert(fine);
         } catch(ex) {
             console.log("Cannot archive fine: " + ex.message);
             archivingException = true;
@@ -48,7 +53,7 @@ function finesArchiving() {
         //Step 3: Remove collected ids from fines collection
         if(!archivingException){
             try {
-                Fines.remove({ _id:fine._id });
+                Fines.remove({ _id:currentId });
             } catch(ex) {
                 console.log("Cannot remove online fine: " + ex.message);
                 archivingException = true;
@@ -314,10 +319,8 @@ Meteor.startup(function () {
                 return null;
             }
         },
-        deleteFine: function (fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin o l'utente corrente "possiede" il fine
-
+        deleteFine: function (fineId) {
             if(fineId && isAdministrator()) { //Se amministratore, è possibile rimuovere la segnalazione
-//                    console.log("removing fine " + fineId);
                 Fines.remove(fineId);
 
                 //Send notification
