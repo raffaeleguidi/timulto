@@ -14,6 +14,8 @@ function setupCronJob() {
 
 function finesArchiving() {
     //Archive fines here
+    var archivingException = false;
+
     //Step 1: Retrieve fines older then 24 hours starting from now -> check moment
     var nowMoment = moment();
     var oldFinesMoment = nowMoment.subtract(24, "hours");
@@ -25,7 +27,7 @@ function finesArchiving() {
 
     //Step 2: Use collected fines ids to save on a separate collection
     oldFinesCursor.forEach(function(fine){
-//        console.log("Found "+fine._id + " created at " + fine.createdAt + ". Time limit: " + oldFinesMoment.format());
+
         console.log("Archiving fine: " + fine._id);
         if(fine.likes) {
             console.log("archiving likes " + fine.likes.count);
@@ -35,19 +37,22 @@ function finesArchiving() {
             fine.likecount = 0;
         }
 
-//        console.log("new fine : " + JSON.stringify(fine));
         try {
-            //Archive fine without image
-            History.insert(fine);
+            //Archive fine without image?
+            History.insert(fine);//Should we archive with same fine's id?
         } catch(ex) {
             console.log("Cannot archive fine: " + ex.message);
+            archivingException = true;
         }
 
         //Step 3: Remove collected ids from fines collection
-        try {
-            Fines.remove({ _id:fine._id });
-        } catch(ex) {
-            console.log("Cannot remove online fine: " + ex.message);
+        if(!archivingException){
+            try {
+                Fines.remove({ _id:fine._id });
+            } catch(ex) {
+                console.log("Cannot remove online fine: " + ex.message);
+                archivingException = true;
+            }
         }
     });
 };
