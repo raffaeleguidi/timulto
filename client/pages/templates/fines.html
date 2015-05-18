@@ -2,7 +2,8 @@
     <tr class="fine">
         <td>
             <h6 class="blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h6>
-            <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}. Piace a {{likes}} persone{{#if iLikeThis}} compreso te{{/if}}</span>
+            <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.
+{{#if likes}}Piace a {{likes}} persone{{#if iLikeThis}} compreso te{{/if}}{{/if}}</span>
         </td>
         <td>
             <img
