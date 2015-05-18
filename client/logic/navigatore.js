@@ -40,8 +40,8 @@ Template.navigatore.helpers({
     navigatorMapOptions: function() {
         if (GoogleMaps.loaded()) {
             var lat = Session.get("selectedLat");
-            var lon = Session.get("selectedLon");
-            selectedLocation = new google.maps.LatLng(lat, lon);
+            var lng = Session.get("selectedLng");
+            selectedLocation = new google.maps.LatLng(lat, lng);
 
             return {
                 center: selectedLocation,
@@ -76,10 +76,8 @@ Template.navigatore.onCreated(function () {
 
         if (coords) {
             var lat = coords.lat;
-            var lon = coords.lng;
-//            console.log("setting current position "+ lat+ ","+lon);
-
-            currentLocation = new google.maps.LatLng(lat, lon);
+            var lng = coords.lng;
+            currentLocation = new google.maps.LatLng(lat, lng);
 
             var markerCurrentPos = new google.maps.Marker({
                 position: currentLocation,
@@ -88,10 +86,9 @@ Template.navigatore.onCreated(function () {
         }
 
         var lat = Session.get("selectedLat");
-        var lon = Session.get("selectedLon");
-//            console.log("Selected position: lat " + lat + " lon " + lon);
+        var lng = Session.get("selectedLng");
         var markerCurrentPos = new google.maps.Marker({
-            position: new google.maps.LatLng(lat, lon),
+            position: new google.maps.LatLng(lat, lng),
             map:map.instance,
             icon: 'icon_20X20.png'
         });

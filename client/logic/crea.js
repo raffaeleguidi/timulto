@@ -18,9 +18,7 @@ Template.crea.rendered = function () {
     }
 
     var now = moment();
-//    console.log("resetting last used to " + now.toString());
     Session.set("lastUsed", now.toString());
-    //geoLocalization.geocode();
 };
 
 Template.crea.helpers({
@@ -80,13 +78,6 @@ Template.crea.events({
         console.log("set category");
         Session.set("categoryselected", true);
     },
-   /* "input #address": function(event){
-        if(!$("#address").val()) {
-            Session.set("address","");
-        } else {
-            Session.set("address","a");
-        }
-    },*/
     "click #send": function (event) {
         event.preventDefault();
         var text = $("#description").val();

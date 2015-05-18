@@ -1,3 +1,68 @@
+History = new Mongo.Collection("history");
+
+function setupCronJob() {
+    SyncedCron.add({
+      name: 'FinesArchiving',
+      schedule: function(parser) {
+        return parser.text('every 2 hours');
+      },
+      job: function() {
+        finesArchiving();
+      }
+    });
+}
+
+function finesArchiving() {
+    //Archive fines here
+    var archivingException = false;
+
+    //Step 1: Retrieve fines older then 24 hours starting from now -> check moment
+    var nowMoment = moment();
+    var oldFinesMoment = nowMoment.subtract(24, "hours");
+//    console.log("old fines moment " + oldFinesMoment.format());
+    var selector   = { createdAt:{ $lte: new Date(oldFinesMoment.format()) }};
+    //TODO - REMOVE images?
+//    var projection = { fields: { imageData:0 }};
+    var oldFinesCursor = Fines.find( selector);//, projection);
+
+    //Step 2: Use collected fines ids to save on a separate collection
+    oldFinesCursor.forEach(function(fine){
+        var currentId = fine._id;
+
+        console.log("Archiving fine: " + fine._id);
+        if(fine.likes && !(typeof fine.likes != 'undefined')) {
+            console.log("archiving likes " + fine.likes.count);
+            fine.likecount = fine.likes.length;
+        } else {
+            fine.likecount = 0;
+        }
+
+        fine.originalId = {};
+        fine.originalId = fine._id;//Original id is saved, new collection id is demanded to mongo
+        delete fine["_id"];
+        delete fine["likes"];
+
+        try {
+            //Archive fine without image?
+            History.insert(fine);
+        } catch(ex) {
+            console.log("Cannot archive fine: " + ex.message);
+            archivingException = true;
+        }
+
+        //Step 3: Remove collected ids from fines collection
+        if(!archivingException){
+            try {
+                Fines.remove({ _id:currentId });
+            } catch(ex) {
+                console.log("Cannot remove online fine: " + ex.message);
+                archivingException = true;
+            }
+        }
+    });
+};
+
+
 function setupInitialData() {
 
     function updateApproved() {
@@ -5,7 +70,12 @@ function setupInitialData() {
         Fines.update({ approved:1 },{ $set: { approved: true }}, { multi: true}, function(err,res){ console.log("err: " +err + ", for approved=1 updated rows: " + res); });
     }
 
+    function updateLikes() {
+        Fines.update({ likes:{ $exists:false }},{ $set:{ likes:[] }}, { multi: true });
+    }
+
     updateApproved();
+    updateLikes();
 
     function addCategory(key, value) {
         if (Categories.find({key: key}).count() == 0) {
@@ -54,7 +124,6 @@ function setupInitialData() {
 }
 
 Meteor.startup(function () {
-
     // <meta name="viewport" content="width=device-width, initial-scale=1">
 
     // requires package meteorhacks:inject-initial
@@ -69,6 +138,7 @@ Meteor.startup(function () {
 
 
     setupInitialData();
+    setupCronJob();
 
     Restivus.configure({
       useAuth: false,
@@ -249,10 +319,8 @@ Meteor.startup(function () {
                 return null;
             }
         },
-        deleteFine: function (fineId) {//TODO da aggiungere la logica che controlla se l'utente è admin o l'utente corrente "possiede" il fine
-
+        deleteFine: function (fineId) {
             if(fineId && isAdministrator()) { //Se amministratore, è possibile rimuovere la segnalazione
-//                    console.log("removing fine " + fineId);
                 Fines.remove(fineId);
 
                 //Send notification
@@ -298,14 +366,14 @@ Meteor.startup(function () {
                     });
             }
         },
-        reverseGeocode: function (lat, lon) {
+        reverseGeocode: function (lat, lng) {
             this.unblock();
             try {
                 var obj = HTTP.get("http://nominatim.openstreetmap.org/reverse",
                                    { params: {
                                          format: "json",
                                          lat: lat,
-                                         lon: lon
+                                         lon: lng
                                      }});
                 var address = obj.data.address.road + (obj.data.address.house_number ? ", " + obj.data.address.house_number : "");
                 var city = obj.data.address.city;
@@ -319,20 +387,18 @@ Meteor.startup(function () {
                     }
                 } else {
                     return {
-                        address: "Lat: " + lat + ", Lon: " + lon,
+                        address: "Lat: " + lat + ", Lng: " + lng,
                         postcode: 'geocoding error',
                         city: obj.statusCode
                     }
                 }
             } catch (ex) {
                 return {
-                    address: "Lat: " + lat + ", Lon: " + lon,
+                    address: "Lat: " + lat + ", Lng: " + lng,
                     postcode: 'geocoding error',
                     city: ex.message
                 }
             }
         }
     });
-
 });
-

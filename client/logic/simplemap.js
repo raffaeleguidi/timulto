@@ -5,39 +5,18 @@ var markers = {};
 
 var myIcon;
 
-var defaultZoomLevel = 16;
+var defaultZoomLevel = 12;
 var defaultIconUrl = 'icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
 
-Template.mappa.events({
+Template.simplemap.events({
     'click a[target=_blank]': function (event) {
         event.preventDefault();
         window.open(event.target.href, '_blank');
     },
-    "click #manualgeocode": function(event) {
-        event.preventDefault();
-//        console.log("clicked manual");
-        var result = geoLocalization.getLatLng();
-        var lat;
-        var lng;
 
-        if(result) {
-            lat = result.lat;
-            lng = result.lng;
-        } else {
-            lat = Session.get("lat");
-            lng = Session.get("lng");
-        }
-
-//        console.log("pan to lat: "+ lat + ",lng: " + lng);
-
-        map.panTo(new L.LatLng(lat, lng));
-        map.setZoom(defaultZoomLevel);
-
-        return false;
-    },
     "click #clickableMapElement":function(event) {
         event.preventDefault();
 
@@ -57,9 +36,6 @@ Template.mappa.events({
 
             Router.go('/dettaglio');
         }
-    },
-    "click #shoot": function (event) {
-        Router.go('/crea');
     }
 });
 
@@ -118,17 +94,13 @@ function init() {
     });
 }
 
-Template.mappa.created = function () {
+Template.simplemap.created = function () {
     depth = 1;
 }
 
-Template.mappa.rendered = function () {
+Template.simplemap.rendered = function () {
 
     init();
-
-    var now = moment();
-//    console.log("resetting last used to " + now.toString());
-    Session.set("lastUsed", now.toString());
 
     $(function () {
         $(window).resize(function () {
@@ -178,4 +150,6 @@ Template.mappa.rendered = function () {
     L.tileLayer.provider('MapQuestOpen').addTo(map);
 
     map.addLayer(cluster);
+
+    map.scrollWheelZoom.disable();
 };
