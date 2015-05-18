@@ -2,6 +2,9 @@
 Probably it's better to switch to:
 https://github.com/FezVrasta/bootstrap-material-design/tree/master/meteor
 */
+
+html, body {height:100%;}
+
 li {
     text-align: left;
 }
@@ -52,4 +55,26 @@ i.mdi-navigation-arrow-drop-down {
 }
   .parallax-container .section {
     width: 100%;
+}
+
+.tabs .tab a {
+  color: #42a5f5 ;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: color .28s ease;
+  -moz-transition: color .28s ease;
+  -o-transition: color .28s ease;
+  -ms-transition: color .28s ease;
+  transition: color .28s ease;
+}
+
+
+.tabs .tab a:hover{color:#42a5f5}
+.tabs .indicator{
+    position:absolute;
+    bottom:0;
+    height:2px;
+    background-color:#ffb74d ;
+    will-change:left, right
 }

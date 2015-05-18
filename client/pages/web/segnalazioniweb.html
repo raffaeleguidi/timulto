@@ -1,26 +1,16 @@
+<template name="segnalazioniweb">
 
-<template name="webhomepage">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-        <title>TiMulto!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
-    <body>
-    {{> navbarweb}}
+    <div class="container">
 
-
-   {{> simplemap}}
-
-
-    <div class="parallax-container">
-        <div class="parallax">
-            <img src="images/roma.jpg">
+<!--
+        <div class="row center">
+            <img style="margin-top: -10px;" src="/images/timulto-badge.png">
         </div>
-    </div>
-
-     <div class="section white">
-        <div class="row container">
+-->
 
         {{#if finesNotYetLoaded}}
         <div class="row center">
@@ -60,14 +50,5 @@
             </table>
         </div>
     </div>
-
-    </div>
-        <div class="parallax-container">
-        <div class="parallax">
-            <img src="images/milano.jpg">
-        </div>
-    </div>
-
-    {{> footerweb}}
-    </body>
 </template>
+

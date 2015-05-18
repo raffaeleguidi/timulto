@@ -9,6 +9,11 @@ Template.webhomepage.rendered = function () {
 //    console.log("resetting last used to " + now.toString());
     Session.set("lastUsed", now.toString());
     $(".parallax").parallax();
+
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
+
 }
 
 Template.webhomepage.helpers({

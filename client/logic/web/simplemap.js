@@ -149,7 +149,9 @@ Template.simplemap.rendered = function () {
 
     L.tileLayer.provider('MapQuestOpen').addTo(map);
 
+
     map.addLayer(cluster);
 
+    map.dragging.disable();
     map.scrollWheelZoom.disable();
 };
