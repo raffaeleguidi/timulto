@@ -44,7 +44,7 @@ Restivus.addRoute('token/:message', {authRequired: false}, {
                 this.request.headers.timestamp + '#' +
                 this.request.headers.app + '#' +
                 this.urlParams.message,
-            key).toString()
+            Meteor.settings[this.request.headers.app] ).toString()
         }
       };
       var filter = {}; filter[this.urlParams.service] = null;
@@ -62,18 +62,18 @@ Restivus.addRoute('token/:message', {authRequired: false}, {
 Restivus.addRoute('fines/:service', {authRequired: false}, {
     get: function () {
 
-      /*var check = CryptoJS.HmacMD5(
+      var check = CryptoJS.HmacMD5(
                 this.request.headers.timestamp + '#' +
                 this.request.headers.app + '#' +
                 this.urlParams.service,
-            key).toString();
+            Meteor.settings[this.request.headers.app]).toString();
 
       console.log(check);
 
       if (this.request.headers.token != check) return {
         statusCode: 401,
         body: {status: 'unauthorized', message: 'Token is not correct'}
-      };*/
+      };
 
       var filter = {}; filter[this.urlParams.service] = null;
       var fines = findFinesFor(filter);
@@ -104,19 +104,19 @@ Restivus.addRoute('segnalazioni', {authRequired: false}, {
 Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
     post: function () {
 
-        /*var check = CryptoJS.HmacMD5(
+        var check = CryptoJS.HmacMD5(
                     this.request.headers.timestamp + '#' +
                     this.request.headers.app + '#' +
                     this.urlParams.service + '#' +
                     this.urlParams.id,
-                key).toString();
+                Meteor.settings[this.request.headers.app] ).toString();
 
         console.log(check);
 
         if (this.request.headers.token != check) return {
             statusCode: 401,
             body: {status: 'unauthorized', message: 'Token is not correct'}
-        };*/
+        };
 
         var filter = {}; filter[this.urlParams.service] = this.bodyParams.postId;
         var updatedCount = Fines.update(
