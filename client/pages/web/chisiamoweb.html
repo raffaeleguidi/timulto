@@ -1,34 +1,37 @@
 <template name="chisiamoweb">
-    <div class="container">
-        <div class="section">
+    <div style="min-height: 500px; margin-top: 50px">
+        <h3 style="color: #42a5f5">Chi siamo</h3>
+<!--        <div class="container">-->
+<!--            <div class="section">-->
 
-            <div class="row">
-                <div>
-                    <h5 class="blue-text">{{_ "chisiamo"}}</h5>
-                    <a name="info">
-                        <p class="black-text text-lighten-4">TiMulto! è una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Tutte le nostre applicazioni sono rilasciate in utilizzo gratuito e con licenze rigorosamente open source. Ogni contributo, morale e materiale, è largamente apprezzato.</p>
-                    </a>
-                </div>
-                <div>
-                  <h5 class="blue-text">{{_ "contattaci"}}</h5>
-                  <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network. Ci trovi su:</p>
-                  <a name="contactus">
-                      <ul>
-                        <li><a onclick="window.open('https://www.facebook.com/raffaele.guidi', '_system');return false;" href="https://www.facebook.com/raffaele.guidi">Facebook</a></li>
-                        <li><a onclick="window.open('https://twitter.com/raffaeleguidi', '_system');return false;" href="https://twitter.com/raffaeleguidi">Twitter</a></li>
-                        <li><a onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a></li>
-                      </ul>
-                  </a>
-                </div>
-                <div>
-                  <h5 class="blue-text">{{_ "Ringraziamenti"}}</h5>
-                  <p>Le mappe e la risoluzione degli indirizzi sono cura di <a onclick="window.open('http://www.mapquest.com', '_system');return false;" href="http://www.mapquest.com">MapQuest</a></p>
-                  <p>TiMulto! è ospitato su  <a onclick="window.open('http://www.heroku.com', '_system');return false;" href="http://www.heroku.com">Heroku</a></p>
-                  {{#if platform }}
-                  <p>Piattaforma {{ platform }}</p>
-                  {{/if}}
-                </div>
-            </div>
-        </div>
+<!--                <div class="row">-->
+                    <div>
+<!--                        <h5 class="blue-text">{{_ "chisiamo"}}</h5>-->
+                        <a name="info">
+                            <p class="black-text text-lighten-4">TiMulto! è una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Tutte le nostre applicazioni sono rilasciate in utilizzo gratuito e con licenze rigorosamente open source. Ogni contributo, morale e materiale, è largamente apprezzato.</p>
+                        </a>
+                    </div>
+                    <div>
+                      <h5 class="blue-text">{{_ "contattaci"}}</h5>
+                      <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network. Ci trovi su:</p>
+                      <a name="contactus">
+                          <ul>
+                            <li><a onclick="window.open('https://www.facebook.com/raffaele.guidi', '_system');return false;" href="https://www.facebook.com/raffaele.guidi">Facebook</a></li>
+                            <li><a onclick="window.open('https://twitter.com/raffaeleguidi', '_system');return false;" href="https://twitter.com/raffaeleguidi">Twitter</a></li>
+                            <li><a onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a></li>
+                          </ul>
+                      </a>
+                    </div>
+                    <div>
+                      <h5 class="blue-text">{{_ "Ringraziamenti"}}</h5>
+                      <p>Le mappe e la risoluzione degli indirizzi sono cura di <a onclick="window.open('http://www.mapquest.com', '_system');return false;" href="http://www.mapquest.com">MapQuest</a></p>
+                      <p>TiMulto! è ospitato su  <a onclick="window.open('http://www.heroku.com', '_system');return false;" href="http://www.heroku.com">Heroku</a></p>
+                      {{#if platform }}
+                      <p>Piattaforma {{ platform }}</p>
+                      {{/if}}
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </template>
