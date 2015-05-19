@@ -77,3 +77,4 @@ Template.navbar.events({
         $('.button-collapse').sideNav('show');
     }
 });
+

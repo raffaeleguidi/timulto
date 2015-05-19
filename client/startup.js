@@ -73,8 +73,7 @@ $.get("/api/categories", function(data){
           .fail(function (error_message) {
             // Handle the situation
             console.log(error_message);
-          });      
-      
+          });
 
       $('select').material_select();
 
