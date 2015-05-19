@@ -120,7 +120,7 @@ Template.crea.events({
                 $( this ).attr("src", src);
                 console.log("refreshed src=%s", src);
             });
-        }, 1000);
+        }, 2000);
 
         GAnalytics.event("segnalazione","inviata");
         return false;
