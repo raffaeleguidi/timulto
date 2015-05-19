@@ -45,6 +45,7 @@ Template.dettaglio.events({
                 //Materialize.toast("Errore di salvataggio: " + ex.message, 4000, 'rounded center');
                 alert("errore: " + ex.message);
             }
+            GAnalytics.event("dettaglio","modificato");
         }
     },
     "click #findonmap": function(event) {
@@ -92,6 +93,7 @@ Template.dettaglio.events({
                     Materialize.toast("+1 aggiunto :)", 4000, 'rounded center');
                 }
             });
+            GAnalytics.event("dettaglio","like");
         }
       },
     "click .idontlikeit": function () {
@@ -105,6 +107,7 @@ Template.dettaglio.events({
                     Materialize.toast("+1 rimosso :(", 4000, 'rounded center');
                 }
             });
+            GAnalytics.event("dettaglio","dislike");
         }
       },
     "click .delete": function () {
@@ -122,6 +125,7 @@ Template.dettaglio.events({
             hideFixedActionButton();
             Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
         }
+        GAnalytics.event("dettaglio","delete");
       },
     "click .thumb-up": function () {
         hideFixedActionButton();
@@ -137,6 +141,7 @@ Template.dettaglio.events({
         } else {
             Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
         }
+        GAnalytics.event("dettaglio","approvato");
       }
 });
 

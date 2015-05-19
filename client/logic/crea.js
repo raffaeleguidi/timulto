@@ -122,6 +122,7 @@ Template.crea.events({
             });
         }, 1000);
 
+        GAnalytics.event("segnalazione","inviata");
         return false;
     },
     "click #login": function () {

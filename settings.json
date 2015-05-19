@@ -1,15 +1,7 @@
-// this file is just a placeholder
-// for heroku use an env variable
-// called METEOR_SETTINGS containing
-// the json data
 {
   "public" : {
     "ga": {
-      "account":"UA-XXXXXXX-Y"
+      "account":"UA-63007561-1"
     }
-  },
-  "twitter": {
-    "consumerKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    "secret": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   }
 }

@@ -30,3 +30,4 @@ mrt:imagemagick
 ground:db
 meteorhacks:aggregate
 percolate:synced-cron
+datariot:ganalytics
