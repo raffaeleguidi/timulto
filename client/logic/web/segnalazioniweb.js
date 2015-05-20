@@ -21,6 +21,8 @@ function imageUrl(){
 Template.smallFinesInHomePage.events({
     "click .fine":function(){
         Session.set("dettaglio-web", this);
+        $('#lista').hide();
+        $('#dettaglio').show();
     }
 });
 
@@ -30,7 +32,14 @@ Template.dettaglioWeb.helpers({
     },
     fineToShow: function() {
         return Session.get("dettaglio-web");
-    },
+    }
+});
+
+Template.dettaglioWeb.events({
+    "click #hideDettaglio": function(){
+        $('#lista').show();
+        $('#dettaglio').hide();
+    }
 });
 
 Template.segnalazioniweb.helpers({

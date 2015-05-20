@@ -39,13 +39,21 @@ Template.webhomepage.rendered = function () {
         $('ul.tabs').tabs();
 
         $('.mytab').click(function(item){
-            $('div.tabbody').each(function(){
-                $(this).hide();
-            });
-            console.log($(item));
+            $('div.tabbody').hide();
             $($(item.target).attr('href')).show();
-        })
+        });
+
+//        $('.tab').click(function(item){
+//            window.location.hash = $(item.target).attr('href');
+//        });
+
     });
+
+    if (window.location.hash) {
+        $('div.tabbody').hide();
+        $(window.location.hash).show();
+    }
+
 
 }
 
