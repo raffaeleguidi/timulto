@@ -120,7 +120,15 @@ Template.crea.events({
                 $( this ).attr("src", src);
                 console.log("refreshed src=%s", src);
             });
-        }, 2000);
+            setTimeout(function() {
+                $(".mini-shot").each( function () {
+                    var src = $( this ).attr("src");
+                    $( this ).attr("src", "/icon.png");
+                    $( this ).attr("src", src);
+                    console.log("refreshed src=%s", src);
+                });
+            }, 1000);
+        }, 1000);
 
         GAnalytics.event("segnalazione","inviata");
         return false;
