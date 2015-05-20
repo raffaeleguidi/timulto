@@ -14,6 +14,25 @@ Template.segnalazioniweb.rendered = function () {
     });
 }
 
+function imageUrl(){
+    return Session.get("rootUrl") + "api/image/" + Session.get("dettaglio-web")._id + "?v=" +  Session.get("dettaglio-web").version;
+}
+
+Template.smallFinesInHomePage.events({
+    "click .fine":function(){
+        Session.set("dettaglio-web", this);
+    }
+});
+
+Template.dettaglioWeb.helpers({
+    imageUrl: function(){
+        return imageUrl();
+    },
+    fineToShow: function() {
+        return Session.get("dettaglio-web");
+    },
+});
+
 Template.segnalazioniweb.helpers({
 
     finesToApprove: function() {
