@@ -2,6 +2,14 @@
 
 Template.webhomepage.created = function(){
     depth = 0; // not useful - this is only for cordova
+    Meteor.call("rootUrl", function(err, res){
+        if (err) {
+            console.log("error "+err);
+        }
+        Session.set("rootUrl", res)
+        console.log("rootUrl =%s", res)
+    });
+
 };
 
 Template.webhomepage.rendered = function () {
@@ -17,13 +25,6 @@ Template.webhomepage.rendered = function () {
 
     var now = moment();
     Session.set("lastUsed", now.toString());
-
-    Meteor.call("rootUrl", function(err, res){
-        if (err) {
-            console.log("error "+err);
-        }
-        Session.set("rootUrl", res)
-    });
 
     $(document).ready(function(){
 

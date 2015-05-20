@@ -10,6 +10,16 @@ var defaultIconUrl = 'icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
+Template.simplemap.created = function() {
+    Meteor.call("rootUrl", function(err, res){
+        if (err) {
+            console.log("error "+err);
+        }
+        Session.set("rootUrl", res)
+        console.log("[simplemap] rootUrl =%s", res)
+    });
+};
+
 
 Template.simplemap.events({
     'click a[target=_blank]': function (event) {
@@ -52,6 +62,14 @@ function init() {
     }
     cluster = new L.MarkerClusterGroup();
 
+    Meteor.call("rootUrl", function(err, res){
+        if (err) {
+            console.log("error "+err);
+        }
+        Session.set("rootUrl", res)
+        console.log("[simplemap init] rootUrl =%s", res)
+    });
+
     Fines.find({ approved:true }).observe({
         added: function(fine) {
             var lat = fine.loc.coordinates[1];
@@ -62,7 +80,8 @@ function init() {
                                         Template.popupContentWeb,
                                         {
                                             fine: fine,
-                                            googleMapsUrl:googleMapsUrl
+                                            googleMapsUrl:googleMapsUrl,
+                                            rootUrl: Session.get("rootUrl")
                                         });
 
             var marker = L.marker([lat, lng], {
