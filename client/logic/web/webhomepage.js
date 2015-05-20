@@ -1,16 +1,28 @@
  ///////// Ultime Segnalazioni ///////////
 
 Template.webhomepage.created = function(){
-    depth = 0;
+    depth = 0; // not useful - this is only for cordova
 };
 
 Template.webhomepage.rendered = function () {
+
+    function positionLogo() {
+        $('.map-logo').css('left', $(".row").position().left);
+//        $(".map-logo").animate({
+//            left: $(".row").position().left
+//        }, 200, function() {
+//            // noop
+//        });
+    }
+
     var now = moment();
-//    console.log("resetting last used to " + now.toString());
     Session.set("lastUsed", now.toString());
-    $(".parallax").parallax();
 
     $(document).ready(function(){
+        positionLogo();
+        $( window ).resize(function() {
+            positionLogo();
+        });
         $('ul.tabs').tabs();
     });
 

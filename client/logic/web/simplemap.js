@@ -5,7 +5,7 @@ var markers = {};
 
 var myIcon;
 
-var defaultZoomLevel = 12;
+var defaultZoomLevel = 11;
 var defaultIconUrl = 'icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
