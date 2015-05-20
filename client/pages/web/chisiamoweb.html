@@ -1,36 +1,26 @@
 <template name="chisiamoweb">
     <div style="min-height: 450px; margin-top: 50px">
         <h3 style="color: #42a5f5">Chi siamo</h3>
-<!--        <div class="container">-->
-<!--            <div class="section">-->
-
-<!--                <div class="row">-->
-                    <div>
-<!--                        <h5 class="blue-text">{{_ "chisiamo"}}</h5>-->
-                        <a name="info">
-                            <p class="black-text text-lighten-4">TiMulto! è una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Tutte le nostre applicazioni sono rilasciate in utilizzo gratuito e con licenze rigorosamente open source. Iscriversi è semplice: fate il login con il vostro social network preferito (facebook, twitter, google+) e concedere l'autorizzazione base richiesta, che si limita all'indirizzo web (non lo useremo per mandarvi spam). Da quel momento in poi potrete usare la nostra app per segnalare in maniera sicura ed anonima infrazioni al codice della strada, sporcizia, mancanza di accessibilità - con una semplice foto che verrà, poi, twittata, postata su facebook e su google+, oltre che segnalata alle autorità competenti.</p>
-                        </a>
-                    </div>
-                    <div>
-                      <h5 class="blue-text">{{_ "contattaci"}}</h5>
-                      <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network. Ci trovi su:</p>
-                      <a name="contactus">
-                          <ul>
-                            <li><a onclick="window.open('https://www.facebook.com/raffaele.guidi', '_system');return false;" href="https://www.facebook.com/raffaele.guidi">Facebook</a></li>
-                            <li><a onclick="window.open('https://twitter.com/raffaeleguidi', '_system');return false;" href="https://twitter.com/raffaeleguidi">Twitter</a></li>
-                            <li><a onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a></li>
-                          </ul>
-                      </a>
-                    </div>
-                    <div>
-                      <h5 class="blue-text">{{_ "Ringraziamenti"}}</h5>
-                      <p>Le mappe e la risoluzione degli indirizzi sono cura di <a onclick="window.open('http://www.mapquest.com', '_system');return false;" href="http://www.mapquest.com">MapQuest</a>. TiMulto! è ospitato su  <a onclick="window.open('http://www.heroku.com', '_system');return false;" href="http://www.heroku.com">Heroku</a></p>
-                      {{#if platform }}
-                      <p>Piattaforma {{ platform }}</p>
-                      {{/if}}
-                    </div>
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="col s8 l8">
+            <a name="info">
+                <p class="black-text text-lighten-4">TiMulto! è una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Tutte le nostre applicazioni sono rilasciate in utilizzo gratuito e con licenze rigorosamente open source. Iscriversi è semplice: fate il login con il vostro social network preferito (facebook, twitter, google+) e concedere l'autorizzazione base richiesta, che si limita all'indirizzo web (non lo useremo per mandarvi spam). Da quel momento in poi potrete usare la nostra app per segnalare in maniera sicura ed anonima infrazioni al codice della strada, sporcizia, mancanza di accessibilità - con una semplice foto che verrà, poi, twittata, postata su facebook e su google+, oltre che segnalata alle autorità competenti.</p>
+            </a>
+            <div>
+              <h5 class="blue-text">{{_ "Ringraziamenti"}}</h5>
+              <p>Le mappe e la risoluzione degli indirizzi sono cura di <a onclick="window.open('http://www.mapquest.com', '_system');return false;" href="http://www.mapquest.com">MapQuest</a>. TiMulto! è ospitato su  <a onclick="window.open('http://www.heroku.com', '_system');return false;" href="http://www.heroku.com">Heroku</a></p>
+              {{#if platform }}
+              <p>Piattaforma {{ platform }}</p>
+              {{/if}}
+            </div>
+        </div>
+        <div class="col s4 l4">
+          <h5 class="blue-text">{{_ "Scarica l'app!"}}</h5>
+          <p>
+              <img src="/splash.png" align="left" style="border: 2px solid orange; margin-right: 10px"/>
+              Scarica la nostra app per Android e iPhone da Play Store e iTunes e inizia a TiMultare immediatamente!
+              <img src="/images/icons/googleplay.png" style="width: 73px; margin: 2px 0px 0px 0px"/>
+              <img src="/images/icons/applestore.jpg" style="width: 70px; margin: 2px 2px 2px 2px"/>
+          </p>
+        </div>
     </div>
 </template>
