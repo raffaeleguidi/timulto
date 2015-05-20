@@ -20,10 +20,31 @@ Template.webhomepage.rendered = function () {
 
     $(document).ready(function(){
         positionLogo();
+        // it overflows the menu and it is shown in homepage, in any case
+        $('.leaflet-control-attribution').hide();
+
         $( window ).resize(function() {
             positionLogo();
         });
+        $('.button-collapse').sideNav({
+            //menuWidth: 300, // Default is 240
+            //edge: 'right', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+
+        $('.button-collapse').click(function(){
+            $('.leaflet-control-attribution').hide();
+        });
+
         $('ul.tabs').tabs();
+
+        $('.mytab').click(function(item){
+            $('div.tabbody').each(function(){
+                $(this).hide();
+            });
+            console.log($(item));
+            $($(item.target).attr('href')).show();
+        })
     });
 
 }

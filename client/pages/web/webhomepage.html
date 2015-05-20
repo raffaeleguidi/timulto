@@ -1,4 +1,3 @@
-
 <template name="webhomepage">
 
 <!--
@@ -20,7 +19,7 @@
       {{> simplemap}}
 
       <img
-           class="map-logo"
+           class="map-logo hide-on-med-and-down"
            style="position: absolute; top: 73px; left: 45px; border: 2px solid orange; background-color: white;"
            width="200px"
            src="/images/timulto-badge.png" />
@@ -30,18 +29,19 @@
 
           <div class="row">
             <div class="col s12">
-              <ul class="tabs">
-                <li class="tab col s3"><a class="active" href="#test1">TiMulto!</a></li>
-                <li class="tab col s3"><a href="#test2">Segnalazioni</a></li>
-                <li class="tab col s3"><a href="#test3">Missione</a></li>
-                <li class="tab col s3"><a href="#test4">{{_ "Contattaci"}}</a></li>
+              <ul class="tabs hide-on-med-and-down">
+                <li class="tab col s3"><a class="active" href="#tab1">TiMulto!</a></li>
+                <li class="tab col s3"><a href="#tab2">Segnalazioni</a></li>
+                <li class="tab col s3"><a href="#tab3">Missione</a></li>
+                <li class="tab col s3"><a href="#tab4">{{_ "Contattaci"}}</a></li>
               </ul>
+              <div class="hide-on-large-only"><br /></div>
             </div>
 
-            <div id="test1" class="col s12">{{> chisiamoweb}}</div>
-            <div id="test2" class="col s12">{{> segnalazioniweb}}</div>
-            <div id="test3" class="col s12">{{> mission}}</div>
-            <div id="test4" class="col s12">{{> contattaci}}</div>
+            <div id="tab1" class="tabbody col s12">{{> chisiamoweb}}</div>
+            <div id="tab2" class="tabbody col s12">{{> segnalazioniweb}}</div>
+            <div id="tab3" class="tabbody col s12">{{> mission}}</div>
+            <div id="tab4" class="tabbody col s12">{{> contattaci}}</div>
           </div>
 
       </div>
