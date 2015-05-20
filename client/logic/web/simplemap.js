@@ -151,6 +151,6 @@ Template.simplemap.rendered = function () {
 
     map.addLayer(cluster);
 
-    map.dragging.disable();
-    map.scrollWheelZoom.disable();
+//    map.dragging.disable();
+//    map.scrollWheelZoom.disable();
 };

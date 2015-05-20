@@ -27,8 +27,7 @@ Template.webhomepage.rendered = function () {
 
     $(document).ready(function(){
 
-        $('#tabhome').addClass('active');
-        $('#tabhome').css('border-bottom', '2px solid orange');
+        showHome();
 
         positionLogo();
         // it overflows the menu and it is shown in homepage, in any case
@@ -77,6 +76,37 @@ Template.webhomepage.rendered = function () {
 
 
 }
+
+function showHome() {
+    $('.tabbody').hide();
+    $('.tab').css('border-bottom', '0px solid orange');
+    $('.tab a').css('border-bottom', '0px solid orange');
+    $('#tabhome').css('border-bottom', '2px solid orange');
+    $('#home').show();
+}
+
+Template.webhomepage.events({
+    "click .brand-logo": function(){
+        showHome();
+    },
+    "click .map-logo": function(){
+        showHome();
+    }
+});
+
+Template.navbarweb.events({
+    "click .brand-logo": function(){
+        showHome();
+    },
+    "click .map-logo": function(){
+        showHome();
+    },
+    "click [href='#home']": function(){
+        showHome();
+    }
+});
+
+
 
 Template.webhomepage.helpers({
 
