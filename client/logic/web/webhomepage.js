@@ -18,7 +18,18 @@ Template.webhomepage.rendered = function () {
     var now = moment();
     Session.set("lastUsed", now.toString());
 
+    Meteor.call("rootUrl", function(err, res){
+        if (err) {
+            console.log("error "+err);
+        }
+        Session.set("rootUrl", res)
+    });
+
     $(document).ready(function(){
+
+        $('#tabhome').addClass('active');
+        $('#tabhome').css('border-bottom', '2px solid orange');
+
         positionLogo();
         // it overflows the menu and it is shown in homepage, in any case
         $('.leaflet-control-attribution').hide();
@@ -36,11 +47,21 @@ Template.webhomepage.rendered = function () {
             $('.leaflet-control-attribution').hide();
         });
 
-        $('ul.tabs').tabs();
+//        $('ul.tabs').tabs();
 
         $('.mytab').click(function(item){
             $('div.tabbody').hide();
             $($(item.target).attr('href')).show();
+        });
+        $('.tab').click(function(item){
+            $('div.tabbody').hide();
+            var active = $($(item.target).attr('href'));
+            active.show();
+            $(item.target).addClass('active');
+            $('.tab').css('border-bottom', '0px solid orange');
+            $('.tab a').css('border-bottom', '0px solid orange');
+            $(item.target).css('border-bottom', '2px solid orange');
+            return false;
         });
 
 //        $('.tab').click(function(item){

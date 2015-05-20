@@ -24,17 +24,16 @@ Template.simplemap.events({
         var fine = Fines.findOne({_id:selectedId});
 
         if(fine) {
-            Session.set("_id",fine._id);
-            Session.set("createdAt", fine.createdAt);
-            Session.set("detailUsername", fine.username);
-            Session.set("detailText",fine.text);
-            Session.set("detailAddress",fine.address);
-            Session.set("detailCategory",fine.category);
-            Session.set("detailImageData",fine.imageData);
-            Session.set("version",fine.version);
-            Session.set("isapproved", (fine.approved==1?true:false));
-
-            Router.go('/dettaglio');
+            Session.set("dettaglio-web", fine);
+            window.location.hash = '#segnalazioni';
+            $('div.tabbody').hide();
+            $('#lista').hide();
+            $('#dettaglio').show();
+            $('#segnalazioni').show();
+            $('.tab').css('border-bottom', '0px solid orange');
+            $('.tab a').css('border-bottom', '0px solid orange');
+            $('#tabsegnalazioni').addClass('active');
+            $('#tabsegnalazioni').css('border-bottom', '2px solid orange');
         }
     }
 });
@@ -59,8 +58,8 @@ function init() {
             var lng = fine.loc.coordinates[0];
             var googleMapsUrl = 'http://maps.google.com/maps/?q='+lat+','+lng+'&ll='+lat+','+lng+'&z=17';
             //var mapQuestUrl = 'http://mapq.st/map?q='+lat+','+lng+'&zoom=16&maptype=map';
-            var popupContent = Blaze.toHTMLWithData(
-                                        Template.popupContent,
+            var popupContentWeb = Blaze.toHTMLWithData(
+                                        Template.popupContentWeb,
                                         {
                                             fine: fine,
                                             googleMapsUrl:googleMapsUrl
@@ -72,7 +71,7 @@ function init() {
                 clickable: true
             });
 
-            marker.bindPopup(popupContent).openPopup();
+            marker.bindPopup(popupContentWeb).openPopup();
             markers[marker.options._id] = marker;
             //map.addLayer(marker);
             cluster.addLayer(marker);

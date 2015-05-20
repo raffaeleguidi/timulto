@@ -1,11 +1,12 @@
 
-Template.popupContent.rendered = function() {
+Template.popupContentWeb.rendered = function() {
     var now = moment();
+//    console.log("resetting last used to " + now.toString());
     Session.set("lastUsed", now.toString());
 };
 
 
-Template.popupContent.events({
+Template.popupContentWeb.events({
     'click #naviga': function (event) {
         event.preventDefault();
         window.open(event.target.href, '_system');
