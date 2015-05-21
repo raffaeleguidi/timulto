@@ -10,10 +10,15 @@ function initHelp() {
     help.push("..Fai \"tap\" sulla foto per mascherare targhe e visi..");
     help.push("..Completa la scheda inserendo il tipo di segnalazione ed eventuali note..");
     help.push("..premi \"Multa\" ed è fatta!");
+    help.push("Sarai automaticamente reindirizzato alla lista di segnalazioni per ognuna delle quali potrai vedere il dettaglio e mettere un \"Mi piace\" per dare credito alla segnalazione.");
+    help.push("Comincia adesso, non è mai stato più facile!");
 
     Session.set("help",help);
     Session.set("currentHelp",0);
 }
+Template.navbar.created = function() {
+    initHelp();
+};
 
 Template.navbar.rendered = function(){
     $('.modal-trigger').leanModal();
@@ -46,22 +51,68 @@ Template.navbar.helpers({
             help = Session.get("help")[Session.get("currentHelp")];
          }
         return help;
+    },
+    showHelpBackward: function() {
+
+         if(Session.get("currentHelp") > 0) {
+            return "enabled";
+        } else {
+            return "disabled";
+        };
+    },
+    showHelpForward: function() {
+         if(Session.get("currentHelp") < Session.get("help").length - 1) {
+            return "enabled";
+        } else {
+            return "disabled";
+        };
     }
 });
 
+
+var HELP_DIRECTION = {
+    BACKWARD:0,
+    FORWARD:1
+};
+
+function showHelp(helpDirection) {
+    var currentHelp = Session.get("currentHelp");
+
+    if ( Session.get("help") )
+    {
+        if( helpDirection == HELP_DIRECTION.BACKWARD &&
+            Session.get("currentHelp") > 0 ) {
+                currentHelp--;
+        } else if( helpDirection == HELP_DIRECTION.FORWARD &&
+                 currentHelp < Session.get("help").length - 1) {
+            currentHelp++;
+        }
+    } else {
+        currentHelp = 0;
+    }
+
+    Session.set("currentHelp", currentHelp);
+}
+
 Template.navbar.events({
-    "click #showHelp": function (event) {
+    "click #showHelpForward": function (event) {
         event.preventDefault();
 
-        var currentHelp = Session.get("currentHelp");
+        showHelp(HELP_DIRECTION.FORWARD);
+       /* var currentHelp = Session.get("currentHelp");
 
-        if (currentHelp < Session.get("help").length - 1) {
+        if ( Session.get("help") && currentHelp < Session.get("help").length - 1) {
             currentHelp++;
         } else {
             currentHelp = 0;
         }
 
-        Session.set("currentHelp", currentHelp);
+        Session.set("currentHelp", currentHelp);*/
+    },
+    "click #showHelpBack": function (event) {
+        event.preventDefault();
+
+        showHelp(HELP_DIRECTION.BACKWARD);
     },
     "click #closeHelp": function (event) {
         event.preventDefault();
