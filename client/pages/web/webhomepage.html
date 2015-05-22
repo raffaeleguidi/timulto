@@ -30,17 +30,17 @@
           <div class="row">
             <div class="col s12">
               <ul class="tabs hide-on-med-and-down">
-                <li id="tabhome" class="tab col s3"><a class="active" href="#home">TiMulto!</a></li>
-                <li id="tabsegnalazioni" class="tab col s3"><a href="#segnalazioni">Segnalazioni</a></li>
-                <li id="tabmissione" class="tab col s3"><a href="#missione">Missione</a></li>
-                <li id="tabcontattaci" class="tab col s3"><a href="#contattaci">{{_ "Contattaci"}}</a></li>
+                <li id="tabhome" class="tab col s4"><a class="active" href="#home">TiMulto!</a></li>
+                <li id="tabsegnalazioni" class="tab col s4"><a href="#segnalazioni">Segnalazioni</a></li>
+<!--                <li id="tabmissione" class="tab col s3"><a href="#missione">Missione</a></li>-->
+                <li id="tabcontattaci" class="tab col s4"><a href="#contattaci">{{_ "Contattaci"}}</a></li>
               </ul>
               <div class="hide-on-large-only"><br /></div>
             </div>
 
             <div id="home" class="tabbody col s12">{{> chisiamoweb}}</div>
             <div id="segnalazioni" class="tabbody col s12">{{> segnalazioniweb}}</div>
-            <div id="missione" class="tabbody col s12">{{> mission}}</div>
+<!--            <div id="missione" class="tabbody col s12">{{> mission}}</div>-->
             <div id="contattaci" class="tabbody col s12">{{> contattaci}}</div>
           </div>
 
@@ -57,8 +57,17 @@
         <div class="col l8 s12">
             <h3 style="color: #42a5f5">Chi siamo</h3>
             <a name="info">
-                <p class="black-text text-lighten-4">TiMulto! è una organizzazione pedon-insurezzionalista dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. Tutte le nostre applicazioni sono rilasciate in utilizzo gratuito e con licenze rigorosamente open source. Iscriversi è semplice: fate il login con il vostro social network preferito (facebook, twitter, google+) e concedere l'autorizzazione base richiesta, che si limita all'indirizzo web (non lo useremo per mandarvi spam). Da quel momento in poi potrete usare la nostra app per segnalare in maniera sicura ed anonima infrazioni al codice della strada, sporcizia, mancanza di accessibilità - con una semplice foto che verrà, poi, twittata, postata su facebook e su google+, oltre che segnalata alle autorità competenti.</p>
+                <p class="black-text text-lighten-4">TiMulto! è una organizzazione <i>"pedon-insurezionalista</i>  &#9786;" dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. <br/><br/>Tutte le nostre applicazioni sono rilasciate in utilizzo gratuito e con licenze rigorosamente open source. Iscriversi è semplice: fate il login con il vostro <b>social network</b> preferito (facebook, twitter, google+) e concedere l'autorizzazione base richiesta, che si limita all'indirizzo web (non lo useremo per mandarvi spam). Da quel momento in poi potrete usare la nostra app per segnalare in maniera sicura ed anonima infrazioni al codice della strada, sporcizia, mancanza di accessibilità - con una semplice foto che verrà, poi, twittata, postata su facebook e su google+, oltre che segnalata alle autorità competenti.</p>
             </a>
+            <div>
+                <h5 class="blue-text">Missione</h5>
+                <p>La nostra mission è quella di aumentare il senso civico della popolazione per migliorare la vita di tutti i giorni; in tal senso è fondamentale il contributo di ognuno di noi che, nel suo piccolo, può fare molto per raggiungere l'obiettivo comune di un Paese con un alto senso civico.
+                <br/><br/>
+                Quest'ultimo, infatti, non è altro che un atteggiamento di fiducia nei confronti degli altri, governato da una propensione alla cooperazione nel raggiungimento di un benessere comune.
+                <br/><br/>
+                Nell'era digitale moderna TiMulto! si prefigge l'obiettivo di fungere da strumento e canale di comunicazione ed aggregazione per alimentare le reti e gli scambi interpersonali atti a denunciare una deficenza civica ormai diffusa.
+                </p>
+            </div>
             <div>
               <h5 class="blue-text">{{_ "Ringraziamenti"}}</h5>
               <p>Le mappe e la risoluzione degli indirizzi sono cura di <a onclick="window.open('http://www.mapquest.com', '_system');return false;" href="http://www.mapquest.com">MapQuest</a>. TiMulto! è ospitato su  <a onclick="window.open('http://www.heroku.com', '_system');return false;" href="http://www.heroku.com">Heroku</a></p>
