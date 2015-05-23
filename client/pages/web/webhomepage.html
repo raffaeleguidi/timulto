@@ -53,8 +53,8 @@
 </template>
 
 <template name="chisiamoweb">
-    <div class="row" style="margin-top: 30px; ">
-        <div class="col l8 s12">
+    <div class="row" style="margin-top: 30px;; margin-right: 10px">
+        <div class="col l8 s12" style="margin-right: 10px">
             <h3 style="color: #42a5f5">Chi siamo</h3>
             <a name="info">
                 <p class="black-text text-lighten-4">TiMulto! è una organizzazione <i>"pedon-insurezionalista</i>" &#9786; dedita allo sviluppo di tecnologie atte a migliorare la vivibilità degli ambienti urbani ed extraurbani con priorità specifica a quelli nei pressi delle nostre case. <br/><br/>Tutte le nostre applicazioni sono rilasciate in utilizzo gratuito e con licenze rigorosamente open source. Iscriversi è semplice: fate il login con il vostro <b>social network</b> preferito (facebook, twitter, google+) e concedere l'autorizzazione base richiesta, che si limita all'indirizzo web (non lo useremo per mandarvi spam). Da quel momento in poi potrete usare la nostra app per segnalare in maniera sicura ed anonima infrazioni al codice della strada, sporcizia, mancanza di accessibilità - con una semplice foto che verrà, poi, twittata, postata su facebook e su google+, oltre che segnalata alle autorità competenti.</p>
@@ -80,8 +80,34 @@
     </div>
 </template>
 
+<template name="mission">
+    <div class="row" style="margin-top: 30px; margin-right: 10px">
+        <div class="col l8 s12">
+            <h3 style="color: #42a5f5">Missione</h3>
+            <p>La nostra mission è quella di aumentare il senso civico della popolazione per migliorare la vita di tutti i giorni; in tal senso è fondamentale il contributo di ognuno di noi che, nel suo piccolo, può fare molto per raggiungere l'obiettivo comune di un Paese con un alto senso civico. <br/><br/>Quest'ultimo, infatti, non è altro che un atteggiamento di fiducia nei confronti degli altri, governato da una propensione alla cooperazione nel raggiungimento di un benessere comune. <br/><br/>Nell'era digitale moderna TiMulto! si prefigge l'obiettivo di fungere da strumento e canale di comunicazione ed aggregazione per alimentare le reti e gli scambi interpersonali atti a denunciare una deficenza civica ormai diffusa.
+            </p>
+        </div>
+        {{> appBox}}
+    </div>
+</template>
+
+<template name="contattaci">
+    <div class="row" style="margin-top: 30px; margin-right: 10px">
+        <div class="col l8 s12"  style="margin-right: 10px">
+            <h3 style="color: #42a5f5">{{_ "contattaci"}}</h3>
+            <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network.<br/> Ci trovi su:</p>
+              <a name="contactus">
+                  <a class="button-facebook" onclick="window.open('https://www.facebook.com/timultoapp', '_system');return false;" href="https://www.facebook.com/timultoapp">Facebook</a>
+                  <a class="button-twitter" onclick="window.open('https://twitter.com/timultoapp', '_system');return false;" href="https://twitter.com/timultoapp">Twitter</a>
+                  <a class="button-googleplus" onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a>
+              </a>
+        </div>
+        {{> appBox}}
+    </div>
+</template>
+
 <template name="appBox">
-    <div style="margin-top: 20px" class="col l4 s12 z-depth-2">
+    <div style="margin-top: 20px; margin-right: -10px" class="col l4 s12 z-depth-2">
       <h5 class="blue-text">{{_ "Scarica l'app!"}}</h5>
       <p>
           <img class="hide-on-med-and-down" src="/splash.png" align="left" width="150" style="border: 2px solid orange; margin-right: 10px"/>
@@ -93,28 +119,3 @@
     </div>
 </template>
 
-<template name="mission">
-    <div class="row" style="margin-top: 30px; ">
-        <div class="col l8 s12">
-            <h3 style="color: #42a5f5">Missione</h3>
-            <p>La nostra mission è quella di aumentare il senso civico della popolazione per migliorare la vita di tutti i giorni; in tal senso è fondamentale il contributo di ognuno di noi che, nel suo piccolo, può fare molto per raggiungere l'obiettivo comune di un Paese con un alto senso civico. <br/><br/>Quest'ultimo, infatti, non è altro che un atteggiamento di fiducia nei confronti degli altri, governato da una propensione alla cooperazione nel raggiungimento di un benessere comune. <br/><br/>Nell'era digitale moderna TiMulto! si prefigge l'obiettivo di fungere da strumento e canale di comunicazione ed aggregazione per alimentare le reti e gli scambi interpersonali atti a denunciare una deficenza civica ormai diffusa.
-            </p>
-        </div>
-            {{> appBox}}
-    </div>
-</template>
-
-<template name="contattaci">
-    <div class="row" style="margin-top: 30px; ">
-        <div class="col l8 s12">
-            <h3 style="color: #42a5f5">{{_ "contattaci"}}</h3>
-            <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network.<br/> Ci trovi su:</p>
-              <a name="contactus">
-                  <a class="button-facebook" onclick="window.open('https://www.facebook.com/timultoapp', '_system');return false;" href="https://www.facebook.com/timultoapp">Facebook</a>
-                  <a class="button-twitter" onclick="window.open('https://twitter.com/timultoapp', '_system');return false;" href="https://twitter.com/timultoapp">Twitter</a>
-                  <a class="button-googleplus" onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a>
-              </a>
-        </div>
-            {{> appBox}}
-        </div>
-</template>
