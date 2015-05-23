@@ -76,37 +76,45 @@
               {{/if}}
             </div>
         </div>
-        <div style="margin-top: 20px" class="col l4 s12 z-depth-2">
-          <h5 class="blue-text">{{_ "Scarica l'app!"}}</h5>
-          <p>
-              <img class="hide-on-med-and-down" src="/splash.png" align="left" width="150" style="border: 2px solid orange; margin-right: 10px"/>
-              <img src="/images/icons/googleplay.png" style="width: 73px; margin: 2px 0px 0px 0px"/>
-              <img src="/images/icons/applestore.jpg" style="width: 70px; margin: 2px 2px 2px 2px"/>
-              <br />
-              Scarica la nostra app per Android e iPhone da Play Store e iTunes e inizia a TiMultare immediatamente! <br/>
-          </p>
-        </div>
+        {{> appBox}}
+    </div>
+</template>
+
+<template name="appBox">
+    <div style="margin-top: 20px" class="col l4 s12 z-depth-2">
+      <h5 class="blue-text">{{_ "Scarica l'app!"}}</h5>
+      <p>
+          <img class="hide-on-med-and-down" src="/splash.png" align="left" width="150" style="border: 2px solid orange; margin-right: 10px"/>
+          <img src="/images/icons/googleplay.png" style="width: 73px; margin: 2px 0px 0px 0px"/>
+          <img src="/images/icons/applestore.jpg" style="width: 70px; margin: 2px 2px 2px 2px"/>
+          <br />
+          Scarica la nostra app per Android e iPhone da Play Store e iTunes e inizia a TiMultare immediatamente! <br/>
+      </p>
     </div>
 </template>
 
 <template name="mission">
-    <div style="min-height: 490px; margin-top: 50px">
-        <h3 style="color: #42a5f5">Missione</h3>
-        <p>La nostra mission è quella di aumentare il senso civico della popolazione per migliorare la vita di tutti i giorni; in tal senso è fondamentale il contributo di ognuno di noi che, nel suo piccolo, può fare molto per raggiungere l'obiettivo comune di un Paese con un alto senso civico. <br/><br/>Quest'ultimo, infatti, non è altro che un atteggiamento di fiducia nei confronti degli altri, governato da una propensione alla cooperazione nel raggiungimento di un benessere comune. <br/><br/>Nell'era digitale moderna TiMulto! si prefigge l'obiettivo di fungere da strumento e canale di comunicazione ed aggregazione per alimentare le reti e gli scambi interpersonali atti a denunciare una deficenza civica ormai diffusa.
-        </p>
+    <div class="row" style="margin-top: 30px; ">
+        <div class="col l8 s12">
+            <h3 style="color: #42a5f5">Missione</h3>
+            <p>La nostra mission è quella di aumentare il senso civico della popolazione per migliorare la vita di tutti i giorni; in tal senso è fondamentale il contributo di ognuno di noi che, nel suo piccolo, può fare molto per raggiungere l'obiettivo comune di un Paese con un alto senso civico. <br/><br/>Quest'ultimo, infatti, non è altro che un atteggiamento di fiducia nei confronti degli altri, governato da una propensione alla cooperazione nel raggiungimento di un benessere comune. <br/><br/>Nell'era digitale moderna TiMulto! si prefigge l'obiettivo di fungere da strumento e canale di comunicazione ed aggregazione per alimentare le reti e gli scambi interpersonali atti a denunciare una deficenza civica ormai diffusa.
+            </p>
+        </div>
+            {{> appBox}}
     </div>
 </template>
 
 <template name="contattaci">
-    <div style="min-height: 490px; margin-top: 50px">
-        <h3 style="color: #42a5f5">{{_ "contattaci"}}</h3>
-        <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network.<br/> Ci trovi su:</p>
-          <a name="contactus">
-              <ul>
-                <li><a class="button-facebook" onclick="window.open('https://www.facebook.com/raffaele.guidi', '_system');return false;" href="https://www.facebook.com/raffaele.guidi">Facebook</a></li>
-                <li><a class="button-twitter" onclick="window.open('https://twitter.com/raffaeleguidi', '_system');return false;" href="https://twitter.com/raffaeleguidi">Twitter</a></li>
-                <li><a class="button-googleplus" onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a></li>
-              </ul>
-          </a>
-    </div>
+    <div class="row" style="margin-top: 30px; ">
+        <div class="col l8 s12">
+            <h3 style="color: #42a5f5">{{_ "contattaci"}}</h3>
+            <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network.<br/> Ci trovi su:</p>
+              <a name="contactus">
+                  <a class="button-facebook" onclick="window.open('https://www.facebook.com/timultoapp', '_system');return false;" href="https://www.facebook.com/timultoapp">Facebook</a>
+                  <a class="button-twitter" onclick="window.open('https://twitter.com/timultoapp', '_system');return false;" href="https://twitter.com/timultoapp">Twitter</a>
+                  <a class="button-googleplus" onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a>
+              </a>
+        </div>
+            {{> appBox}}
+        </div>
 </template>
