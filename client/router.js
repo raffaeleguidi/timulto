@@ -1,23 +1,24 @@
-
-Router.map(function () {
-    this.route('webhomepage', {
-      path: '/homepage',
-        onBeforeAction: function () {
-            GAnalytics.pageview("/homepage");
-            this.next();
-        }
-  });
-});
-
-Router.map(function () {
-    this.route('segnalazioni', {
-      path: '/',
-        onBeforeAction: function () {
-            GAnalytics.pageview("/");
-            this.next();
-        }
-  });
-});
+if(Meteor.isCordova) {
+    Router.map(function () {
+        this.route('segnalazioni', {
+          path: '/',
+            onBeforeAction: function () {
+                GAnalytics.pageview("/");
+                this.next();
+            }
+      });
+    });
+} else {
+    Router.map(function () {
+        this.route('webhomepage', {
+          path: '/',
+            onBeforeAction: function () {
+                GAnalytics.pageview("/homepage");
+                this.next();
+            }
+      });
+    });
+}
 
 Router.map(function () {
     this.route('crea', {
