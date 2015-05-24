@@ -36,6 +36,7 @@ function showChart(statistics) {
     $('.piechart').each(function(index){
         var ctx = $(this).get(0).getContext('2d');
         ctx.canvas.width = $('.chartcontainer').width()-40;
+        ctx.canvas.height = $('.chartcontainer').width()-40;
         var myPieChart = new Chart(ctx).Pie(data);
     })
 
