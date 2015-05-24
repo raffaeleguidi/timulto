@@ -127,7 +127,7 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
                                 { _id: this.urlParams.id },
                                 { $set: idToSet });
         console.log("updated %d doc from fine/%s/%s",
-                    updateCount,
+                    updatedCount,
                     this.urlParams.id,
                     this.urlParams.service
                    )
