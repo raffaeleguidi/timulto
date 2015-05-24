@@ -37,7 +37,6 @@ var key = 'this is the key';
 
 Restivus.addRoute('token/:message', {authRequired: false}, {
     get: function () {
-      console.log(this);
       return {
         body: {
             token: CryptoJS.HmacMD5(
@@ -68,7 +67,7 @@ Restivus.addRoute('fines/:service', {authRequired: false}, {
                 this.urlParams.service,
             Meteor.settings[this.request.headers.app]).toString();
 
-      console.log(check);
+      console.log("token should be : %s", check);
 
       if (this.request.headers.token != check) return {
         statusCode: 401,
@@ -111,7 +110,7 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
                     this.urlParams.id,
                 Meteor.settings[this.request.headers.app] ).toString();
 
-        console.log(check);
+        console.log("token should be : %s", check);
 
         if (this.request.headers.token != check) return {
             statusCode: 401,
@@ -119,9 +118,9 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
         };
 
         var idToSet = {}; idToSet[this.urlParams.service] = this.bodyParams.postId;
-        var updatedCount = Fines.update(
-                                { _id: this.urlParams.id },
-                                { $set: idToSet });
+            var updatedCount = Fines.update(
+                                    { _id: this.urlParams.id },
+                                    { $set: idToSet });
 
         if (updatedCount == 1) {
           return {status: "success"};
