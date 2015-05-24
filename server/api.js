@@ -118,10 +118,10 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
             body: {status: 'unauthorized', message: 'Token is not correct'}
         };
 
-        var filter = {}; filter[this.urlParams.service] = this.bodyParams.postId;
+        var idToSet = {}; idToSet[this.urlParams.service] = this.bodyParams.postId;
         var updatedCount = Fines.update(
-                                { _id: this.urlParams.id, approved:true },
-                                { $set: filter });
+                                { _id: this.urlParams.id },
+                                { $set: idToSet });
 
         if (updatedCount == 1) {
           return {status: "success"};
