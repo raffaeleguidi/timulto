@@ -102,7 +102,7 @@
                   <a class="button-googleplus" onclick="window.open('https://plus.google.com/communities/103825358603044589608', '_system');return false;" href="https://plus.google.com/communities/103825358603044589608">Google Plus</a>
               </a>
         </div>
-        {{> appBox}}
+        {{> appBox2}}
     </div>
 </template>
 
@@ -124,6 +124,20 @@
       </p>
     </div>
 </template>
+
+<template name="appBox2">
+    <div style="margin-top: 20px; margin-right: -10px" class="col l4 s12 z-depth-2 right; clear: right">
+      <h5 class="blue-text">{{_ "Scarica l'app!"}}</h5>
+      <p>
+          <img class="hide-on-med-and-down" src="/splash.png" align="left" width="150" style="border: 2px solid orange; margin-right: 10px"/>
+          <img src="/images/icons/googleplay.png" style="width: 73px; margin: 2px 0px 0px 0px"/>
+          <img src="/images/icons/applestore.jpg" style="width: 70px; margin: 2px 2px 2px 2px"/>
+          <br />
+          Scarica la nostra app per Android e iPhone da Play Store e iTunes e inizia a TiMultare immediatamente! <br/>
+      </p>
+    </div>
+</template>
+
 
 <template name="statsBox">
 <!--    <table class="striped bordered">
