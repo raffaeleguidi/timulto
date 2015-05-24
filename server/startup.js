@@ -220,6 +220,18 @@ Meteor.startup(function () {
 //            isAdministrator: function () {
 //                return isAdministrator();
 //            },
+        getStatistics: function() {
+            var pipeline = [{
+                $group: {
+                    _id: "$category",
+                    count: { $sum: 1}
+                }
+            }, {
+                $sort: {count: -1}
+            }];
+            var result = Fines.aggregate(pipeline);
+            return result;
+        },
         getLikes: function(fineId) {
             var likes = 0;
             if(fineId) {

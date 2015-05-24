@@ -107,10 +107,13 @@ Template.navbarweb.events({
     }
 });
 
-
+Template.statsBox.helpers({
+    statistics: function() {
+        return Session.get("statistics");
+    }
+});
 
 Template.webhomepage.helpers({
-
     finesToApprove: function() {
         return Fines.find(
             { approved: false },

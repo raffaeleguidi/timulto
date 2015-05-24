@@ -93,7 +93,7 @@
 
 <template name="contattaci">
     <div class="row" style="margin-top: 30px; margin-right: 10px">
-        <div class="col l8 s12"  style="margin-right: 10px">
+        <div class="col l8 s12"  style="margin-right: 10px; min-height: 500px">
             <h3 style="color: #42a5f5">{{_ "contattaci"}}</h3>
             <p>Siamo in costante ascolto sul nostro account <a onclick="window.open('https://www.github.com/timulto', '_system');return false;" href="https://www.github.com/timulto">GitHub</a> e tutti i social network.<br/> Ci trovi su:</p>
               <a name="contactus">
@@ -117,5 +117,27 @@
           Scarica la nostra app per Android e iPhone da Play Store e iTunes e inizia a TiMultare immediatamente! <br/>
       </p>
     </div>
+    <div style="margin-top: 20px; margin-right: -10px" class="col l4 s12 z-depth-2">
+      <h5 class="blue-text">{{_ "Statistiche"}}</h5>
+      <p>
+          {{> statsBox}}
+      </p>
+    </div>
+</template>
+
+<template name="statsBox">
+    <table class="striped bordered">
+        <thead>
+            <th>Categoria</th>
+            <th>n°</th>
+        </thead>
+        <tbody>
+        {{#each statistics}}
+        <tr>
+            <td>{{_ _id}}</td><td>{{count}}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
 </template>
 
