@@ -118,9 +118,19 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
         };
 
         var idToSet = {}; idToSet[this.urlParams.service] = this.bodyParams.postId;
-            var updatedCount = Fines.update(
-                                    { _id: this.urlParams.id },
-                                    { $set: idToSet });
+
+        console.log("idToSet=%s",
+                    JSON.stringify(idToSet)
+                   )
+
+        var updatedCount = Fines.update(
+                                { _id: this.urlParams.id },
+                                { $set: idToSet });
+        console.log("updated %d doc from fine/%s/%s",
+                    updateCount,
+                    this.urlParams.id,
+                    this.urlParams.service
+                   )
 
         if (updatedCount == 1) {
           return {status: "success"};
