@@ -109,7 +109,7 @@ Meteor.methods({
     isAdministrator: function(){
         return isAdministrator();
     },
-    saveFine: function (text, address, city, lat, lng, category, imageData) {
+    saveFine: function (text, address, city, postcode, lat, lng, category, imageData) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
           throw new Meteor.Error("not-authorized");
@@ -135,7 +135,8 @@ Meteor.methods({
         console.log("inserted element " + Fines.insert({
           text: text,
           address: address,
-          city:city,
+          city: city,
+          postcode: postcode,
           loc:{type:"Point",coordinates:[parseFloat(lng),parseFloat(lat)]},
           category: category,
           approved:approved,

@@ -83,6 +83,7 @@ Template.crea.events({
         var text = $("#description").val();
         var address = $("#address").val();
         var city = Session.get("city");
+        var postcode = Session.get("postcode");
         var lat = $("#lat").val();
         var lng = $("#lng").val();
         var category = $("#category").val();
@@ -98,7 +99,7 @@ Template.crea.events({
         }
         var imageData = canvas.toDataURL();
 
-        Meteor.call("saveFine", text, address, city, lat, lng, category, imageData);
+        Meteor.call("saveFine", text, address, city, postcode, lat, lng, category, imageData);
 
         /*photoHandling.resetPicture();
         Session.set("categoryselected",false);*/

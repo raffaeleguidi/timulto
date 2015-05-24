@@ -100,6 +100,7 @@ geoLocalization = {
                     var address = results.address + ' - ' + results.postcode + ' ' + results.city;
                     Session.set("address", address);
                     Session.set("city", results.city);
+                    Session.set("postcode", results.postcode);
                     Session.set("lat",coords.lat);
                     Session.set("lng",coords.lng);
                     console.log("address taken in geoLocalization");
