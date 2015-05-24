@@ -12,15 +12,73 @@ Template.webhomepage.created = function(){
 
 };
 
+function showChart(statistics) {
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+    console.log('piechart begin');
+     var data = _.map(statistics, function(elem){
+        return {
+            label: TAPi18n.__(elem._id),
+            value: elem.count,
+            color: getRandomColor()
+        };
+    });
+
+    console.log("piechart data: %s", JSON.stringify(data));
+
+    $('.piechart').each(function(index){
+        var ctx = $(this).get(0).getContext('2d');
+        var myPieChart = new Chart(ctx).Pie(data);
+    })
+
+    console.log('piechart end');
+
+    /*var data = [
+        {
+            value: 300,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "Red"
+        },
+        {
+            value: 50,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "Green"
+        },
+        {
+            value: 100,
+            color: "#FDB45C",
+            highlight: "#FFC870",
+            label: "Yellow"
+        }
+    ]*/
+}
+
 Template.webhomepage.rendered = function () {
+
+      Meteor.call("getStatistics", function(err, res){
+        if (err) {
+            console.log("error in getStatistics: %s ", err);
+        } else {
+            console.log("statistics: %s", JSON.stringify(res));
+        }
+        Session.set("statistics", res)
+        showChart(Session.get("statistics"));
+
+      });
+
+
 
     function positionLogo() {
         $('.map-logo').css('left', $(".row").position().left);
-//        $(".map-logo").animate({
-//            left: $(".row").position().left
-//        }, 200, function() {
-//            // noop
-//        });
     }
 
     var now = moment();
@@ -37,6 +95,9 @@ Template.webhomepage.rendered = function () {
         $( window ).resize(function() {
             positionLogo();
         });
+
+        showChart(Session.get("statistics"));
+
         $('.button-collapse').sideNav({
             //menuWidth: 300, // Default is 240
             //edge: 'right', // Choose the horizontal origin

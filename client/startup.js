@@ -67,15 +67,6 @@ function loadCategories () {
         Session.set("rootUrl", res)
       });
 
-      Meteor.call("getStatistics", function(err, res){
-        if (err) {
-            console.log("error in getStatistics: %s ", err);
-        } else {
-            console.log("statistics: %s", JSON.stringify(res));
-        }
-        Session.set("statistics", res)
-      });
-
       TAPi18n.setLanguage(getUserLanguage())
           .done(function () {
             Session.set("showLoadingIndicator", false);
