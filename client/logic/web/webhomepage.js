@@ -35,9 +35,12 @@ function showChart(statistics) {
 
     $('.piechart').each(function(index){
         var ctx = $(this).get(0).getContext('2d');
+        ctx.canvas.width = $('.chartcontainer').width()-40;
         var myPieChart = new Chart(ctx).Pie(data);
     })
 
+    //$('.piechart').width($('.chartcontainer').width());
+    //$('.piechart').height($('.chartcontainer').width());
     console.log('piechart end');
 
     /*var data = [
