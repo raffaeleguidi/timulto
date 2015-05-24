@@ -1,3 +1,7 @@
+
+var fs = Npm.require('fs');
+var os = Npm.require('os');
+
 function sanitize(fine) {
     delete fine.username;
     delete fine.owner;
@@ -18,22 +22,6 @@ function findFinesFor(service) {
     }
     return res;
 }
-
-function allFines() {
-    var cursor = Fines.find(
-        {},
-        { sort:{ createdAt: -1 }}
-    );
-    var res = new Array();
-
-    if(cursor){
-        cursor.forEach(function (doc) {
-            res.push(sanitize(doc));
-        });
-    }
-    return res;
-}
-var key = 'this is the key';
 
 Restivus.addRoute('token/:message', {authRequired: false}, {
     get: function () {
@@ -69,27 +57,13 @@ Restivus.addRoute('fines/:service', {authRequired: false}, {
 
       console.log("token should be : %s", check);
 
-      if (this.request.headers.token != check) return {
+      if (this.request.headers.token != check || this.urlParams.service.indexOf(this.request.headers.app) != 0 ) return {
         statusCode: 401,
         body: {status: 'unauthorized', message: 'Token is not correct'}
       };
 
       var filter = {}; filter[this.urlParams.service] = null;
       var fines = findFinesFor(filter);
-      if (fines) {
-        return fines;
-      }
-      return {
-        statusCode: 404,
-        body: {status: 'fail', message: 'Fines not found'}
-      };
-    }
-});
-
-
-Restivus.addRoute('segnalazioni', {authRequired: false}, {
-    get: function () {
-      var fines = allFines();
       if (fines) {
         return fines;
       }
@@ -112,7 +86,7 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
 
         console.log("token should be : %s", check);
 
-        if (this.request.headers.token != check) return {
+        if (this.request.headers.token != check || this.urlParams.service.indexOf(this.request.headers.app) != 0) return {
             statusCode: 401,
             body: {status: 'unauthorized', message: 'Token is not correct'}
         };
@@ -142,35 +116,6 @@ Restivus.addRoute('fine/:id/:service', {authRequired: false}, {
     }
 });
 
-WebApp.connectHandlers.use(function(req, res, next) {
-    var re = /^\/webappapi\/image\/(.*)$/.exec(req.url);
-    if (re !== null) {   // Only handle URLs that start with /url_path/*
-
-        /* var filePath = process.env.PWD + '/.server_path/' + re[1];
-        var data = fs.readFileSync(filePath, data);*/
-        var fine = Fines.findOne({ _id: re[1], approved:true });
-
-        if (fine) {
-            var rawData = decodeBase64Image(fine.imageData).data
-            res.writeHead(200, {
-                    'Content-Type': 'image/png',
-                    'Content-Length': rawData.length,
-                    'transfer-encoding': ''
-                    /*'Content-Type': 'text/plain'*/
-            });
-            res.write(rawData);
-        } else {
-            res.writeHead(404);
-        }
-
-        res.end();
-    } else {  // Other urls will have default behaviors
-        next();
-    }
-});
-
-
-
 function decodeBase64Image(dataString) {
   var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
   var response = {};
@@ -185,46 +130,10 @@ function decodeBase64Image(dataString) {
   return response;
 }
 
-Restivus.addRoute('imageold/:fineId', {authRequired: false}, {
-    get: function () {
-        var fine = Fines.findOne({_id: this.urlParams.fineId});
-
-        if (fine) {
-            var rawData = decodeBase64Image(fine.imageData).data;
-            return {
-              statusCode: 200,
-              headers: {
-                'Content-Type': 'image/png',
-                'Cache-Control': 'public,max-age=86400'
-              },
-              /* this switches off chunked transfer
-              headers: {
-                'Content-Type': 'image/png',
-                'Content-Length': rawData.length,
-                'transfer-encoding': 'identity',
-                'Cache-Control': 'public,max-age=86400'
-              },*/
-              body: rawData
-            }
-        } else {
-            return {
-              statusCode: 404,
-              body: 'cannot find timulto #' + this.urlParams.fineId
-            }
-        }
-    }
-});
-
-var fs = Npm.require('fs');
-var os = Npm.require('os');
-
 function writeToFile(fileName, buffer) {
-    //console.log("will write to %s", fileName);
     var fd = fs.openSync(fileName, 'w');
     var bytes = fs.writeSync(fd, buffer.data, 0, buffer.data.length);
-    //console.log("written %d bytes", bytes);
     fs.closeSync(fd);
-    //console.log("written %s", fileName);
 }
 
 function readFile(fileName) {
@@ -347,3 +256,36 @@ Restivus.addRoute('categories', {authRequired: false}, {
         return categories;
     }
 });
+
+
+
+// unused
+function allFines() {
+    var cursor = Fines.find(
+        {},
+        { sort:{ createdAt: -1 }}
+    );
+    var res = new Array();
+
+    if(cursor){
+        cursor.forEach(function (doc) {
+            res.push(sanitize(doc));
+        });
+    }
+    return res;
+}
+
+// unusued - maybe for future ajax APIs
+Restivus.addRoute('segnalazioni', {authRequired: false}, {
+    get: function () {
+      var fines = allFines();
+      if (fines) {
+        return fines;
+      }
+      return {
+        statusCode: 404,
+        body: {status: 'fail', message: 'Fines not found'}
+      };
+    }
+});
+
