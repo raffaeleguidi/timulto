@@ -117,7 +117,7 @@ Template.dettaglio.events({
                 if(err){
                     Materialize.toast("Errore nella cancellazione: " + err.message, 3000, 'rounded center');
                 } else {
-                    Router.go('/segnalazioni');
+                    Router.go('/');
                     Materialize.toast("Segnalazione cancellata!", 3000, 'rounded center');
                 }
             });

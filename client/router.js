@@ -18,6 +18,15 @@ if(Meteor.isCordova) {
             }
       });
     });
+    Router.map(function () {
+        this.route('segnalazioni', {
+          path: '/segnalazioni',
+            onBeforeAction: function () {
+                GAnalytics.pageview("/");
+                this.next();
+            }
+      });
+    });
 }
 
 Router.map(function () {
