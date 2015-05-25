@@ -14,10 +14,6 @@ Template.segnalazioniweb.rendered = function () {
     });
 }
 
-function imageUrl(){
-    return Session.get("rootUrl") + "api/image/" + Session.get("dettaglio-web")._id + "?v=" +  Session.get("dettaglio-web").version;
-}
-
 Template.smallFinesInHomePage.events({
     "click .fine":function(){
         Session.set("dettaglio-web", this);
@@ -26,21 +22,6 @@ Template.smallFinesInHomePage.events({
     }
 });
 
-Template.dettaglioWeb.helpers({
-    imageUrl: function(){
-        return imageUrl();
-    },
-    fineToShow: function() {
-        return Session.get("dettaglio-web");
-    }
-});
-
-Template.dettaglioWeb.events({
-    "click #hideDettaglio": function(){
-        $('#lista').show();
-        $('#dettaglio').hide();
-    }
-});
 
 Template.segnalazioniweb.helpers({
 

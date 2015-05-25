@@ -1,0 +1,93 @@
+<template name="dettaglioWeb">
+    {{#if fineToShow}}
+          <button class="right" id="hideDettaglio"><i class="mdi-navigation-close "></i></button>
+      <div class="section">
+
+          <h5 class="header center blue-text">{{_ fineToShow.category}}
+            <div style="display: none">{{fineToShow._id}}</div>
+          </h5>
+
+          <div class="row center">
+              <div class="col s12 m6">
+                <img alt="caricamento in corso" class="normal-shot" src="{{imageUrl}}" />
+              </div>
+              <div class="col s12 m6">
+                 <p class="card-panel light-blue lighten-5">
+                     {{formatDate fineToShow.createdAt}} {{#if isadmin}}[{{fineToShow.username}}] {{/if}}{{#if fineToShow.text}}"{{fineToShow.text}}". {{/if}}In {{fineToShow.address}}. {{#if fineToShow.likes.count}}Piace a {{fineToShow.likes.count}} persone.{{/if}}
+                     {{#if notApproved}}
+                     <p>
+                        <span class="orange" style="color: white; padding: 2px">In attesa di approvazione</span>
+                     </p>
+                     {{/if}}
+                 </p>
+              </div>
+              {{#if isadmin}}
+              <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
+                 {{#if notApproved}}
+                 <a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up approve"></i></a>
+                 {{/if}}
+              {{/if}}
+
+                {{#if iDontLikeThis}}
+                    <li>
+                        <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one ilikeit"></i></a>
+                    </li>
+                {{/if}}
+                {{#if iLikeThis}}
+                    <li>
+                        <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 idontlikeit"></i></a>
+                    </li>
+                {{/if}}
+
+
+              <input type="hidden" value="{{lat}}" />
+              <input type="hidden" value="{{lng}}" />
+          </div>
+<!--
+          <div class="row center">
+              <div class="row">
+                {{#if isadmin}}
+                <button id="save" class="btn waves-light" name="action">{{_ "Salva"}}
+                   <i class="mdi-content-save right"></i>
+                </button>
+                {{/if}}
+            </div>
+          </div>
+-->
+
+<!--
+        {{#if currentUser}}
+            <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                <a class="btn-floating btn-large orange">
+                    <i class="large mdi-action-thumbs-up-down"></i>
+                </a>
+                <ul>
+
+                {{#if iDontLikeThis}}
+                    <li>
+                        <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one ilikeit"></i></a>
+                    </li>
+                {{/if}}
+                {{#if iLikeThis}}
+                    <li>
+                        <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 idontlikeit"></i></a>
+                    </li>
+                {{/if}}
+                    <li>
+                        <a id="findonmap" class="btn-floating blue lighten-1"><i class="large mdi-maps-place place"></i></a>
+                    </li>
+                {{#if isadmin}}
+                    <li>
+                        <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
+                    </li>
+                    <li>
+                        <a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up"></i></a>
+                    </li>
+                {{/if}}
+                </ul>
+            </div>
+        {{/if}}
+-->
+        </div>
+    {{/if}}
+</template>
