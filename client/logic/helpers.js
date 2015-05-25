@@ -59,6 +59,10 @@ Template.registerHelper("user", function() {
      return Meteor.user().profile.name;
 });
 
+Template.registerHelper("isLoggedIn", function() {
+    return userUtils.isLoggedIn();
+});
+
 UI.registerHelper('isCordova', function(){
   if (Meteor.isCordova){
     return true;

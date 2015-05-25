@@ -7,20 +7,23 @@ function imageUrl(){
     return Session.get("rootUrl") + "api/image/" + Session.get("dettaglio-web")._id + "?v=" +  Session.get("dettaglio-web").version;
 }
 
+function iLikeThis(fine) {
+    return fine.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
+}
+
 Template.dettaglioWeb.helpers({
     imageUrl: function(){
         return imageUrl();
     },
     fineToShow: function() {
         return Session.get("dettaglio-web");
-    }
-});
-
-Template.dettaglioWeb.events({
-    "click #hideDettaglio": function(){
-        $('#lista').show();
-        $('#dettaglio').hide();
-    }
+    },
+    iLikeThis: function() {
+        return iLikeThis(Session.get("dettaglio-web"));
+    },
+    iDontLikeThis: function() {
+        return !iLikeThis(Session.get("dettaglio-web"));
+    },
 });
 
 Template.dettaglioWeb.events({
@@ -31,8 +34,8 @@ Template.dettaglioWeb.events({
         Meteor.call("deleteFine", Session.get("dettaglio-web")._id);
         backToList();
     },
-    "click .likeit": function () {
-        if(Meteor.user()){
+    "click .mipiace": function () {
+        if(userUtils.isLoggedIn()){
             Meteor.call("likeFine", Session.get("dettaglio-web")._id, true, function(err) {
                 if(err) {
                     Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
@@ -43,9 +46,9 @@ Template.dettaglioWeb.events({
             });
             GAnalytics.event("dettaglio","like");
         }
-      },
-    "click .idontlikeit": function () {
-        if(Meteor.user()){
+    },
+    "click .nonmipiace": function () {
+        if(userUtils.isLoggedIn()){
             Meteor.call("likeFine",Session.get("dettaglio-web")._id, false, function(err) {
                 if(err) {
                     Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
@@ -56,6 +59,10 @@ Template.dettaglioWeb.events({
             });
             GAnalytics.event("dettaglio","dislike");
         }
-      },
+    },
+    "click #hideDettaglio": function(){
+        $('#lista').show();
+        $('#dettaglio').hide();
+    }
 });
 

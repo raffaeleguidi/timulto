@@ -28,16 +28,14 @@
                  {{/if}}
               {{/if}}
 
+              {{#if isLoggedIn}}
                 {{#if iDontLikeThis}}
-                    <li>
-                        <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one ilikeit"></i></a>
-                    </li>
+                    <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one mipiace"></i></a>
                 {{/if}}
                 {{#if iLikeThis}}
-                    <li>
-                        <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 idontlikeit"></i></a>
-                    </li>
+                    <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 nonmipiace"></i></a>
                 {{/if}}
+              {{/if}}
 
 
               <input type="hidden" value="{{lat}}" />

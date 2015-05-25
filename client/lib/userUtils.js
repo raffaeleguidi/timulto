@@ -44,5 +44,11 @@ userUtils = {
     },
     getSupportedServices: function() {
         return services;
+    },
+    isLoggedIn: function() {
+        if (Meteor.user())
+            return true;
+        else
+            return false;
     }
 }
