@@ -160,6 +160,19 @@ Template.webhomepage.events({
     }
 });
 
+Template.dettaglioWeb.events({
+    "click .approve": function(){
+        alert('approve');
+    },
+    "click .delete": function(){
+        //console.log(Session.get("dettaglio-web"));
+        Meteor.call("deleteFine", Session.get("dettaglio-web")._id);
+        $('#dettaglio').hide();
+        $('#lista').show();
+    }
+});
+
+
 Template.navbarweb.events({
     "click .brand-logo": function(){
         showHome();

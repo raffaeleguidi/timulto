@@ -67,6 +67,14 @@
                  class="mini-shot"
                  src="{{thumbUrl}}"/>
         </td>
+        <!--<td>
+              {{#if isadmin}}
+              <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
+                 {{#if notApproved}}
+                 <a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up approve"></i></a>
+                 {{/if}}
+              {{/if}}
+        </td>-->
     </tr>
 </template>
 
@@ -93,6 +101,13 @@
                      {{/if}}
                  </p>
               </div>
+              {{#if isadmin}}
+              <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
+                 {{#if notApproved}}
+                 <a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up approve"></i></a>
+                 {{/if}}
+              {{/if}}
+
               <input type="hidden" value="{{lat}}" />
               <input type="hidden" value="{{lng}}" />
           </div>
