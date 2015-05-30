@@ -12,7 +12,7 @@ function clientGeocode (lat, lng, cb) {
                         //console.log(res);
                         var data = JSON.parse(res.content);
                         var address = data.address.road + (data.address.house_number ? ", " + data.address.house_number : "");
-                        var city = data.address.city;
+                        var city = data.address.city || data.address.town;
                         var postcode = data.address.postcode;
 
                         cb( null, {
