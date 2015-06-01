@@ -1,4 +1,3 @@
-History = new Mongo.Collection("history");
 
 function setupCronJob() {
     SyncedCron.add({
@@ -59,6 +58,7 @@ function finesArchiving() {
                 archivingException = true;
             }
         }
+        archivingException = false;
     });
 };
 

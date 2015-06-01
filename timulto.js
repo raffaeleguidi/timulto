@@ -1,6 +1,7 @@
 Fines           = new Mongo.Collection("fines");
 Administrators  = new Mongo.Collection("administrators");
 Categories      = new Mongo.Collection("categories");
+History         = new Mongo.Collection("history");
 
 if(Meteor.isCordova){
 
