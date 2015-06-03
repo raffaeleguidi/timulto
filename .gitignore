@@ -8,3 +8,4 @@ npm-debug.log
 scripts/dumps
 /timultoAndroidKeyStore
 /dumps/
+.DS_Store
