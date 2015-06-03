@@ -110,7 +110,45 @@ Meteor.methods({
     isAdministrator: function(){
         return isAdministrator();
     },
-    saveFine: function (text, address, city, county, postcode, lat, lng, category, imageData) {
+    saveFine: function (fine) {
+        // was: text, address, city, county, postcode, lat, lng, category, imageData
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+          throw new Meteor.Error("not-authorized");
+        }
+
+        var username = '';
+
+        try {
+            username = Meteor.user().profile.name;
+        } catch (ex) {
+            console.log('falling back to username for simple password auth');
+            username = Meteor.user().username;
+        }
+
+        var approved = false;
+
+        if(isAdministrator()){
+            approved = true;
+        }
+        console.log("inserted element " + Fines.insert({
+          text: fine.text,
+          address: fine.address,
+          city: fine.city,
+          county: fine.county,
+          postcode: fine.postcode,
+          loc:{type:"Point",coordinates:[parseFloat(fine.lng),parseFloat(fine.lat)]},
+          category: fine.category,
+          approved: fine.approved,
+          likes:[],
+          imageData: fine.imageData,
+          owner: Meteor.userId(),
+          username: username,
+          createdAt: new Date() // current time
+        }));
+
+    },
+    saveFineOld: function (text, address, city, county, postcode, lat, lng, category, imageData) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
           throw new Meteor.Error("not-authorized");

@@ -80,16 +80,20 @@ Template.crea.events({
     },
     "click #send": function (event) {
         event.preventDefault();
-        var text = $("#description").val();
-        var address = $("#address").val();
-        var city = Session.get("city");
-        var county = Session.get("county");
-        var postcode = Session.get("postcode");
-        var lat = $("#lat").val();
-        var lng = $("#lng").val();
-        var category = $("#category").val();
-        if (!category) {
-            category = "4";
+        // text, address, city, county, postcode, lat, lng, category, imageData
+
+        var fine = {};
+
+        fine.text = $("#description").val();
+        fine.address = $("#address").val();
+        fine.city = Session.get("city");
+        fine.county = Session.get("county");
+        fine.postcode = Session.get("postcode");
+        fine.lat = $("#lat").val();
+        fine.lng = $("#lng").val();
+        fine.category = $("#category").val();
+        if (!fine.category) {
+            fine.category = "4";
         }
 
         var canvas = null;
@@ -98,9 +102,10 @@ Template.crea.events({
         } catch(ex) {
             //noop
         }
-        var imageData = canvas.toDataURL();
+        fine.imageData = canvas.toDataURL();
 
-        Meteor.call("saveFine", text, address, city, county, postcode, lat, lng, category, imageData);
+        // was: text, address, city, county, postcode, lat, lng, category, imageData
+        Meteor.call("saveFine", fine);
 
         /*photoHandling.resetPicture();
         Session.set("categoryselected",false);*/
