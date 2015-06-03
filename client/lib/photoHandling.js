@@ -50,8 +50,8 @@ photoHandling = {
                 photoHandling.isPhotoTaken = true;
 
                 photoHandling.fitImageInCanvas(data, canvas);
-                Materialize.toast("Tocca la foto per coprire", 4000 , 'rounded');
-                Materialize.toast("Targhe e visi", 4000 , 'rounded');
+                //Materialize.toast("Tocca la foto per coprire", 4000 , 'rounded');
+                //Materialize.toast("Targhe e visi", 4000 , 'rounded');
                 //Materialize.toast("Completa la scheda e premi \"Multa\"", 4000 , 'rounded');
                 Session.set("photo", data);
                 $('body').scrollTop(0);
