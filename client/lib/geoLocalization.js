@@ -13,12 +13,14 @@ function clientGeocode (lat, lng, cb) {
                         var data = JSON.parse(res.content);
                         var address = data.address.road + (data.address.house_number ? ", " + data.address.house_number : "");
                         var city = data.address.city || data.address.town;
+                        var county = data.address.county;
                         var postcode = data.address.postcode;
 
                         cb( null, {
                             address: address,
                             postcode: postcode,
-                            city: city
+                            city: city,
+                            county: county
                         })
                     } else {
                         cb({
@@ -100,6 +102,7 @@ geoLocalization = {
                     var address = results.address + ' - ' + results.postcode + ' ' + results.city;
                     Session.set("address", address);
                     Session.set("city", results.city);
+                    Session.set("county", results.county);
                     Session.set("postcode", results.postcode);
                     Session.set("lat",coords.lat);
                     Session.set("lng",coords.lng);

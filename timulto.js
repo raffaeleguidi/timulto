@@ -110,7 +110,7 @@ Meteor.methods({
     isAdministrator: function(){
         return isAdministrator();
     },
-    saveFine: function (text, address, city, postcode, lat, lng, category, imageData) {
+    saveFine: function (text, address, city, county, postcode, lat, lng, category, imageData) {
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
           throw new Meteor.Error("not-authorized");
@@ -137,6 +137,7 @@ Meteor.methods({
           text: text,
           address: address,
           city: city,
+          county: county,
           postcode: postcode,
           loc:{type:"Point",coordinates:[parseFloat(lng),parseFloat(lat)]},
           category: category,
