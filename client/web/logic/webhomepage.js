@@ -114,7 +114,7 @@ Template.webhomepage.rendered = function () {
         $('[href=' + window.location.hash + ']').css('border-bottom', '2px solid orange');
         //hideAllTabsBut($('window.location.hash));
         $(window.location.hash).show();
-        if (Common.getParam("fineId")) {
+        if (Common.getParam("fineId") && window.location.hash == '#segnalazioni') {
             setTimeout(function() {
                 console.log("clicking %s", Common.getParam("fineId"))
                 $('#' + Common.getParam("fineId")).click();
