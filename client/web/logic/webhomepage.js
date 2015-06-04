@@ -92,7 +92,7 @@ Template.webhomepage.rendered = function () {
             var active = $($(item.target).attr('href'));
             active.show();
             unselectAllTabsBut(item.target)
-            return false;
+            //return false;
         });
     });
 
@@ -104,6 +104,7 @@ Template.webhomepage.rendered = function () {
         $(tab).css('border-bottom', '2px solid orange');
     }
 
+    // tab highlighted at load time
     if (window.location.hash) {
         $('div.tabbody').hide();
         var active = $(window.location.hash);
@@ -114,7 +115,10 @@ Template.webhomepage.rendered = function () {
         //hideAllTabsBut($('window.location.hash));
         $(window.location.hash).show();
         if (Common.getParam("fineId")) {
-            console.log(Common.getParam("fineId"));
+            setTimeout(function() {
+                console.log("clicking %s", Common.getParam("fineId"))
+                $('#' + Common.getParam("fineId")).click();
+            }, 1000);
         }
     }
 
