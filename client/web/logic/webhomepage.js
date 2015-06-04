@@ -22,8 +22,8 @@ function showChart(statistics) {
         }
         return color;
     }
-    console.log('piechart begin');
-     var data = _.map(statistics, function(elem){
+
+    var data = _.map(statistics, function(elem){
         return {
             label: TAPi18n.__(elem._id),
             value: elem.count,
@@ -31,44 +31,17 @@ function showChart(statistics) {
         };
     });
 
-    console.log("piechart data: %s", JSON.stringify(data));
-
     $('.piechart').each(function(index){
         var ctx = $(this).get(0).getContext('2d');
         ctx.canvas.width = $('.chartcontainer').width()-40;
         ctx.canvas.height = ctx.canvas.width;
         var myPieChart = new Chart(ctx).Pie(data);
     })
-
-    //$('.piechart').width($('.chartcontainer').width());
-    //$('.piechart').height($('.chartcontainer').width());
-    console.log('piechart end');
-
-    /*var data = [
-        {
-            value: 300,
-            color:"#F7464A",
-            highlight: "#FF5A5E",
-            label: "Red"
-        },
-        {
-            value: 50,
-            color: "#46BFBD",
-            highlight: "#5AD3D1",
-            label: "Green"
-        },
-        {
-            value: 100,
-            color: "#FDB45C",
-            highlight: "#FFC870",
-            label: "Yellow"
-        }
-    ]*/
 }
 
 Template.webhomepage.rendered = function () {
 
-      Meteor.call("getStatistics", function(err, res){
+    Meteor.call("getStatistics", function(err, res){
         if (err) {
             console.log("error in getStatistics: %s ", err);
         } else {
@@ -76,10 +49,7 @@ Template.webhomepage.rendered = function () {
         }
         Session.set("statistics", res)
         showChart(Session.get("statistics"));
-
-      });
-
-
+    });
 
     function positionLogo() {
         $('.map-logo').css('left', $(".row").position().left);
@@ -89,6 +59,7 @@ Template.webhomepage.rendered = function () {
     Session.set("lastUsed", now.toString());
 
     $(document).ready(function(){
+
 
         showHome();
 
@@ -103,8 +74,6 @@ Template.webhomepage.rendered = function () {
         showChart(Session.get("statistics"));
 
         $('.button-collapse').sideNav({
-            //menuWidth: 300, // Default is 240
-            //edge: 'right', // Choose the horizontal origin
             closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
         });
 
@@ -122,22 +91,31 @@ Template.webhomepage.rendered = function () {
             $('div.tabbody').hide();
             var active = $($(item.target).attr('href'));
             active.show();
-            $(item.target).addClass('active');
-            $('.tab').css('border-bottom', '0px solid orange');
-            $('.tab a').css('border-bottom', '0px solid orange');
-            $(item.target).css('border-bottom', '2px solid orange');
+            unselectAllTabsBut(item.target)
             return false;
         });
-
-//        $('.tab').click(function(item){
-//            window.location.hash = $(item.target).attr('href');
-//        });
-
     });
+
+    function unselectAllTabsBut(tab) {
+        console.log(tab);
+        $(tab).addClass('active');
+        $('.tab').css('border-bottom', '0px solid orange');
+        $('.tab a').css('border-bottom', '0px solid orange');
+        $(tab).css('border-bottom', '2px solid orange');
+    }
 
     if (window.location.hash) {
         $('div.tabbody').hide();
+        var active = $(window.location.hash);
+        active.show();
+        $('.tab').css('border-bottom', '0px solid orange');
+        $('.tab a').css('border-bottom', '0px solid orange');
+        $('[href=' + window.location.hash + ']').css('border-bottom', '2px solid orange');
+        //hideAllTabsBut($('window.location.hash));
         $(window.location.hash).show();
+        if (Common.getParam("fineId")) {
+            console.log(Common.getParam("fineId"));
+        }
     }
 
 
@@ -221,6 +199,9 @@ Template.statsBox.helpers({
 });
 
 Template.webhomepage.helpers({
+    fineIdFromQueryString: function(){
+        return Common.getParam("fineId");
+    },
     finesToApprove: function() {
         return Fines.find(
             { approved: false },
