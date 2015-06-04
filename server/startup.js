@@ -90,7 +90,7 @@ function setupInitialData() {
 
     //Categories.remove({});
 
-    addCategory('PRC', 'Parcheggio incivile');
+    addCategory('PRC', 'Divieto di sosta');
     addCategory('RFT', 'Rifiuti o cassonetti sporchi');
     addCategory('ACC', 'Accessibilità scarsa o mancante');
     addCategory('ABS', 'Abusivismo');

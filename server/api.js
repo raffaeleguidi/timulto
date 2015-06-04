@@ -238,7 +238,7 @@ Restivus.addRoute('categories', {authRequired: false}, {
             });
         }
 
-        addCategory('PRC', 'Parcheggio incivile');
+        addCategory('PRC', 'Divieto di sosta');
         addCategory('RFT', 'Rifiuti o cassonetti sporchi');
         addCategory('ACC', 'Accessibilità scarsa o mancante');
         addCategory('ABS', 'Abusivismo');
