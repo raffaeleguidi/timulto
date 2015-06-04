@@ -1,5 +1,5 @@
 {
-    "PRC": "Divieto di sosta",
+    "PRC": "Sosta in divieto",
     "RFT": "Rifiuti o cassonetti sporchi",
     "ACC": "Accessibilità scarsa o mancante",
     "ABS": "Abusivismo",
@@ -11,7 +11,7 @@
     "MLT": "Maltrattamento animali",
     "greetings":"Ciao",
     "tiposegnalazione": "Tipo di segnalazione",
-    "segnalazione1":"Divieto di sosta",
+    "segnalazione1":"Sosta in divieto",
     "segnalazione2":"Cassonetti sporchi",
     "segnalazione3":"Affissioni abusive",
     "segnalazione4":"Manto stradale",
