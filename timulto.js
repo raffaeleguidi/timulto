@@ -139,7 +139,7 @@ Meteor.methods({
           postcode: fine.postcode,
           loc:{type:"Point",coordinates:[parseFloat(fine.lng),parseFloat(fine.lat)]},
           category: fine.category,
-          approved: approved,
+          approved: approved ? true : false,
           likes:[],
           imageData: fine.imageData,
           owner: Meteor.userId(),
