@@ -54,18 +54,22 @@
 </template>
 
 <template name="smallFinesInHomePage">
-    <tr class="fine">
+    <tr class="fineaaa">
         <td>
-            <h6 class="blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h6>
-            <span id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.
-{{#if likes.length}}Piace a {{likes.length}} persone{{/if}}</span>
+            <a href="/?fineId={{_id}}#segnalazioni">
+                <h6 class="blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h6>
+                <span style="color: black;" id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.
+    {{#if likes.length}}Piace a {{likes.length}} persone{{/if}}</span>
+            </a>
         </td>
         <td>
-            <img
-                 id="img_{{_id}}"
-                 alt="caricamento in corso"
-                 class="mini-shot"
-                 src="{{thumbUrl}}"/>
+            <a href="/?fineId={{_id}}#segnalazioni">
+                <img
+                     id="img_{{_id}}"
+                     alt="caricamento in corso"
+                     class="mini-shot"
+                     src="{{thumbUrl}}"/>
+            </a>
         </td>
     </tr>
 </template>
