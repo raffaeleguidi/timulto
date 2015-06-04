@@ -6,7 +6,7 @@ function setupCronJob() {
         return parser.text('every 2 hours');
       },
       job: function() {
-        finesArchiving();
+//        finesArchiving();
       }
     });
 }
@@ -43,7 +43,8 @@ function finesArchiving() {
 
         try {
             //Archive fine without image?
-            History.insert(fine);
+            var result = History.insert(fine);
+            console.log("Archiving fine, result:"+result);
         } catch(ex) {
             console.log("Cannot archive fine: " + ex.message);
             archivingException = true;
