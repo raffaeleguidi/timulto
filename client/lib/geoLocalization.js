@@ -95,11 +95,11 @@ geoLocalization = {
                 /*Meteor.call("reverseGeocode", coords.lat, coords.lng, function(error, results) {*/
                 clientGeocode( coords.lat, coords.lng, function(error, results) {
                     if (error) {
-                        console.error('skipping reverse geocode becaus of error: ' + error.message + ' (' + error.code + ')');
+                        console.error('skipping reverse geocode because of error: ' + error.message + ' (' + error.code + ')');
                         return;
                     }
 
-                    var address = results.address + ' - ' + results.postcode + ' ' + results.city;
+                    var address = results.address + ', ' + results.city;
                     Session.set("address", address);
                     Session.set("city", results.city);
                     Session.set("county", results.county);
