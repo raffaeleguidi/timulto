@@ -34,22 +34,24 @@ if(Meteor.isCordova) {
         GAnalytics.pageview("/web/segnalazioni");
         console.log("segnalazioni web");
         this.render('webhomepage_refactored', {data: { tab: "segnalazioni"} });
+        Session.set("dettaglio-web", undefined);
         Web.showTab("segnalazioni");
         Web.positionLogo();
     });
 
     Router.route('/web/contattaci', function () {
         GAnalytics.pageview("/web/contattaci");
-        console.log("segnalazioni web");
+        console.log("contattaci web");
         this.render('webhomepage_refactored', {data: { tab: "contattaci"} });
         Web.showTab("contattaci");
         Web.positionLogo();
     });
 
-    Router.route('/web/fine/:_id', function () {
-        console.log("detail for %s", this.params._id);
-        GAnalytics.pageview("/web/detail");
-        var fine = Fines.findOne({_id: this.params._id});
+    Router.route('/web/segnalazione', function () {
+        console.log("detail for %s", this.params.query._id);
+        GAnalytics.pageview("/web/segnalazione");
+        var fine = Fines.findOne({_id: this.params.query._id});
+        Session.set("dettaglio-web", fine);
         this.render('webhomepage_refactored', { data: { tab: "segnalazioni", fineToShow: fine } });
         Web.positionLogo();
     });

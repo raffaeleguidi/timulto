@@ -1,3 +1,88 @@
+
+<template name="smallFinesInHomePage_refactored">
+    <tr class="fineaaa">
+        <td>
+            <a class="fine" href="segnalazione?_id={{_id}}">
+                <h6 class="blue-text">{{_ category}}<div style="display: none">{{_id}}</div></h6>
+                <span style="color: black;" id="{{_id}}" class="text">{{formatDate createdAt}} {{#if isadmin}}[{{username}}] {{/if}}{{#if text}}"{{text}}". {{/if}}In {{address}}.
+    {{#if likes.length}}Piace a {{likes.length}} persone{{/if}}</span>
+            </a>
+        </td>
+        <td>
+            <a class="fine" href="segnalazione?_id={{_id}}">
+                <img
+                     id="img_{{_id}}"
+                     alt="caricamento in corso"
+                     class="mini-shot"
+                     src="{{thumbUrl}}"/>
+            </a>
+        </td>
+    </tr>
+</template>
+
+
+
+
+<template name="segnalazioniweb_refactored">
+
+    <div style="min-height: 490px; margin-top: 50px">
+        <h3 style="color: #42a5f5">Segnalazioni</h3>
+<!--
+        <div class="row center">
+            <img style="margin-top: -10px;" src="/images/timulto-badge.png">
+        </div>
+-->
+        <p>Ovunque tu sia, puoi segnalare un'infrazione (<i>divieti di sosta, rifiuti o cassonetti sporchi, scarsa accessibilità, problemi al manto stradale, atti vandalici, segnaletica mancante</i>) o mettere un <b>"Mi Piace"</b> alle segnalazioni di altri utenti per confermarne la veridicità.<br /><br />
+            Di seguito trovi le ultime segnalazioni dei nostri utenti.. aiutaci anche tu ad aumentare il senso civico, non c'è mai stato un modo più <b>semplice</b> di farlo!
+            </p>
+        {{#if finesNotYetLoaded}}
+        <div class="row center">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+
+        {{#if fineToShow}}
+            <div id="aaa-dettaglio" class="col s12 l12" style="border:1px solid lightgray; min-height: 300px">
+                {{> dettaglioWeb_refactored}}
+            </div>
+        {{else}}
+            {{#if finesToApprove.count}}
+                <div class="row" id="adminApproval" hidden="{{hide}}">
+                    <h5 class="header center blue-text">{{_ "Segnalazioni da verificare"}} ({{finesToApprove.count}})</h5>
+                    <table class="striped">
+                        <tbody>
+                            {{#each finesToApprove}} {{> fineInARow}} {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                <hr/>
+            {{/if}}
+            <div class="row">
+                <div id="lista" class="col s12 l12">
+                    <table class="striped">
+                        <tbody>
+                            {{#each latestFines}} {{> smallFinesInHomePage_refactored}} {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</template>
+
 <template name="segnalazioniweb">
 
     <div style="min-height: 490px; margin-top: 50px">
@@ -37,6 +122,8 @@
                 </table>
             </div>
             <hr/>
+            <br clear="left">
+            <h5 class="header center blue-text">{{_ "Ultime segnalazioni approvate"}}</h5>
         {{/if}}
         <div class="row">
             <div id="lista" class="col s12 l12">
