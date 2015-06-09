@@ -3,30 +3,57 @@ if(Meteor.isCordova) {
         this.route('segnalazioni', {
           path: '/',
             onBeforeAction: function () {
-                GAnalytics.pageview("/");
+                GAnalytics.pageview("/app/home");
                 this.next();
             }
       });
     });
 } else {
-    Router.map(function () {
-        this.route('webhomepage', {
-          path: '/',
-            onBeforeAction: function () {
-                GAnalytics.pageview("/homepage");
-                this.next();
-            }
-      });
+    /* legacy routes */
+    Router.route('/', function () {
+        GAnalytics.pageview("/web/home");
+        console.log("legacy home page");
+        this.render('webhomepage');
     });
-    Router.map(function () {
-        this.route('segnalazioni', {
-          path: '/segnalazioni',
-            onBeforeAction: function () {
-                GAnalytics.pageview("/");
-                this.next();
-            }
-      });
+    Router.route('/segnalazioni', function () {
+        console.log("segnalazioni");
+        GAnalytics.pageview("/web/segnalazioni");
+        this.render('segnalazioni');
     });
+    /* end legacy home pages */
+
+    Router.route('/web/home', function () {
+        GAnalytics.pageview("/web/home");
+        console.log("home page");
+        this.render('webhomepage_refactored', {data: { tab: "home"} });
+        Web.showTab("home");
+        Web.positionLogo();
+    });
+
+    Router.route('/web/segnalazioni', function () {
+        GAnalytics.pageview("/web/segnalazioni");
+        console.log("segnalazioni web");
+        this.render('webhomepage_refactored', {data: { tab: "segnalazioni"} });
+        Web.showTab("segnalazioni");
+        Web.positionLogo();
+    });
+
+    Router.route('/web/contattaci', function () {
+        GAnalytics.pageview("/web/contattaci");
+        console.log("segnalazioni web");
+        this.render('webhomepage_refactored', {data: { tab: "contattaci"} });
+        Web.showTab("contattaci");
+        Web.positionLogo();
+    });
+
+    Router.route('/web/fine/:_id', function () {
+        console.log("detail for %s", this.params._id);
+        GAnalytics.pageview("/web/detail");
+        var fine = Fines.findOne({_id: this.params._id});
+        this.render('webhomepage_refactored', { data: { tab: "segnalazioni", fineToShow: fine } });
+        Web.positionLogo();
+    });
+
 }
 
 Router.map(function () {

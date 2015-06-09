@@ -1,3 +1,49 @@
+<template name="navbarweb_refactored">
+
+    <div id="helpbox" class="modal blue lighten-5">
+
+        <div class="modal-content">
+            <h4>{{_ "aiuto"}}!</h4>
+            <p>Come fare per...</p>
+                {{helpMessage}}
+        </div>
+        <div class="divider blue-grey lighten-1"></div>
+
+        <div class="modal-footer blue lighten-5">
+                <a href="#" id="showHelp" class="btn-flat"><i class="mdi-navigation-arrow-forward"></i></a>
+                <a href="#" id="closeHelp" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="mdi-navigation-close"></i></a>
+         </div>
+    </div>
+
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container">
+
+            <!-- mobile -->
+            <ul class="side-nav" id="mobile-demo" style="width: 240px">
+                <li class="center" style="padding-top: 10px"><img src="icon.png" width="80px" /></li>
+                <li class="divider"></li>
+                <li class="bold"><a class="navbutton mytab" href="home">Home</a></li>
+                <li class="bold"><a class="navbutton mytab" href="segnalazioni">Segnalazioni</a></li>
+<!--                <li class="bold"><a class="navbutton mytab" href="#missione">Missione</a></li>-->
+                <li class="bold"><a class="navbutton mytab" href="contattaci">{{_ "Contattaci"}}</a></li>
+                {{#if isadmin}}
+                <li class="bold"><a class="navbutton" href="/crea">{{_ "Segnala"}}</a></li>
+                {{/if}}
+            </ul>
+
+            <a href="/" class="brand-logo"><span class="orange white-text">Ti</span>Multo!</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li class="bold"><a href="#home">Home</a></li>
+                {{#if isadmin}}
+                <li class="bold"><a class="navbutton" href="/crea">{{_ "Segnala"}}</a></li>
+                {{/if}}
+                <li>&nbsp;&nbsp;{{#if currentUser}}{{_ "greetings"}}, {{/if}}{{> loginButtons}}</li>
+            </ul>
+        </div>
+    </nav>
+</template>
+
 <template name="navbarweb">
 
     <div id="helpbox" class="modal blue lighten-5">

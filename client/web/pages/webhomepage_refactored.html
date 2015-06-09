@@ -1,0 +1,55 @@
+
+<template name="webhomepage_refactored">
+
+<!--
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <title>TiMulto!</title>
+    </head>
+
+    <body>
+
+
+      {{> navbarweb}}
+-->
+    <body>
+
+      {{> navbarweb_refactored}}
+
+      {{> simplemap}}
+
+      <img
+           class="map-logo hide-on-med-and-down"
+           style="position: absolute; top: 73px; left: 45px; border: 2px solid orange; background-color: white;"
+           width="200px"
+           src="/images/timulto-badge.png" />
+
+
+      <div style="margin-top: -60px; z-index: 10" class="container">
+
+          <div class="row">
+            <div class="col s12">
+              <ul class="tabs hide-on-med-and-down">
+                <li id="tabhome" class="tab col s4"><a class="active" href="home">TiMulto!</a></li>
+                <li id="tabsegnalazioni" class="tab col s4"><a href="segnalazioni">Segnalazioni</a></li>
+<!--                <li id="tabmissione" class="tab col s3"><a href="#missione">Missione</a></li>-->
+                <li id="tabcontattaci" class="tab col s4"><a href="contattaci">{{_ "Contattaci"}}</a></li>
+              </ul>
+              <div class="hide-on-large-only"><br /></div>
+            </div>
+
+            <div id="home" class="tabbody col s12">{{> chisiamoweb}}</div>
+            <div id="segnalazioni" class="tabbody col s12">{{> segnalazioniweb}}</div>
+            <div id="contattaci" class="tabbody col s12">{{> contattaci}}</div>
+          </div>
+
+          <div>{{#if fineToShow}}<h1>test</h1>{{/if}}</div>
+
+      </div>
+
+        {{> footer}}
+
+   </body>
+
+</template>
