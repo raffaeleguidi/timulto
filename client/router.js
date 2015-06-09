@@ -11,6 +11,8 @@ if(Meteor.isCordova) {
 } else {
     /* legacy routes */
     Router.route('/', function () {
+        Router.go("/web/home");
+        return;
         GAnalytics.pageview("/web/home");
         console.log("legacy home page");
         this.render('webhomepage');
