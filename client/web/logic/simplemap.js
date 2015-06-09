@@ -20,8 +20,32 @@ Template.simplemap.created = function() {
     });
 };
 
+Template.simplemap.helpers({
+    mapHeight: function() {
+        var mapHeight = 300;
+
+        var mapMode = Session.get("mapexpanded");
+
+        if(mapMode != null && mapMode) {
+            mapHeight = 500;
+        }
+
+        return mapHeight;
+    }
+});
 
 Template.simplemap.events({
+    'click .btn-minmax': function() {
+        var mapMode = Session.get("mapexpanded");
+
+        if(mapMode != null) {
+            mapMode = !mapMode;
+        } else {
+            mapMode = true;
+        }
+
+        Session.set("mapexpanded", mapMode);
+    },
     'click a[target=_blank]': function (event) {
         event.preventDefault();
         window.open(event.target.href, '_blank');
