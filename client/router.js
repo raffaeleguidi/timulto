@@ -25,16 +25,16 @@ if(Meteor.isCordova) {
         GAnalytics.pageview("/web/home");
         console.log("home page");
         this.render('webhomepage', {data: { tab: "home"} });
+        Session.set("dettaglio-web", undefined);
         Web.showTab("home");
         Web.positionLogo();
     });
 
-    Router.route('/web/segnalazioni', function () {
-        GAnalytics.pageview("/web/segnalazioni");
+    Router.route('/web/chisiamo', function () {
+        GAnalytics.pageview("/web/chisiamo");
         console.log("segnalazioni web");
-        this.render('webhomepage', {data: { tab: "segnalazioni"} });
-        Session.set("dettaglio-web", undefined);
-        Web.showTab("segnalazioni");
+        this.render('webhomepage', {data: { tab: "chisiamo"} });
+        Web.showTab("chisiamo");
         Web.positionLogo();
     });
 
@@ -51,7 +51,7 @@ if(Meteor.isCordova) {
         GAnalytics.pageview("/web/segnalazione");
         var fine = Fines.findOne({_id: this.params.query._id});
         Session.set("dettaglio-web", fine);
-        this.render('webhomepage', { data: { tab: "segnalazioni", fineToShow: fine } });
+        this.render('webhomepage', { data: { tab: "home", fineToShow: fine } });
         Web.positionLogo();
     });
 

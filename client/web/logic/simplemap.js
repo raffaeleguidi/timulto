@@ -51,8 +51,7 @@ Template.simplemap.events({
         window.open(event.target.href, '_blank');
     },
     'click #goToDetail': function(event) {
-        console.log("click #goToDetail");
-        Web.showTab("segnalazioni");
+        Web.showTab("home");
         Web.positionLogo();
     }
 //    ,
