@@ -1,30 +1,3 @@
-function showChart(statistics) {
-
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++ ) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    var data = _.map(statistics, function(elem){
-        return {
-            label: TAPi18n.__(elem._id),
-            value: elem.count,
-            color: getRandomColor()
-        };
-    });
-
-    $('.piechart').each(function(index){
-        var ctx = $(this).get(0).getContext('2d');
-        ctx.canvas.width = $('.chartcontainer').width()-40;
-        ctx.canvas.height = ctx.canvas.width;
-        var myPieChart = new Chart(ctx).Pie(data);
-    })
-}
-
 
 Template.webhomepage_refactored.rendered = function () {
 
@@ -35,7 +8,7 @@ Template.webhomepage_refactored.rendered = function () {
             console.log("statistics: %s", JSON.stringify(res));
         }
         Session.set("statistics", res)
-        showChart(Session.get("statistics"));
+        Web.showChart(Session.get("statistics"));
     });
 
     var now = moment();
@@ -52,7 +25,7 @@ Template.webhomepage_refactored.rendered = function () {
             Web.positionLogo();
         });
 
-        showChart(Session.get("statistics"));
+        Web.showChart(Session.get("statistics"));
 
         $('.button-collapse').sideNav({
             closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
@@ -108,48 +81,12 @@ Template.webhomepage_refactored.rendered = function () {
 
 }
 
-function showHome() {
-    $('.tabbody').hide();
-    $('.tab').css('border-bottom', '0px solid orange');
-    $('.tab a').css('border-bottom', '0px solid orange');
-    $('#tabhome').css('border-bottom', '2px solid orange');
-    $('#home').show();
-}
-
-function showTab(tab) {
-    $('div.tabbody').hide();
-    var active = $($('#' + tab).attr('href'));
-    active.show();
-
-    $('.tabbody').hide();
-    $('.tab').css('border-bottom', '0px solid orange');
-    $('.tab a').css('border-bottom', '0px solid orange');
-    $('#tabhome').css('border-bottom', '2px solid orange');
-    $('#' + tab).show();
-
-    $('#tab' + tab).addClass('active');
-    $('.tab').css('border-bottom', '0px solid orange');
-    $('.tab a').css('border-bottom', '0px solid orange');
-    $('#tab' + tab).css('border-bottom', '2px solid orange');
-}
-
-
-
-Web = {
-    showTab: showTab,
-    positionLogo: function() {
-        //setTimeout(function() {
-            $('.map-logo').css('left', $("#mark").position().left);
-        //}, 200);
-    }
-}
-
 Template.webhomepage_refactored.events({
     "click .brand-logo": function(){
-        showHome();
+        Web.showHome();
     },
     "click .map-logo": function(){
-        showHome();
+        Web.showHome();
     }
 });
 
@@ -193,3 +130,24 @@ Template.webhomepage_refactored.helpers({
         return !Session.get("isadmin");
     }
 });
+
+
+
+Template.navbarweb.events({
+    "click .brand-logo": function(){
+        showHome();
+    },
+    "click .map-logo": function(){
+        showHome();
+    },
+    "click [href='#home']": function(){
+        showHome();
+    }
+});
+
+Template.statsBox.helpers({
+    statistics: function() {
+        return Session.get("statistics");
+    }
+});
+

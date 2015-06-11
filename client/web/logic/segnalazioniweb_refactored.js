@@ -14,14 +14,22 @@ Template.segnalazioniweb_refactored.rendered = function () {
     });
 }
 
-Template.smallFinesInHomePage.events({
-    "click .NOOOOOOfine":function(){
-        Session.set("dettaglio-web", this);
-        $('#lista').hide();
-        $('#dettaglio').show();
-    }
-});
-
+//Template.smallFinesInHomePage.events({
+//    "click .NOOOOOOfine":function(){
+//        Session.set("dettaglio-web", this);
+//        $('#lista').hide();
+//        $('#dettaglio').show();
+//    }
+//});
+//
+//Template.smallFinesInHomePage.events({
+//    "click .fine":function(){
+//        Session.set("dettaglio-web", this);
+//        $('#lista').hide();
+//        $('#dettaglio').show();
+//    }
+//});
+//
 
 Template.segnalazioniweb_refactored.helpers({
 

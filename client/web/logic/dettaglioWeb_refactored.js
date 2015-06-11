@@ -1,8 +1,3 @@
-function backToList() {
-    $('#lista').show();
-    $('#dettaglio').hide();
-}
-
 function imageUrl(){
     return Session.get("rootUrl") + "api/image/" + Session.get("dettaglio-web")._id + "?v=" +  Session.get("dettaglio-web").version;
 }
@@ -32,7 +27,7 @@ Template.dettaglioWeb_refactored.events({
     },
     "click .delete": function(){
         Meteor.call("deleteFine", Session.get("dettaglio-web")._id);
-        backToList();
+        Web.backToList();
     },
     "click .mipiace": function () {
         if(userUtils.isLoggedIn()){
@@ -40,7 +35,7 @@ Template.dettaglioWeb_refactored.events({
                 if(err) {
                     Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
                 } else {
-                    backToList();
+                    Web.backToList();
                     Materialize.toast("+1 aggiunto :)", 4000, 'rounded center');
                 }
             });
@@ -53,7 +48,7 @@ Template.dettaglioWeb_refactored.events({
                 if(err) {
                     Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
                 } else {
-                    backToList();
+                    Web.backToList();
                     Materialize.toast("+1 rimosso :(", 4000, 'rounded center');
                 }
             });
