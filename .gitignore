@@ -9,3 +9,4 @@ scripts/dumps
 /timultoAndroidKeyStore
 /dumps/
 .DS_Store
+/client/.DS_Store
