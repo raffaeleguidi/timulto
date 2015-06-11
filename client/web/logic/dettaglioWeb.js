@@ -6,7 +6,7 @@ function iLikeThis(fine) {
     return fine.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
 }
 
-Template.dettaglioWeb_refactored.helpers({
+Template.dettaglioWeb.helpers({
     imageUrl: function(){
         return imageUrl();
     },
@@ -21,7 +21,7 @@ Template.dettaglioWeb_refactored.helpers({
     },
 });
 
-Template.dettaglioWeb_refactored.events({
+Template.dettaglioWeb.events({
     "click .approve": function(){
         alert('approve');
     },
