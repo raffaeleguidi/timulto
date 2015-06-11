@@ -12,6 +12,22 @@
                 <img alt="caricamento in corso" class="normal-shot" src="{{imageUrl}}" />
               </div>
               <div class="col s12 m6">
+                  <div class="center">
+                    <p>
+                        <a alt="Condividi su Facebook" class="fb-share" href="#">
+                            <img class="fb-share" src="/icon-fb.png" />
+                        </a>
+                        <!--
+                        <a alt="Condividi su Twitter" class="tw-share" href="#">
+                            <img src="/icon-tw.png" />
+                        </a>
+                        <a alt="Condividi su Google Plus" class="gp-share" href="#">
+                            <img src="/icon-gp.png" />
+                        </a>
+                        -->
+                    </p>
+                  </div>
+
                  <p class="card-panel light-blue lighten-5">
                      {{formatDate fineToShow.createdAt}} {{#if isadmin}}[{{fineToShow.username}}] {{/if}}{{#if fineToShow.text}}"{{fineToShow.text}}". {{/if}}In {{fineToShow.address}}. {{#if fineToShow.likes.count}}Piace a {{fineToShow.likes.count}} persone.{{/if}}
                      {{#if notApproved}}
@@ -40,6 +56,7 @@
 
               <input type="hidden" value="{{lat}}" />
               <input type="hidden" value="{{lng}}" />
+
           </div>
 <!--
           <div class="row center">

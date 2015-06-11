@@ -40,6 +40,8 @@ if (!Meteor.isCordova) {    // legacy: needed?
     });
 
     Router.route('/web/segnalazione', function () {
+        $("#mipiace").attr("data-href", location.href);
+        console.log("like: %s", $("#mipiace").attr("data-href"));
         console.log("detail for %s", this.params.query._id);
         GAnalytics.pageview("/web/segnalazione");
         var fine = Fines.findOne({_id: this.params.query._id});
