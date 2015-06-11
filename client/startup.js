@@ -60,24 +60,24 @@ Meteor.startup(function(){
 
       depth = 0;
 
-      try {
-          var url = window.location.protocol + "//" + window.location.host + "/";
-          if (url) {
-              Session.set("rootUrl", url);
-          } else {
-              Session.set("rootUrl", "http://beta.timulto.org/");
-          }
-      } catch(ex) {
-          Session.set("rootUrl", "http://beta.timulto.org/");
-      }
+//      try {
+//          var url = window.location.protocol + "//" + window.location.host + "/";
+//          if (url) {
+//              Session.set("rootUrl", url);
+//          } else {
+//              Session.set("rootUrl", "http://beta.timulto.org/");
+//          }
+//      } catch(ex) {
+//          Session.set("rootUrl", "http://beta.timulto.org/");
+//      }
 //      alert(Session.get("rootUrl"));
 
-//      Meteor.call("rootUrl", function(err, res){
-//        if (err) {
-//            console.log("error "+err);
-//        }
-//        Session.set("rootUrl", res)
-//      });
+      Meteor.call("rootUrl", function(err, res){
+        if (err) {
+            console.log("error "+err);
+        }
+        Session.set("rootUrl", res)
+      });
 
       TAPi18n.setLanguage(getUserLanguage())
           .done(function () {
