@@ -92,13 +92,13 @@ function init() {
     }
     cluster = new L.MarkerClusterGroup();
 
-    Meteor.call("rootUrl", function(err, res){
-        if (err) {
-            console.log("error "+err);
-        }
-        Session.set("rootUrl", res)
-        console.log("[simplemap init] rootUrl =%s", res)
-    });
+//    Meteor.call("rootUrl", function(err, res){
+//        if (err) {
+//            console.log("error "+err);
+//        }
+//        Session.set("rootUrl", res)
+//        console.log("[simplemap init] rootUrl =%s", res)
+//    });
 
     Fines.find({ approved:true }).observe({
         added: function(fine) {

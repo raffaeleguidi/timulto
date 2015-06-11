@@ -60,7 +60,16 @@ Meteor.startup(function(){
 
       depth = 0;
 
-      Session.set("rootUrl", window.location.protocol + "//" + window.location.host + "/");
+      try {
+          var url = window.location.protocol + "//" + window.location.host + "/";
+          if (url) {
+              Session.set("rootUrl", url);
+          } else {
+              Session.set("rootUrl", "http://beta.timulto.org/");
+          }
+      } catch(ex) {
+          Session.set("rootUrl", "http://beta.timulto.org/");
+      }
 //      alert(Session.get("rootUrl"));
 
 //      Meteor.call("rootUrl", function(err, res){
