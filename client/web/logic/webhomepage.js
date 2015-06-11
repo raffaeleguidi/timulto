@@ -15,20 +15,6 @@ Template.webhomepage.rendered = function () {
 
     $(document).ready(function(){
 
-        $(".fb-share").click(function(){
-            FB.ui({
-              method: 'share_open_graph',
-              action_type: 'og.likes',
-              action_properties: JSON.stringify({
-                object: location.href,
-              })
-            }, function(response){
-              // Debug response (optional)
-              console.log(response);
-            });
-            return false;
-        });
-
         Web.positionLogo();
         Web.showTab(UI.getData().tab);
         // it overflows the menu and it is shown in homepage, in any case

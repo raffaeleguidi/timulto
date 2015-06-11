@@ -19,6 +19,9 @@ Template.dettaglioWeb.helpers({
     iDontLikeThis: function() {
         return !iLikeThis(Session.get("dettaglio-web"));
     },
+    thisUrl: function() {
+        return location.href;
+    }
 });
 
 Template.dettaglioWeb.events({
@@ -54,7 +57,21 @@ Template.dettaglioWeb.events({
             });
             GAnalytics.event("dettaglio","dislike");
         }
-    }//,
+    },
+    "click .fb-share": function() {
+        FB.ui({
+          method: 'share_open_graph',
+          action_type: 'og.likes',
+          action_properties: JSON.stringify({
+            object: location.href,
+          })
+        }, function(response){
+          // Debug response (optional)
+          console.log(response);
+        });
+        return false;
+    }
+    //,
 //    "click #hideDettaglio": function(){
 //        $('#lista').show();
 //        $('#dettaglio').hide();
