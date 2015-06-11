@@ -9,20 +9,17 @@ if(Meteor.isCordova) {
       });
     });
 } else {
-    /* legacy routes */
     Router.route('/', function () {
         Router.go("/web/home");
-        return;
-        GAnalytics.pageview("/web/home");
-        console.log("legacy home page");
-        this.render('webhomepage');
     });
+
+    // legacy: needed?
     Router.route('/segnalazioni', function () {
         console.log("segnalazioni");
         GAnalytics.pageview("/web/segnalazioni");
         this.render('segnalazioni');
     });
-    /* end legacy home pages */
+    // end legacy
 
     Router.route('/web/home', function () {
         GAnalytics.pageview("/web/home");
@@ -59,6 +56,9 @@ if(Meteor.isCordova) {
     });
 
 }
+
+
+// routes for all clients
 
 Router.map(function () {
     this.route('crea', {

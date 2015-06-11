@@ -49,7 +49,7 @@ Template.webhomepage_refactored.rendered = function () {
         $('.leaflet-control-attribution').hide();
 
         $( window ).resize(function() {
-            positionLogo();
+            Web.positionLogo();
         });
 
         showChart(Session.get("statistics"));
@@ -61,8 +61,6 @@ Template.webhomepage_refactored.rendered = function () {
         $('.button-collapse').click(function(){
             $('.leaflet-control-attribution').hide();
         });
-
-        console.log(UI.getData());
 
 //        $('ul.tabs').tabs();
 
@@ -140,7 +138,9 @@ function showTab(tab) {
 Web = {
     showTab: showTab,
     positionLogo: function() {
-        $('.map-logo').css('left', $(".row").position().left);
+        //setTimeout(function() {
+            $('.map-logo').css('left', $("#mark").position().left);
+        //}, 200);
     }
 }
 

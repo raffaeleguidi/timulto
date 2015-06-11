@@ -1,15 +1,15 @@
  ///////// Ultime Segnalazioni ///////////
 
 Template.webhomepage.created = function(){
-    depth = 0; // not useful - this is only for cordova
-    Meteor.call("rootUrl", function(err, res){
-        if (err) {
-            console.log("error "+err);
-        }
-        Session.set("rootUrl", res)
-        console.log("rootUrl =%s", res)
-    });
-
+//    depth = 0; // not useful - this is only for cordova
+//    Meteor.call("rootUrl", function(err, res){
+//        if (err) {
+//            console.log("error "+err);
+//        }
+//        Session.set("rootUrl", res)
+//        console.log("rootUrl =%s", res)
+//    });
+//
 };
 
 function showChart(statistics) {

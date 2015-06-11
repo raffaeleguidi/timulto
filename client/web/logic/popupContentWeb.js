@@ -1,11 +1,11 @@
 Template.popupContentWeb.created = function() {
-    Meteor.call("rootUrl", function(err, res){
-        if (err) {
-            console.log("error "+err);
-        }
-        Session.set("rootUrl", res)
-        console.log("[popupContentWeb] rootUrl =%s", res)
-    });
+//    Meteor.call("rootUrl", function(err, res){
+//        if (err) {
+//            console.log("error "+err);
+//        }
+//        Session.set("rootUrl", res)
+//        console.log("[popupContentWeb] rootUrl =%s", res)
+//    });
 };
 
 
@@ -27,6 +27,6 @@ Template.popupContentWeb.events({
 
 Template.popupContentWeb.helpers({
     'thumbUrl': function(){
-        return "api/thumb/" + this._id + "?v=" + (this.version ? this.version : '0');
+        return "/api/thumb/" + this._id + "?v=" + (this.version ? this.version : '0');
     }
 });

@@ -30,17 +30,17 @@ Template.registerHelper("finesNotYetLoaded",  function() {
 });
 
 Template.registerHelper("rootUrl", function() {
-    if (!Session.get("rootUrl")) {
-        Meteor.call("rootUrl", function(err, res){
-            if (err) {
-                console.log("error "+err);
-            }
-            Session.set("rootUrl", res)
-            return res;
-        });
-    } else {
+//    if (!Session.get("rootUrl")) {
+//        Meteor.call("rootUrl", function(err, res){
+//            if (err) {
+//                console.log("error "+err);
+//            }
+//            Session.set("rootUrl", res)
+//            return res;
+//        });
+//    } else {
         return Session.get("rootUrl");
-    }
+//    }
 });
 
 Template.registerHelper("categories",  function() {

@@ -6,18 +6,18 @@ var markers = {};
 var myIcon;
 
 var defaultZoomLevel = 11;
-var defaultIconUrl = 'icon_30X30.png';
+var defaultIconUrl = '/icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
 Template.simplemap.created = function() {
-    Meteor.call("rootUrl", function(err, res){
-        if (err) {
-            console.log("error "+err);
-        }
-        Session.set("rootUrl", res)
-        console.log("[simplemap] rootUrl =%s", res)
-    });
+//    Meteor.call("rootUrl", function(err, res){
+//        if (err) {
+//            console.log("error "+err);
+//        }
+//        Session.set("rootUrl", res)
+//        console.log("[simplemap] rootUrl =%s", res)
+//    });
 };
 
 Template.simplemap.helpers({
@@ -50,26 +50,32 @@ Template.simplemap.events({
         event.preventDefault();
         window.open(event.target.href, '_blank');
     },
-
-    "click #clickableMapElement":function(event) {
-        event.preventDefault();
-
-        var selectedId = $('input[type=\'hidden\']').attr("id");
-        var fine = Fines.findOne({_id:selectedId});
-
-        if(fine) {
-            Session.set("dettaglio-web", fine);
-            window.location.hash = '#segnalazioni';
-            $('div.tabbody').hide();
-            $('#lista').hide();
-            $('#dettaglio').show();
-            $('#segnalazioni').show();
-            $('.tab').css('border-bottom', '0px solid orange');
-            $('.tab a').css('border-bottom', '0px solid orange');
-            $('#tabsegnalazioni').addClass('active');
-            $('#tabsegnalazioni').css('border-bottom', '2px solid orange');
-        }
+    'click #goToDetail': function(event) {
+        console.log("click #goToDetail");
+        Web.showTab("segnalazioni");
+        Web.positionLogo();
     }
+//    ,
+//
+//    "click #clickableMapElement":function(event) {
+//        event.preventDefault();
+//
+//        var selectedId = $('input[type=\'hidden\']').attr("id");
+//        var fine = Fines.findOne({_id:selectedId});
+//
+//        if(fine) {
+//            Session.set("dettaglio-web", fine);
+//            window.location.hash = '#segnalazioni';
+//            $('div.tabbody').hide();
+//            $('#lista').hide();
+//            $('#dettaglio').show();
+//            $('#segnalazioni').show();
+//            $('.tab').css('border-bottom', '0px solid orange');
+//            $('.tab a').css('border-bottom', '0px solid orange');
+//            $('#tabsegnalazioni').addClass('active');
+//            $('#tabsegnalazioni').css('border-bottom', '2px solid orange');
+//        }
+//    }
 });
 
 var rendered = false;

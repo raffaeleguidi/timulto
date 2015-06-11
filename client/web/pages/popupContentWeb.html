@@ -1,11 +1,17 @@
 <template name="popupContentWeb">
 
     {{#with fine}}
-        <div class="row center" id="clickableMapElement">
+
+    <div class="row center" id="clickableMapElement">
+        <a id="goToDetail" href="/web/segnalazione?_id={{_id}}">
             <input type="hidden" id="{{_id}}" />
-            <div class="col s6"><img class="mini-shot" name="imageData" src="{{rootUrl}}{{thumbUrl}}" /></div>
-            <div id="iw_content" class="col s6">Segnalato in {{address}} </div>
-        </div>
+            <div class="col s12 l12">
+                <img style="margin-right: 10px;" align="left" class="mini-shot" name="imageData" src="{{thumbUrl}}" />
+                <div><p>Segnalato in {{address}}</p></div>
+            </div>
+        </a>
+    </div>
+
     {{/with}}
     <div class="row center" style="margin-top: 5px">
         <a id="naviga" href="{{googleMapsUrl}}" target="_blank">Ottieni indicazioni</a>
