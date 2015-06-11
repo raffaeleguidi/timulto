@@ -97,7 +97,7 @@ onNotification(e) { <-- the signature of the event is always the same!
 
     */
 
-if (Meteor.isCordova) {
+if (Meteor.isCordova && false) {
     Meteor.startup(function() {
         document.addEventListener("deviceready", function() {
 
