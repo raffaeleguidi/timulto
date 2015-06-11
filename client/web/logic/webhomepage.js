@@ -1,5 +1,4 @@
-
-Template.webhomepage_refactored.rendered = function () {
+Template.webhomepage.rendered = function () {
 
     Meteor.call("getStatistics", function(err, res){
         if (err) {
@@ -81,7 +80,7 @@ Template.webhomepage_refactored.rendered = function () {
 
 }
 
-Template.webhomepage_refactored.events({
+Template.webhomepage.events({
     "click .brand-logo": function(){
         Web.showHome();
     },
@@ -95,7 +94,7 @@ function backToList() {
     $('#dettaglio').hide();
 }
 
-Template.webhomepage_refactored.helpers({
+Template.webhomepage.helpers({
     fineIdFromQueryString: function(){
         return Common.getParam("fineId");
     },

@@ -24,7 +24,7 @@ if(Meteor.isCordova) {
     Router.route('/web/home', function () {
         GAnalytics.pageview("/web/home");
         console.log("home page");
-        this.render('webhomepage_refactored', {data: { tab: "home"} });
+        this.render('webhomepage', {data: { tab: "home"} });
         Web.showTab("home");
         Web.positionLogo();
     });
@@ -32,7 +32,7 @@ if(Meteor.isCordova) {
     Router.route('/web/segnalazioni', function () {
         GAnalytics.pageview("/web/segnalazioni");
         console.log("segnalazioni web");
-        this.render('webhomepage_refactored', {data: { tab: "segnalazioni"} });
+        this.render('webhomepage', {data: { tab: "segnalazioni"} });
         Session.set("dettaglio-web", undefined);
         Web.showTab("segnalazioni");
         Web.positionLogo();
@@ -41,7 +41,7 @@ if(Meteor.isCordova) {
     Router.route('/web/contattaci', function () {
         GAnalytics.pageview("/web/contattaci");
         console.log("contattaci web");
-        this.render('webhomepage_refactored', {data: { tab: "contattaci"} });
+        this.render('webhomepage', {data: { tab: "contattaci"} });
         Web.showTab("contattaci");
         Web.positionLogo();
     });
@@ -51,7 +51,7 @@ if(Meteor.isCordova) {
         GAnalytics.pageview("/web/segnalazione");
         var fine = Fines.findOne({_id: this.params.query._id});
         Session.set("dettaglio-web", fine);
-        this.render('webhomepage_refactored', { data: { tab: "segnalazioni", fineToShow: fine } });
+        this.render('webhomepage', { data: { tab: "segnalazioni", fineToShow: fine } });
         Web.positionLogo();
     });
 
@@ -70,7 +70,6 @@ Router.map(function () {
         }
     });
 });
-
 
 Router.map(function(){
   this.route('mappa', {
