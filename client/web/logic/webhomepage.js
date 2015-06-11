@@ -150,3 +150,9 @@ Template.statsBox.helpers({
     }
 });
 
+Template.statsBoxTabular.helpers({
+    statistics: function() {
+        return Session.get("statistics");
+    }
+});
+
