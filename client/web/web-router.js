@@ -17,7 +17,7 @@ if (!Meteor.isCordova) {    // legacy: needed?
                         }
                     });
 
-
+        document.title = "Home - TiMulto!"
         Session.set("dettaglio-web", undefined);
         Web.showTab("home");
         Web.positionLogo();
@@ -27,6 +27,7 @@ if (!Meteor.isCordova) {    // legacy: needed?
         GAnalytics.pageview("/web/chisiamo");
         console.log("segnalazioni web");
         this.render('webhomepage', {data: { tab: "chisiamo"} });
+        document.title = "Chi siamo - TiMulto!"
         Web.showTab("chisiamo");
         Web.positionLogo();
     });
@@ -35,6 +36,7 @@ if (!Meteor.isCordova) {    // legacy: needed?
         GAnalytics.pageview("/web/contattaci");
         console.log("contattaci web");
         this.render('webhomepage', {data: { tab: "contattaci"} });
+        document.title = "Contattaci - TiMulto!"
         Web.showTab("contattaci");
         Web.positionLogo();
     });
@@ -45,6 +47,7 @@ if (!Meteor.isCordova) {    // legacy: needed?
         console.log("detail for %s", this.params.query._id);
         GAnalytics.pageview("/web/segnalazione");
         var fine = Fines.findOne({_id: this.params.query._id});
+        document.title = "Segnalazione " + fine.address + " - TiMulto!"
         Session.set("dettaglio-web", fine);
         this.render('webhomepage', { data: { tab: "home", fineToShow: fine } });
         Web.positionLogo();
