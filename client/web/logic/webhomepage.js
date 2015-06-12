@@ -138,10 +138,12 @@ Template.navbarweb.events({
     },
     "click .map-logo": function(){
         showHome();
-    },
+    }//,
+/*
     "click [href='#home']": function(){
         showHome();
     }
+*/
 });
 
 Template.statsBox.helpers({
