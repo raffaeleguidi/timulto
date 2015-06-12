@@ -33,5 +33,3 @@ percolate:synced-cron
 datariot:ganalytics
 chart:chart
 underscore
-gadicohen:phantomjs
-spiderable
