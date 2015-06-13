@@ -51,5 +51,8 @@ Web = {
     backToList: function() {
         $('#dettaglio').hide();
         $('#lista').show();
+    },
+    rootUrl: function() {
+        return Session.get("rootUrl");
     }
 }
