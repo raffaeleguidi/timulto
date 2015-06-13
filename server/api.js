@@ -36,7 +36,7 @@ Router.route('/web/seo', function () {
     this.response.write('<meta property="og:image" content="' + image + '" />');
     this.response.write('<meta http-equiv="refresh" content="0; url=' + redirect + '">');
     this.response.write('</head><html>');
-    this.response.end(title);
+    this.response.end("Stiamo andando a " + title + "...");
 }, { where: 'server' });
 
 Restivus.addRoute('token/:message', {authRequired: false}, {
