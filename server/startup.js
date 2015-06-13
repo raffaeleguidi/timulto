@@ -144,6 +144,7 @@ Meteor.startup(function () {
 
     setupInitialData();
     setupCronJob();
+    finesArchiving();
 
     Restivus.configure({
       useAuth: false,
