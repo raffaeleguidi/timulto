@@ -10,15 +10,6 @@ var defaultIconUrl = '/icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
-Template.simplemap.created = function() {
-//    Meteor.call("rootUrl", function(err, res){
-//        if (err) {
-//            console.log("error "+err);
-//        }
-//        Session.set("rootUrl", res)
-//        console.log("[simplemap] rootUrl =%s", res)
-//    });
-};
 
 Template.simplemap.helpers({
     mapHeight: function() {
@@ -34,6 +25,21 @@ Template.simplemap.helpers({
     }
 });
 
+Tracker.autorun(function(){
+    var expanded = Session.get("mapexpanded");
+    if (map) {
+        if (expanded != null && expanded) {
+            map.dragging.enable();
+            map.scrollWheelZoom.enable();
+            console.log("enable");
+        } else {
+            map.dragging.disable();
+            map.scrollWheelZoom.disable();
+            console.log("disable");
+        }
+    }
+});
+
 Template.simplemap.events({
     'click .btn-minmax': function() {
         var mapMode = Session.get("mapexpanded");
@@ -43,7 +49,7 @@ Template.simplemap.events({
         } else {
             mapMode = true;
         }
-
+        console.log("setting mapexpanded to " + mapMode);
         Session.set("mapexpanded", mapMode);
     },
     'click a[target=_blank]': function (event) {
@@ -199,6 +205,6 @@ Template.simplemap.rendered = function () {
 
     map.addLayer(cluster);
 
-//    map.dragging.disable();
-//    map.scrollWheelZoom.disable();
+    map.dragging.disable();
+    map.scrollWheelZoom.disable();
 };
