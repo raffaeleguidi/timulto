@@ -43,7 +43,7 @@ function finesArchiving() {
 
         try {
             //Archive fine without image?
-            var result = History.insert(fine);
+            var result = FinesHistory.insert(fine);
             console.log("Archiving fine, result:"+result);
         } catch(ex) {
             console.log("Cannot archive fine: " + ex.message);
@@ -54,7 +54,7 @@ function finesArchiving() {
         //Step 3: Remove collected ids from fines collection
         if(archivingException == false){
             try {
-                Fines.remove({ _id:currentId });
+                Fines.remove(currentId);
             } catch(ex) {
                 console.log("Cannot remove online fine: " + ex.message);
                 archivingException = true;
