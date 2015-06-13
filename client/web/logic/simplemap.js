@@ -10,20 +10,10 @@ var defaultIconUrl = '/icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
+var collapsedMapHeight = 300;
+var expandedMapHeight = 650;
 
-Template.simplemap.helpers({
-    mapHeight: function() {
-        var mapHeight = 300;
 
-        var mapMode = Session.get("mapexpanded");
-
-        if(mapMode != null && mapMode) {
-            mapHeight = 500;
-        }
-
-        return mapHeight;
-    }
-});
 
 Tracker.autorun(function(){
     var expanded = Session.get("mapexpanded");
@@ -31,12 +21,27 @@ Tracker.autorun(function(){
         if (expanded != null && expanded) {
             map.dragging.enable();
             map.scrollWheelZoom.enable();
-            console.log("enable");
+//            console.log("enable");
         } else {
             map.dragging.disable();
             map.scrollWheelZoom.disable();
-            console.log("disable");
+//            console.log("disable");
         }
+        map._onResize();
+    }
+});
+
+Template.simplemap.helpers({
+    mapHeight: function() {
+        var mapHeight = collapsedMapHeight;
+
+        var mapMode = Session.get("mapexpanded");
+
+        if(mapMode != null && mapMode) {
+            mapHeight = expandedMapHeight;
+        }
+
+        return mapHeight;
     }
 });
 
@@ -49,7 +54,7 @@ Template.simplemap.events({
         } else {
             mapMode = true;
         }
-        console.log("setting mapexpanded to " + mapMode);
+
         Session.set("mapexpanded", mapMode);
     },
     'click a[target=_blank]': function (event) {

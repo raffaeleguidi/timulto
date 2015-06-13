@@ -6,6 +6,14 @@
 /*  margin: 15px auto 0 auto;*/
 }
 
+.leaflet-container-simple {
+  width: 100%;
+    height:100%;
+    position: relative;
+/*    min-height: 100%;*/
+/*  margin: 15px auto 0 auto;*/
+}
+
 .leaflet-container2 {
   width: 100%;
     height:100%;
@@ -28,37 +36,3 @@
   margin-bottom: 10px; 
   text-align: center;
 }
-
-/*
-.notice {
-  margin: 10px 0 5px 0;
-  line-height: 1.5;
-  text-align: center;
-}
-*/
-
-/*
-@media all and (max-width: 480px) {
-//   styles for iPhone/Android landscape (and really narrow browser windows)
-  .notice {
-    font-size: 11px;
-  }
-}
-*/
-
-/*
-@media all and (max-width: 320px) {
-//   styles for iPhone/Android portrait
-  .notice {
-      font-size: 11px;
-  }
-}
-*/
-
-/*
-@media all and (max-width: 240px) {
- //  styles for smaller devices
-  .notice{
-    font-size: 11px;
-  }
-}*/
