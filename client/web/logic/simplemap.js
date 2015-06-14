@@ -32,6 +32,15 @@ Tracker.autorun(function(){
 });
 
 Template.simplemap.helpers({
+    mapAction: function() {
+        var text = "Ingrandisci";
+
+        if(Session.get("mapexpanded") && Session.get("mapexpanded") == true) {
+            text = "Riduci";
+        }
+
+        return text;
+    },
     mapHeight: function() {
         var mapHeight = collapsedMapHeight;
 
