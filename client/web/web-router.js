@@ -54,7 +54,7 @@ if (!Meteor.isCordova) {    // legacy: needed?
         GAnalytics.pageview("/web/segnalazione");
         var fine = Fines.findOne({_id: this.params.query._id});
         if(!fine || fine == null) {
-            fine = FinesHistory.findOne({_id:this.params.query._id});
+            fine = FinesHistory.findOne({_id: this.params.query._id});
         }
         document.title = "Segnalazione " + fine.address + " - TiMulto!"
         Session.set("dettaglio-web", fine);

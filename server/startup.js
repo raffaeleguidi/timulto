@@ -154,6 +154,13 @@ Meteor.startup(function () {
       enableCors: true
     });
 
+    Meteor.publish("history", function () {
+        return Fines.find({},
+            { fields: {imageData: 0}},
+            { sort: {createdAt: -1}
+        });
+    });
+
     Meteor.publish("fines", function () {
         return Fines.find({
                 createdAt: { $gte: Common.yesterday() }
