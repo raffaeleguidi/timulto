@@ -14,9 +14,9 @@ function setupCronJob() {
 function finesArchiving() {
     //Archive fines here
 
-    //Step 1: Retrieve fines older then 24 hours starting from now -> check moment
+    //Step 1: Retrieve fines older then 30 days starting from now -> check moment
     var nowMoment = moment();
-    var oldFinesMoment = nowMoment.subtract(24, "hours");
+    var oldFinesMoment = nowMoment.subtract(30, "days");
 //    console.log("old fines moment " + oldFinesMoment.format());
     var selector   = { createdAt:{ $lte: new Date(oldFinesMoment.format()) }};
     //TODO - REMOVE images?
@@ -279,7 +279,7 @@ Meteor.startup(function () {
                 var username = userUtils.getCurrentUsername();
                 //console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
                 if(like) {
-                    Fines.update({_id:fineId},{$addToSet:{likes:username}},
+                    var res = Fines.update({_id:fineId},{$addToSet:{likes:username}},
                                 function(err,result){
                         if(err) {
                             console.log("error in liking:" + err);
@@ -288,7 +288,7 @@ Meteor.startup(function () {
                         console.log("Result:" + result);
                     });
                 } else {
-                    Fines.update({_id:fineId},{$pull:{likes:username}},
+                    var res = Fines.update({_id:fineId},{$pull:{likes:username}},
                                 function(err,result){
                         if(err) {
                             console.log("error in not liking:" + err);
