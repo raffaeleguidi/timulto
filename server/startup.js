@@ -155,7 +155,7 @@ Meteor.startup(function () {
     });
 
     Meteor.publish("history", function () {
-        return Fines.find({},
+        return FinesHistory.find({},
             { fields: {imageData: 0}},
             { sort: {createdAt: -1}
         });
