@@ -41,12 +41,12 @@ if (!Meteor.isCordova) {    // legacy: needed?
         Web.positionLogo();
     });
 
-    Router.route('/web/termsofservice', function () {
-        GAnalytics.pageview("/web/termsofservice");
-        console.log("termsofservice web");
-        this.render('webhomepage', {data: { tab: "termsofservice"} });
+    Router.route('/web/terminidiservizio', function () {
+        GAnalytics.pageview("/web/terminidiservizio");
+        console.log("terminidiservizio web");
+        this.render('webhomepage', {data: { tab: "terminidiservizio"} });
         document.title = "Terms of Service - TiMulto!"
-        Web.showTab("termsofservice");
+        Web.showTab("terminidiservizio");
         Web.positionLogo();
     });
 

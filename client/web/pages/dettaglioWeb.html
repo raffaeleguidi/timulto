@@ -22,9 +22,6 @@
                           data-size="large">
                         <img src="/icon-tw.png" /></a>
                         <!--
-                        <a alt="Condividi su Twitter" class="tw-share" href="#">
-                            <img src="/icon-tw.png" />
-                        </a>
                         <a alt="Condividi su Google Plus" class="gp-share" href="#">
                             <img src="/icon-gp.png" />
                         </a>
@@ -41,22 +38,23 @@
                      {{/if}}
                  </p>
               </div>
-              {{#if isadmin}}
-              <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
-                 {{#if notApproved}}
-                 <a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up approve"></i></a>
-                 {{/if}}
-              {{/if}}
+              {{#if fineToShow.archived}}
+                  {{#if isadmin}}
+                  <a class="btn-floating red lighten-1"><i class="large mdi-action-delete delete"></i></a>
+                     {{#if notApproved}}
+                     <a class="btn-floating light-green lighten-1"><i class="large mdi-action-thumb-up thumb-up approve"></i></a>
+                     {{/if}}
+                  {{/if}}
 
-              {{#if isLoggedIn}}
-                {{#if iDontLikeThis}}
-                    <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one mipiace"></i></a>
-                {{/if}}
-                {{#if iLikeThis}}
-                    <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 nonmipiace"></i></a>
-                {{/if}}
+                  {{#if isLoggedIn}}
+                    {{#if iDontLikeThis}}
+                        <a class="btn-floating green lighten-1"><i class="large mdi-social-plus-one mipiace"></i></a>
+                    {{/if}}
+                    {{#if iLikeThis}}
+                        <a class="btn-floating amber lighten-1"><i class="large mdi-image-exposure-minus-1 nonmipiace"></i></a>
+                    {{/if}}
+                  {{/if}}
               {{/if}}
-
 
               <input type="hidden" value="{{lat}}" />
               <input type="hidden" value="{{lng}}" />
