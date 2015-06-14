@@ -1,4 +1,5 @@
 var finesSubscription = Meteor.subscribe("fines");
+Meteor.subscribe("history");
 Meteor.subscribe("categories");
 Meteor.subscribe("userData");
     

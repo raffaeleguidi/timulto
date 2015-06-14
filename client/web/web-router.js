@@ -55,6 +55,10 @@ if (!Meteor.isCordova) {    // legacy: needed?
         var fine = Fines.findOne({_id: this.params.query._id});
         if(!fine || fine == null) {
             fine = FinesHistory.findOne({_id: this.params.query._id});
+            fine.archived = true;
+        }
+        if (fine == null) {
+            console.log("fine not found in history for _id=%s", this.params.query._id);
         }
         document.title = "Segnalazione " + fine.address + " - TiMulto!"
         Session.set("dettaglio-web", fine);
