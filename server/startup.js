@@ -29,17 +29,19 @@ function finesArchiving() {
         var archivingException = false;
         var msg = "";
         console.log("Archiving fine: " + fine._id);
-        if(fine.likes && !(typeof fine.likes != 'undefined')) {
-            console.log("archiving likes " + fine.likes.count);
-            fine.likecount = fine.likes.length;
-        } else {
-            fine.likecount = 0;
-        }
+//        if(fine.likes && !(typeof fine.likes != 'undefined')) {
+//            console.log("archiving likes " + fine.likes.count);
+//            fine.likecount = fine.likes.length;
+//        } else {
+//            fine.likecount = 0;
+//        }
 
-        fine.originalId = {};
-        fine.originalId = fine._id;//Original id is saved, new collection id is demanded to mongo
-        delete fine["_id"];
-        delete fine["likes"];
+        //Original id is saved, new collection id is demanded to mongo
+//        fine.originalId = {};
+//        fine.originalId = fine._id;
+
+//        delete fine["_id"];
+//        delete fine["likes"];
 
         try {
             //Archive fine without image?
