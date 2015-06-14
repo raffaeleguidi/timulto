@@ -45,7 +45,7 @@ if (!Meteor.isCordova) {    // legacy: needed?
         GAnalytics.pageview("/web/terminidiservizio");
         console.log("terminidiservizio web");
         this.render('webhomepage', {data: { tab: "terminidiservizio"} });
-        document.title = "Terms of Service - TiMulto!"
+        document.title = "Termini di servizio - TiMulto!"
         Web.showTab("terminidiservizio");
         Web.positionLogo();
     });
@@ -53,9 +53,10 @@ if (!Meteor.isCordova) {    // legacy: needed?
     Router.route('/web/segnalazione', function () {
         GAnalytics.pageview("/web/segnalazione");
         var fine = Fines.findOne({_id: this.params.query._id});
+        fine.live = true;
         if(!fine || fine == null) {
             fine = FinesHistory.findOne({_id: this.params.query._id});
-            fine.archived = true;
+            fine.live = false;
         }
         if (fine == null) {
             console.log("fine not found in history for _id=%s", this.params.query._id);

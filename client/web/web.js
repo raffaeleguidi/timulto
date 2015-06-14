@@ -23,7 +23,11 @@ Web = {
         })
     },
     positionLogo: function() {
-        $('.map-logo').css('left', $("#mark").position().left);
+        try {
+            $('.map-logo').css('left', $("#mark").position().left);
+        } catch(ex) {
+            // noop
+        }
     },
     showTab: function(tab) {
         $('div.tabbody').hide();

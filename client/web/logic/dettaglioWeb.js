@@ -1,4 +1,5 @@
 function imageUrl(){
+    if (Session.get("dettaglio-web") == null) return null;
     return Session.get("rootUrl") + "api/image/" + Session.get("dettaglio-web")._id + "?v=" +  Session.get("dettaglio-web").version;
 }
 
