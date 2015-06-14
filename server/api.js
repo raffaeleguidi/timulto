@@ -26,7 +26,7 @@ function findFinesFor(service) {
 Router.route('/web/seo', function () {
     //this.render("test");
     var fine = Fines.findOne({_id: this.params.query._id});
-    if(!fine) {
+    if(fine == null) {
         fine = FinesHistory.findOne({_id:this.params.query._id});
     }
     var title = "Segnalazione " + fine.address + " - TiMulto!"
@@ -215,7 +215,9 @@ Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
         var fine = Fines.findOne({_id: this.urlParams.fineId});
-
+        if(fine == null) {
+            fine = FinesHistory.findOne({_id:this.params.query._id});
+        }
         if (fine) {
             var tmpfile = os.tmpdir() + '/' + fine._id + '.png';
             if (!fs.existsSync(tmpfile)) {
