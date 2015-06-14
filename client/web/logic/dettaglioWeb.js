@@ -63,7 +63,7 @@ Template.dettaglioWeb.events({
           method: 'share_open_graph',
           action_type: 'og.likes',
           action_properties: JSON.stringify({
-            object: location.href,
+            object: Web.rootUrl() + "web/seo?_id=" + Session.get("dettaglio-web")._id /*location.href*/,
           })
         }, function(response){
           // Debug response (optional)
