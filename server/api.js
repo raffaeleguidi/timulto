@@ -26,6 +26,9 @@ function findFinesFor(service) {
 Router.route('/web/seo', function () {
     //this.render("test");
     var fine = Fines.findOne({_id: this.params.query._id});
+    if(!fine) {
+        fine = FinesHistory.findOne({_id:this.params.query._id});
+    }
     var title = "Segnalazione " + fine.address + " - TiMulto!"
     var description = fine.address + fine.text;
     var image = process.env.ROOT_URL + "api/image/" + fine._id;
