@@ -17,7 +17,7 @@ Notifications = {
             },
             data: request
         };
-        HTTP.post("https://gcm-http.googleapis.com/gcm/send", options);
+        return HTTP.post("https://gcm-http.googleapis.com/gcm/send", options);
     },
     regIdsFor: function(userId) {
         var cursor = Registrations.find(
@@ -78,26 +78,32 @@ Meteor.startup(function () {
             return { sent: regIds.length, errors: res.failure };
         },
         sendMessageToAdmins: function(msg) {
-            console.log("should send a message to all admins sent from: %s", user, Meteor.userId());
+            console.log("should send a message to all admins sent from: %s", Meteor.userId());
 
             // should send a message to the latest regid for every device of the user
 
-            var getAllAdminsIds: function() {
+            var getAllAdminsIds = function() {
                 var allIds = new Array();
                 var cursor = Administrators.find();
                 var res = new Array();
 
                 if(cursor){
                     cursor.forEach(function (doc) {
-                        allIds.push(regIdsForUsernameAndService(doc.username, doc.service));
+                        allIds = allIds.concat(Notifications.regIdsForUsernameAndService(doc.username, doc.service));
                     });
                 }
                 return allIds;
             }
 
             var regIds = getAllAdminsIds();
+            if (regIds.length == 0) {
+                console.log("no admins registrations");
+                return { sent: 0 };
+            }
             var res = Notifications.send2android(msg, regIds);
-            return { sent: regIds.length, errors: res.failure };
+            console.log(regIds);
+            console.log(res);
+            return { sent: regIds.length };
         }
     });
 });
