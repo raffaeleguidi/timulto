@@ -9,4 +9,4 @@ Meteor.startup(function () {
             console.log("should send a message to: %s", user)
         }
     });
- }
+});
