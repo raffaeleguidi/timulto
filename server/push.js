@@ -55,6 +55,8 @@ Meteor.startup(function () {
             // save it for later reuse
             console.log("registering client: %s for user: %s to device: %s", regid, Meteor.userId(), deviceUUID);
 
+            if (!deviceUUID) return;
+
             var thisUser = userUtils.getCurrentUsernameService();
 
             // remove all user registrations for the current device
