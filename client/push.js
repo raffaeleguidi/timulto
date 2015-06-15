@@ -83,15 +83,16 @@ if (Meteor.isCordova) {
                 } else if ( device.platform == 'blackberry10'){
                     // not supported - does it even exist anymore?!
                 } else {
-                    pushNotification.register(
-                    tokenHandler,
-                    errorHandler,
-                    {
-                        "badge":"true",
-                        "sound":"true",
-                        "alert":"true",
-                        "ecb": "Push.onNotificationApple"
-                    });
+                    // not supported, yet
+//                    pushNotification.register(
+//                    tokenHandler,
+//                    errorHandler,
+//                    {
+//                        "badge":"true",
+//                        "sound":"true",
+//                        "alert":"true",
+//                        "ecb": "Push.onNotificationApple"
+//                    });
                 }
             } catch (ex) {
                 // noop
