@@ -44,6 +44,34 @@ Notifications = {
             });
         }
         return res;
+    },
+    sendToAllAdmins: function(msg) {
+            console.log("should send a message to all admins sent from: %s", Meteor.userId());
+
+            // should send a message to the latest regid for every device of the user
+
+            var getAllAdminsIds = function() {
+                var allIds = new Array();
+                var cursor = Administrators.find();
+                var res = new Array();
+
+                if(cursor){
+                    cursor.forEach(function (doc) {
+                        allIds = allIds.concat(Notifications.regIdsForUsernameAndService(doc.username, doc.service));
+                    });
+                }
+                return allIds;
+            }
+
+            var regIds = getAllAdminsIds();
+            if (regIds.length == 0) {
+                console.log("no admins registrations");
+                return { sent: 0 };
+            }
+            var res = Notifications.send2android(msg, regIds);
+            console.log(regIds);
+            console.log(res);
+            return { sent: regIds.length };
     }
 }
 
@@ -80,32 +108,7 @@ Meteor.startup(function () {
             return { sent: regIds.length, errors: res.failure };
         },
         sendMessageToAdmins: function(msg) {
-            console.log("should send a message to all admins sent from: %s", Meteor.userId());
-
-            // should send a message to the latest regid for every device of the user
-
-            var getAllAdminsIds = function() {
-                var allIds = new Array();
-                var cursor = Administrators.find();
-                var res = new Array();
-
-                if(cursor){
-                    cursor.forEach(function (doc) {
-                        allIds = allIds.concat(Notifications.regIdsForUsernameAndService(doc.username, doc.service));
-                    });
-                }
-                return allIds;
-            }
-
-            var regIds = getAllAdminsIds();
-            if (regIds.length == 0) {
-                console.log("no admins registrations");
-                return { sent: 0 };
-            }
-            var res = Notifications.send2android(msg, regIds);
-            console.log(regIds);
-            console.log(res);
-            return { sent: regIds.length };
+            return Notifications.sendToAllAdmins(msg);
         }
     });
 });

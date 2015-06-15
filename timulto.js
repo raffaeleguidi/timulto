@@ -130,6 +130,8 @@ Meteor.methods({
 
         if(isAdministrator()){
             approved = true;
+        } else {
+            Notifications.sendToAllAdmins({ title: "Segnalazione da approvare", message: fine.address + " da " + username });
         }
         console.log("inserted element " + Fines.insert({
           text: fine.text,
