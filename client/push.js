@@ -8,20 +8,21 @@ Push = {
         switch (e.event) {
             case 'registered':
                 if (e.regid.length > 0) {
-                    alert('[REGISTRATION] Registration id = ' + e.regid);
+                    console.log('[REGISTRATION] Registration id = ' + e.regid);
                     Session.set("registrationId", e.regid);
                 };
                 break;
             case 'message':
                 // if this flag is set, this notification happened while we were in the foreground.
                 // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+                alert(e.payload.title + ": " + e.payload.message);
                 if ( e.foreground ) {
-                    alert("[MESSAGE] foreground " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
+                    console.log("[MESSAGE] foreground " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
                 } else {  // otherwise we were launched because the user touched a notification in the notification tray.
                     if ( e.coldstart ) {
-                        alert("[MESSAGE] coldstart " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
+                        console.log("[MESSAGE] coldstart " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
                     } else {
-                        alert("[MESSAGE] background " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
+                        console.log("[MESSAGE] background " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
                     }
                 }
                 break;
@@ -66,7 +67,7 @@ if (Meteor.isCordova) {
                         console.log("SUCCESS: " + JSON.stringify(data));
                     }
                     function errorHandler(e) {
-                        alert("Errore di registrazione: " + e);
+                        console.log("Errore di registrazione: " + e);
                     }
                 } else if ( device.platform == 'blackberry10'){
                     // not supported - does it even exist anymore?!
