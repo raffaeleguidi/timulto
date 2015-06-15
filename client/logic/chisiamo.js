@@ -17,5 +17,14 @@ Template.chisiamo.created = function(){
 Template.chisiamo.events({
     "click #shoot": function (event) {
         Router.go('/crea');
+    },
+    "click #sendmessage": function (event) {
+        Meteor.call("sendMessage", $("#msgto").val(), { title: $("#msgtitle").val(), message: $("#msgmessage").val()}, function(err, res) {
+            if (err) {
+                alert(err);
+            } else {
+                alert("messaggio inviato");
+            }
+        })
     }
 });

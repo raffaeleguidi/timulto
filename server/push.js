@@ -16,7 +16,7 @@ Notifications = {
             },
             data: request
         };
-        Http.post("https://gcm-http.googleapis.com/gcm/send", options);
+        HTTP.post("https://gcm-http.googleapis.com/gcm/send", options);
     }
 }
 

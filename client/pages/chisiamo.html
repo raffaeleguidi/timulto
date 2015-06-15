@@ -33,8 +33,17 @@
                   <p>TiMulto! è ospitato su  <a onclick="window.open('http://www.heroku.com', '_system');return false;" href="http://www.heroku.com">Heroku</a></p>
                   {{#if platform }}
                   <p>Piattaforma {{ platform }}</p>
-                  <h5>Notifiche push</h5>
-                  <p>{{#if registrationId}}Registrato correttamente{{/if}}</p>
+                  {{/if}}
+                  {{#if isadmin}}
+                      <h5>Notifiche push</h5>
+                      <p>{{#if registrationId}}Registrato correttamente{{/if}}</p>
+                      <label>User ID</label>
+                      <input id="msgto" name="msgto" type="text"><br />
+                      <label>Titolo</label>
+                      <input id="msgtitle" name="msgtitle" type="text"><br />
+                      <label>Testo</label>
+                      <input id="msgmessage" name="msgmessage" type="text"><br />
+                      <button id="sendmessage" class="btn waves-light">Invia</button>
                   {{/if}}
                 </div>
             </div>
