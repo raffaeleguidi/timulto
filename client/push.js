@@ -9,19 +9,19 @@ Push = {
             case 'registered':
                 if (e.regid.length > 0) {
                     alert('[REGISTRATION] Registration id = ' + e.regid);
-                    // Do something here with the token
+                    Session.set("registrationId", e.regid);
                 };
                 break;
             case 'message':
                 // if this flag is set, this notification happened while we were in the foreground.
                 // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                 if ( e.foreground ) {
-                    alert("[MESSAGE]");
+                    alert("[MESSAGE] foreground " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
                 } else {  // otherwise we were launched because the user touched a notification in the notification tray.
                     if ( e.coldstart ) {
-                        alert("[MESSAGE] coldstart " + e.payload.message + " count=" + e.payload.msgcnt);
+                        alert("[MESSAGE] coldstart " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
                     } else {
-                        alert("[MESSAGE] background " + e.payload.message + " count=" + e.payload.msgcnt);
+                        alert("[MESSAGE] background " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
                     }
                 }
                 break;
@@ -33,7 +33,7 @@ Push = {
                 break;
         }
     },
-    onNotificationApple (event) { <-- the name of the event is always the same!
+    onNotificationApple: function (event) {
         if ( event.alert ) {
             navigator.notification.alert(event.alert);
         }
@@ -58,16 +58,15 @@ if (Meteor.isCordova) {
                     pushNotification.register(
                         successHandler,
                         errorHandler, {
-                            "senderID": "95065xxxx", // <-- this is the project id from the google developer console
-                                                     // <-- use vars from settings.json, don't include in code
+                            "senderID": "190071353423", // <-- this is the project number from the google developer console
                             "ecb": "Push.onNotificationGCM"
                         }
                     );
                     function successHandler(data) {
-                        alert("SUCCESS: " + JSON.stringify(data));
+                        console.log("SUCCESS: " + JSON.stringify(data));
                     }
                     function errorHandler(e) {
-                        alert("ERROR" + e);
+                        alert("Errore di registrazione: " + e);
                     }
                 } else if ( device.platform == 'blackberry10'){
                     // not supported - does it even exist anymore?!

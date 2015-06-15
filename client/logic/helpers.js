@@ -1,3 +1,7 @@
+Template.registerHelper('registrationId', function(){
+    return Session.get("registrationId");
+});
+
 Template.registerHelper('gaAccount', function(){
     return Meteor.settings.public.ga.account ? Meteor.settings.public.ga.account : '';
     //return "UA-63007561-1";
