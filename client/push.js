@@ -49,6 +49,16 @@ Push = {
 
 }
 
+Tracker.autorun(function(){
+    if(Meteor.userId() && Session.get("registrationId")){
+        Meteor.call("registerId", Session.get("registrationId"), function(err, res){
+            if (!err) {
+                console.log("device registered to %s", Meteor.userId());
+            }
+        });
+    }
+});
+
 if (Meteor.isCordova) {
     Meteor.startup(function() {
         document.addEventListener("deviceready", function() {
