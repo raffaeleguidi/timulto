@@ -50,10 +50,10 @@ Push = {
 }
 
 Tracker.autorun(function(){
-    if(Meteor.userId() && Session.get("registrationId")){
-        Meteor.call("registerId", Session.get("registrationId"), Push.deviceUUID, function(err, res){
+    if(Meteor.userId() && Session.get("registrationId") && Session.get("deviceUUID")){
+        Meteor.call("registerId", Session.get("registrationId"), Session.get("deviceUUID"), function(err, res){
             if (!err) {
-                console.log("device registered to %s", Meteor.userId(), Push.deviceUUID);
+                console.log("device registered to %s", Meteor.userId(), Session.get("deviceUUID"));
             }
         });
     }
@@ -63,7 +63,7 @@ if (Meteor.isCordova) {
     Meteor.startup(function() {
         document.addEventListener("deviceready", function() {
             try {
-                Push.deviceUUID = device.uuid;
+                Session.set("deviceUUID", device.uuid);
                 if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
                     pushNotification = window.plugins.pushNotification;
                     pushNotification.unregister(successHandler, errorHandler);
