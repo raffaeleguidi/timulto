@@ -26,5 +26,14 @@ Template.chisiamo.events({
                 alert("messaggio inviato");
             }
         })
+    },
+    "click #sendtoalladmins": function (event) {
+        Meteor.call("sendMessageToAdmins", { title: $("#msgtitle").val(), message: $("#msgmessage").val()}, function(err, res) {
+            if (err) {
+                alert(err);
+            } else {
+                alert("messaggio inviato");
+            }
+        })
     }
 });

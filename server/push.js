@@ -18,6 +18,32 @@ Notifications = {
             data: request
         };
         HTTP.post("https://gcm-http.googleapis.com/gcm/send", options);
+    },
+    regIdsFor: function(userId) {
+        var cursor = Registrations.find(
+            { userId: userId }
+        );
+        var res = new Array();
+
+        if(cursor){
+            cursor.forEach(function (doc) {
+                res.push(doc.regId);
+            });
+        }
+        return res;
+    },
+    regIdsForUsernameAndService: function(username, service) {
+        var cursor = Registrations.find(
+            { username: username, service: service }
+        );
+        var res = new Array();
+
+        if(cursor){
+            cursor.forEach(function (doc) {
+                res.push(doc.regId);
+            });
+        }
+        return res;
     }
 }
 
@@ -29,12 +55,16 @@ Meteor.startup(function () {
             // save it for later reuse
             console.log("registering client: %s for user: %s to device: %s", regid, Meteor.userId(), deviceUUID);
 
+            var thisUser = userUtils.getCurrentUsernameService();
+
             // remove all user registrations for the current device
-            Registrations.remove({ userId: Meteor.userId(), uuId: deviceUUID});
+            Registrations.remove({ username: thisUser.username, service: thisUser.service, uuId: deviceUUID});
 
             // insert user registration for the current device
             Registrations.insert({
               userId: Meteor.userId(),
+              username: thisUser.username,
+              service: thisUser.service,
               uuId: deviceUUID,
               regId: regid
             });
@@ -42,22 +72,30 @@ Meteor.startup(function () {
         sendMessage: function(userId, msg) {
             console.log("should send a message to: %s sent from: %s", user, Meteor.userId());
 
-            function regIdsFor(userId) {
-                var cursor = Registrations.find(
-                    { userId: userId }
-                );
+            // should send a message to the latest regid for every device of the user
+            var regIds = Notifications.regIdsFor(userId);
+            var res = Notifications.send2android(msg, regIds);
+            return { sent: regIds.length, errors: res.failure };
+        },
+        sendMessageToAdmins: function(msg) {
+            console.log("should send a message to all admins sent from: %s", user, Meteor.userId());
+
+            // should send a message to the latest regid for every device of the user
+
+            var getAllAdminsIds: function() {
+                var allIds = new Array();
+                var cursor = Administrators.find();
                 var res = new Array();
 
                 if(cursor){
                     cursor.forEach(function (doc) {
-                        res.push(doc.regId);
+                        allIds.push(regIdsForUsernameAndService(doc.username, doc.service));
                     });
                 }
-                return res;
+                return allIds;
             }
 
-            // should send a message to the latest regid for every device of the user
-            var regIds = regIdsFor(userId);
+            var regIds = getAllAdminsIds();
             var res = Notifications.send2android(msg, regIds);
             return { sent: regIds.length, errors: res.failure };
         }
