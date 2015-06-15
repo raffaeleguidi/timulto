@@ -1,3 +1,4 @@
+Registrations = new Mongo.Collection("registrations");
 
 Notifications = {
     send2android: function(msg, regids) {
@@ -20,20 +21,45 @@ Notifications = {
     }
 }
 
-tempRegIds = new Array();
+//tempRegIds = new Array();
 
 Meteor.startup(function () {
     Meteor.methods({
         registerId: function(regid, deviceUUID) {
             // save it for later reuse
-            console.log("should register client: %s for user: %s to device: %s", regid, Meteor.userId(), deviceUUID);
-            tempRegIds.push(regid);
+            console.log("registering client: %s for user: %s to device: %s", regid, Meteor.userId(), deviceUUID);
+
+            // remove all user registrations for the current device
+            Registrations.remove({ userId: Meteor.userId(), uuId: deviceUUID});
+
+            // insert user registration for the current device
+            Registrations.insert({
+              userId: Meteor.userId(),
+              uuId: deviceUUID,
+              regId: regid
+            });
         },
-        sendMessage: function(user, msg) {
+        sendMessage: function(userId, msg) {
             console.log("should send a message to: %s sent from: %s", user, Meteor.userId());
+
+            function regIdsFor(userId) {
+                var cursor = Registrations.find(
+                    { userId: userId }
+                );
+                var res = new Array();
+
+                if(cursor){
+                    cursor.forEach(function (doc) {
+                        res.push(doc.regId);
+                    });
+                }
+                return res;
+            }
+
             // should send a message to the latest regid for every device of the user
-            Notifications.send2android(msg, tempRegIds);
-            return { sent: 0, errors: 0 };
+            var regIds = regIdsFor(userId);
+            var res = Notifications.send2android(msg, regIds);
+            return { sent: regIds.length, errors: res.failure };
         }
     });
 });
