@@ -13,10 +13,10 @@ Push = {
                 };
                 break;
             case 'message':
-                // if this flag is set, this notification happened while we were in the foreground.
-                // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                 alert(e.payload.title + ": " + e.payload.message);
                 if ( e.foreground ) {
+                    // if this flag is set, this notification happened while we were in the foreground.
+                    // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                     console.log("[MESSAGE] foreground " + e.payload.title + ": " + e.payload.message + " count=" + e.payload.msgcnt);
                 } else {  // otherwise we were launched because the user touched a notification in the notification tray.
                     if ( e.coldstart ) {
@@ -51,9 +51,9 @@ Push = {
 
 Tracker.autorun(function(){
     if(Meteor.userId() && Session.get("registrationId")){
-        Meteor.call("registerId", Session.get("registrationId"), function(err, res){
+        Meteor.call("registerId", Session.get("registrationId"), Push.deviceUUID, function(err, res){
             if (!err) {
-                console.log("device registered to %s", Meteor.userId());
+                console.log("device registered to %s", Meteor.userId(), Push.deviceUUID);
             }
         });
     }
@@ -63,6 +63,7 @@ if (Meteor.isCordova) {
     Meteor.startup(function() {
         document.addEventListener("deviceready", function() {
             try {
+                Push.deviceUUID = device.uuid;
                 if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
                     pushNotification = window.plugins.pushNotification;
                     pushNotification.unregister(successHandler, errorHandler);
