@@ -20,6 +20,23 @@ Template.dettaglio.rendered = function(){
     Session.set("lastUsed", now.toString());
 }
 
+Template.socialButtonsApp.events({
+    "click .fb-share": function() {
+        alert("ciao");
+        FB.ui({
+          method: 'share_open_graph',
+          action_type: 'og.likes',
+          action_properties: JSON.stringify({
+            object: Web.rootUrl() + "web/seo?_id=" + this._id /*location.href*/,
+          })
+        }, function(response){
+          // Debug response (optional)
+          console.log(response);
+        });
+        return false;
+    }
+});
+
 Template.dettaglio.events({
     "click #herecanvas": function(event) {
         if(Session.get("isadmin"))
@@ -142,7 +159,7 @@ Template.dettaglio.events({
             Materialize.toast("Utente non autorizzato.", 3000, 'rounded center');
         }
         GAnalytics.event("dettaglio","approvato");
-      }
+    }
 });
 
 function imageUrl(){

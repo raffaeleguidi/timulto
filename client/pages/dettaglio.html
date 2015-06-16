@@ -1,4 +1,7 @@
 <template name="dettaglio">
+
+    {{> includeFbAndTwitterLibs}}
+
     {{> navbar}}
 
     <div class="section no-pad-bot">
@@ -27,6 +30,9 @@
                         <span class="orange" style="color: white; padding: 2px">In attesa di approvazione</span>
                      </p>
                      {{/if}}
+                 </p>
+                 <p>
+                     {{> socialButtonsApp _id=_id address=address category=category}}
                  </p>
               </div>
               <input type="hidden" value="{{lat}}" />
