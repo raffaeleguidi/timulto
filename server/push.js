@@ -107,6 +107,14 @@ Meteor.startup(function () {
             var res = Notifications.send2android(msg, regIds);
             return { sent: regIds.length, errors: res.failure };
         },
+        sendMessageToUserAndService: function(username, service, msg) {
+            console.log("should send a message to: %s sent from: %s", user, Meteor.userId());
+
+            // should send a message to the latest regid for every device of the user
+            var regIds = Notifications.regIdsForUsernameAndService(username, service);
+            var res = Notifications.send2android(msg, regIds);
+            return { sent: regIds.length, errors: res.failure };
+        },
         sendMessageToAdmins: function(msg) {
             return Notifications.sendToAllAdmins(msg);
         }
