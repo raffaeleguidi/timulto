@@ -280,8 +280,17 @@ Meteor.startup(function () {
                         console.log("Result:" + result);
                     });
 
-                    if(res > 0) {//Notify owner of the like
+                    if(res > 0) {
+                        //Notify owner of the like
                         Notifications.sendMessage(userId, { title:"Like", message: "A qualcuno piace la tua segnalazione!" });
+                        //Notify all the users who already like the same fine
+                        var fineLikes = Fines.findOne({_id:fineId}, { fields: { likes:1 }});
+
+                        for( i in fineLikes ) {
+                            if(fineLikes[i] != userId) {//Do not notify current user
+                                Notifications.sendMessage(userId, { title:"Like", message: "Un altro utente ha messo \'Mi piace\' su una segnalazione che piace anche a te!" });
+                            }
+                        }
                     }
                 } else {
                     var res = Fines.update({_id:fineId},{$pull:{likes:userId}},
