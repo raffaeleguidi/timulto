@@ -218,7 +218,7 @@ Template.dettaglio.helpers({
 function iLikeThis() {
     var arr = Session.get("likes");
     for (i in arr) {
-        if (arr[i] == userUtils.getCurrentUsername()) {
+        if (arr[i] == Meteor.userId() || arr[i] == userUtils.getCurrentUsername()) {
             return true;
         }
     }

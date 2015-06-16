@@ -4,7 +4,7 @@ function imageUrl(){
 }
 
 function iLikeThis(fine) {
-    return fine.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
+    return fine.likes.indexOf(Meteor.userId()) >= 0 || fine.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
 }
 
 Template.dettaglioWeb.helpers({
