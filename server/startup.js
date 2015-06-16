@@ -329,6 +329,8 @@ Meteor.startup(function () {
                     }
                 });
 
+                Notifications.sendMessage(Meteor.userId(), { title:"Approvazione Segnalazioni", message: "La tua segnalazione è stata approvata!" });
+
                 return true;
 //                    var fine = Fines.find({_id:fineId});
                 //Send notification
