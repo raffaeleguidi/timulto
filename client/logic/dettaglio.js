@@ -21,19 +21,34 @@ Template.dettaglio.rendered = function(){
 }
 
 Template.socialButtonsApp.events({
+    //fb-share-button
     "click .fb-share": function() {
         var obj = Session.get("rootUrl") + "web/seo?_id=" + this._id;
         console.log("** sharing on fb: " + obj);
-        FB.ui({
-          method: 'share_open_graph',
-          action_type: 'og.likes',
-          action_properties: JSON.stringify({
-            object: obj,
-          })
-        }, function(response){
-          // Debug response (optional)
-          console.log(response);
-        });
+        FB.ui(
+          {
+            method: 'share',
+            href: obj,
+          },
+          // callback
+          function(response) {
+            if (response && !response.error_code) {
+              console.log('Posting completed.');
+            } else {
+              console.log('Error while posting.');
+            }
+          }
+        );
+//        FB.ui({
+//          method: 'share_open_graph',
+//          action_type: 'og.likes',
+//          action_properties: JSON.stringify({
+//            object: obj,
+//          })
+//        }, function(response){
+//          // Debug response (optional)
+//          console.log(response);
+//        });
         return false;
     }
 });
