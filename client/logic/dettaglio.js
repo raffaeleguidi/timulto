@@ -22,14 +22,13 @@ Template.dettaglio.rendered = function(){
 
 Template.socialButtonsApp.events({
     "click .fb-share": function() {
-        console.log("** sharing on fb: " + Session.get("rootUrl"));
-        console.log("** web/seo?_id=" + this._id);
-        console.log("** sharing on fb: %s", Session.get("rootUrl") + "web/seo?_id=" + this._id)
+        var obj = Session.get("rootUrl") + "web/seo?_id=" + this._id;
+        console.log("** sharing on fb: " + obj);
         FB.ui({
           method: 'share_open_graph',
           action_type: 'og.likes',
           action_properties: JSON.stringify({
-            object: Session.get("rootUrl") + "web/seo?_id=" + this._id /*location.href*/,
+            object: obj,
           })
         }, function(response){
           // Debug response (optional)
