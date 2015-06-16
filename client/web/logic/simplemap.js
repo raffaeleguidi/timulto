@@ -10,7 +10,7 @@ var defaultIconUrl = '/icon_30X30.png';
 var defaultIconH = 30;
 var defaultIconW = 30;
 
-var collapsedMapHeight = 300;
+var collapsedMapHeight = 350;
 var expandedMapHeight = 650;
 
 
@@ -21,11 +21,9 @@ Tracker.autorun(function(){
         if (expanded != null && expanded) {
             map.dragging.enable();
             map.scrollWheelZoom.enable();
-//            console.log("enable");
         } else {
             map.dragging.disable();
             map.scrollWheelZoom.disable();
-//            console.log("disable");
         }
         map._onResize();
     }
@@ -219,6 +217,6 @@ Template.simplemap.rendered = function () {
 
     map.addLayer(cluster);
 
-    map.dragging.disable();
+    //map.dragging.disable();
     map.scrollWheelZoom.disable();
 };
