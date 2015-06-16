@@ -18,5 +18,6 @@ Common = {
         if (fine == null) {
             console.log("fine not found in history for _id=%s", fineId);
         }
+        return fine;
     }
 }
