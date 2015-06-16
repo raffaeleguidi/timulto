@@ -22,7 +22,6 @@ Template.dettaglio.rendered = function(){
 
 Template.socialButtonsApp.events({
     "click .fb-share": function() {
-        alert("ciao");
         FB.ui({
           method: 'share_open_graph',
           action_type: 'og.likes',
