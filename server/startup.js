@@ -279,6 +279,10 @@ Meteor.startup(function () {
                         }
                         console.log("Result:" + result);
                     });
+
+                    if(res > 0) {//Notify owner of the like
+                        Notifications.sendMessage(userId, { title:"Like", message: "A qualcuno piace la tua segnalazione!" });
+                    }
                 } else {
                     var res = Fines.update({_id:fineId},{$pull:{likes:userId}},
                                 function(err,result){
