@@ -68,6 +68,8 @@ App.accessRule('http://connect.facebook.net/*');
 App.accessRule('https://connect.facebook.net/*');
 App.accessRule('http://*.facebook.net/*');
 App.accessRule('https://*.facebook.net/*');
+App.accessRule('http://*.facebook.com/*');
+App.accessRule('https://*.facebook.com/*');
 
 /*
 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).
