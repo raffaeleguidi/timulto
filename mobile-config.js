@@ -59,6 +59,16 @@ App.accessRule('https://*.gstatic.com/*');
 App.accessRule('http://*..google-analytics.com.com/*');
 App.accessRule('https://*..google-analytics.com.com/*');
 
+// needed for social buttons
+App.accessRule('http://platform.twitter.com/*');
+App.accessRule('https://platform.twitter.com/*');
+App.accessRule('http://*.twitter.com/*');
+App.accessRule('https://*.twitter.com/*');
+App.accessRule('http://connect.facebook.net/*');
+App.accessRule('https://connect.facebook.net/*');
+App.accessRule('http://*.facebook.net/*');
+App.accessRule('https://*.facebook.net/*');
+
 /*
 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).
 480dp: a tweener tablet like the Streak (480x800 mdpi).

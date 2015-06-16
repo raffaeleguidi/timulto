@@ -89,6 +89,25 @@
             <p>Di seguito e nel box qui a destra riportiamo qualche semplice statistica; ricordate che le segnalazioni visualizzate sul sito e sull'app sono solo quelle delle ultime due ore, mentre queste statistiche si riferiscono ad un periodo più lungo</p>
             {{> statsBoxTabular}}
         </div>
+
+    {{#if isadmin}}
+        <div style="margin-top: 20px">
+            <h5 class="blue-text">Statistiche sulle segnalazioni</h5>
+              <h5>Notifiche push</h5>
+              <p>{{#if registrationId}}Registrato correttamente{{/if}}</p>
+              <label>User ID</label>
+              <input id="msgto" name="msgto" type="text"><br />
+              <label>Titolo</label>
+              <input id="msgtitle" name="msgtitle" type="text"><br />
+              <label>Testo</label>
+              <input id="msgmessage" name="msgmessage" type="text"><br />
+              <button id="sendmessage" class="btn waves-light">Invia</button>
+              <button id="sendtoalladmins" class="btn waves-light">Invia a tutti gli admin</button>
+        </div>
+    {{/if}}
+
+
+
     </div>
 </template>
 

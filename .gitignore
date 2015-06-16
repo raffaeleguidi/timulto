@@ -10,3 +10,4 @@ scripts/dumps
 /dumps/
 .DS_Store
 /client/.DS_Store
+/donotcommit.json
