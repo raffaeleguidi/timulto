@@ -24,14 +24,37 @@
     <meta property="og:title" content="TiMulto!" />
     <meta property="og:description" content="Delazione e senso civico" />
     <meta property="og:image" content="http://beta.timulto.org/splash.png" />
-<script>
-//  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-//  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-//  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-//  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-//
-//  ga('create', 'UA-63007561-1', 'auto');
-//  ga('send', 'pageview');
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '751390834982391',
+          xfbml      : true,
+          version    : 'v2.3'
+        });
+      };
 
-</script>
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/it_IT/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
 </head>
