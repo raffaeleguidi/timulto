@@ -1,0 +1,52 @@
+<template name="includeFbAndTwitterLibs">
+    <!-- right after opening the body tag -->
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '751390834982391',
+          xfbml      : true,
+          version    : 'v2.3'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/it_IT/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
+</template>
+
+<template name="socialButtons">
+    <a class="fb-share" href="#">
+        <img class="fb-share" src="/icon-fb.png" />
+    </a>
+    <a class="twitter-share-button"
+      href="https://twitter.com/intent/tweet?text={{_ category}} in {{address}} {{text}}&via=timultoapp&url={{thisUrl}}"
+      data-size="large">
+    <img src="/icon-tw.png" /></a>
+    <!--
+    <a alt="Condividi su Google Plus" class="gp-share" href="#">
+        <img src="/icon-gp.png" />
+    </a>
+    -->
+</template>
