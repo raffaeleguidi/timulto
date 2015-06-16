@@ -52,16 +52,7 @@ if (!Meteor.isCordova) {    // legacy: needed?
 
     Router.route('/web/segnalazione', function () {
         GAnalytics.pageview("/web/segnalazione");
-        var fine = Fines.findOne({_id: this.params.query._id});
-        if(!fine || fine == null) {
-            fine = FinesHistory.findOne({_id: this.params.query._id});
-            fine.live = false;
-        } else {
-            fine.live = true;
-        }
-        if (fine == null) {
-            console.log("fine not found in history for _id=%s", this.params.query._id);
-        }
+        var fine = Common.getFineIncludingHistory(this.params.query._id);
         document.title = "Segnalazione " + fine.address + " - TiMulto!"
         Session.set("dettaglio-web", fine);
         this.render('webhomepage', { data: { tab: "home", fineToShow: fine } });

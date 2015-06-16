@@ -25,10 +25,7 @@ function findFinesFor(service) {
 
 Router.route('/web/seo', function () {
     //this.render("test");
-    var fine = Fines.findOne({_id: this.params.query._id});
-    if(!fine || fine == null) {
-        fine = FinesHistory.findOne({_id:this.params.query._id});
-    }
+    var fine = Common.getFineIncludingHistory(this.params.query._id);
     var title = "Segnalazione " + fine.address + " - TiMulto!"
     var description = fine.address + fine.text;
     var image = process.env.ROOT_URL + "api/image/" + fine._id;
@@ -39,7 +36,7 @@ Router.route('/web/seo', function () {
     this.response.write('<meta property="og:image" content="' + image + '" />');
     this.response.write('<meta http-equiv="refresh" content="0; url=' + redirect + '">');
     this.response.write('</head><html>');
-    this.response.end("Stiamo andando a " + title + "...");
+    this.response.end("Stiamo andando a " + fine.address + "...");
 }, { where: 'server' });
 
 Restivus.addRoute('token/:message', {authRequired: false}, {
@@ -214,10 +211,7 @@ Restivus.addRoute('thumb/:fineId', {authRequired: false}, {
 
 Restivus.addRoute('image/:fineId', {authRequired: false}, {
     get: function () {
-        var fine = Fines.findOne({_id: this.urlParams.fineId});
-        if(!fine || fine == null) {
-            fine = FinesHistory.findOne({_id: this.urlParams.fineId});
-        }
+        var fine = Common.getFineIncludingHistory(this.urlParams.fineId);
         if (fine) {
             var tmpfile = os.tmpdir() + '/' + fine._id + '.png';
             if (!fs.existsSync(tmpfile)) {
