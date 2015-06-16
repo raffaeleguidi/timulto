@@ -13,7 +13,7 @@ Template.fineInARow.helpers({
     },
     iLikeThis: function() {
         if (this.likes) {
-            return this.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
+            return this.likes.indexOf(Meteor.userId()) >= 0 || this.likes.indexOf(userUtils.getCurrentUsername()) >= 0;
         }
         return false;
     }

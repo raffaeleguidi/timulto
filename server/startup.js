@@ -182,7 +182,6 @@ Meteor.startup(function () {
                 'services.twitter.screenName': 1,
                 'username': 1,
                 'services.twitter.profile_image_url': 1,
-//                    'services.facebook':1,
                 'services.facebook.email':1,
                 'services.facebook.picture':1,
                 'services.google.email':1,
@@ -192,8 +191,7 @@ Meteor.startup(function () {
         });
     });
     /* Google service schema */
-    /*
-    "{
+    /*"{
         "accessToken":"",
         "idToken":"",
         "expiresAt":,
@@ -214,27 +212,20 @@ Meteor.startup(function () {
         var username = cu.username;
         var service  = cu.service;
 
-        //var userAdm = Administrators.find({"username":username},{limit:1}).fetch()[0];
         var userAdm = Administrators.findOne({$and:[{username: username},{service:service}]});
 
         if (Meteor.user().services.password) {
             userAdm = Meteor.user();
         }
-        //    console.log("userAdm " + JSON.stringify(userAdm)+" looking for "+username);
 
         if (!userAdm) {
-//            console.log(username + " is not admin");
             return false;
         } else {
-//            console.log(username + " is  admin!!!!");
             return true;
         }
     };
 
     Meteor.methods({
-//            isAdministrator: function () {
-//                return isAdministrator();
-//            },
         getStatistics: function() {
             var pipeline = [{
                 $group: {
@@ -276,10 +267,11 @@ Meteor.startup(function () {
         //like -> boolean, true indica approvazione, false indica non approvazione dell'utente
         likeFine: function(fineId, like) {
             if(Meteor.user() && fineId) {
-                var username = userUtils.getCurrentUsername();
+                //var username = userUtils.getCurrentUsername();
+                var userId = Meteor.userId();
                 //console.log("User "+username +" said: I " + (like==true?"like":"don't like") +  " fine "+fineId);
                 if(like) {
-                    var res = Fines.update({_id:fineId},{$addToSet:{likes:username}},
+                    var res = Fines.update({_id:fineId},{$addToSet:{likes:userId}},
                                 function(err,result){
                         if(err) {
                             console.log("error in liking:" + err);
@@ -288,7 +280,7 @@ Meteor.startup(function () {
                         console.log("Result:" + result);
                     });
                 } else {
-                    var res = Fines.update({_id:fineId},{$pull:{likes:username}},
+                    var res = Fines.update({_id:fineId},{$pull:{likes:userId}},
                                 function(err,result){
                         if(err) {
                             console.log("error in not liking:" + err);
@@ -301,9 +293,9 @@ Meteor.startup(function () {
         },
         // not working
         iLikeThis: function(fineId) {
-
             if(Meteor.user() && fineId) {
-                var username = userUtils.getCurrentUsername();
+                //var username = userUtils.getCurrentUsername();
+                var username = Meteor.userId();
 
                 var match    = { $match: { _id:fineId, likes: { $in: [username.toString()] }}};
                 var group    = { $group: { _id:"$_id", count: { $sum:1 }}};
