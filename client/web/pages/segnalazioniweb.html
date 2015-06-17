@@ -56,7 +56,8 @@
             </div>
         {{else}}
             {{#if finesToApprove.count}}
-                <div class="row" id="adminApproval" hidden="{{hide}}">
+            <div class="row" id="adminApproval" hidden="{{hide}}">
+                <div id="lista2" class="col s12 l12">
                     <h5 class="header center blue-text">{{_ "Segnalazioni da verificare"}} ({{finesToApprove.count}})</h5>
                     <table class="striped">
                         <tbody>
@@ -64,10 +65,13 @@
                         </tbody>
                     </table>
                 </div>
-                <hr/>
+            </div>
             {{/if}}
             <div class="row">
                 <div id="lista" class="col s12 l12">
+                    {{#if finesToApprove.count}}
+                        <h5 class="header center blue-text">{{_ "Ultime segnalazioni"}} ({{latestFines.count}})</h5>
+                    {{/if}}
                     <table class="striped">
                         <tbody>
                             {{#each latestFines}} {{> smallFinesInHomePage_refactored}} {{/each}}

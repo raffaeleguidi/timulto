@@ -216,6 +216,9 @@ Meteor.startup(function () {
 
         if (Meteor.user().services.password) {
             userAdm = Meteor.user();
+            if (userAdm.username != "admin") {
+                userAdm = null;
+            }
         }
 
         if (!userAdm) {

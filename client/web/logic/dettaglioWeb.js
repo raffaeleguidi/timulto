@@ -22,6 +22,9 @@ Template.dettaglioWeb.helpers({
     },
     thisUrl: function() {
         return location.href;
+    },
+    notApproved: function() {
+        return !Session.get("dettaglio-web").approved;
     }
 });
 

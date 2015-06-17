@@ -72,8 +72,8 @@ function isAdministrator() {
     var userAdm = Administrators.findOne({$and:[{username:username},{service:service}]});
 
     if (Meteor.user().services.password) {
-        console.log('with local password everyone is admin');
-        return true;
+        console.log("username: %s - admin=%s", Meteor.user().username , Meteor.user().username == "admin");
+        return Meteor.user().username == "admin";
     }
 
     if(!userAdm) {

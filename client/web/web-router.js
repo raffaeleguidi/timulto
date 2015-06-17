@@ -1,7 +1,7 @@
 if (!Meteor.isCordova) {    // legacy: needed?
-    Router.route('/segnalazioni', function () {
-        console.log("segnalazioni");
-        GAnalytics.pageview("/web/segnalazioni");
+    Router.route('/app', function () {
+        console.log("web/segnalazioni-app");
+        GAnalytics.pageview("/web/segnalazioni-app");
         this.render('segnalazioni');
     });
     // end legacy
