@@ -345,7 +345,7 @@ Meteor.startup(function () {
                     }
                 });
 
-                Notifications.sendMessage(Meteor.userId(), { title:"Approvazione Segnalazioni", message: "La tua segnalazione è stata approvata!" });
+                Notifications.sendMessage(Meteor.userId(), { title:"Congratulazioni!", message: "La tua segnalazione è stata pubblicata" });
 
                 return true;
 //                    var fine = Fines.find({_id:fineId});

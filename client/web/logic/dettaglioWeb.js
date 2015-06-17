@@ -34,7 +34,9 @@ Template.dettaglioWeb.events({
     },
     "click .delete": function(){
         Meteor.call("deleteFine", Session.get("dettaglio-web")._id);
-        Web.backToList();
+        Session.set("dettaglio-web", undefined);
+        Router.go("/web/home");
+        //Web.backToList();
     },
     "click .mipiace": function () {
         if(userUtils.isLoggedIn()){
