@@ -285,13 +285,16 @@ Meteor.startup(function () {
 
                     if(res > 0) {
                         //Notify owner of the like
-                        Notifications.sendMessage(userId, { title:"Like", message: "A qualcuno piace la tua segnalazione!" });
+                        var owner = Fines.findOne({_id: fineId}, {fields: {owner: 1}});
+                        if(owner) {
+                            Notifications.sendMessage(owner, { title:"Like", message: "A qualcuno piace la tua segnalazione!" });
+                        }
                         //Notify all the users who already like the same fine
                         var fineLikes = Fines.findOne({_id:fineId}, { fields: { likes:1 }});
 
                         for( i in fineLikes ) {
                             if(fineLikes[i] != userId) {//Do not notify current user
-                                Notifications.sendMessage(userId, { title:"Like", message: "Un altro utente ha messo \'Mi piace\' su una segnalazione che piace anche a te!" });
+                                Notifications.sendMessage(fineLikes[i], { title:"Like", message: "Un altro utente ha messo \'Mi piace\' su una segnalazione che piace anche a te!" });
                             }
                         }
                     }
