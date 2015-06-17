@@ -344,9 +344,10 @@ Meteor.startup(function () {
                         "approved": true
                     }
                 });
-
-                Notifications.sendMessage(Meteor.userId(), { title:"Congratulazioni!", message: "La tua segnalazione è stata pubblicata" });
-
+                var owner = Fines.findOne({_id:fineId},{fields:{owner:1}});
+                if(owner) {
+                    Notifications.sendMessage(owner, { title:"Congratulazioni!", message: "La tua segnalazione è stata pubblicata" });
+                }
                 return true;
 //                    var fine = Fines.find({_id:fineId});
                 //Send notification
