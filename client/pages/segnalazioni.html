@@ -37,17 +37,19 @@
             </div>
         </div>
         {{/if}}
-        {{#if finesToApprove.count}}
-        <div class="section">
-            <div class="row" id="adminApproval" hidden="{{hide}}">
-                <h5 class="header center blue-text">{{_ "Segnalazioni da verificare"}} ({{finesToApprove.count}})</h5>
-                <table class="striped">
-                    <tbody>
-                        {{#each finesToApprove}} {{> fineInARow}} {{/each}}
-                    </tbody>
-                </table>
+        {{#if isadmin}}
+            {{#if finesToApprove.count}}
+            <div class="section">
+                <div class="row" id="adminApproval" hidden="{{hide}}">
+                    <h5 class="header center blue-text">{{_ "Segnalazioni da verificare"}} ({{finesToApprove.count}})</h5>
+                    <table class="striped">
+                        <tbody>
+                            {{#each finesToApprove}} {{> fineInARow}} {{/each}}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+            {{/if}}
         {{/if}}
         <div class="row">
             <h5 class="header center blue-text">{{_ "Ultime segnalazioni"}} ({{latestFines.count}})</h5>
