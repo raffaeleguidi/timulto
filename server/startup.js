@@ -338,7 +338,6 @@ Meteor.startup(function () {
             return process.env.ROOT_URL;
         },
         approveFine: function (fineId) {
-
             if (fineId && isAdministrator()) {
                 Fines.update({
                     "_id": fineId
@@ -347,14 +346,11 @@ Meteor.startup(function () {
                         "approved": true
                     }
                 });
-                var owner = Fines.findOne({_id:fineId},{fields:{owner:1}});
-                if(owner) {
-                    Notifications.sendMessage(owner, { title:"Congratulazioni!", message: "La tua segnalazione è stata pubblicata" });
+                var fine = Fines.findOne({ _id:fineId },{ fields:{owner:1}} );
+                if(fine) {
+                    Notifications.sendMessage(fine.owner, { title:"Congratulazioni!", message: "La tua segnalazione è stata pubblicata" });
                 }
                 return true;
-//                    var fine = Fines.find({_id:fineId});
-                //Send notification
-                //serverNotification(fine);
             } else {
                 console.log("Trying to approve fine "+ fineId +".User is not an administrator: " + JSON.stringify(Meteor.user().profile.name));
                 return null;
