@@ -2,6 +2,8 @@ Registrations = new Mongo.Collection("registrations");
 
 Notifications = {
     send2android: function(msg, regids) {
+        if (regids == null || regids.length == 0)
+            return null;
         var request = {
             "data": {
                 "title": msg.title,
