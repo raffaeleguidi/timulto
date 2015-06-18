@@ -91,10 +91,10 @@ Meteor.methods({
         if(Meteor.userId()) {
             var userId = Meteor.userId();
 
-            var owner = Fines.findOne(fineId,{fields:{"owner":1}})
+            var fine = Fines.findOne(fineId,{fields:{"owner":1}})
             if(owner) {
                 var obj =  {
-                    result:(owner.owner == userId),
+                    result:(fine.owner == userId),
                     _id:fineId
                 };
 

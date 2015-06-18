@@ -30,13 +30,26 @@ Template.dettaglioWeb.helpers({
 
 Template.dettaglioWeb.events({
     "click .approve": function(){
-        alert('approve');
-    },
-    "click .delete": function(){
-        Meteor.call("deleteFine", Session.get("dettaglio-web")._id);
+        Meteor.call("approveFine", Session.get("dettaglio-web")._id, true, function(err) {
+            if(err) {
+                Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
+            } else {
+                Materialize.toast("Segnalazione approvata", 4000, 'rounded center');
+            }
+        });
         Session.set("dettaglio-web", undefined);
         Router.go("/web/home");
-        //Web.backToList();
+    },
+    "click .delete": function(){
+        Meteor.call("deleteFine", Session.get("dettaglio-web")._id, function(err) {
+            if(err) {
+                Materialize.toast("Errore: " + err.message, 4000, 'rounded center');
+            } else {
+                Materialize.toast("Segnalazione cancellata", 4000, 'rounded center');
+            }
+        });
+        Session.set("dettaglio-web", undefined);
+        Router.go("/web/home");
     },
     "click .mipiace": function () {
         if(userUtils.isLoggedIn()){
